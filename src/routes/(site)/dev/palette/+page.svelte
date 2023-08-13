@@ -22,7 +22,7 @@
 		height: 100%;
 		padding: var(--spacing-32);
 		display: grid;
-		grid-template-columns: repeat(11, 1fr);
+		grid-template-columns: repeat(12, 1fr);
         gap: var(--spacing-16);
 	}
 </style>

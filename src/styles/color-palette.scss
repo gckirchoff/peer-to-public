@@ -25,6 +25,7 @@
 		700: 0.75,
 		800: 0.6,
 		900: 0.49,
+		1000: 0.36,
 	);
 
 	$intensity: map-get($intensities, $shade);
@@ -35,15 +36,30 @@
 	@return darken($hex, $intensity);
 }
 
-@mixin color-palette($name, $color) {
-	--clr-#{$name}-50: #{shade($color, 50)};
-	--clr-#{$name}-100: #{shade($color, 100)};
-	--clr-#{$name}-200: #{shade($color, 200)};
-	--clr-#{$name}-300: #{shade($color, 300)};
-	--clr-#{$name}-400: #{shade($color, 400)};
-	--clr-#{$name}-500: #{$color};
-	--clr-#{$name}-600: #{shade($color, 600)};
-	--clr-#{$name}-700: #{shade($color, 700)};
-	--clr-#{$name}-800: #{shade($color, 800)};
-	--clr-#{$name}-900: #{shade($color, 900)};
+@mixin color-palette($name, $color, $invert: false) {
+	@if ($invert) {
+		--clr-#{$name}-50: #{shade($color, 1000)};
+		--clr-#{$name}-100: #{shade($color, 900)};
+		--clr-#{$name}-200: #{shade($color, 800)};
+		--clr-#{$name}-300: #{shade($color, 700)};
+		--clr-#{$name}-400: #{shade($color, 600)};
+		--clr-#{$name}-500: #{$color};
+		--clr-#{$name}-600: #{shade($color, 400)};
+		--clr-#{$name}-700: #{shade($color, 300)};
+		--clr-#{$name}-800: #{shade($color, 200)};
+		--clr-#{$name}-900: #{shade($color, 100)};
+		--clr-#{$name}-1000: #{shade($color, 50)};
+	} @else {
+		--clr-#{$name}-50: #{shade($color, 50)};
+		--clr-#{$name}-100: #{shade($color, 100)};
+		--clr-#{$name}-200: #{shade($color, 200)};
+		--clr-#{$name}-300: #{shade($color, 300)};
+		--clr-#{$name}-400: #{shade($color, 400)};
+		--clr-#{$name}-500: #{$color};
+		--clr-#{$name}-600: #{shade($color, 600)};
+		--clr-#{$name}-700: #{shade($color, 700)};
+		--clr-#{$name}-800: #{shade($color, 800)};
+		--clr-#{$name}-900: #{shade($color, 900)};
+		--clr-#{$name}-1000: #{shade($color, 1000)};
+	}
 }
