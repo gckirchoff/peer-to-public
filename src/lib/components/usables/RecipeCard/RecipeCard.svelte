@@ -38,9 +38,10 @@
 
 <style lang="scss">
 	.card {
-		background-color: var(--clr-surface-400);
-		padding: var(--spacing-32);
+		background-color: var(--clr-surface-300);
+		padding: var(--spacing-64);
 		border-radius: var(--rounded-20);
+		width: max-content;
 	}
 	.scale {
 		display: flex;
@@ -49,6 +50,10 @@
 		input {
 			color: black;
 		}
+	}
+
+	ul {
+		list-style: none;
 	}
 
 	input[type='checkbox'],
