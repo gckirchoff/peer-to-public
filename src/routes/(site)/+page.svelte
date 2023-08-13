@@ -50,7 +50,7 @@
 	}
 
 	.panel {
-		background-color: var(--clr-surface-400);
+		background-color: var(--clr-surface-300);
 		border-radius: var(--rounded-20);
 		box-shadow: var(--shadow-md);
 	}
