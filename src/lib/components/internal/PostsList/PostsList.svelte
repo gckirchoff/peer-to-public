@@ -12,7 +12,7 @@
 		<li>
 			<article>
 				<a href="/posts/{post.slug}">
-					<!-- img goes here -->
+					<img src="/postImages/{post.coverImage}" alt={post.title} />
 					<H3>
 						{post.title}
 					</H3>

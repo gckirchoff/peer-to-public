@@ -1,9 +1,10 @@
 ---
-title: 'Canned Tomatoes'
+title: 'Tomato Soup'
 description: 'How to stew tomatoes'
 categories:
   - 'canning'
   - 'cooking'
+coverImage: "tomato-soup.png"
 date: '2023-08-11'
 published: true
 ---

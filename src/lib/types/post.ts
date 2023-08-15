@@ -18,6 +18,7 @@ export type Frontmatter = {
 	categories: string;
 	date: string;
 	published: string;
+	coverImage: string;
 };
 
 export type Tag = {
