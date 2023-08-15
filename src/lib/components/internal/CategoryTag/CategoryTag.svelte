@@ -4,7 +4,9 @@
 	export let category: string;
 </script>
 
-<Body1><a href="/posts/category/{category}">{category}</a></Body1>
+<li>
+	<Body1><a href="/posts/category/{category}">{category}</a></Body1>
+</li>
 
 <style lang="scss">
 	a {
