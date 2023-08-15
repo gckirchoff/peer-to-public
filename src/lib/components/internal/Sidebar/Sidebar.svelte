@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Tag } from '$lib/types/post';
-	import Body1 from '../typography/Body1.svelte';
+	import CategoryTag from '../CategoryTag/CategoryTag.svelte';
+	import CategoryTagsList from '../CategoryTagsList/CategoryTagsList.svelte';
 	import H4 from '../typography/H4.svelte';
 
 	// import TagList from './tags/TagList.svelte'
@@ -12,23 +13,32 @@
 </script>
 
 <aside>
-	<a href="/posts/category">
-		<H4>Categories</H4>
-	</a>
-	<ul>
-		{#each allCategories as category}
-			<li>
-				<a href="/posts/category/{category}"><Body1>{category}</Body1></a>
-			</li>
-		{/each}
-	</ul>
+	{#if popularPosts.length}
+		<H4><span class="sidebar-header">Popular posts</span></H4>
+		<ul>
+			{#each popularPosts as post}
+				<li>
+					<a href="/posts/{post.slug}">{post.title}</a>
+				</li>
+			{/each}
+		</ul>
+	{/if}
 
-	<H4>Popular posts</H4>
-	<ul>
-		{#each popularPosts as post}
-			<li>
-				<a href="/posts/{post.slug}">{post.title}</a>
-			</li>
+	<H4>
+		<a href="/posts/category" class="sidebar-header"> Categories </a>
+	</H4>
+	<CategoryTagsList>
+		{#each allCategories as category}
+			<CategoryTag {category} />
 		{/each}
-	</ul>
+	</CategoryTagsList>
 </aside>
+
+<style>
+	.sidebar-header {
+		display: inline-block;
+		margin-bottom: var(--spacing-16);
+		text-decoration: underline;
+		color: var(--clr-primary-500);
+	}
+</style>
