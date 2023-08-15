@@ -8,10 +8,12 @@
 </script>
 
 <li>
-	<a {href} class:active={isCurrentPage} aria-current={isCurrentPage}>
-		<H5>
-			<slot />
-		</H5>
+	<a {href} aria-current={isCurrentPage}>
+		<span class:active={isCurrentPage}>
+			<H5>
+				<slot />
+			</H5>
+		</span>
 	</a>
 </li>
 
@@ -22,5 +24,6 @@
 
 	.active {
 		text-decoration: underline;
+		color: var(--clr-primary-500);
 	}
 </style>
