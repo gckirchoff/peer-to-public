@@ -23,7 +23,8 @@
 
 <style lang="scss">
 	header {
-		padding: var(--spacing-32);
+		padding: var(--spacing-24);
+		background-color: var(--clr-surface-400);
 
 		nav {
 			display: grid;
