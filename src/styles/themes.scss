@@ -20,6 +20,7 @@ html[color-theme='dark'] {
 	@include color-palette(surface, $clr-surface, true);
 
 	--clr-txt: hsl(0 0% 98%);
+	--clr-txt-neg: hsl(220 10% 10%);
 	--clr-link-txt: var(--clr-primary-400);
 
 	/* Post */
@@ -46,13 +47,13 @@ html[color-theme='dark'] {
 
 html[color-theme='light'] {
 	/* Palette ---------------------------------- */
-	$clr-primary: #289559ed;
-	$clr-secondary: hsl(208, 43%, 59%);
-	$clr-tertiary: hsl(27, 47%, 43%);
+	$clr-primary: #4f758e;
+	$clr-secondary: #bee761;
+	$clr-tertiary: #ecc122;
 	$clr-success: #84cc16;
 	$clr-warning: #eab308;
 	$clr-error: #d41976;
-	$clr-surface: hsl(32, 42%, 86%);
+	$clr-surface: #dfdddd;
 	/* ------------------------------------------ */
 
 	@include color-palette(primary, $clr-primary);
@@ -64,6 +65,7 @@ html[color-theme='light'] {
 	@include color-palette(surface, $clr-surface);
 
 	--clr-txt: hsl(220 10% 10%);
+	--clr-txt-neg: hsl(0 0% 98%);
 	--clr-link-txt: var(--clr-primary-400);
 
 	/* Post */
