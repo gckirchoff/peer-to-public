@@ -21,3 +21,9 @@
 		<slot />
 	</Transition>
 </main>
+
+<style lang="scss">
+	main {
+		padding: var(--spacing-24);
+	}
+</style>
