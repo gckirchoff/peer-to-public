@@ -10,7 +10,7 @@
 <li>
 	<article>
 		<a href="/posts/{post.slug}" class="card">
-			<img src="/postImages/{post.coverImage}" alt={post.title} />
+			<img src="/images/postImages/{post.coverImage}" alt={post.title} />
 			<div>
 				<H4>
 					{post.title}
