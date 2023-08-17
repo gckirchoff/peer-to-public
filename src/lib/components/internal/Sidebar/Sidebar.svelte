@@ -35,6 +35,10 @@
 </aside>
 
 <style>
+	aside {
+		flex: 0 1 15%;
+	}
+
 	.sidebar-header {
 		display: inline-block;
 		margin-bottom: var(--spacing-16);
