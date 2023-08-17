@@ -104,15 +104,13 @@
 .prose {
 	display: grid;
 	grid-template-columns:
-		1fr
 		[gutter-start]
 		40px
 		[content-start]
 		minmax(0px, var(--post-txt-length))
 		[content-end]
 		40px
-		[gutter-end]
-		1fr;
+		[gutter-end];
 }
 
 .prose > * {
