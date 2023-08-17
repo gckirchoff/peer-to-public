@@ -19,3 +19,9 @@
 		{/each}
 	</ul>
 </main>
+
+<style>
+	ul {
+		list-style: none;
+	}
+</style>
