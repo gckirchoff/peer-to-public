@@ -18,15 +18,20 @@
 
 <div class="layout">
 	<Sidebar {popularPosts} {allCategories} />
-
-	<Transition url={data.currentUrl}>
-		<slot />
-	</Transition>
+	<main>
+		<Transition url={data.currentUrl}>
+			<slot />
+		</Transition>
+	</main>
 </div>
 
 <style lang="scss">
 	.layout {
 		display: flex;
-		gap: var(--spacing-24);
+		gap: var(--spacing-64);
+
+		main {
+			flex: 1 1 auto;
+		}
 	}
 </style>
