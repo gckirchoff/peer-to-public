@@ -1,4 +1,8 @@
 <script lang="ts">
+	import CategoryTag from '$lib/components/internal/CategoryTag/CategoryTag.svelte';
+	import CategoryTagsList from '$lib/components/internal/CategoryTagsList/CategoryTagsList.svelte';
+	import { Body2, H1 } from '$lib/components/internal/typography';
+
 	export let data;
 
 	const {
@@ -31,6 +35,51 @@
 	<!-- <meta name="twitter:image" content="https://yourdomain.com/image_path" /> -->
 </svelte:head>
 
-<div class="prose">
-	<PostContent />
+<div class="content">
+	<div class="heading">
+		<figure class="cover-image">
+			<img src="/images/postImages/{coverImage}" alt={title} />
+		</figure>
+		<CategoryTagsList>
+			{#each categories as category}
+				<CategoryTag {category} />
+			{/each}
+		</CategoryTagsList>
+		<Body2>{date}</Body2>
+		<H1>{title}</H1>
+	</div>
+	<div class="prose">
+		<PostContent />
+	</div>
 </div>
+
+<style lang="scss">
+	.content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.heading {
+			--spacing: var(--spacing-32);
+
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: var(--spacing);
+			margin-bottom: var(--spacing);
+
+			.cover-image {
+				display: flex;
+				justify-content: center;
+
+				img {
+					width: clamp(400px, 75%, 900px);
+				}
+			}
+
+			:global(h1) {
+				font-size: var(--font-32);
+			}
+		}
+	}
+</style>
