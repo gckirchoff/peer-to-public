@@ -8,7 +8,6 @@
 }
 
 .prose h2 {
-	margin-top: var(--spacing-64);
 	margin-bottom: var(--spacing-24);
 	color: var(--clr-primary-500);
 }
@@ -51,35 +50,8 @@
 	margin-bottom: var(--spacing-32);
 }
 
-.prose li > ul {
-	margin-bottom: 0;
-}
-
-.prose ul li::before {
-	content: '🪶';
-	padding-right: var(--spacing-8);
-}
-
-.prose li > ul {
-	margin-top: var(--spacing-8);
-	padding-left: var(--spacing-16);
-}
-
-.prose li > ul > li {
-	list-style-type: circle;
-}
-
-.prose li > ul > li::before {
-	content: none;
-}
-
 .prose ol {
 	list-style-type: decimal;
-}
-
-.prose li > ol {
-	margin-top: var(--spacing-8);
-	padding-left: var(--spacing-16);
 }
 
 .prose blockquote {
