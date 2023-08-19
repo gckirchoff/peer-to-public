@@ -1,11 +1,14 @@
 import type { Tag } from '$lib/types/post.js';
 import type Post from '$lib/types/post.js';
 
-export const load = async ({ fetch }) => {
-	const recentPostsRes = await fetch(`/api/posts/offset/0?limit=3`);
-	const recentPosts = (await recentPostsRes.json()) as Post[];
+export const prerender = true;
 
-	const allPostsRes = await fetch(`/api/posts/all`);
+export const load = async ({ fetch }) => {
+	const postsRes = await fetch('/api/posts/offset/0');
+	const posts = (await postsRes.json()) as Post[];
+	const recentPosts = posts.slice(0, 3);
+
+	const allPostsRes = await fetch('/api/posts/all');
 	const allPosts = (await allPostsRes.json()) as Post[];
 
 	const popularPosts: Tag[] = allPosts

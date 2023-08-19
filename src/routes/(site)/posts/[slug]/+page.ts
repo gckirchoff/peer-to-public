@@ -2,6 +2,8 @@ import { error, redirect } from '@sveltejs/kit';
 
 import type Post from '$lib/types/post.js';
 
+export const prerender = true;
+
 export const load = async ({ params }) => {
 	// /posts/page will be covered by another route
 	if (params.slug == 'page') {
