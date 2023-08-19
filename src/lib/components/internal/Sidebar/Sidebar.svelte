@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { Tag } from '$lib/types/post';
-	import CategoryTag from '../CategoryTag/CategoryTag.svelte';
-	import CategoryTagsList from '../CategoryTagsList/CategoryTagsList.svelte';
-	import H4 from '../typography/H4.svelte';
+	import { Body1, H5 } from '$lib/components/internal/typography';
+	import CategoryTagsList from '$lib/components/internal/CategoryTagsList/CategoryTagsList.svelte';
+	import CategoryTag from '$lib/components/internal/CategoryTag/CategoryTag.svelte';
 
 	// import TagList from './tags/TagList.svelte'
 	// import Tag from './tags/Tag.svelte'
@@ -14,35 +14,52 @@
 
 <aside>
 	{#if popularPosts.length}
-		<H4><span class="sidebar-header">Popular posts</span></H4>
-		<ul>
-			{#each popularPosts as post}
-				<li>
-					<a href="/posts/{post.slug}">{post.title}</a>
-				</li>
-			{/each}
-		</ul>
+		<div>
+			<H5>
+				<a href="/posts/category/popular" class="sidebar-header"> Popular posts </a>
+			</H5>
+			<ul>
+				{#each popularPosts as post}
+					<li>
+						<a href="/posts/{post.slug}">
+							<Body1>
+								{post.title}
+							</Body1>
+						</a>
+					</li>
+				{/each}
+			</ul>
+		</div>
 	{/if}
 
-	<H4>
-		<a href="/posts/category" class="sidebar-header"> Categories </a>
-	</H4>
-	<CategoryTagsList>
-		{#each allCategories as category}
-			<CategoryTag {category} />
-		{/each}
-	</CategoryTagsList>
+	<div>
+		<H5>
+			<a href="/posts/category" class="sidebar-header"> Categories </a>
+		</H5>
+		<CategoryTagsList>
+			{#each allCategories as category}
+				<CategoryTag {category} />
+			{/each}
+		</CategoryTagsList>
+	</div>
 </aside>
 
 <style>
 	aside {
 		flex: 0 1 15%;
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-32);
 	}
 
 	.sidebar-header {
 		display: inline-block;
-		margin-bottom: var(--spacing-16);
+		margin-bottom: var(--spacing-8);
 		text-decoration: underline;
-		color: var(--clr-primary-500);
+		color: var(--clr-primary-600);
+	}
+
+	ul {
+		list-style: none;
 	}
 </style>
