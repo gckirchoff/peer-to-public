@@ -5,7 +5,7 @@ categories:
   - tutorial
   - demo
   - popular
-coverImage: "markdown-tutorial.jpg"
+coverImage: 'markdown-tutorial.jpg'
 date: '2023-07-31'
 published: true
 ---
@@ -59,13 +59,15 @@ For example, [this link](/about) will bring you to the about page.
 <script>
     import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
 
-    const irishSodaBreadIngredients = [
-        { quantity: 2.5, item: 'cups of flour' },
-        { quantity: 1, item: 'egg' },
-        { quantity: 1, item: 'teaspoon of baking powder' },
-        { quantity: 2, item: 'cups of water' },
-        { item: 'A dash of salt' },
-    ];
+    const irishSodaBreadIngredients = {
+       list: [
+           { quantity: 2.5, item: 'cups of flour' },
+           { quantity: 1, item: 'egg' },
+           { quantity: 1, item: 'teaspoon of baking powder' },
+           { quantity: 2, item: 'cups of water' },
+           { item: 'A dash of salt' },
+       ]
+    };
 
     const irishSodaBreadSteps = [
         'Preheat oven to 375 degrees fahrenheit',

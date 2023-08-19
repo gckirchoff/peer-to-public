@@ -1,8 +1,20 @@
-<script lang="ts">
-	import type { Ingredients, Step } from '$lib/components/usables/RecipeCard/types';
-	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
+---
+title: 'Mediterranean Baked Salmon'
+description: 'Delicious baked salmon with olive oil.'
+categories:
+  - 'cooking'
+  - 'fish'
+coverImage: 'salmon-recipe/salmon.jpg'
+date: '2023-08-11'
+published: true
+---
 
-	const ingredients: Ingredients[] = [
+Here's how to make tomatoes!
+
+<script>
+    import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
+
+    const ingredients = [
 		{
 			title: 'Salmon',
 			list: [
@@ -24,7 +36,7 @@
 		},
 	];
 
-	const steps: Step[] = [
+    const steps = [
 		{ emphasis: 'Prepare the sauce:', description: 'Whisk the milk, yeast, and yogurt in a bowl.' },
 		'Prepare a sheet pan lined with a large piece of foil (should be large enough to fold over salmon). Brush the top of the foil with extra virgin olive oil.',
 		{
@@ -41,21 +53,13 @@
 	];
 </script>
 
-<main>
-	<RecipeCard
-		img="salmon-recipe/salmon.jpg"
-		title="Mediterranean Baked Salmon"
-		description="This Lemon Garlic Salmon Recipe makes tender, perfectly flaky baked salmon while lemon garlic sauce with olive oil hits all the right flavor notes. It's Mediterranean Diet friendly and gluten free."
-		prepTime={15}
-		cookTime={30}
-		result="2 servings"
-		{ingredients}
-		{steps}
-	/>
-</main>
-
-<style>
-	main {
-		padding: var(--spacing-32);
-	}
-</style>
+<RecipeCard
+    img="salmon-recipe/salmon.jpg"
+    title="Mediterranean Baked Salmon"
+    description="This Lemon Garlic Salmon Recipe makes tender, perfectly flaky baked salmon while lemon garlic sauce with olive oil hits all the right flavor notes. It's Mediterranean Diet friendly and gluten free."
+    prepTime="{15}"
+    cookTime="{30}"
+    result="2 servings"
+    ingredients="{ingredients}"
+    steps="{steps}"
+/>
