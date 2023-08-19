@@ -9,7 +9,9 @@ date: '2023-08-11'
 published: true
 ---
 
-Here's how to make tomatoes!
+This recipe is easy to make, yet produces amazing results!
+
+Because the olive oil is such an important component of the flavor of this dish, use the highest quality one you can find.
 
 <script>
     import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
