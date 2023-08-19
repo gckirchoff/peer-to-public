@@ -7,6 +7,17 @@ export const siteConfig = {
 	url: 'https://your-blog-template.vercel.app',
 	link: 'https://github.com/gckirchoff/blog-template',
 	author: 'Amadeus',
+	landingPage: {
+		miniAboutMe: {
+			img: 'me.jpg',
+			quickDescription:
+				'My name is Gregory and I hope you enjoy this easy to use, but powerful site template!',
+		},
+		welcome: {
+			header: 'Welcome to your site template!',
+			description: 'Create posts, photo galleries, and more!',
+		},
+	},
 };
 
 // Controls how many posts are shown per page on the main blog index pages
@@ -32,7 +43,6 @@ export const navItems = [
 	},
 ];
 
-// Turn this back to if (dev)
 if (dev) {
 	navItems.push({
 		title: 'Dev',
