@@ -4,10 +4,6 @@
 	import CategoryTagsList from '$lib/components/internal/CategoryTagsList/CategoryTagsList.svelte';
 	import CategoryTag from '$lib/components/internal/CategoryTag/CategoryTag.svelte';
 
-	// import TagList from './tags/TagList.svelte'
-	// import Tag from './tags/Tag.svelte'
-	// import PostSearch from './PostSearch.svelte'
-
 	export let popularPosts: Tag[];
 	export let allCategories: string[];
 </script>
