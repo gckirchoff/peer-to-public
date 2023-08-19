@@ -13,11 +13,6 @@ export const GET = async ({ params, url }): Promise<Response> => {
 		options.offset = Number(params.offset);
 	}
 
-	const limit = url.searchParams.get('limit');
-	if (limit) {
-		options.limit = Number(limit);
-	}
-
 	const posts = await fetchPosts({ ...options });
 	return json(posts);
 };
