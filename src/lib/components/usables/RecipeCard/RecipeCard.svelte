@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { H5 } from '$lib/components/internal/typography';
+	import { H5, H6 } from '$lib/components/internal/typography';
 	import Body1 from '$lib/components/internal/typography/Body1.svelte';
 	import H4 from '$lib/components/internal/typography/H4.svelte';
 	import { ensureTargetIsArray } from '$lib/utils/logic';
@@ -7,7 +7,7 @@
 
 	export let img: string;
 	export let title: string;
-	export let description: string;
+	export let description = '';
 	export let prepTime: number;
 	export let cookTime: number;
 	export let result: string;
@@ -35,8 +35,15 @@
 				<Body1><strong>Total Time:</strong> {totalTime}</Body1>
 				<Body1><strong>Yield:</strong> {result}</Body1>
 			</div>
+			<hr />
+			{#if description}
+				<H6>Description</H6>
+				<Body1>{description}</Body1>
+			{/if}
 		</div>
 	</div>
+
+	<H6>Ingredients</H6>
 
 	<label class="scale">
 		Scale:
@@ -79,15 +86,18 @@
 		background-color: var(--clr-surface-300);
 		padding: var(--spacing-64);
 		border-radius: var(--rounded-4);
-		max-width: 70rem;
+		max-width: 100rem;
 
 		.heading {
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-			gap: var(--spacing-16);
+			gap: var(--spacing-32);
 
 			figure {
+				height: 100%;
+
 				img {
+					height: 100%;
 					object-fit: cover;
 				}
 			}
