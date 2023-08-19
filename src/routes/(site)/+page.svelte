@@ -41,7 +41,6 @@
 	@import '/src/styles/mixins.scss';
 
 	main {
-		padding: var(--spacing-24);
 		@include base-layout;
 		grid-template-rows: 50vh;
 		row-gap: var(--spacing-32);

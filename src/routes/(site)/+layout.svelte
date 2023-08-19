@@ -16,14 +16,14 @@
 </script>
 
 <Header />
-<main>
+<div class="content">
 	<Transition url={data.currentUrl} exceptions={['/posts']}>
 		<slot />
 	</Transition>
-</main>
+</div>
 
 <style lang="scss">
-	main {
-		padding: var(--spacing-24);
+	.content {
+		padding: var(--spacing-64);
 	}
 </style>
