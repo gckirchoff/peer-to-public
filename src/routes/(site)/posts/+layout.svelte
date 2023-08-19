@@ -29,9 +29,6 @@
 	@import '/src/styles//mixins.scss';
 
 	.layout {
-		// display: grid;
-		// grid-template-columns: 1fr 4fr;
-		// column-gap: 10%;
 		@include base-layout;
 	}
 </style>
