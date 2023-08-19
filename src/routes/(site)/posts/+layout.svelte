@@ -26,12 +26,12 @@
 </div>
 
 <style lang="scss">
-	.layout {
-		display: flex;
-		gap: var(--spacing-64);
+	@import '/src/styles//mixins.scss';
 
-		main {
-			flex: 1 1 auto;
-		}
+	.layout {
+		// display: grid;
+		// grid-template-columns: 1fr 4fr;
+		// column-gap: 10%;
+		@include base-layout;
 	}
 </style>

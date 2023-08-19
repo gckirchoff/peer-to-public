@@ -1,0 +1,5 @@
+@mixin base-layout {
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+	column-gap: 10%;
+}
