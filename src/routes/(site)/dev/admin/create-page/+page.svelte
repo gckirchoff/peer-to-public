@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
+	import { fly } from 'svelte/transition';
 
 	import MultiSelect from '$lib/components/internal/MultiSelect/MultiSelect.svelte';
+	import { H4 } from '$lib/components/internal/typography';
+	import type { PostReqPostBody, PostReqResponse } from '../../../../api/posts/types';
 	import MarkdownEditor from './MarkdownEditor.svelte';
 
 	export let data;
@@ -13,10 +16,52 @@
 	let title = '';
 	let description = '';
 	let categories: string[] = [];
-	let mdValue = '# Hi Everybody!';
+	let mdValue = '# Hi Everybody!\r## Hi Doctor Nik!\r> Dr Nik Riviera\r\rDr Nik Riviera is a quack';
 
-	const handleSubmit = async () => {
-		await fetch('/api/posts', {});
+	let errorText = '';
+
+	const handleSubmit = async (
+		event: MouseEvent & {
+			currentTarget: EventTarget & HTMLButtonElement;
+		}
+	) => {
+		event.preventDefault();
+		try {
+			if (!title) {
+				errorText = 'Must have a title';
+				setTimeout(() => (errorText = ''), 5000);
+				return;
+			}
+			if (!description) {
+				errorText = 'Must have a description';
+				setTimeout(() => (errorText = ''), 5000);
+				return;
+			}
+			if (!categories.length) {
+				errorText = 'Must have at least one category';
+				setTimeout(() => (errorText = ''), 5000);
+				return;
+			}
+
+			const body: PostReqPostBody = {
+				title,
+				description,
+				categories,
+				content: mdValue,
+			};
+			const res = await fetch('/api/posts', {
+				method: 'POST',
+				body: JSON.stringify(body),
+			});
+			const { status } = (await res.json()) as PostReqResponse;
+			if (status !== 'success') {
+				errorText = 'Could not create post';
+			}
+			window.localStorage.removeItem('create-markdown');
+		} catch (err) {
+			errorText = 'Could not create post';
+		}
+		setTimeout(() => (errorText = ''), 5000);
 	};
 
 	$: {
@@ -34,10 +79,9 @@
 	}
 </script>
 
-<form method="POST">
+<form>
 	<input type="text" bind:value={title} placeholder="Title" />
 	<textarea bind:value={description} placeholder="Description" />
-	<input type="text" placeholder="New Categories (comma separated: tag1,tag2)" />
 	<div>
 		<MultiSelect id="categories" bind:value={categories}>
 			{#each allCategories as category}
@@ -47,8 +91,14 @@
 	</div>
 	<MarkdownEditor bind:value={mdValue} />
 
-	<button type="submit">Save</button>
+	<button type="submit" on:click={handleSubmit}>Save</button>
 </form>
+
+{#if errorText}
+	<span class="error-text" transition:fly={{ duration: 200, y: 5 }}>
+		<H4>{errorText}</H4>
+	</span>
+{/if}
 
 <style lang="scss">
 	form {
@@ -71,6 +121,19 @@
 			&:hover {
 				background-color: var(--clr-primary-400);
 			}
+		}
+	}
+
+	.error-text {
+		position: absolute;
+		top: 10%;
+		left: 50%;
+		translate: -50% 0;
+		display: inline-block;
+		background-color: var(--clr-error-500);
+		padding: var(--spacing-8) var(--spacing-16);
+		:global(h4) {
+			color: var(--clr-txt-neg);
 		}
 	}
 </style>
