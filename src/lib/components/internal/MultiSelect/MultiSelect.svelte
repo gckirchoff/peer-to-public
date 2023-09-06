@@ -147,7 +147,7 @@
 </script>
 
 <div class="multiselect" class:readonly>
-	<div class="tokens" class:showOptions on:click={handleTokenClick}>
+	<div class="tokens" class:showOptions on:click={handleTokenClick} on:keydown={() => undefined}>
 		{#each Object.values(selected) as s}
 			<div class="token" data-id={s.value}>
 				<span>{s.name}</span>
@@ -239,6 +239,7 @@
 		background-color: white;
 		border-bottom: 1px solid hsl(0, 0%, 70%);
 		position: relative;
+		color: black;
 	}
 	.multiselect:not(.readonly):hover {
 		border-bottom-color: hsl(0, 0%, 50%);
