@@ -51,6 +51,7 @@
 				title,
 				description,
 				categories,
+				usables,
 				content: mdValue,
 			};
 			const res = await fetch('/api/posts', {
