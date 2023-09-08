@@ -19,7 +19,7 @@
 	let description = '';
 	let categories: string[] = [];
 	let mdValue = '# Hi Everybody!\r## Hi Doctor Nik!\r> Dr Nik Riviera\r\rDr Nik Riviera is a quack';
-	let usables: Usable[] = [];
+	let usables: { [id: string]: Usable } = {};
 
 	let openUsablesMenu = false;
 	let errorText = '';
@@ -60,8 +60,10 @@
 			const { status } = (await res.json()) as PostReqResponse;
 			if (status !== 'success') {
 				errorText = 'Could not create post';
+				return;
 			}
 			window.localStorage.removeItem('create-markdown');
+			window.localStorage.removeItem('usables');
 		} catch (err) {
 			errorText = 'Could not create post';
 		}
@@ -69,8 +71,10 @@
 	};
 
 	const addUsable = (usable: Usable): void => {
-		usables = [...usables, usable];
-		mdValue += `<--Component type="${usable.type}" id="${usable.id}" -->`;
+		openUsablesMenu = false;
+		usables = { ...usables, [usable.id]: usable };
+		window.localStorage.setItem('usables', JSON.stringify(usables));
+		mdValue += `[--Component type="${usable.type}" id="${usable.id}" --]`;
 	};
 
 	$: {
@@ -82,6 +86,11 @@
 				if (storedMd) {
 					mdValue = storedMd;
 				}
+				const storedUsables = window.localStorage.getItem('usables');
+				if (storedUsables) {
+					usables = JSON.parse(storedUsables);
+				}
+
 				loaded = true;
 			}
 		}
