@@ -2,6 +2,7 @@ import { error, json } from '@sveltejs/kit';
 import { writeFile } from 'node:fs/promises';
 import type { PostReqPostBody } from './types.js';
 import { slugify } from '$lib/utils/logic.js';
+import { UsableType } from '../../(site)/dev/admin/create-post/UsablesModal/constants.js';
 
 export const POST = async ({ request }) => {
 	try {
@@ -13,6 +14,7 @@ export const POST = async ({ request }) => {
 			published = true,
 			coverImage = 'ascidian.png',
 			content,
+			usables,
 		} = body;
 
 		const now = new Date();
@@ -20,7 +22,7 @@ export const POST = async ({ request }) => {
 		const adjustedDate = new Date(now.getTime() - offset * 60 * 1000);
 		const finalDate = adjustedDate.toISOString().split('T')[0];
 
-		const post = `---
+		let post = `---
 title: "${title}"
 description: "${description}"
 categories:
@@ -29,8 +31,32 @@ coverImage: "${coverImage}"
 date: '${finalDate}'
 published: ${published}
 ---
+<script> // usables
+
+</script>
 
 ${content}`;
+
+		const usableImports: Record<UsableType, string> = {
+			[UsableType.RecipeCard]:
+				"import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte'",
+			[UsableType.PhotoGallery]: 'TODO', // ! TODO
+		};
+		const importedUsables: Partial<Record<UsableType, true>> = {};
+		Object.entries(usables).forEach(([id, usable]) => {
+			if (!(usable.type in importedUsables)) {
+				post = post.replace(
+					'<script> // usables',
+					`<script> // usables
+  ${usableImports[usable.type]}`
+				);
+				importedUsables[usable.type] = true;
+			}
+			// switch (usable.type) {
+			// 	case UsableType.RecipeCard:
+
+			// }
+		});
 
 		const fileName = slugify(title);
 		const filePath = `src/lib/content/posts/${fileName}.md`;
