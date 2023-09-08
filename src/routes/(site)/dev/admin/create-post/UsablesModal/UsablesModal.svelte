@@ -2,7 +2,8 @@
 	import Modal from '$lib/components/internal/Modal/Modal.svelte';
 	import { H4, H5 } from '$lib/components/internal/typography';
 	import UsableRecipeCard from './UsableRecipeCard/UsableRecipeCard.svelte';
-	import { UsableType, type Usable } from './constants';
+	import { UsableType } from './constants';
+	import type { Usable } from './constants';
 
 	export let open: boolean;
 	export let handleClose: () => void;
