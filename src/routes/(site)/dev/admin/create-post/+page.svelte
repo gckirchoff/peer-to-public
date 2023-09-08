@@ -7,6 +7,7 @@
 	import type { PostReqPostBody, PostReqResponse } from '../../../../api/posts/types';
 	import MarkdownEditor from './MarkdownEditor.svelte';
 	import UsablesModal from './UsablesModal/UsablesModal.svelte';
+	import type { Usable } from './UsablesModal/constants';
 
 	export let data;
 
@@ -18,7 +19,9 @@
 	let description = '';
 	let categories: string[] = [];
 	let mdValue = '# Hi Everybody!\r## Hi Doctor Nik!\r> Dr Nik Riviera\r\rDr Nik Riviera is a quack';
+	let usables: Usable[] = [];
 
+	let openUsablesMenu = false;
 	let errorText = '';
 
 	const handleSubmit = async (
@@ -65,6 +68,11 @@
 		setTimeout(() => (errorText = ''), 5000);
 	};
 
+	const addUsable = (usable: Usable): void => {
+		usables = [...usables, usable];
+		mdValue += `<--Component type="${usable.type}" id="${usable.id}" -->`;
+	};
+
 	$: {
 		if (browser) {
 			if (loaded) {
@@ -90,18 +98,23 @@
 			{/each}
 		</MultiSelect>
 	</div>
+	<button class="open-usables" on:click={() => (openUsablesMenu = true)}>Add Component</button>
 	<MarkdownEditor bind:value={mdValue} />
 
 	<button type="submit" on:click={handleSubmit}>Save</button>
 </form>
+
+<UsablesModal
+	open={openUsablesMenu}
+	handleClose={() => (openUsablesMenu = false)}
+	handleSubmit={addUsable}
+/>
 
 {#if errorText}
 	<span class="error-text" transition:fly={{ duration: 200, y: 5 }}>
 		<H4>{errorText}</H4>
 	</span>
 {/if}
-
-<UsablesModal open={false} />
 
 <style lang="scss">
 	form {
@@ -115,7 +128,8 @@
 			width: 50%;
 		}
 
-		button[type='submit'] {
+		button[type='submit'],
+		.open-usables {
 			align-self: flex-end;
 			background-color: var(--clr-primary-300);
 			padding: var(--spacing-4) var(--spacing-8);
