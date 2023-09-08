@@ -6,6 +6,7 @@
 	import { H4 } from '$lib/components/internal/typography';
 	import type { PostReqPostBody, PostReqResponse } from '../../../../api/posts/types';
 	import MarkdownEditor from './MarkdownEditor.svelte';
+	import UsablesModal from './UsablesModal/UsablesModal.svelte';
 
 	export let data;
 
@@ -99,6 +100,8 @@
 		<H4>{errorText}</H4>
 	</span>
 {/if}
+
+<UsablesModal open={false} />
 
 <style lang="scss">
 	form {
