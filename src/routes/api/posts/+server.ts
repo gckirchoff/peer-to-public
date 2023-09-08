@@ -22,7 +22,7 @@ export const POST = async ({ request }) => {
 		const adjustedDate = new Date(now.getTime() - offset * 60 * 1000);
 		const finalDate = adjustedDate.toISOString().split('T')[0];
 
-		let post = `---
+		const postTemplate = `---
 title: "${title}"
 description: "${description}"
 categories:
@@ -43,9 +43,9 @@ ${content}`;
 			[UsableType.PhotoGallery]: 'TODO', // ! TODO
 		};
 		const importedUsables: Partial<Record<UsableType, true>> = {};
-		Object.entries(usables).forEach(([id, usable]) => {
+		const post = Object.entries(usables).reduce((acc, [id, usable]) => {
 			if (!(usable.type in importedUsables)) {
-				post = post.replace(
+				acc = acc.replace(
 					'<script> // usables',
 					`<script> // usables
   ${usableImports[usable.type]}`
@@ -56,7 +56,8 @@ ${content}`;
 			// 	case UsableType.RecipeCard:
 
 			// }
-		});
+			return acc;
+		}, postTemplate);
 
 		const fileName = slugify(title);
 		const filePath = `src/lib/content/posts/${fileName}.md`;
