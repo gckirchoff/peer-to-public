@@ -2,8 +2,9 @@
 	import { nanoid } from 'nanoid';
 
 	import { H4, H5 } from '$lib/components/internal/typography';
-	import { UsableType, type Usable } from '../constants';
+	import { slugify } from '$lib/utils/logic';
 	import type { Ingredients, Step } from '$lib/components/usables/RecipeCard/types';
+	import { UsableType, type Usable } from '../constants';
 
 	export let handleSubmit: (usable: Usable) => void;
 
@@ -17,7 +18,7 @@
 	let servings: number;
 
 	const createRecipeCard = () => {
-		const id = nanoid();
+		const id = `${slugify(title)}-${nanoid()}`;
 		handleSubmit({
 			type: UsableType.RecipeCard,
 			id,
@@ -41,6 +42,7 @@
 	<input placeholder="Servings" type="number" bind:value={servings} />
 	<H5>Ingredients:</H5>
 	<H5>Steps:</H5>
+	<button on:click={createRecipeCard}>Add Recipe Card</button>
 </div>
 
 <style lang="scss">
@@ -48,5 +50,14 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-8);
+	}
+	button {
+		background-color: var(--clr-primary-300);
+		padding: var(--spacing-4) var(--spacing-8);
+		border-radius: var(--rounded-4);
+
+		&:hover {
+			background-color: var(--clr-primary-400);
+		}
 	}
 </style>
