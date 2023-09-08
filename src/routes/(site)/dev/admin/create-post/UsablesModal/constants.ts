@@ -24,6 +24,8 @@ interface RecipeCard extends BaseUsable {
 
 interface PhotoGallery extends BaseUsable {
 	type: UsableType.PhotoGallery;
+	columns: number;
+	images: string[];
 }
 
 export type Usable = RecipeCard | PhotoGallery;
