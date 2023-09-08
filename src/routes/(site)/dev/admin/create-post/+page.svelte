@@ -75,7 +75,7 @@
 		openUsablesMenu = false;
 		usables = { ...usables, [usable.id]: usable };
 		window.localStorage.setItem('usables', JSON.stringify(usables));
-		mdValue += `[--Component type="${usable.type}" id="${usable.id}" --]`;
+		mdValue += `\r[--Component type="${usable.type}" id="${usable.id}" --]`;
 	};
 
 	$: {
