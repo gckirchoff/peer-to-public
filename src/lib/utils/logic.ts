@@ -13,3 +13,6 @@ export const slugify = (str: string): string =>
 		.replace(/[^a-z0-9 -]/g, '') // remove non-alphanumeric characters
 		.replace(/\s+/g, '-') // replace spaces with hyphens
 		.replace(/-+/g, '-'); // remove consecutive hyphens
+
+export const escapeRegExp = (text: string): string =>
+	text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
