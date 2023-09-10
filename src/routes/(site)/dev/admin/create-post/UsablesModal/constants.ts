@@ -10,7 +10,7 @@ interface BaseUsable {
 	type: UsableType;
 }
 
-interface RecipeCard extends BaseUsable {
+export interface RecipeCard extends BaseUsable {
 	type: UsableType.RecipeCard;
 	title: string;
 	img: string;
@@ -22,7 +22,7 @@ interface RecipeCard extends BaseUsable {
 	steps: Step[];
 }
 
-interface PhotoGallery extends BaseUsable {
+export interface PhotoGallery extends BaseUsable {
 	type: UsableType.PhotoGallery;
 	columns: number;
 	images: string[];
