@@ -8,19 +8,13 @@ import type {
 import type { UsableComponent } from './constants';
 
 export class UsablesFactory {
-	private usable: Usable;
-
-	constructor(usable: Usable) {
-		this.usable = usable;
-	}
-
-	createUsable = (): UsableComponent => {
-		const { type } = this.usable;
+	createUsable = (usable: Usable): UsableComponent => {
+		const { type } = usable;
 		switch (type) {
 			case UsableType.RecipeCard:
-				return new RecipeCardUsable(this.usable);
+				return new RecipeCardUsable(usable);
 			case UsableType.PhotoGallery:
-				return new PhotoGalleryUsable(this.usable);
+				return new PhotoGalleryUsable(usable);
 			default:
 				throw new Error(`Unsupported type: ${type}`);
 		}

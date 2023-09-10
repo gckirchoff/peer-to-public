@@ -30,6 +30,8 @@ export const POST = async ({ request }) => {
 		});
 
 		const importedUsables: Partial<Record<UsableType, true>> = {};
+		const usablesFactory = new UsablesFactory();
+
 		const post = Object.entries(usables).reduce((acc, [id, usable]) => {
 			if (!(usable.type in importedUsables)) {
 				acc = acc.replace(
@@ -44,9 +46,7 @@ export const POST = async ({ request }) => {
 				escapeRegExp(`[--Component type="${usable.type}" id="${usable.id}" --]`)
 			);
 
-			const usablesFactory = new UsablesFactory(usable);
-			const usableComponent = usablesFactory.createUsable();
-
+			const usableComponent = usablesFactory.createUsable(usable);
 			acc = usableComponent.swapOut(dummyComponent, acc);
 
 			return acc;
