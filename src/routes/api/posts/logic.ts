@@ -5,10 +5,10 @@ import type {
 	RecipeCard,
 	PhotoGallery,
 } from '../../(site)/dev/admin/create-post/UsablesModal/constants';
-import type { UsableComponent } from './constants';
+import type { ComponentBuilder } from './constants';
 
 export class UsablesFactory {
-	createUsable = (usable: Usable): UsableComponent => {
+	createUsableBuilder = (usable: Usable): ComponentBuilder => {
 		const { type } = usable;
 		switch (type) {
 			case UsableType.RecipeCard:
@@ -21,14 +21,14 @@ export class UsablesFactory {
 	};
 }
 
-class RecipeCardUsable implements UsableComponent {
+class RecipeCardUsable implements ComponentBuilder {
 	recipeCard: RecipeCard;
 
 	constructor(recipeCard: RecipeCard) {
 		this.recipeCard = recipeCard;
 	}
 
-	swapOut = (dummyComponent: RegExp, post: string): string => {
+	buildComponent = (): string => {
 		const { title, description, prepTime, cookTime, servings, ingredients, steps } =
 			this.recipeCard;
 		const recipeComponent = `<RecipeCard
@@ -42,21 +42,21 @@ class RecipeCardUsable implements UsableComponent {
     steps="{[]}"
 />`;
 
-		return post.replace(dummyComponent, recipeComponent);
+		return recipeComponent;
 	};
 }
 
-class PhotoGalleryUsable implements UsableComponent {
+class PhotoGalleryUsable implements ComponentBuilder {
 	photoGallery: PhotoGallery;
 
 	constructor(photoGallery: PhotoGallery) {
 		this.photoGallery = photoGallery;
 	}
 
-	swapOut = (dummyComponent: RegExp, post: string): string => {
+	buildComponent = (): string => {
 		const galleryComponent = 'TODO implement this'; // TODO
 
-		return post.replace(dummyComponent, galleryComponent);
+		return galleryComponent;
 	};
 }
 

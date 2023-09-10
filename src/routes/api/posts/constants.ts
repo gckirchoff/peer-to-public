@@ -15,8 +15,8 @@ export type PostReqResponse = {
 	status: 'success';
 };
 
-export interface UsableComponent {
-	swapOut: (dummyComponent: RegExp, post: string) => string;
+export interface ComponentBuilder {
+	buildComponent: () => string;
 }
 
 export const usableImports: Record<UsableType, string> = {

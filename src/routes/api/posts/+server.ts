@@ -46,8 +46,9 @@ export const POST = async ({ request }) => {
 				escapeRegExp(`[--Component type="${usable.type}" id="${usable.id}" --]`)
 			);
 
-			const usableComponent = usablesFactory.createUsable(usable);
-			acc = usableComponent.swapOut(dummyComponent, acc);
+			const usableBuilder = usablesFactory.createUsableBuilder(usable);
+			const realComponent = usableBuilder.buildComponent();
+			acc = acc.replace(dummyComponent, realComponent);
 
 			return acc;
 		}, postTemplate);
