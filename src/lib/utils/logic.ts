@@ -16,3 +16,11 @@ export const slugify = (str: string): string =>
 
 export const escapeRegExp = (text: string): string =>
 	text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+
+export const prettyDate = (date?: Date) => {
+	const myDate = date ?? new Date();
+	const offset = myDate.getTimezoneOffset();
+	const adjustedDate = new Date(myDate.getTime() - offset * 60 * 1000);
+	const finalDate = adjustedDate.toISOString().split('T')[0];
+	return finalDate;
+};
