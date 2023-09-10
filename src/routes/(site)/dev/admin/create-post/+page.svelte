@@ -4,7 +4,7 @@
 
 	import MultiSelect from '$lib/components/internal/MultiSelect/MultiSelect.svelte';
 	import { H4 } from '$lib/components/internal/typography';
-	import type { PostReqPostBody, PostReqResponse } from '../../../../api/posts/types';
+	import type { PostReqPostBody, PostReqResponse } from '../../../../api/posts/constants';
 	import MarkdownEditor from './MarkdownEditor.svelte';
 	import UsablesModal from './UsablesModal/UsablesModal.svelte';
 	import type { Usable } from './UsablesModal/constants';
