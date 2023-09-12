@@ -24,6 +24,7 @@
 	let servings: number;
 
 	let newIngredientsSection = '';
+	let newStep = '';
 
 	const createRecipeCard = () => {
 		const id = `${slugify(title)}-${nanoid()}`;
@@ -60,6 +61,11 @@
 			};
 		});
 	};
+
+	const addStep = () => {
+		steps = [...steps, newStep];
+		newStep = '';
+	};
 </script>
 
 <div class="container">
@@ -75,7 +81,18 @@
 	{#each ingredientSections as ingredientsSection}
 		<IngredientsList {ingredientsSection} onSubmit={addIngredient} />
 	{/each}
-	<H5>Steps:</H5>
+	<form on:submit={addStep}>
+		<textarea placeholder="Add Step" bind:value={newStep} />
+		<Button type="submit">Add Step</Button>
+	</form>
+	<ol class="steps-list">
+		{#each steps as step}
+			<li>
+				{step}
+			</li>
+		{/each}
+	</ol>
+
 	<Button on:click={createRecipeCard}>Add Recipe Card</Button>
 </div>
 
@@ -84,5 +101,9 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-8);
+	}
+
+	.steps-list {
+		padding-left: var(--spacing-24);
 	}
 </style>
