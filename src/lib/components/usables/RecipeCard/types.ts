@@ -5,8 +5,8 @@ export interface Ingredient {
 	note?: string;
 }
 
-export interface Ingredients {
-	title?: string;
+export interface IngredientSection {
+	title: string;
 	list: Ingredient[];
 }
 

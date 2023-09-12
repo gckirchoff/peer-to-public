@@ -3,19 +3,27 @@
 
 	import { H4, H5 } from '$lib/components/internal/typography';
 	import { slugify } from '$lib/utils/logic';
-	import type { Ingredients, Step } from '$lib/components/usables/RecipeCard/types';
+	import type {
+		Ingredient,
+		IngredientSection,
+		Step,
+	} from '$lib/components/usables/RecipeCard/types';
 	import { UsableType, type Usable } from '../constants';
+	import IngredientsList from './IngredientsList/IngredientsList.svelte';
+	import Button from '$lib/components/internal/Button/Button.svelte';
 
 	export let handleSubmit: (usable: Usable) => void;
 
 	let title = '';
 	let img = '';
 	let description = '';
-	let ingredients: Ingredients[] = [];
+	let ingredientSections: IngredientSection[] = [];
 	let steps: Step[] = [];
 	let prepTime: number;
 	let cookTime: number;
 	let servings: number;
+
+	let newIngredientsSection = '';
 
 	const createRecipeCard = () => {
 		const id = `${slugify(title)}-${nanoid()}`;
@@ -25,11 +33,31 @@
 			title,
 			img,
 			description,
-			ingredients,
+			ingredients: ingredientSections,
 			steps,
 			prepTime,
 			cookTime,
 			servings,
+		});
+	};
+
+	const addIngredientsSection = () => {
+		if (!newIngredientsSection) {
+			return;
+		}
+		ingredientSections = [...ingredientSections, { title: newIngredientsSection, list: [] }];
+		newIngredientsSection = '';
+	};
+
+	const addIngredient = (section: string, newIngredient: Ingredient) => {
+		ingredientSections = ingredientSections.map((ingredientSection) => {
+			if (ingredientSection.title !== section) {
+				return ingredientSection;
+			}
+			return {
+				...ingredientSection,
+				list: [...ingredientSection.list, newIngredient],
+			};
 		});
 	};
 </script>
@@ -40,9 +68,15 @@
 	<input placeholder="Prep Time (mins)" type="number" bind:value={prepTime} />
 	<input placeholder="Cook Time (mins)" type="number" bind:value={cookTime} />
 	<input placeholder="Servings" type="number" bind:value={servings} />
-	<H5>Ingredients:</H5>
+	<form on:submit={addIngredientsSection}>
+		<input placeholder="Ingredients Section" bind:value={newIngredientsSection} />
+		<Button type="submit">Add Ingredients Section</Button>
+	</form>
+	{#each ingredientSections as ingredientsSection}
+		<IngredientsList {ingredientsSection} onSubmit={addIngredient} />
+	{/each}
 	<H5>Steps:</H5>
-	<button on:click={createRecipeCard}>Add Recipe Card</button>
+	<Button on:click={createRecipeCard}>Add Recipe Card</Button>
 </div>
 
 <style lang="scss">
@@ -50,14 +84,5 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-8);
-	}
-	button {
-		background-color: var(--clr-primary-300);
-		padding: var(--spacing-4) var(--spacing-8);
-		border-radius: var(--rounded-4);
-
-		&:hover {
-			background-color: var(--clr-primary-400);
-		}
 	}
 </style>

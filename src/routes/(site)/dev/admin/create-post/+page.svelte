@@ -8,6 +8,7 @@
 	import MarkdownEditor from './MarkdownEditor.svelte';
 	import UsablesModal from './UsablesModal/UsablesModal.svelte';
 	import type { Usable } from './UsablesModal/constants';
+	import Button from '$lib/components/internal/Button/Button.svelte';
 
 	export let data;
 
@@ -24,11 +25,7 @@
 	let openUsablesMenu = false;
 	let errorText = '';
 
-	const handleSubmit = async (
-		event: MouseEvent & {
-			currentTarget: EventTarget & HTMLButtonElement;
-		}
-	) => {
+	const handleSubmit = async (event: MouseEvent) => {
 		event.preventDefault();
 		try {
 			if (!title) {
@@ -108,10 +105,12 @@
 			{/each}
 		</MultiSelect>
 	</div>
-	<button class="open-usables" on:click={() => (openUsablesMenu = true)}>Add Component</button>
+	<Button on:click={() => (openUsablesMenu = true)} style="align-self: flex-end;">
+		Add Component
+	</Button>
 	<MarkdownEditor bind:value={mdValue} />
 
-	<button type="submit" on:click={handleSubmit}>Save</button>
+	<Button type="submit" on:click={handleSubmit} style="align-self: flex-end;">Save</Button>
 </form>
 
 <UsablesModal
@@ -136,18 +135,6 @@
 		textarea {
 			align-self: flex-start;
 			width: 50%;
-		}
-
-		button[type='submit'],
-		.open-usables {
-			align-self: flex-end;
-			background-color: var(--clr-primary-300);
-			padding: var(--spacing-4) var(--spacing-8);
-			border-radius: var(--rounded-4);
-
-			&:hover {
-				background-color: var(--clr-primary-400);
-			}
 		}
 	}
 

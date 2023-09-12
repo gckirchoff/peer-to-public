@@ -3,7 +3,7 @@
 	import Body1 from '$lib/components/internal/typography/Body1.svelte';
 	import H4 from '$lib/components/internal/typography/H4.svelte';
 	import { ensureTargetIsArray } from '$lib/utils/logic';
-	import type { Ingredients, Step } from './types';
+	import type { IngredientSection, Step } from './types';
 
 	export let img: string;
 	export let title: string;
@@ -11,7 +11,7 @@
 	export let prepTime: number;
 	export let cookTime: number;
 	export let result: string;
-	export let ingredients: Ingredients | Ingredients[];
+	export let ingredients: IngredientSection | IngredientSection[];
 	export let steps: Step[];
 
 	const totalTime = prepTime + cookTime;

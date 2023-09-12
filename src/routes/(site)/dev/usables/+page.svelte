@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Ingredients, Step } from '$lib/components/usables/RecipeCard/types';
+	import type { IngredientSection, Step } from '$lib/components/usables/RecipeCard/types';
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
 
-	const ingredients: Ingredients[] = [
+	const ingredients: IngredientSection[] = [
 		{
 			title: 'Salmon',
 			list: [

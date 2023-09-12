@@ -38,7 +38,7 @@ class RecipeCardUsable implements ComponentBuilder {
     prepTime="{${prepTime}}"
     cookTime="{${cookTime}}"
     result="{${servings}}"
-    ingredients="{[]}"
+    ingredients="{${JSON.stringify(ingredients)}}"
     steps="{[]}"
 />`;
 

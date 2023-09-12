@@ -1,4 +1,4 @@
-import type { Ingredients, Step } from '$lib/components/usables/RecipeCard/types';
+import type { IngredientSection, Step } from '$lib/components/usables/RecipeCard/types';
 
 export enum UsableType {
 	RecipeCard = 'recipe-card',
@@ -18,7 +18,7 @@ export interface RecipeCard extends BaseUsable {
 	prepTime: number;
 	cookTime: number;
 	servings: number;
-	ingredients: Ingredients | Ingredients[];
+	ingredients: IngredientSection | IngredientSection[];
 	steps: Step[];
 }
 
