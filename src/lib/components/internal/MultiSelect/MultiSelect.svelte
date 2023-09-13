@@ -12,7 +12,7 @@
 	let input: HTMLInputElement,
 		inputValue: string,
 		options: { value: string; name: string | null }[] = [],
-		activeOption: { value: string; name: string | null },
+		activeOption: { value: string; name: string | null } | undefined | null,
 		showOptions = false,
 		selected = {},
 		first = true,
