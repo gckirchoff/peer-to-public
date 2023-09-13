@@ -123,6 +123,10 @@
 		optionsVisibility(false);
 	}
 
+	function handleFocus() {
+		optionsVisibility(true);
+	}
+
 	function handleTokenClick(e) {
 		if (e.target.closest('.token-remove')) {
 			e.stopPropagation();
@@ -174,6 +178,7 @@
 					bind:value={inputValue}
 					bind:this={input}
 					on:keyup={handleKeyup}
+					on:focus={handleFocus}
 					on:blur={handleBlur}
 					{placeholder}
 				/>
