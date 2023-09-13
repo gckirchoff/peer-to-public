@@ -19,7 +19,8 @@
 	let title = '';
 	let description = '';
 	let categories: string[] = [];
-	let mdValue = '# Hi Everybody!\r## Hi Doctor Nik!\r> Dr Nik Riviera\r\rDr Nik Riviera is a quack';
+	let mdValue =
+		'# Hi Everybody!\r## Hi Doctor Nik!\r> "You\'ve tried the best, now try the rest!"\r>\r>-Dr Nik\r\rDr Nik Riviera is a quack';
 	let usables: { [id: string]: Usable } = {};
 
 	let openUsablesMenu = false;
@@ -95,7 +96,7 @@
 	}
 </script>
 
-<form>
+<div class="post-meta-data-container">
 	<input type="text" bind:value={title} placeholder="Title" />
 	<textarea bind:value={description} placeholder="Description" />
 	<div>
@@ -110,8 +111,8 @@
 	</Button>
 	<MarkdownEditor bind:value={mdValue} />
 
-	<Button type="submit" on:click={handleSubmit} style="align-self: flex-end;">Save</Button>
-</form>
+	<Button on:click={handleSubmit} style="align-self: flex-end;">Save</Button>
+</div>
 
 <UsablesModal
 	open={openUsablesMenu}
@@ -126,7 +127,7 @@
 {/if}
 
 <style lang="scss">
-	form {
+	.post-meta-data-container {
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-8);
