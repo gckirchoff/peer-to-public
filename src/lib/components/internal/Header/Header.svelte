@@ -7,17 +7,15 @@
 
 <header>
 	<nav>
+		<a href="/" class="site-name">
+			<H3>{siteConfig.title}</H3>
+		</a>
 		<ul>
 			{#each navItems as { route, title } (route)}
 				<NavItem href={route}>{title}</NavItem>
 			{/each}
-		</ul>
-		<a href="/" class="site-name">
-			<H3>{siteConfig.title}</H3>
-		</a>
-		<div class="config">
 			<LightModeToggle />
-		</div>
+		</ul>
 	</nav>
 </header>
 
@@ -26,24 +24,23 @@
 		padding: var(--spacing-24);
 		background-color: var(--clr-surface-400);
 
+		--flex-gap: var(--spacing-24);
+		--row-gap: var(--spacing-8);
+
 		nav {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
+			display: flex;
+			justify-content: space-between;
 			align-items: center;
+			flex-wrap: wrap;
+			gap: var(--flex-gap);
+			row-gap: var(--row-gap);
 
 			ul {
 				display: flex;
-				gap: 2rem;
+				flex-wrap: wrap;
+				gap: var(--flex-gap);
+				row-gap: var(--row-gap);
 				list-style: none;
-			}
-
-			.site-name {
-				justify-self: center;
-				font-size: var(--font-32);
-			}
-
-			.config {
-				justify-self: flex-end;
 			}
 		}
 	}
