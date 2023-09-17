@@ -74,15 +74,16 @@
 }
 
 .prose {
-	display: grid;
-	grid-template-columns:
-		[gutter-start]
-		40px
-		[content-start]
-		minmax(0px, var(--post-txt-length))
-		[content-end]
-		40px
-		[gutter-end];
+	// display: grid;
+	// grid-template-columns:
+	// 	[gutter-start]
+	// 	40px
+	// 	[content-start]
+	// 	minmax(0px, var(--post-txt-length))
+	// 	[content-end]
+	// 	40px
+	// 	[gutter-end];
+	max-width: 80ch;
 }
 
 .prose > * {
