@@ -61,6 +61,43 @@
 	font-weight: 700;
 }
 
+.prose > table {
+	width: 100%;
+	border-collapse: collapse;
+	border: 1px solid #ccc;
+	margin-bottom: 20px;
+
+	th,
+	td {
+		padding: 8px 12px;
+		border: 1px solid #ccc;
+	}
+
+	/* Table Header Styles */
+	th {
+		background-color: var(--clr-surface-300);
+		font-weight: bold;
+	}
+
+	/* Alternating Row Colors */
+	tr:nth-child(even) {
+		background-color: var(--clr-surface-300);
+	}
+
+	tr:nth-child(odd) {
+		background-color: var(--clr-surface-400);
+	}
+
+	/* Hover Effect */
+	tr:hover {
+		background-color: #e0e0e0;
+	}
+
+	a {
+		color: var(--clr-primary-600);
+	}
+}
+
 .prose {
 	max-width: 80ch;
 }
