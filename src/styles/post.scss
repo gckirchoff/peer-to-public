@@ -69,7 +69,7 @@
 
 	th,
 	td {
-		padding: 8px 12px;
+		padding: var(--spacing-16);
 		border: 1px solid #ccc;
 	}
 
@@ -79,22 +79,28 @@
 		font-weight: bold;
 	}
 
-	/* Alternating Row Colors */
-	tr:nth-child(even) {
-		background-color: var(--clr-surface-300);
-	}
+	tr {
+		/* Alternating Row Colors */
+		&:nth-child(even) {
+			background-color: var(--clr-surface-300);
+		}
 
-	tr:nth-child(odd) {
-		background-color: var(--clr-surface-400);
-	}
+		&:nth-child(odd) {
+			background-color: var(--clr-surface-400);
+		}
 
-	/* Hover Effect */
-	tr:hover {
-		background-color: #e0e0e0;
+		/* Hover Effect */
+		&:hover {
+			background-color: var(--clr-surface-500);
+		}
 	}
 
 	a {
 		color: var(--clr-primary-600);
+
+		&:hover {
+			color: var(--clr-primary-400);
+		}
 	}
 }
 
