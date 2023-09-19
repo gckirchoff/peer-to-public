@@ -12,7 +12,7 @@
 	{#if popularPosts.length}
 		<div>
 			<H5>
-				<a href="/posts/category/popular" class="sidebar-header"> Popular posts </a>
+				<a href="/posts/category/popular" class="sidebar-header">Popular posts</a>
 			</H5>
 			<ul>
 				{#each popularPosts as post}
@@ -46,6 +46,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-32);
+		margin-bottom: var(--spacing-32);
 	}
 
 	.sidebar-header {
