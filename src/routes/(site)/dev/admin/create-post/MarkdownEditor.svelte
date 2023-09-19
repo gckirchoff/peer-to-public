@@ -16,6 +16,7 @@
 			// i18n: "en_US",
 			lang: 'en_US',
 			value: value,
+			mode: 'wysiwyg',
 			toolbar: [
 				// "emoji",
 				'headings',
@@ -43,7 +44,7 @@
 				'link',
 				'table',
 				//"record",
-				// "edit-mode",
+				"edit-mode",
 				// "both",
 				// "preview",
 				'fullscreen',
