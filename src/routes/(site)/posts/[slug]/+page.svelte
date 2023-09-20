@@ -41,7 +41,7 @@
 <div class="content">
 	<div class="heading">
 		{#if dev}
-			<a href="/dev/admin/post/{slug}"><Button>Edit Me</Button></a>
+			<a href="/dev/admin/post/{slug}"><Button>Edit</Button></a>
 		{/if}
 		<figure class="cover-image">
 			<img src="/images/postImages/{coverImage}" alt={title} />
