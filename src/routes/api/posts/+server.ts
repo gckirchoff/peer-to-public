@@ -4,7 +4,7 @@ import { usableImports } from './constants';
 import type { PostReqPostBody } from './constants';
 
 import { escapeRegExp, slugify } from '$lib/utils/logic';
-import type { UsableType } from '../../(site)/dev/admin/create-post/UsablesModal/constants';
+import type { UsableType } from '../../(site)/dev/admin/post/UsablesModal/constants';
 import { UsablesFactory, getPostTemplate } from './logic';
 
 export const POST = async ({ request }) => {

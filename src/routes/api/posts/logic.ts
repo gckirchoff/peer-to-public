@@ -1,10 +1,10 @@
 import { prettyDate } from '$lib/utils/logic';
-import { UsableType } from '../../(site)/dev/admin/create-post/UsablesModal/constants';
+import { UsableType } from '../../(site)/dev/admin/post/UsablesModal/constants';
 import type {
 	Usable,
 	RecipeCard,
 	PhotoGallery,
-} from '../../(site)/dev/admin/create-post/UsablesModal/constants';
+} from '../../(site)/dev/admin/post/UsablesModal/constants';
 import type { ComponentBuilder } from './constants';
 
 export class UsablesFactory {

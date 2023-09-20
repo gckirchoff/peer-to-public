@@ -1,5 +1,5 @@
-import { UsableType } from '../../(site)/dev/admin/create-post/UsablesModal/constants';
-import type { Usable } from '../../(site)/dev/admin/create-post/UsablesModal/constants';
+import { UsableType } from '../../(site)/dev/admin/post/UsablesModal/constants';
+import type { Usable } from '../../(site)/dev/admin/post/UsablesModal/constants';
 
 export type PostReqPostBody = {
 	title: string;
