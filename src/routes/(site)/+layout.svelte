@@ -23,7 +23,12 @@
 </div>
 
 <style lang="scss">
+	@import '/src/styles/mixins.scss';
 	.content {
 		padding: var(--spacing-64);
+
+		@include respond(mobile) {
+			padding: var(--spacing-4);
+		}
 	}
 </style>
