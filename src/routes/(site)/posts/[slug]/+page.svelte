@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { dev } from '$app/environment';
+
+	import Button from '$lib/components/internal/Button/Button.svelte';
 	import CategoryTag from '$lib/components/internal/CategoryTag/CategoryTag.svelte';
 	import CategoryTagsList from '$lib/components/internal/CategoryTagsList/CategoryTagsList.svelte';
 	import { Body2, H1 } from '$lib/components/internal/typography';
@@ -37,6 +40,9 @@
 
 <div class="content">
 	<div class="heading">
+		{#if dev}
+			<a href="/dev/admin/post/{slug}"><Button>Edit Me</Button></a>
+		{/if}
 		<figure class="cover-image">
 			<img src="/images/postImages/{coverImage}" alt={title} />
 		</figure>
