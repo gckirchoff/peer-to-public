@@ -41,7 +41,11 @@
 <div class="content">
 	<div class="heading">
 		{#if dev}
-			<a href="/dev/admin/post/{slug}"><Button>Edit</Button></a>
+			<div class="edit-button">
+				<a href="/dev/admin/post/{slug}">
+					<Button>Edit</Button>
+				</a>
+			</div>
 		{/if}
 		<figure class="cover-image">
 			<img src="/images/postImages/{coverImage}" alt={title} />
@@ -64,6 +68,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		position: relative;
 
 		.heading {
 			--spacing: var(--spacing-32);
@@ -87,5 +92,11 @@
 				font-size: var(--font-32);
 			}
 		}
+	}
+
+	.edit-button {
+		position: absolute;
+		right: 0px;
+		top: 0px;
 	}
 </style>
