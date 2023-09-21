@@ -67,6 +67,8 @@ interface GetPostTemplateParams {
 	coverImage: string;
 	published: boolean;
 	content: string;
+	date?: string;
+	update?: boolean;
 }
 
 export const getPostTemplate = ({
@@ -76,6 +78,8 @@ export const getPostTemplate = ({
 	coverImage,
 	published,
 	content,
+	date,
+	update = false,
 }: GetPostTemplateParams) => {
 	const publishedDate = prettyDate();
 
@@ -88,9 +92,14 @@ coverImage: "${coverImage}"
 date: '${publishedDate}'
 published: ${published}
 ---
-<script> // usables
+${
+	update
+		? ''
+		: `<script> // usables
 
-</script>
+</script>`
+}
+
 
 ${content}`;
 
