@@ -8,7 +8,9 @@ export const load = async ({ params, fetch }) => {
 
 	try {
 		const post = await import(`../../../../../../lib/content/posts/${slug}.md`);
-		const postContent = await readFile(`src/lib/content/posts/${slug}.md`, 'utf-8');
+		const contentString = await readFile(`src/lib/content/posts/${slug}.md`, 'utf-8');
+
+		const postContent = contentString.split('---')[2];
 
 		const allPostsRes = await fetch('/api/posts/all');
 		const allPosts = (await allPostsRes.json()) as Post[];
