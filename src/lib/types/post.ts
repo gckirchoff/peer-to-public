@@ -17,6 +17,7 @@ export type Frontmatter = {
 	description: string;
 	categories: string;
 	date: string;
+	updated?: string;
 	published: string;
 	coverImage: string;
 };
