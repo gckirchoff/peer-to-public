@@ -11,11 +11,6 @@ updated: '2023-09-24'
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
 </script>
-
-
-
-
-
 # Hi Everybody! This is supposed to be a draft
 
 ## Hi Doctor Nik!
