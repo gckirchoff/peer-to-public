@@ -11,7 +11,7 @@ export type PostReqPostBody = {
 	published?: boolean;
 };
 
-export type PatchReqPostBody = PostReqPostBody & { slug: string };
+export type PatchReqPostBody = PostReqPostBody & { slug: string; date: string; };
 
 export type PostReqResponse = {
 	status: 'success';
