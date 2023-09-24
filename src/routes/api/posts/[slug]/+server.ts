@@ -18,6 +18,7 @@ export const PATCH = async ({ request, params }) => {
 			coverImage = 'ascidian.png',
 			content: preprocessedContent,
 			usables,
+			date,
 		} = body;
 
 		const content = unescapeComponents(preprocessedContent);
@@ -30,6 +31,7 @@ export const PATCH = async ({ request, params }) => {
 			coverImage,
 			published,
 			content,
+			publishDate: date,
 			update: true,
 		});
 
