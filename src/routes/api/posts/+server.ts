@@ -12,7 +12,7 @@ export const POST = async ({ request }) => {
 			title,
 			description,
 			categories,
-			published = true,
+			published,
 			coverImage = 'ascidian.png',
 			content,
 			usables,
