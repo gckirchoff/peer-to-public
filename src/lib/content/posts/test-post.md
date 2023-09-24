@@ -1,11 +1,13 @@
 ---
-title: "New Test post"
+title: "New Test post UPDATED"
 description: "Demo post. This post has been improved"
 categories:
-  - "demo"  - "edited"
+  - "demo"
+  - "edited"
 coverImage: "ascidian.png"
 date: '2023-09-20'
 published: true
+updated: '2023-09-24'
 ---
 
 

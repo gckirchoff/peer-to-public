@@ -1,10 +1,10 @@
 ---
-title: "hi"
+title: "hi UPDATE AGAIN"
 description: "hello"
 categories:
   - "cooking"
 coverImage: "ascidian.png"
-date: '2023-09-18'
+date: '2023-09-24'
 published: true
 ---
 <script> // usables
