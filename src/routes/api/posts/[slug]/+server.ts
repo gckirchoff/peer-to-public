@@ -3,7 +3,7 @@ import { error, json } from '@sveltejs/kit';
 import { usableImports, type PatchReqPostBody } from '../constants.js';
 import { UsablesFactory, getPostTemplate } from '../logic.js';
 import type { UsableType } from '../../../(site)/dev/admin/post/subcomponents/UsablesModal/constants.js';
-import { escapeRegExp } from '$lib/utils/logic.js';
+import { escapeRegExp, unescapeComponents } from '$lib/utils/logic.js';
 
 export const PATCH = async ({ request, params }) => {
 	try {
@@ -16,9 +16,11 @@ export const PATCH = async ({ request, params }) => {
 			categories,
 			published = true,
 			coverImage = 'ascidian.png',
-			content,
+			content: preprocessedContent,
 			usables,
 		} = body;
+
+		const content = unescapeComponents(preprocessedContent);
 
 		// TODO add published date and upated date
 		const postTemplate = getPostTemplate({
@@ -35,11 +37,14 @@ export const PATCH = async ({ request, params }) => {
 		const usablesFactory = new UsablesFactory();
 
 		const post = Object.entries(usables).reduce((acc, [id, usable]) => {
-			if (!(usable.type in importedUsables)) {
+			const importStatement = usableImports[usable.type];
+			const importRegex = new RegExp(escapeRegExp(importStatement));
+
+			if (!(usable.type in importedUsables) && !importRegex.test(acc)) {
 				acc = acc.replace(
 					'<script> // usables',
 					`<script> // usables
-    ${usableImports[usable.type]}`
+    ${importStatement}`
 				);
 				importedUsables[usable.type] = true;
 			}
