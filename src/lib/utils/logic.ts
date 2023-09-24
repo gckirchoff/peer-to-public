@@ -17,6 +17,12 @@ export const slugify = (str: string): string =>
 export const escapeRegExp = (text: string): string =>
 	text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 
+export const escapeComponents = (str: string): string =>
+	str.replace(/<[^>]+\/>/gm, (match) => match.replace(/^</, '$-'));
+
+export const unescapeComponents = (str: string): string =>
+	str.replace(/\$-[^>]+\/>/gm, (match) => match.replace(/^\$-/, '<'));
+
 export const prettyDate = (date?: Date) => {
 	const myDate = date ?? new Date();
 	const offset = myDate.getTimezoneOffset();
