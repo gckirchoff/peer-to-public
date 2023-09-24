@@ -19,6 +19,7 @@
 		coverHeight,
 		subtitle,
 		updated,
+		published,
 	} = data.meta;
 	const { PostContent } = data;
 </script>
