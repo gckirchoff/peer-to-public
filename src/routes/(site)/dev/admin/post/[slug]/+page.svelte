@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '$lib/components/internal/Button/Button.svelte';
 	import { H4 } from '$lib/components/internal/typography';
 	import PostEditor from '../subcomponents/PostEditor/PostEditor.svelte';
 	import type { PostEditorBody } from '../subcomponents/PostEditor/constants.js';
@@ -22,7 +23,12 @@
 	};
 </script>
 
-<H4>Edit Post</H4>
+<div class="edit-post-header">
+	<H4>Edit Post</H4>
+	<a href="/posts/{slug}" target="_blank">
+		<Button>See Current Post</Button>
+	</a>
+</div>
 
 <PostEditor
 	handlePostAction={handleUpdatePost}
@@ -34,3 +40,13 @@
 	{date}
 	mdValue={postContent}
 />
+
+<style lang="scss">
+	.edit-post-header {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--spacing-16);
+		margin-bottom: var(--spacing-16);
+	}
+</style>
