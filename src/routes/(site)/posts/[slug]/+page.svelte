@@ -56,7 +56,12 @@
 				<CategoryTag {category} />
 			{/each}
 		</CategoryTagsList>
-		<Body2>{date}</Body2>
+		<div class="dates">
+			<Body2>Published: {date}</Body2>
+			{#if updated}
+				<Body2>Updated: {updated}</Body2>
+			{/if}
+		</div>
 		<H1>{title}</H1>
 	</div>
 	<div class="prose">
@@ -87,6 +92,12 @@
 				img {
 					width: clamp(400px, 75%, 900px);
 				}
+			}
+
+			.dates {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
 			}
 
 			:global(h1) {
