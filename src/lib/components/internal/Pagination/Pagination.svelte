@@ -34,6 +34,7 @@
 		flex-wrap: wrap;
 		justify-content: start;
 		gap: var(--spacing-8);
+		list-style: none;
 	}
 
 	a {
