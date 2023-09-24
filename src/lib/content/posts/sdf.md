@@ -2,14 +2,16 @@
 title: "sdf"
 description: "sdfsdf"
 categories:
-  - "popular"
+  - "demo"
 coverImage: "ascidian.png"
 date: '2023-09-18'
 published: true
+updated: '2023-09-24'
 ---
 <script> // usables
-
+	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
 </script>
+
 
 # Hi Everybody!
 

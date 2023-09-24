@@ -2,7 +2,7 @@
 title: "Covid 19 Resources"
 description: "A collection of Scientific publications, news articles, and other resources that describe the nature of the ongoing SARS-CoV-2 pandemic"
 categories:
-  - "covid-19"
+  - "covid-19"  - "popular"
 coverImage: "ascidian.png"
 date: '2023-09-19'
 published: true
@@ -11,6 +11,7 @@ updated: '2023-09-24'
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
 </script>
+
 # News
 
 | Title                                                                                                                                                                                                                                                                                                          | Summary                                                                                                                                                                                                                           |
