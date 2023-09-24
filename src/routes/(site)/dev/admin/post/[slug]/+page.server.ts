@@ -11,7 +11,7 @@ export const load = async ({ params, fetch }) => {
 		const post = await import(`../../../../../../lib/content/posts/${slug}.md`);
 		const contentString = await readFile(`src/lib/content/posts/${slug}.md`, 'utf-8');
 
-		const contentAfterFrontMatter = contentString.split('---')[2];
+		const contentAfterFrontMatter = contentString.split('</script>')?.[1] ?? contentString;
 		const postContent = escapeComponents(contentAfterFrontMatter);
 
 		const allPostsRes = await fetch('/api/posts/all');

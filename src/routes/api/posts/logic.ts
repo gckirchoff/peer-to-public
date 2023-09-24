@@ -94,13 +94,9 @@ date: '${publishedDate}'
 published: ${published}
 ${update ? `updated: '${updateDate}'` : ''}
 ---
-${
-	update
-		? ''
-		: `<script> // usables
+<script> // usables
 
-</script>`
-}
+</script>
 ${content}`;
 
 	return postTemplate;
