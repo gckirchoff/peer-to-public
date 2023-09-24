@@ -6,7 +6,7 @@
 	export let data;
 	const { postContent, meta, allCategories } = data;
 
-	const { title, description, categories, slug } = meta;
+	const { title, description, categories, slug, date } = meta;
 
 	const handleUpdatePost = async (body: PostEditorBody): Promise<boolean> => {
 		try {
@@ -31,5 +31,6 @@
 	{description}
 	{categories}
 	{slug}
+	{date}
 	mdValue={postContent}
 />

@@ -19,6 +19,7 @@
 	export let mdValue =
 		'# Hi Everybody!\r## Hi Doctor Nik!\r> "You\'ve tried the best, now try the rest!"\r>\r>-Dr Nik\r\rDr Nik Riviera is a quack';
 	export let slug: string | undefined = undefined;
+	export let date: string | undefined = undefined;
 
 	let formTitle = title;
 	let formDescription = description;
@@ -61,6 +62,7 @@
 				content: formMdValue,
 				usables,
 				slug,
+				date,
 			};
 
 			const success = await handlePostAction(body);
