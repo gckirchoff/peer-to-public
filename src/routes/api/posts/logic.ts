@@ -101,8 +101,6 @@ ${
 
 </script>`
 }
-
-
 ${content}`;
 
 	return postTemplate;
