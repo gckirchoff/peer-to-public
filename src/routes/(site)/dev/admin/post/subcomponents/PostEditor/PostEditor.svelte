@@ -9,6 +9,7 @@
 	import type { Usable } from '../../subcomponents/UsablesModal/constants';
 	import Button from '$lib/components/internal/Button/Button.svelte';
 	import type { PostEditorBody } from './constants';
+	import Switch from '$lib/components/internal/Switch.svelte';
 
 	export let handlePostAction: (body: PostEditorBody) => Promise<boolean>;
 	export let allCategories: string[];
@@ -16,6 +17,7 @@
 	export let title = '';
 	export let description = '';
 	export let categories: string[] = [];
+	export let published = false;
 	export let mdValue =
 		'# Hi Everybody!\r## Hi Doctor Nik!\r> "You\'ve tried the best, now try the rest!"\r>\r>-Dr Nik\r\rDr Nik Riviera is a quack';
 	export let slug: string | undefined = undefined;
@@ -25,6 +27,7 @@
 	let formDescription = description;
 	let formCategories = [...categories];
 	let formMdValue = mdValue;
+	let formPublished = published;
 
 	let loaded = false;
 
@@ -59,6 +62,7 @@
 				title: formTitle,
 				description: formDescription,
 				categories: formCategories,
+				published: formPublished,
 				content: formMdValue,
 				usables,
 				slug,
@@ -107,6 +111,7 @@
 </script>
 
 <div class="post-meta-data-container">
+	<Switch label="Published" bind:value={formPublished} />
 	<input type="text" bind:value={formTitle} placeholder="Title" />
 	<textarea bind:value={formDescription} placeholder="Description" />
 	<div>
