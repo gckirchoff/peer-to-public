@@ -4,12 +4,12 @@
 	import Transition from '$lib/components/internal/Transition/Transition.svelte';
 
 	export let data: LayoutData;
-	let popularPosts: LayoutData['popularPosts'];
+	let featuredPosts: LayoutData['featuredPosts'];
 	let allCategories: LayoutData['allCategories'];
-	$: ({ popularPosts, allCategories } = data);
+	$: ({ featuredPosts, allCategories } = data);
 	// onMount(() => {
 	// 	if (!prefersReducedData()) {
-	// 		popularPosts.forEach((post) => {
+	// 		featuredPosts.forEach((post) => {
 	// 			preloadCode(`/posts/${post.slug}`);
 	// 		});
 	// 	}
@@ -17,7 +17,7 @@
 </script>
 
 <div class="layout">
-	<Sidebar {popularPosts} {allCategories} />
+	<Sidebar {featuredPosts} {allCategories} />
 	<main>
 		<Transition url={data.currentUrl}>
 			<slot />

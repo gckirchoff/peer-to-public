@@ -6,7 +6,7 @@
 
 	export let data;
 
-	const { recentPosts, allCategories, popularPosts } = data;
+	const { recentPosts, allCategories, featuredPosts } = data;
 </script>
 
 <main>
@@ -30,7 +30,7 @@
 
 	<H4>Recent Posts</H4>
 
-	<Sidebar {popularPosts} {allCategories} />
+	<Sidebar {featuredPosts} {allCategories} />
 
 	<div>
 		<PostsList posts={recentPosts} />

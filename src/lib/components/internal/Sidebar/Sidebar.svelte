@@ -4,18 +4,18 @@
 	import CategoryTagsList from '$lib/components/internal/CategoryTagsList/CategoryTagsList.svelte';
 	import CategoryTag from '$lib/components/internal/CategoryTag/CategoryTag.svelte';
 
-	export let popularPosts: Tag[];
+	export let featuredPosts: Tag[];
 	export let allCategories: string[];
 </script>
 
 <aside>
-	{#if popularPosts.length}
+	{#if featuredPosts.length}
 		<div>
 			<H5>
-				<a href="/posts/category/popular" class="sidebar-header">Popular posts</a>
+				<a href="/posts/category/featured" class="sidebar-header">Featured posts</a>
 			</H5>
 			<ul>
-				{#each popularPosts as post}
+				{#each featuredPosts as post}
 					<li>
 						<a href="/posts/{post.slug}">
 							<Body1>

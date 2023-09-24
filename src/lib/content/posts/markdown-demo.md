@@ -4,7 +4,7 @@ description: A quick showcase of what you can do with markdown.
 categories:
   - tutorial
   - demo
-  - popular
+  - featured
 coverImage: 'markdown-tutorial/cover.jpg'
 date: '2023-07-31'
 published: true

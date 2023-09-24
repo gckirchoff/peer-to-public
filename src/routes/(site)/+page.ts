@@ -11,15 +11,15 @@ export const load = async ({ fetch }) => {
 	const allPostsRes = await fetch('/api/posts/all');
 	const allPosts = (await allPostsRes.json()) as Post[];
 
-	const popularPosts: Tag[] = allPosts
-		.filter((post) => post.categories.includes('popular'))
+	const featuredPosts: Tag[] = allPosts
+		.filter((post) => post.categories.includes('featured'))
 		.map((post) => ({ slug: post.slug, title: post.title }));
 
 	const allCategories = Array.from(new Set(allPosts.flatMap((p) => p.categories)));
 
 	return {
 		recentPosts,
-		popularPosts,
+		featuredPosts,
 		allCategories,
 	};
 };
