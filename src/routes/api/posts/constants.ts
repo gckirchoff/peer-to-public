@@ -7,8 +7,8 @@ export type PostReqPostBody = {
 	categories: string[];
 	content: string;
 	usables: { [id: string]: Usable };
+	published: boolean;
 	coverImage?: string;
-	published?: boolean;
 };
 
 export type PatchReqPostBody = PostReqPostBody & { slug: string; date: string; };
