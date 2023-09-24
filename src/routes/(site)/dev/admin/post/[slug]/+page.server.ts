@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { redirect } from '@sveltejs/kit';
 
 import type Post from '$lib/types/post.js';
+import { escapeComponents } from '$lib/utils/logic.js';
 
 export const load = async ({ params, fetch }) => {
 	const { slug } = params;
@@ -10,7 +11,8 @@ export const load = async ({ params, fetch }) => {
 		const post = await import(`../../../../../../lib/content/posts/${slug}.md`);
 		const contentString = await readFile(`src/lib/content/posts/${slug}.md`, 'utf-8');
 
-		const postContent = contentString.split('---')[2];
+		const contentAfterFrontMatter = contentString.split('---')[2];
+		const postContent = escapeComponents(contentAfterFrontMatter);
 
 		const allPostsRes = await fetch('/api/posts/all');
 		const allPosts = (await allPostsRes.json()) as Post[];
