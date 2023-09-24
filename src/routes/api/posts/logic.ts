@@ -95,7 +95,7 @@ published: ${published}
 ${update ? `updated: '${updateDate}'` : ''}
 ---
 <script> // usables
-
+	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
 </script>
 ${content}`;
 

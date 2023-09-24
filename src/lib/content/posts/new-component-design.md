@@ -1,5 +1,5 @@
 ---
-title: "New Component Design UPDATED"
+title: "New Component Design UPDATED again"
 description: "This was made with our fancy new component"
 categories:
   - "demo"
@@ -9,8 +9,7 @@ published: true
 updated: '2023-09-24'
 ---
 <script> // usables
-    import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte'
-
+	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
 </script>
 # This was made with a new component! UPDATED
 
@@ -28,14 +27,27 @@ steps="{["cook\n","eat"]}"
 ## Qail!
 
 <RecipeCard
+img="markdown-tutorial/irish-soda-bread.jpg"
+title="quail"
+description="good quail"
+prepTime="{2}"
+cookTime="{2}"
+result="{3}"
+ingredients="{[{"title":"quail","list":[{"item":"quail","quantity":3,"unit":"quails","note":""}]}]}"
+steps="{["cook","eat"]}"
+/>
+
+# Cookies!
+
+<RecipeCard
     img="markdown-tutorial/irish-soda-bread.jpg"
-    title="quail"
-    description="good quail"
-    prepTime="{2}"
-    cookTime="{2}"
+    title="Cookies"
+    description="warm"
+    prepTime="{3}"
+    cookTime="{3}"
     result="{3}"
-    ingredients="{[{"title":"quail","list":[{"item":"quail","quantity":3,"unit":"quails","note":""}]}]}"
-    steps="{["cook","eat"]}"
+    ingredients="{[{"title":"cookies","list":[{"item":"flour","quantity":1,"unit":"cup","note":""}]}]}"
+    steps="{["bake","eat"]}"
 />
 
 

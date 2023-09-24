@@ -1,8 +1,7 @@
 import { writeFile } from 'node:fs/promises';
 import { error, json } from '@sveltejs/kit';
-import { usableImports, type PatchReqPostBody } from '../constants.js';
+import type { PatchReqPostBody } from '../constants.js';
 import { UsablesFactory, getPostTemplate } from '../logic.js';
-import type { UsableType } from '../../../(site)/dev/admin/post/subcomponents/UsablesModal/constants.js';
 import { escapeRegExp, unescapeComponents } from '$lib/utils/logic.js';
 
 export const PATCH = async ({ request, params }) => {
@@ -35,22 +34,9 @@ export const PATCH = async ({ request, params }) => {
 			update: true,
 		});
 
-		const importedUsables: Partial<Record<UsableType, true>> = {};
 		const usablesFactory = new UsablesFactory();
 
 		const post = Object.entries(usables).reduce((acc, [id, usable]) => {
-			const importStatement = usableImports[usable.type];
-			const importRegex = new RegExp(escapeRegExp(importStatement));
-
-			if (!(usable.type in importedUsables) && !importRegex.test(acc)) {
-				acc = acc.replace(
-					'<script> // usables',
-					`<script> // usables
-    ${importStatement}`
-				);
-				importedUsables[usable.type] = true;
-			}
-
 			const dummyComponent = new RegExp(
 				escapeRegExp(`[--Component type="${usable.type}" id="${usable.id}" --]`)
 			);
