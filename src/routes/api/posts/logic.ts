@@ -67,7 +67,7 @@ interface GetPostTemplateParams {
 	coverImage: string;
 	published: boolean;
 	content: string;
-	date?: string;
+	publishDate?: string;
 	update?: boolean;
 }
 
@@ -78,10 +78,11 @@ export const getPostTemplate = ({
 	coverImage,
 	published,
 	content,
-	date,
+	publishDate,
 	update = false,
 }: GetPostTemplateParams) => {
-	const publishedDate = prettyDate();
+	const publishedDate = publishDate ?? prettyDate();
+	const updateDate = update ? prettyDate() : null;
 
 	const postTemplate = `---
 title: "${title}"
@@ -91,6 +92,7 @@ ${categories.map((category) => `  - "${category}"\r`).join('')}
 coverImage: "${coverImage}"
 date: '${publishedDate}'
 published: ${published}
+${update ? `updated: '${updateDate}'` : ''}
 ---
 ${
 	update
