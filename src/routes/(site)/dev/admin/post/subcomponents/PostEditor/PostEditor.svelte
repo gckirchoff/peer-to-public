@@ -20,6 +20,7 @@
 	export let published = false;
 	export let mdValue =
 		'# Hi Everybody!\r## Hi Doctor Nik!\r> "You\'ve tried the best, now try the rest!"\r>\r>-Dr Nik\r\rDr Nik Riviera is a quack';
+	export let coverImage: string | undefined = undefined;
 	export let slug: string | undefined = undefined;
 	export let date: string | undefined = undefined;
 
@@ -28,6 +29,7 @@
 	let formCategories = [...categories];
 	let formMdValue = mdValue;
 	let formPublished = published;
+	let formCoverImage = coverImage;
 
 	let loaded = false;
 
@@ -64,6 +66,7 @@
 				categories: formCategories,
 				published: formPublished,
 				content: formMdValue,
+				coverImage: formCoverImage,
 				usables,
 				slug,
 				date,
