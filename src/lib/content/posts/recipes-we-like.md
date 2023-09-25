@@ -6,13 +6,11 @@ categories:
 coverImage: "ascidian.png"
 date: '2023-09-19'
 published: false
-updated: '2023-09-24'
+updated: '2023-09-25'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
 </script>
-
-
 # Our Favorite Recipes
 
 * [Coconut Lime Chicken](https://getinspiredeveryday.com/food/thai-coconut-lime-chicken/?fbclid=IwAR1TICqX3iGPPIVJ6EInQpAv3DxrhLvKNlM0MPmcOcA2xnGuwAtlaM_Xm90)

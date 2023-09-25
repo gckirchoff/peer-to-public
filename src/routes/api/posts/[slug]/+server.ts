@@ -20,7 +20,7 @@ export const PATCH = async ({ request, params }) => {
 			date,
 		} = body;
 
-		const content = unescapeComponents(preprocessedContent);
+		const content = unescapeComponents(preprocessedContent).trimStart();
 
 		// TODO add published date and upated date
 		const postTemplate = getPostTemplate({
