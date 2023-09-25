@@ -7,12 +7,11 @@ categories:
 coverImage: "covid-19.jpg"
 date: '2023-09-19'
 published: true
-updated: '2023-09-24'
+updated: '2023-09-25'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
 </script>
-
 # News
 
 | Title                                                                                                                                                                                                                                                                                                          | Summary                                                                                                                                                                                                                           |
@@ -24,7 +23,7 @@ updated: '2023-09-24'
 | [We May Be The Last Maskers](https://www.mercurynews.com/2023/08/02/we-may-be-the-last-maskers-covid-cases-are-rising-heres-why-health-experts-are-masking-indoors/?fbclid=IwAR2ucpKQJ78V7vds5Z-zxw3WANDIHI1mRsiE0d9N1vbodsS_-MVcCmSMgNI)                                                                         | Quick article on why experts in public health continue to mask.                                                                                                                                                                   |
 | [HHS: THe More Often You Get COVID, The Higher Your Risk of Complications](https://twitter.com/HHSGov/status/1679883484142206978?t=K-R2621ubYvSvm628nh_GQ&s=19&fbclid=IwAR00lFDT5Sisu41xsUk9ldRaEptKuzzpva3kHCgEsQ-FXebIIKOftUd60RM)                                                                              | Twitter post by the Department of Health and Human Services                                                                                                                                                                       |
 | [After N.B.'s Deadliest Year, COVID-Related Strokes and Heart Attacks are in the Spotlight](https://www.cbc.ca/news/canada/new-brunswick/record-covid-deaths-heart-stroke-1.6847211?fbclid=IwAR0-vyz3D_OC8M1K14uPMANC8VDZQ_hifvx9Fr_PtowWZOn0AX4BTLuLTns)                                                         | Starts with a testimony of a 32 year old with new onset cardiac complications following covid infection. Follows it up with epidemiologist saying vascular damage by covid apparent on population scale through excess mortality. |
-| [Collection of Global News Headlines Stating Chronic Illness at All-Time Highs](https://twitter.com/NateB_Panic/status/1637526674794323973?t=vjz1k-UPx683zQNxzeXeGg&s=03&fbclid=IwAR13UytFilMy3L64wB2J6GmI7MeQYaRXUklF5Gk8QPLbX0Xt9_dUryNB6Mo)                                                                    | Collection of international news articles with translations surrounding                                                                                                                                                          |
+| [Collection of Global News Headlines Stating Chronic Illness at All-Time Highs](https://twitter.com/NateB_Panic/status/1637526674794323973?t=vjz1k-UPx683zQNxzeXeGg&s=03&fbclid=IwAR13UytFilMy3L64wB2J6GmI7MeQYaRXUklF5Gk8QPLbX0Xt9_dUryNB6Mo)                                                                    | Collection of international news articles with translations covering the global phenomenon of increased morbidity                                                                                                                 |
 
 # General Long Covid
 
@@ -110,11 +109,10 @@ updated: '2023-09-24'
 
 # General Virology
 
-| Title                                                                                                                                                                                                                                    | Summary                                                                                                                                                                                                |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Seasonality of Common Human Coronaviruses](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9514339/?fbclid=IwAR19GKS_P-4-Vpwio1WukyqIFLGTKWN3kPdMdB5fVC5zl9wOws1WMLYHRZU#:~:text=HCoVs%2C%20human%20coronaviruses.,Table%201%3B%20Figure%202) | Seasonality trends of common alpha and betacoronaviruses.                                                                                                                                              |
-| [The Lifecycle of SARS-CoV-2](https://www.maastrichtuniversity.nl/news/lifecycle-sars-cov-2?fbclid=IwAR2gwok9JLdBr5QD8rC6bLoeZUEVXgJg-Hlb_Y1QnR2feDp9IrDqet8SS10)                                                                           | Great molecular animation of how covid-19 infects cells.                                                                                                                                               |
-|                                                                                                                                                                                                                                          | Long term vascular and cardiac damage appears to be a driving force behind Germany's drop of life expectency in 2022, a year that was expected to see a rebound in life expectency since the pandemic. |
+| Title                                                                                                                                                                                                                                    | Summary                                                   |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| [Seasonality of Common Human Coronaviruses](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9514339/?fbclid=IwAR19GKS_P-4-Vpwio1WukyqIFLGTKWN3kPdMdB5fVC5zl9wOws1WMLYHRZU#:~:text=HCoVs%2C%20human%20coronaviruses.,Table%201%3B%20Figure%202) | Seasonality trends of common alpha and betacoronaviruses. |
+| [The Lifecycle of SARS-CoV-2](https://www.maastrichtuniversity.nl/news/lifecycle-sars-cov-2?fbclid=IwAR2gwok9JLdBr5QD8rC6bLoeZUEVXgJg-Hlb_Y1QnR2feDp9IrDqet8SS10)                                                                           | Great molecular animation of how covid-19 infects cells.  |
 
 # I am Infected. What do I do?
 
