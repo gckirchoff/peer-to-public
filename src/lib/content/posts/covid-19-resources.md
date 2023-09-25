@@ -4,7 +4,7 @@ description: "A collection of Scientific publications, news articles, and other 
 categories:
   - "covid-19"
   - "featured"
-coverImage: "ascidian.png"
+coverImage: "covid-19.jpg"
 date: '2023-09-19'
 published: true
 updated: '2023-09-24'
