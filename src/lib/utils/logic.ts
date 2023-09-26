@@ -30,3 +30,15 @@ export const prettyDate = (date?: Date) => {
 	const finalDate = adjustedDate.toISOString().split('T')[0];
 	return finalDate;
 };
+
+const getRandomInt = (min: number, max: number): number => {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+export const getCoverImage = (coverImage: string | undefined): string => {
+	if (coverImage) return coverImage;
+
+	return `default-background-${getRandomInt(1, 7)}.jpg`;
+};

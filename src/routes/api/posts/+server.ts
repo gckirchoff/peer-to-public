@@ -2,21 +2,15 @@ import { error, json } from '@sveltejs/kit';
 import { writeFile } from 'node:fs/promises';
 import type { PostReqPostBody } from './constants';
 
-import { escapeRegExp, slugify } from '$lib/utils/logic';
+import { escapeRegExp, getCoverImage, slugify } from '$lib/utils/logic';
 import { UsablesFactory, getPostTemplate } from './logic';
 
 export const POST = async ({ request }) => {
 	try {
 		const body = (await request.json()) as PostReqPostBody;
-		const {
-			title,
-			description,
-			categories,
-			published,
-			coverImage = 'ascidian.png',
-			content,
-			usables,
-		} = body;
+		const { title, description, categories, published, coverImage: image, content, usables } = body;
+
+		const coverImage = getCoverImage(image);
 
 		const postTemplate = getPostTemplate({
 			title,
