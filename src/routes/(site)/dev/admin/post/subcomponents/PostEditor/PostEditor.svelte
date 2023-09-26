@@ -10,26 +10,29 @@
 	import Button from '$lib/components/internal/Button/Button.svelte';
 	import type { PostEditorBody } from './constants';
 	import Switch from '$lib/components/internal/Switch.svelte';
+	import type { PostMetadata, PostEditorMetaData } from '$lib/types/post';
 
 	export let handlePostAction: (body: PostEditorBody) => Promise<boolean>;
 	export let allCategories: string[];
+	export let postMetaData: PostEditorMetaData = {
+		title: '',
+		description: '',
+		categories: [],
+		published: false,
+		coverImage: undefined,
+		slug: undefined,
+		date: undefined,
+	};
 
-	export let title = '';
-	export let description = '';
-	export let categories: string[] = [];
-	export let published = false;
 	export let mdValue =
 		'# Hi Everybody!\r## Hi Doctor Nik!\r> "You\'ve tried the best, now try the rest!"\r>\r>-Dr Nik\r\rDr Nik Riviera is a quack';
-	export let coverImage: string | undefined = undefined;
-	export let slug: string | undefined = undefined;
-	export let date: string | undefined = undefined;
 
-	let formTitle = title;
-	let formDescription = description;
-	let formCategories = [...categories];
+	let formTitle = postMetaData.title;
+	let formDescription = postMetaData.description;
+	let formCategories = [...postMetaData.categories];
 	let formMdValue = mdValue;
-	let formPublished = published;
-	let formCoverImage = coverImage;
+	let formPublished = postMetaData.published;
+	let formCoverImage = postMetaData.coverImage;
 
 	let loaded = false;
 
@@ -38,8 +41,8 @@
 	let openUsablesMenu = false;
 	let errorText = '';
 
-	const postContentLocalStorage = `markdown${slug ? `-${slug}` : ''}`;
-	const usablesLocalStorage = `usables${slug ? `-${slug}` : ''}`;
+	const postContentLocalStorage = `markdown${postMetaData.slug ? `-${postMetaData.slug}` : ''}`;
+	const usablesLocalStorage = `usables${postMetaData.slug ? `-${postMetaData.slug}` : ''}`;
 
 	const handleSubmit = async (event: MouseEvent) => {
 		event.preventDefault();
@@ -68,8 +71,8 @@
 				content: formMdValue,
 				coverImage: formCoverImage,
 				usables,
-				slug,
-				date,
+				slug: postMetaData.slug,
+				date: postMetaData.date,
 			};
 
 			const success = await handlePostAction(body);

@@ -12,6 +12,14 @@ export default interface Post {
 	updated?: string;
 }
 
+export interface PostMetadata extends Post {
+	slug: string;
+}
+
+type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
+export type PostEditorMetaData = PartialBy<PostMetadata, 'coverImage' | 'slug' | 'date'>;
+
 export type Frontmatter = {
 	title: string;
 	description: string;
