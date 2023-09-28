@@ -44,6 +44,14 @@
 	const postContentLocalStorage = `markdown${postMetaData.slug ? `-${postMetaData.slug}` : ''}`;
 	const usablesLocalStorage = `usables${postMetaData.slug ? `-${postMetaData.slug}` : ''}`;
 
+	let localStorageTimer: NodeJS.Timeout;
+	const debouncedSetLocalStorage = (mdValue: string): void => {
+		clearTimeout(localStorageTimer);
+		localStorageTimer = setTimeout(() => {
+			window.localStorage.setItem(postContentLocalStorage, mdValue);
+		}, 2000);
+	};
+
 	const handleSubmit = async (event: MouseEvent) => {
 		event.preventDefault();
 		try {
@@ -99,7 +107,7 @@
 	$: {
 		if (browser) {
 			if (loaded) {
-				window.localStorage.setItem(postContentLocalStorage, formMdValue);
+				debouncedSetLocalStorage(formMdValue);
 			} else {
 				const storedMd = window.localStorage.getItem(postContentLocalStorage);
 				if (storedMd) {
