@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import H5 from '../../typography/H5.svelte';
+	import { H6 } from '../../typography';
 
 	export let href: string;
 
@@ -10,18 +10,14 @@
 <li>
 	<a {href} aria-current={isCurrentPage}>
 		<span class:active={isCurrentPage}>
-			<H5>
+			<H6>
 				<slot />
-			</H5>
+			</H6>
 		</span>
 	</a>
 </li>
 
 <style>
-	a {
-		font-size: var(--font-24);
-	}
-
 	.active {
 		text-decoration: underline;
 		color: var(--clr-primary-500);
