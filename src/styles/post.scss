@@ -30,9 +30,9 @@
 	font-size: 18px;
 	line-height: 40px;
 
-	@include respond('mobile') {
-		font-size: 20px;
-	}
+	// @include respond('mobile') {
+	// 	font-size: 20px;
+	// }
 }
 
 .prose > p > img,
