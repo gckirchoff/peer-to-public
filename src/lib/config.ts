@@ -29,10 +29,10 @@ export const navItems = [
 		title: 'Blog',
 		route: '/posts',
 	},
-	{
-		title: 'Gallery',
-		route: '/gallery',
-	},
+	// {
+	// 	title: 'Gallery',
+	// 	route: '/gallery',
+	// },
 	{
 		title: 'About',
 		route: '/about',
