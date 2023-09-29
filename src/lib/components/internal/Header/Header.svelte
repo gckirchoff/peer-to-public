@@ -37,6 +37,7 @@
 
 			ul {
 				display: flex;
+				align-items: center;
 				flex-wrap: wrap;
 				gap: var(--flex-gap);
 				row-gap: var(--row-gap);
