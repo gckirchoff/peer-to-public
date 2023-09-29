@@ -11,7 +11,7 @@ export type PostReqPostBody = {
 	coverImage?: string;
 };
 
-export type PatchReqPostBody = PostReqPostBody & { slug: string; date: string; };
+export type PatchReqPostBody = PostReqPostBody & { slug: string; date: string };
 
 export type PostReqResponse = {
 	status: 'success';

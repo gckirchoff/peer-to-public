@@ -2,17 +2,16 @@
 	import Button from '$lib/components/internal/Button/Button.svelte';
 	import { H4 } from '$lib/components/internal/typography';
 	import PostEditor from '../subcomponents/PostEditor/PostEditor.svelte';
-	import type { PostEditorBody } from '../subcomponents/PostEditor/constants.js';
 
 	export let data;
 	const { postContent, meta, allCategories } = data;
 	const { slug } = meta;
 
-	const handleUpdatePost = async (body: PostEditorBody): Promise<boolean> => {
+	const handleUpdatePost = async (body: FormData): Promise<boolean> => {
 		try {
 			const res = await fetch(`/api/posts/${slug}`, {
 				method: 'PATCH',
-				body: JSON.stringify(body),
+				body,
 			});
 			const { status } = await res.json();
 			return status === 'success';

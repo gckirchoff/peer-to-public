@@ -11,8 +11,9 @@
 	import type { PostEditorBody } from './constants';
 	import Switch from '$lib/components/internal/Switch.svelte';
 	import type { PostMetadata, PostEditorMetaData } from '$lib/types/post';
+	import Body1 from '$lib/components/internal/typography/Body1.svelte';
 
-	export let handlePostAction: (body: PostEditorBody) => Promise<boolean>;
+	export let handlePostAction: (body: FormData) => Promise<boolean>;
 	export let allCategories: string[];
 	export let postMetaData: PostEditorMetaData = {
 		title: '',
@@ -33,6 +34,8 @@
 	let formMdValue = mdValue;
 	let formPublished = postMetaData.published;
 	let formCoverImage = postMetaData.coverImage;
+	let newImage: FileList;
+
 
 	let loaded = false;
 
@@ -71,6 +74,14 @@
 				return;
 			}
 
+			const formData = new FormData();
+
+			const file = newImage?.[0];
+			if (file) {
+				const fileName = file.name;
+				formData.append('newImage', file, fileName);
+			}
+
 			const body: PostEditorBody = {
 				title: formTitle,
 				description: formDescription,
@@ -83,7 +94,9 @@
 				date: postMetaData.date,
 			};
 
-			const success = await handlePostAction(body);
+			formData.append('data', JSON.stringify(body));
+
+			const success = await handlePostAction(formData);
 
 			if (!success) {
 				errorText = 'Could not create post';
@@ -93,6 +106,7 @@
 			window.localStorage.removeItem(usablesLocalStorage);
 		} catch (err) {
 			errorText = 'Could not create post';
+			console.warn(err);
 		}
 		setTimeout(() => (errorText = ''), 5000);
 	};
@@ -126,6 +140,10 @@
 
 <div class="post-meta-data-container">
 	<Switch label="Published" bind:value={formPublished} />
+	<label>
+		<Body1>Cover Photo:</Body1>
+		<input type="file" bind:files={newImage} />
+	</label>
 	<input type="text" bind:value={formTitle} placeholder="Title" />
 	<textarea bind:value={formDescription} placeholder="Description" />
 	<div>

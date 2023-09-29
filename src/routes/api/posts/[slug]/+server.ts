@@ -1,24 +1,28 @@
 import { writeFile } from 'node:fs/promises';
 import { error, json } from '@sveltejs/kit';
-import type { PatchReqPostBody } from '../constants.js';
 import { UsablesFactory, getPostTemplate } from '../logic.js';
 import { escapeRegExp, unescapeComponents } from '$lib/utils/logic.js';
+import { getPostEditorUploadAndHandleImageUpload, type PostEditorUploadRet } from '../../utils.js';
 
 export const PATCH = async ({ request, params }) => {
 	try {
-		const body = (await request.json()) as PatchReqPostBody;
+		const body = await getPostEditorUploadAndHandleImageUpload(request);
 		const { slug } = params;
+
+		if (!Object.hasOwn(body, 'date')) {
+			throw error(500, 'Internal Server Error');
+		}
 
 		const {
 			title,
 			description,
 			categories,
 			published,
-			coverImage = 'ascidian.png',
+			coverImage,
 			content: preprocessedContent,
 			usables,
 			date,
-		} = body;
+		} = body as PostEditorUploadRet & { date: string };
 
 		const content = unescapeComponents(preprocessedContent).trimStart();
 

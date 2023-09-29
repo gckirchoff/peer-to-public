@@ -7,11 +7,11 @@
 
 	const { allCategories } = data;
 
-	const handleCreatePost = async (body: PostEditorBody): Promise<boolean> => {
+	const handleCreatePost = async (body: FormData): Promise<boolean> => {
 		try {
 			const res = await fetch('/api/posts', {
 				method: 'POST',
-				body: JSON.stringify(body),
+				body,
 			});
 			const { status } = (await res.json()) as PostReqResponse;
 			return status === 'success';

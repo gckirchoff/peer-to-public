@@ -1,16 +1,14 @@
 import { error, json } from '@sveltejs/kit';
 import { writeFile } from 'node:fs/promises';
-import type { PostReqPostBody } from './constants';
 
-import { escapeRegExp, getCoverImage, slugify } from '$lib/utils/logic';
+import { escapeRegExp, slugify } from '$lib/utils/logic';
 import { UsablesFactory, getPostTemplate } from './logic';
+import { getPostEditorUploadAndHandleImageUpload } from '../utils';
 
 export const POST = async ({ request }) => {
 	try {
-		const body = (await request.json()) as PostReqPostBody;
-		const { title, description, categories, published, coverImage: image, content, usables } = body;
-
-		const coverImage = getCoverImage(image);
+		const body = await getPostEditorUploadAndHandleImageUpload(request);
+		const { title, description, categories, published, coverImage, content, usables } = body;
 
 		const postTemplate = getPostTemplate({
 			title,
@@ -44,6 +42,7 @@ export const POST = async ({ request }) => {
 			status: 'success',
 		});
 	} catch (err) {
+		console.warn(err);
 		throw error(500, 'Internal server error');
 	}
 };
