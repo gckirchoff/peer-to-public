@@ -1,14 +1,14 @@
 <script>
 	import { navItems, siteConfig } from '$lib/config';
 	import LightModeToggle from '../LightModeToggle/LightModeToggle.svelte';
-	import H3 from '../typography/H3.svelte';
+	import {H4} from '../typography';
 	import NavItem from './NavItem/NavItem.svelte';
 </script>
 
 <header>
 	<nav>
 		<a href="/" class="site-name">
-			<H3>{siteConfig.title}</H3>
+			<H4>{siteConfig.title}</H4>
 		</a>
 		<ul>
 			{#each navItems as { route, title } (route)}
@@ -21,7 +21,7 @@
 
 <style lang="scss">
 	header {
-		padding: var(--spacing-24);
+		padding: var(--spacing-16) var(--spacing-24);
 		background-color: var(--clr-surface-400);
 
 		--flex-gap: var(--spacing-24);
