@@ -13,7 +13,7 @@
 	<article>
 		<a href="/posts/{post.slug}" class="card">
 			<img src="/images/postImages/{post.coverImage}" alt={post.title} />
-			<div>
+			<div class="info">
 				<H4>
 					{post.title}
 				</H4>
@@ -22,7 +22,7 @@
 						<CategoryTag {category} />
 					{/each}
 				</CategoryTagsList>
-				<SubTitle1>{post.description}</SubTitle1>
+				<Body1>{post.description}</Body1>
 				<SubTitle2>{post.date}</SubTitle2>
 			</div>
 			{#if dev}
@@ -39,6 +39,7 @@
 </li>
 
 <style lang="scss">
+	@import '/src/styles/mixins.scss';
 	.card {
 		display: grid;
 		grid-template-columns: 1fr 3fr;
@@ -49,6 +50,12 @@
 			object-fit: cover;
 			min-height: 100%;
 			width: 100%;
+		}
+
+		.info {
+			display: flex;
+			flex-direction: column;
+			gap: var(--spacing-8);
 		}
 
 		.published-state {
@@ -63,6 +70,10 @@
 			&.draft {
 				background-color: var(--clr-warning-500);
 			}
+		}
+
+		@include respond('mobile') {
+			grid-template-columns: 1fr;
 		}
 	}
 </style>
