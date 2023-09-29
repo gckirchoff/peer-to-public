@@ -10,7 +10,7 @@
 	import Button from '$lib/components/internal/Button/Button.svelte';
 	import type { PostEditorBody } from './constants';
 	import Switch from '$lib/components/internal/Switch.svelte';
-	import type { PostMetadata, PostEditorMetaData } from '$lib/types/post';
+	import type { PostEditorMetaData } from '$lib/types/post';
 	import Body1 from '$lib/components/internal/typography/Body1.svelte';
 
 	export let handlePostAction: (body: FormData) => Promise<boolean>;
@@ -35,7 +35,6 @@
 	let formPublished = postMetaData.published;
 	let formCoverImage = postMetaData.coverImage;
 	let newImage: FileList;
-
 
 	let loaded = false;
 
