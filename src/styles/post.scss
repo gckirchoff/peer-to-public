@@ -30,6 +30,10 @@
 	font-size: 2rem;
 }
 
+.prose p {
+	margin-bottom: var(--spacing-24);
+}
+
 .prose > p > img,
 .prose iframe,
 .prose video,
