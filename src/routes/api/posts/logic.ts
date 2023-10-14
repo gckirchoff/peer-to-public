@@ -29,10 +29,10 @@ class RecipeCardUsable implements ComponentBuilder {
 	}
 
 	buildComponent = (): string => {
-		const { title, description, prepTime, cookTime, servings, ingredients, steps } =
+		const { title, description, prepTime, cookTime, servings, ingredients, steps, img } =
 			this.recipeCard;
 		const recipeComponent = `<RecipeCard
-    img="markdown-tutorial/irish-soda-bread.jpg"
+    img="${img}"
     title="${title}"
     description="${description}"
     prepTime="{${prepTime}}"
