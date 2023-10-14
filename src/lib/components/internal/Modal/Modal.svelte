@@ -13,7 +13,7 @@
 
 {#if open}
 	<div class="modal-root" class:open transition:fade={{ duration: 100 }}>
-		<div class="backdrop" on:click={handleClose} on:keydown={() => undefined} />
+		<div class="backdrop" on:click={handleClose} on:keydown={() => undefined} role="button" tabindex="-1" />
 
 		<div class="modal-container">
 			<div class="modal">

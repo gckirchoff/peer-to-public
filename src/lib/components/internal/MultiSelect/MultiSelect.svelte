@@ -28,14 +28,14 @@
 		value &&
 			(selected = options.reduce(
 				(obj, op) => (value.includes(op.value) ? { ...obj, [op.value]: op } : obj),
-				{}
+				{},
 			));
 		first = false;
 	});
 
 	$: if (!first) value = Object.values(selected).map((o) => o.value);
 	$: filtered = options.filter((o) =>
-		inputValue ? o.name?.toLowerCase().includes(inputValue.toLowerCase()) : o
+		inputValue ? o.name?.toLowerCase().includes(inputValue.toLowerCase()) : o,
 	);
 	// $: if ((activeOption && !filtered.includes(activeOption)) || (!activeOption && inputValue))
 	// 	activeOption = filtered[0];
@@ -151,7 +151,14 @@
 </script>
 
 <div class="multiselect" class:readonly>
-	<div class="tokens" class:showOptions on:click={handleTokenClick} on:keydown={() => undefined}>
+	<div
+		class="tokens"
+		class:showOptions
+		on:click={handleTokenClick}
+		on:keydown={() => undefined}
+		role="button"
+		tabindex="-1"
+	>
 		{#each Object.values(selected) as s}
 			<div class="token" data-id={s.value}>
 				<span>{s.name}</span>
@@ -181,6 +188,7 @@
 					on:focus={handleFocus}
 					on:blur={handleBlur}
 					{placeholder}
+					data-testid="multi-select-input"
 				/>
 				<div class="remove-all" title="Remove All" class:hidden={!Object.keys(selected).length}>
 					<svg
@@ -216,6 +224,7 @@
 			class="options"
 			transition:fly={{ duration: 200, y: 5 }}
 			on:mousedown|preventDefault={handleOptionMousedown}
+			role="listbox"
 		>
 			{#each filtered as option}
 				<li
@@ -265,7 +274,9 @@
 		left: 50%;
 		position: absolute;
 		background: hsl(45, 100%, 51%);
-		transition: width 0.3s ease 0s, left 0.3s ease 0s;
+		transition:
+			width 0.3s ease 0s,
+			left 0.3s ease 0s;
 		width: 0;
 	}
 	.tokens.showOptions::after {
@@ -336,7 +347,9 @@
 	}
 
 	.options {
-		box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px -2px 4px rgba(0, 0, 0, 0.1);
+		box-shadow:
+			0px 2px 4px rgba(0, 0, 0, 0.1),
+			0px -2px 4px rgba(0, 0, 0, 0.1);
 		left: 0;
 		list-style: none;
 		margin-block-end: 0;
