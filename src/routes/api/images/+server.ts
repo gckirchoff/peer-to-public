@@ -8,7 +8,6 @@ export const POST = async ({ request }) => {
 			success: false,
 		});
 	}
-	// console.log('request', request);
 
 	try {
 		const formdata = await request.formData();
@@ -18,7 +17,7 @@ export const POST = async ({ request }) => {
 
 		const buffer = Buffer.from(await file.arrayBuffer());
 
-		const filePath = `static/images/postImages/${fileName}`;
+		const filePath = `static/images/postImages/${file.name ?? fileName}`;
 
 		await writeFile(filePath, buffer, 'base64');
 
