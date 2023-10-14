@@ -13,10 +13,11 @@ export const POST = async ({ request }) => {
 		const formdata = await request.formData();
 
 		const file = formdata.get('file') as Blob;
-		const fileName = formdata.get('fileName') as string;
+		const nameOverride = formdata.get('fileName') as string;
 
 		const buffer = Buffer.from(await file.arrayBuffer());
 
+		const fileName = nameOverride ?? file.name;
 		const filePath = `static/images/postImages/${file.name ?? fileName}`;
 
 		await writeFile(filePath, buffer, 'base64');
