@@ -14,8 +14,8 @@
 
 	export let handleSubmit: (usable: Usable) => void;
 
+	let newImage: FileList;
 	let title = '';
-	let img = '';
 	let description = '';
 	let ingredientSections: IngredientSection[] = [];
 	let steps: Step[] = [];
@@ -26,13 +26,26 @@
 	let newIngredientsSection = '';
 	let newStep = '';
 
-	const createRecipeCard = () => {
+	const createRecipeCard = async () => {
+		const file = newImage?.[0];
+		if (!file) {
+			return;
+		}
+
+		const formData = new FormData();
+		formData.append('file', file, file.name);
+		await fetch('/api/images', {
+			method: 'POST',
+			body: formData,
+		});
+
 		const id = `${slugify(title)}-${nanoid()}`;
+
 		handleSubmit({
 			type: UsableType.RecipeCard,
 			id,
 			title,
-			img,
+			img: file.name,
 			description,
 			ingredients: ingredientSections,
 			steps,
@@ -69,6 +82,7 @@
 </script>
 
 <div class="container">
+	<input type="file" bind:files={newImage} />
 	<input placeholder="Title" type="text" bind:value={title} />
 	<input placeholder="Description" type="text" bind:value={description} />
 	<input placeholder="Prep Time (mins)" type="number" bind:value={prepTime} />
