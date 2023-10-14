@@ -13,7 +13,13 @@
 
 {#if open}
 	<div class="modal-root" class:open transition:fade={{ duration: 100 }}>
-		<div class="backdrop" on:click={handleClose} on:keydown={() => undefined} role="button" tabindex="-1" />
+		<div
+			class="backdrop"
+			on:click={handleClose}
+			on:keydown={() => undefined}
+			role="button"
+			tabindex="-1"
+		/>
 
 		<div class="modal-container">
 			<div class="modal">
@@ -48,13 +54,13 @@
 			transform: translate(-50%, -50%);
 			display: grid;
 			place-items: center;
+			max-height: calc(100% - 64px);
+			overflow-y: auto;
 
 			.modal {
 				max-width: 600px;
-				max-height: calc(100% - 64px);
 				background-color: var(--clr-surface-500);
 				border-radius: var(--rounded-4);
-				margin: var(--spacing-32);
 				padding: var(--spacing-24);
 				box-shadow: var(--shadow-md);
 				display: flex;
