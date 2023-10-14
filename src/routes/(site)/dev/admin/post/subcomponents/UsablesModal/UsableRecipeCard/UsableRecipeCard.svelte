@@ -83,6 +83,9 @@
 
 <div class="container">
 	<input type="file" bind:files={newImage} />
+	{#if newImage?.[0]}
+		<img src={URL.createObjectURL(newImage?.[0])} alt={newImage?.[0].name} />
+	{/if}
 	<input placeholder="Title" type="text" bind:value={title} />
 	<input placeholder="Description" type="text" bind:value={description} />
 	<input placeholder="Prep Time (mins)" type="number" bind:value={prepTime} />
