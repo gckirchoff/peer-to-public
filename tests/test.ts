@@ -5,18 +5,18 @@ test('index page has expected h1', async ({ page }) => {
 	await expect(page.getByRole('heading', { name: 'Welcome to your site template!' })).toBeVisible();
 });
 
-test('About page renders properly', async ({ page, userAgent }) => {
+test('About page renders properly', async ({ page }) => {
 	await page.goto('/about');
 	await expect(page.getByText('This is the about me section.')).toBeVisible();
 });
 
-// test('Can Create Post', async ({ page }) => {
-// 	await page.goto('/dev/admin/post');
+test('All resources for creating posts are present', async ({ page }) => {
+	await page.goto('/dev/admin/post');
 
-// 	await page.getByPlaceholder('Title').fill('automated test post');
-// 	await page.getByPlaceholder('Description').fill('Automated test description');
-// 	await page.getByTestId('multi-select-input').fill('automated-tag');
-// 	await page.getByTestId('multi-select-input').focus();
-// 	await page.getByTestId('multi-select-input').press('Enter');
-// 	await page.getByRole('button', { name: 'Save' }).click();
-// });
+	await expect(page.getByLabel('Cover Photo:')).toBeVisible();
+	await expect(page.getByPlaceholder('Title')).toBeVisible();
+	await expect(page.getByPlaceholder('Description')).toBeVisible();
+	await expect(page.getByTestId('multi-select-input')).toBeVisible();
+	await expect(page.getByTestId('multi-select-input')).toBeVisible();
+	await expect(page.getByRole('button', { name: 'Save' })).toBeVisible();
+});
