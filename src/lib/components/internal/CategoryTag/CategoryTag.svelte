@@ -10,10 +10,12 @@
 
 <style lang="scss">
 	a {
-		background-color: var(--clr-surface-600);
-		padding: var(--spacing-4) var(--spacing-8);
+		background-color:  var(--clr-primary-300);
+		padding: var(--spacing-2) var(--spacing-4);
+		text-transform: uppercase;
+		font-size: var(--font-14);
 		border-radius: var(--rounded-4);
-		color: var(--clr-text);
+		color:  var(--clr-primary-800);
 
 		&:hover {
 			background-color: var(--clr-surface-700);
