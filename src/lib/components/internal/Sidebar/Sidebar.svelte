@@ -52,7 +52,9 @@
 	.sidebar-header {
 		display: inline-block;
 		margin-bottom: var(--spacing-8);
-		text-decoration: underline;
+		font-family: var(--font-serif);
+		font-size: var(--font-16);
+		text-transform: uppercase;
 		color: var(--clr-primary-600);
 	}
 
