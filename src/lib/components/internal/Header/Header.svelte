@@ -1,18 +1,22 @@
 <script>
 	import { navItems, siteConfig } from '$lib/config';
 	import LightModeToggle from '../LightModeToggle/LightModeToggle.svelte';
-	import {H4} from '../typography';
+	import { H4 } from '../typography';
 	import NavItem from './NavItem/NavItem.svelte';
 </script>
 
 <header>
 	<nav>
 		<a href="/" class="site-name">
-			<H4>{siteConfig.title}</H4>
+			<H4>
+				<div class="site-title">{siteConfig.title}</div>
+			</H4>
 		</a>
 		<ul>
 			{#each navItems as { route, title } (route)}
-				<NavItem href={route}>{title}</NavItem>
+				<NavItem href={route}>
+					<div class="nav-item">{title}</div>
+				</NavItem>
 			{/each}
 			<LightModeToggle />
 		</ul>
@@ -35,6 +39,10 @@
 			gap: var(--flex-gap);
 			row-gap: var(--row-gap);
 
+			.site-title {
+				font-family: var(--font-serif);
+			}
+
 			ul {
 				display: flex;
 				align-items: center;
@@ -42,6 +50,10 @@
 				gap: var(--flex-gap);
 				row-gap: var(--row-gap);
 				list-style: none;
+
+				.nav-item {
+					font-family: var(--font-serif);
+				}
 			}
 		}
 	}
