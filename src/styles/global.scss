@@ -2,7 +2,8 @@
 
 :root {
 	/* Font */
-	--font-sans: 'Poppins', sans-serif;
+	--font-sans: 'Lato', sans-serif;
+	--font-serif: 'Inter', sans-serif;
 	--font-mono: 'JetBrains Mono', monospace;
 	--font-dyslexic: 'OpenDyslexic', sans-serif;
 	--font-dyslexic-mono: 'OpenDyslexic Mono', monospace;
@@ -22,6 +23,7 @@
 	--font-weight-bold: 800;
 
 	/* Spacing */
+	--spacing-2: 0.2rem;
 	--spacing-4: 0.4rem;
 	--spacing-8: 0.8rem;
 	--spacing-16: 1.6rem;
