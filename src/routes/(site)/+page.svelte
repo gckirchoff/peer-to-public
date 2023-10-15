@@ -45,7 +45,7 @@
 	main {
 		@include base-layout;
 		grid-template-rows: 50vh;
-		row-gap: var(--spacing-32);
+		row-gap: var(--spacing-16);
 
 		.profile {
 			flex: 1 0 30rem;
