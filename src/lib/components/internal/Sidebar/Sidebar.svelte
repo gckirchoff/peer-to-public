@@ -19,7 +19,9 @@
 					<li>
 						<a href="/posts/{post.slug}">
 							<Body1>
-								{post.title}
+								<div class="featured-post-item">
+									{post.title}
+								</div>
 							</Body1>
 						</a>
 					</li>
@@ -60,5 +62,11 @@
 
 	ul {
 		list-style: none;
+	}
+
+	.featured-post-item {
+		font-family: var(--font-serif);
+		font-size: var(--font-16);
+
 	}
 </style>
