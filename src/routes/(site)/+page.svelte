@@ -23,7 +23,9 @@
 
 	<div class="welcome">
 		<H2>{siteConfig.landingPage.welcome.header}</H2>
-		<H4>{siteConfig.landingPage.welcome.description}</H4>
+		<H4>
+			<div class="subtitle">{siteConfig.landingPage.welcome.description}</div>
+		</H4>
 	</div>
 
 	<div />
@@ -65,6 +67,11 @@
 
 		.welcome {
 			align-self: center;
+
+			.subtitle {
+				font-weight: var(--font-weight-light);
+				padding-left: var(--spacing-2);
+			}
 		}
 	}
 </style>

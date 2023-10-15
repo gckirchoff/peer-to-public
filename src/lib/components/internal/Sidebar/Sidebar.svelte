@@ -54,7 +54,7 @@
 	.sidebar-header {
 		display: inline-block;
 		margin-bottom: var(--spacing-8);
-		font-family: var(--font-serif);
+		font-family: var(--font-sans);
 		font-size: var(--font-16);
 		text-transform: uppercase;
 		color: var(--clr-primary-600);
@@ -65,7 +65,7 @@
 	}
 
 	.featured-post-item {
-		font-family: var(--font-serif);
+		font-family: var(--font-sans);
 		font-size: var(--font-16);
 
 	}
