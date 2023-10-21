@@ -2,7 +2,7 @@
 	import { dev } from '$app/environment';
 
 	import type Post from '$lib/types/post';
-	import { Body1, H4, SubTitle1, SubTitle2 } from '$lib/components/internal/typography';
+	import { Body1, H4, SubTitle2 } from '$lib/components/internal/typography';
 	import CategoryTag from '../CategoryTag/CategoryTag.svelte';
 	import CategoryTagsList from '../CategoryTagsList/CategoryTagsList.svelte';
 
@@ -12,18 +12,20 @@
 <li>
 	<article>
 		<a href="/posts/{post.slug}" class="card">
-			<img src="/images/postImages/{post.coverImage}" alt={post.title} />
+			<div class="image-container">
+				<img src="/images/postImages/{post.coverImage}" alt={post.title} />
+			</div>
 			<div class="info">
 				<H4>
 					{post.title}
 				</H4>
+				<SubTitle2>{post.date}</SubTitle2>
+				<Body1>{post.description}</Body1>
 				<CategoryTagsList>
 					{#each post.categories as category}
 						<CategoryTag {category} />
 					{/each}
 				</CategoryTagsList>
-				<Body1>{post.description}</Body1>
-				<SubTitle2>{post.date}</SubTitle2>
 			</div>
 			{#if dev}
 				<div class="published-state {post.published ? 'published' : 'draft'}">
@@ -42,13 +44,21 @@
 	@import '/src/styles/mixins.scss';
 	.card {
 		display: grid;
-		grid-template-columns: 1fr 3fr;
+		grid-template-columns: 2fr 3fr;
 		gap: var(--spacing-32);
 		position: relative;
 
+		.image-container {
+			display: block;
+			width: 100%;
+			aspect-ratio: 16 / 9;
+		}
+
 		img {
+			width: 100%;
+			// height: min(100%, 300px);
 			object-fit: cover;
-			max-height: 100%;
+			// max-height: 100%;
 		}
 
 		.info {
