@@ -40,13 +40,18 @@
 	</div>
 </aside>
 
-<style>
+<style lang="scss">
+	@import '/src/styles/mixins.scss';
 	aside {
 		flex: 0 1 15%;
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-32);
 		margin-bottom: var(--spacing-32);
+
+		@include respond('tab-port') {
+			display: none;
+		}
 	}
 
 	.sidebar-header {
