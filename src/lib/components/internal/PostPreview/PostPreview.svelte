@@ -56,9 +56,7 @@
 
 		img {
 			width: 100%;
-			// height: min(100%, 300px);
 			object-fit: cover;
-			// max-height: 100%;
 		}
 
 		.info {
