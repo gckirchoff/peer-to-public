@@ -4,21 +4,32 @@ export const load = async ({ fetch }) => {
 	const postsRes = await fetch('/api/posts/all');
 	const posts: Post[] = await postsRes.json();
 
-	const uniqueCategories = posts.reduce((acc: { [category: string]: number }, post) => {
-		post.categories.forEach((category) => {
-			if (!(category in acc)) {
-				acc[category] = 0;
-			}
-			acc[category]++;
-		});
+	const sortedPosts = [...posts].sort(
+		(a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+	);
 
-		return acc;
-	}, {});
+	const uniqueCategories = sortedPosts.reduce(
+		(acc: { [category: string]: { count: number; image: string } }, post) => {
+			post.categories.forEach((category) => {
+				if (!(category in acc)) {
+					acc[category] = { count: 0, image: post.coverImage };
+				}
+				acc[category].image = post.coverImage;
+				acc[category].count++;
+			});
 
-	const categoriesWithCounts = Object.entries(uniqueCategories).map(([category, count]) => ({
-		title: category,
-		count,
-	}));
+			return acc;
+		},
+		{},
+	);
+
+	const categoriesWithCounts = Object.entries(uniqueCategories)
+		.map(([category, data]) => ({
+			title: category,
+			count: data.count,
+			recentImage: data.image,
+		}))
+		.sort((a, b) => b.count - a.count);
 
 	return {
 		categoriesWithCounts,
