@@ -8,8 +8,8 @@
 <header>
 	<nav>
 		<a href="/" class="site-name">
-			<H4>
-				<div class="site-title">{siteConfig.title}</div>
+			<H4 style="font-family: var(--font-base);">
+				{siteConfig.title}
 			</H4>
 		</a>
 		<ul>
@@ -38,10 +38,6 @@
 			flex-wrap: wrap;
 			gap: var(--flex-gap);
 			row-gap: var(--row-gap);
-
-			.site-title {
-				font-family: var(--font-base);
-			}
 
 			ul {
 				display: flex;
