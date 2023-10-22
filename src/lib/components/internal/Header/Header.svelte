@@ -40,7 +40,7 @@
 			row-gap: var(--row-gap);
 
 			.site-title {
-				font-family: var(--font-sans);
+				font-family: var(--font-base);
 			}
 
 			ul {
@@ -52,7 +52,7 @@
 				list-style: none;
 
 				.nav-item {
-					font-family: var(--font-sans);
+					font-family: var(--font-base);
 				}
 			}
 		}

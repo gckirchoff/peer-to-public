@@ -2,8 +2,8 @@
 
 :root {
 	/* Font */
-	--font-sans: 'Inter', sans-serif;
-	--font-serif: 'Lato', sans-serif;
+	--font-base: 'Inter', sans-serif;
+	--font-accent: 'Lato', sans-serif;
 	--font-mono: 'JetBrains Mono', monospace;
 	--font-dyslexic: 'OpenDyslexic', sans-serif;
 	--font-dyslexic-mono: 'OpenDyslexic Mono', monospace;
@@ -90,7 +90,7 @@ body {
 }
 
 body {
-	font-family: var(--font-serif);
+	font-family: var(--font-accent);
 	font-size: var(--font-16);
 	color: var(--clr-txt);
 	background-color: var(--clr-surface-500);

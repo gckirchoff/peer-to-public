@@ -5,7 +5,7 @@
 		font-size: var(--font-96);
 		font-weight: var(--font-weight-light);
 		line-height: 1.167;
-		font-family: var(--font-serif);
+		font-family: var(--font-accent);
 		color: var(--clr-txt);
 	}
 </style>
