@@ -1,4 +1,8 @@
-<p><slot /></p>
+<script lang="ts">
+	export let style = '';
+</script>
+
+<p {style}><slot /></p>
 
 <style lang="scss">
 	p {

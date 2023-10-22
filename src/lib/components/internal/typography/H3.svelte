@@ -1,4 +1,8 @@
-<h3><slot /></h3>
+<script lang="ts">
+	export let style = '';
+</script>
+
+<h3 {style}><slot /></h3>
 
 <style lang="scss">
 	h3 {
