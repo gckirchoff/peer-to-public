@@ -1,10 +1,15 @@
-<p><slot /></p>
+<script lang="ts">
+	export let style = '';
+</script>
+
+<p {style}><slot /></p>
 
 <style lang="scss">
 	p {
 		font-size: var(--font-20);
-		line-height: 1.5;
-		font-family: var(--font-sans);
+		font-weight: var(--font-weight-regular);
+		line-height: 1.6;
+		font-family: var(--font-accent);
 		color: var(--clr-txt);
 	}
 </style>

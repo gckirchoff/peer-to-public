@@ -36,3 +36,7 @@ export const getRandomInt = (min: number, max: number): number => {
 	max = Math.floor(max);
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 };
+
+export const capitalize = (text: string): string => text[0].toUpperCase() + text.slice(1);
+
+export const randomDefaultPhoto = (): string => `default-background-${getRandomInt(1, 7)}.jpg`;

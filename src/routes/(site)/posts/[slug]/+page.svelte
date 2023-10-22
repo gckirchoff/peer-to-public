@@ -99,10 +99,6 @@
 				flex-direction: column;
 				align-items: center;
 			}
-
-			:global(h1) {
-				font-size: var(--font-32);
-			}
 		}
 	}
 

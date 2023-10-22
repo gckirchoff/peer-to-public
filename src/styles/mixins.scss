@@ -41,8 +41,8 @@ ORDER: Base + typography > general layout + grid > page layout > components
 
 @mixin base-layout {
 	display: grid;
-	grid-template-columns: 1fr 4fr;
-	column-gap: 10%;
+	grid-template-columns: 2fr 7fr;
+	column-gap: clamp(var(--spacing-24), 8%, var(--spacing-32));
 
 	@include respond(tab-port) {
 		grid-template-columns: 1fr;

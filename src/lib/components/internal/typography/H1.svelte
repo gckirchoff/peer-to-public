@@ -1,11 +1,14 @@
-<h1><slot /></h1>
+<script lang="ts">
+	export let style = '';
+</script>
+
+<h1 {style}><slot /></h1>
 
 <style lang="scss">
 	h1 {
-		font-size: var(--font-96);
-		font-weight: var(--font-weight-light);
+		font-size: var(--font-60);
 		line-height: 1.167;
-		font-family: var(--font-sans);
+		font-family: var(--font-accent);
 		color: var(--clr-txt);
 	}
 </style>

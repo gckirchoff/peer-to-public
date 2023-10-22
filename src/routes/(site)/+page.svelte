@@ -23,7 +23,9 @@
 
 	<div class="welcome">
 		<H2>{siteConfig.landingPage.welcome.header}</H2>
-		<H4>{siteConfig.landingPage.welcome.description}</H4>
+		<H4 style="font-weight: var(--font-weight-light); padding-left: var(--spacing-2);">
+			{siteConfig.landingPage.welcome.description}
+		</H4>
 	</div>
 
 	<div />
@@ -43,7 +45,7 @@
 	main {
 		@include base-layout;
 		grid-template-rows: 50vh;
-		row-gap: var(--spacing-32);
+		row-gap: var(--spacing-16);
 
 		.profile {
 			flex: 1 0 30rem;

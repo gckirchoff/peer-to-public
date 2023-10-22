@@ -18,7 +18,7 @@
 				{#each featuredPosts as post}
 					<li>
 						<a href="/posts/{post.slug}">
-							<Body1>
+							<Body1 style="font-family: var(--font-base); font-size: var(--font-16);">
 								{post.title}
 							</Body1>
 						</a>
@@ -40,19 +40,26 @@
 	</div>
 </aside>
 
-<style>
+<style lang="scss">
+	@import '/src/styles/mixins.scss';
 	aside {
 		flex: 0 1 15%;
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-32);
 		margin-bottom: var(--spacing-32);
+
+		@include respond('tab-port') {
+			display: none;
+		}
 	}
 
 	.sidebar-header {
 		display: inline-block;
 		margin-bottom: var(--spacing-8);
-		text-decoration: underline;
+		font-family: var(--font-base);
+		font-size: var(--font-16);
+		text-transform: uppercase;
 		color: var(--clr-primary-600);
 	}
 
