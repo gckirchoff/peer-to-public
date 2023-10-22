@@ -1,11 +1,11 @@
 import { writeFile } from 'node:fs/promises';
-import { getRandomInt } from '$lib/utils/logic';
+import { randomDefaultPhoto } from '$lib/utils/logic';
 import type { PatchReqPostBody, PostReqPostBody } from './posts/constants';
 import type { Modify } from '$lib/utils/tsUtils';
 
 const uploadAndGetCoverImage = async (
 	coverImage: string | undefined,
-	newImageFile: Blob | null
+	newImageFile: Blob | null,
 ): Promise<string> => {
 	if (newImageFile) {
 		const buffer = Buffer.from(await newImageFile.arrayBuffer());
@@ -19,7 +19,7 @@ const uploadAndGetCoverImage = async (
 		return coverImage;
 	}
 
-	return `default-background-${getRandomInt(1, 7)}.jpg`;
+	return randomDefaultPhoto();
 };
 
 export type PostEditorUploadRet = Modify<
@@ -30,7 +30,7 @@ export type PostEditorUploadRet = Modify<
 >;
 
 export const getPostEditorUploadAndHandleImageUpload = async (
-	request: Request
+	request: Request,
 ): Promise<PostEditorUploadRet> => {
 	try {
 		const formData = await request.formData();
