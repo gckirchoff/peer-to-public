@@ -6,7 +6,7 @@
 
 <style lang="scss">
 	h6 {
-		font-size: var(--font-20);
+		font-size: var(--font-18);
 		line-height: 1.6;
 		font-weight: var(--font-weight-regular);
 		font-family: var(--font-accent);
