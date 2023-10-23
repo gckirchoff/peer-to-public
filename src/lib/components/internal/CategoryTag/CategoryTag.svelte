@@ -10,16 +10,18 @@
 
 <style lang="scss">
 	a {
-		background-color:  var(--clr-primary-300);
-		padding: var(--spacing-2) var(--spacing-4);
-		text-transform: uppercase;
+		color: var(--clr-primary-800);
+		background-color: var(--clr-primary-300);
 		font-size: var(--font-14);
+		font-weight: var(--font-weight-regular);
+		text-transform: uppercase;
+
+		padding: var(--spacing-4) var(--spacing-8);
 		border-radius: var(--rounded-4);
-		color:  var(--clr-primary-800);
+		transition: all 0.1s ease-in;
 
 		&:hover {
-			background-color: var(--clr-surface-700);
-			color: var(--clr-txt-neg);
+			filter: brightness(0.9);
 		}
 	}
 </style>
