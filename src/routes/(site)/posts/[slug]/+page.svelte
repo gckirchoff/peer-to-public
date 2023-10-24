@@ -25,7 +25,6 @@
 </script>
 
 <svelte:head>
-	<!-- Be sure to add your image files and un-comment the lines below -->
 	<title>{title}</title>
 	<meta data-key="description" name="description" content={description} />
 	<meta property="og:type" content="article" />
