@@ -142,6 +142,10 @@
 	}
 }
 
+.prose iframe:not([height]) {
+	height: 90vh;
+}
+
 .prose {
 	max-width: 80ch;
 }
