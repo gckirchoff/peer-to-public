@@ -14,15 +14,13 @@ The final and easiest thing to download is VS Code right [here](https://code.vis
 
 After all of this is complete, click on the fork button at the top of this page. This will have you create your own repository.
 
-Once you create that repository, create a folder on your desktop. This folder can be called anything you want like "my-website". Then open the terminal and run these commands in order
+Now open the terminal on your computer and run these commands in order
 
 ```bash
 cd Desktop # Mac
 # either the above or below based on operating system
 cd OneDrive # Windows
-cd Desktop
-
-cd my-website # whatever your folder name is
+cd Desktop # Windows
 
 git clone LINK_OF_YOUR_NEW_GITHUB_REPOSITORY
 
