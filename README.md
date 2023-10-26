@@ -24,7 +24,7 @@ cd Desktop
 
 cd my-website # whatever your folder name is
 
-git clone origin LINK_OF_YOUR_NEW_GITHUB_REPOSITORY
+git clone LINK_OF_YOUR_NEW_GITHUB_REPOSITORY
 
 npm install
 ```
