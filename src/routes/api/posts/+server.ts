@@ -1,35 +1,9 @@
 import { error, json } from '@sveltejs/kit';
-import { writeFile, rename, mkdir } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { writeFile } from 'node:fs/promises';
 
 import { escapeRegExp, slugify } from '$lib/utils/logic';
 import { UsablesFactory, getPostTemplate } from './logic';
-import { getPostEditorUploadAndHandleImageUpload } from '../utils';
-
-const processContentImages = async (post: string, slug: string): Promise<string> => {
-	try {
-		const tempImageFinder = /(?<=\/temp\/).+?(?=(\)|"))/g;
-		const imagesToMove = [...post.matchAll(tempImageFinder)].map(([fileName]) => fileName);
-
-		if (!imagesToMove.length) {
-			return post;
-		}
-
-		const newFolderPath = `postImages/${slug}`;
-
-		if (!existsSync(`static/images/${newFolderPath}`)) {
-			await mkdir(`static/images/${newFolderPath}`);
-		}
-		for (const image of imagesToMove) {
-			await rename(`static/images/temp/${image}`, `static/images/${newFolderPath}/${image}`);
-		}
-
-		return post.replaceAll('/temp/', `/${newFolderPath}/`);
-	} catch (err) {
-		console.warn(err);
-		throw new Error((err as { message: string })!.message);
-	}
-};
+import { getPostEditorUploadAndHandleImageUpload, processContentImages } from '../utils';
 
 export const POST = async ({ request }) => {
 	try {
