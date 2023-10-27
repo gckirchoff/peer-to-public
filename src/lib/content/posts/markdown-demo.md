@@ -95,7 +95,7 @@ like **`ingredients="{irishSodaBreadIngredients}"`**
 <br>
 
 <RecipeCard
-    img="markdown-tutorial/irish-soda-bread.jpg"
+    img="/postImages/markdown-tutorial/irish-soda-bread.jpg"
     title="Irish Soda Bread"
     ingredients="{irishSodaBreadIngredients}"
     steps="{irishSodaBreadSteps}"

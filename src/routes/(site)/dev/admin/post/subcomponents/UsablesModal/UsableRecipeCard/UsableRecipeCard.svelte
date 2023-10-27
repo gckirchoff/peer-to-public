@@ -34,7 +34,7 @@
 
 		const formData = new FormData();
 		formData.append('file', file, file.name);
-		await fetch('/api/images', {
+		await fetch('/api/temp-images', {
 			method: 'POST',
 			body: formData,
 		});
@@ -45,7 +45,7 @@
 			type: UsableType.RecipeCard,
 			id,
 			title,
-			img: file.name,
+			img: `/temp/${file.name}`,
 			description,
 			ingredients: ingredientSections,
 			steps,

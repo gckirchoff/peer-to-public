@@ -2,7 +2,11 @@ import { writeFile } from 'node:fs/promises';
 import { error, json } from '@sveltejs/kit';
 import { UsablesFactory, getPostTemplate } from '../logic.js';
 import { escapeRegExp, unescapeComponents } from '$lib/utils/logic.js';
-import { getPostEditorUploadAndHandleImageUpload, type PostEditorUploadRet } from '../../utils.js';
+import {
+	getPostEditorUploadAndHandleImageUpload,
+	processContentImages,
+	type PostEditorUploadRet,
+} from '../../utils.js';
 
 export const PATCH = async ({ request, params }) => {
 	try {
@@ -26,7 +30,6 @@ export const PATCH = async ({ request, params }) => {
 
 		const content = unescapeComponents(preprocessedContent).trimStart();
 
-		// TODO add published date and upated date
 		const postTemplate = getPostTemplate({
 			title,
 			description,
@@ -40,9 +43,9 @@ export const PATCH = async ({ request, params }) => {
 
 		const usablesFactory = new UsablesFactory();
 
-		const post = Object.entries(usables).reduce((acc, [id, usable]) => {
+		const postAfterComponentProcessing = Object.entries(usables).reduce((acc, [id, usable]) => {
 			const dummyComponent = new RegExp(
-				escapeRegExp(`[--Component type="${usable.type}" id="${usable.id}" --]`)
+				escapeRegExp(`[--Component type="${usable.type}" id="${usable.id}" --]`),
 			);
 
 			const usableBuilder = usablesFactory.createUsableBuilder(usable);
@@ -52,9 +55,10 @@ export const PATCH = async ({ request, params }) => {
 			return acc;
 		}, postTemplate);
 
-		const filePath = `src/lib/content/posts/${slug}.md`;
+		const postAfterImageProcessing = await processContentImages(postAfterComponentProcessing, slug);
 
-		await writeFile(filePath, post);
+		const filePath = `src/lib/content/posts/${slug}.md`;
+		await writeFile(filePath, postAfterImageProcessing);
 
 		return json({
 			status: 'success',

@@ -18,7 +18,7 @@ export const POST = async ({ request }) => {
 		const buffer = Buffer.from(await file.arrayBuffer());
 
 		const fileName = nameOverride ?? file.name;
-		const filePath = `static/images/postImages/${file.name ?? fileName}`;
+		const filePath = `static/images/temp/${file.name ?? fileName}`;
 
 		await writeFile(filePath, buffer, 'base64');
 

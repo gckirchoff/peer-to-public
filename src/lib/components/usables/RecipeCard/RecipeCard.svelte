@@ -23,7 +23,7 @@
 <article class="card">
 	<div class="heading">
 		<figure>
-			<img src="/images/postImages/{img}" alt={title} />
+			<img src="/images{img}" alt={title} />
 		</figure>
 		<div class="recipe-info-container">
 			<H5><strong>{title}</strong></H5>
