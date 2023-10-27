@@ -45,7 +45,7 @@
 			type: UsableType.RecipeCard,
 			id,
 			title,
-			img: file.name,
+			img: `/temp/${file.name}`,
 			description,
 			ingredients: ingredientSections,
 			steps,

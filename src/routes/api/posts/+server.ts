@@ -8,8 +8,12 @@ import { getPostEditorUploadAndHandleImageUpload } from '../utils';
 
 const processContentImages = async (post: string, slug: string): Promise<string> => {
 	try {
-		const tempImageFinder = /(?<=\/images\/temp\/).+?(?=\))/g;
+		const tempImageFinder = /(?<=\/temp\/).+?(?=(\)|"))/g;
 		const imagesToMove = [...post.matchAll(tempImageFinder)].map(([fileName]) => fileName);
+
+		if (!imagesToMove.length) {
+			return post;
+		}
 
 		const newFolderPath = `postImages/${slug}`;
 
