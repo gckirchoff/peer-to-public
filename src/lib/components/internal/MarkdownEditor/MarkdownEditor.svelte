@@ -2,7 +2,7 @@
 	// From https://svelte.dev/repl/d2b97bcce5b34a2690748ac459716125?version=3.44.2
 	import Vditor from 'vditor';
 	import { nanoid } from 'nanoid';
-	import type { PostImageRes } from '../../../../routes/api/images/types';
+	import type { PostImageRes } from '../../../../routes/api/temp-images/types';
 	export let value = '';
 	export let id = nanoid();
 	let vditor: Vditor | undefined = undefined;
@@ -44,7 +44,7 @@
 				'link',
 				'table',
 				//"record",
-				"edit-mode",
+				'edit-mode',
 				// "both",
 				// "preview",
 				'fullscreen',
@@ -69,7 +69,6 @@
 				handler: async (files) => {
 					const file = files[0];
 					const fileName = file.name;
-
 					// Send the file name along with the file to the backend
 					const formData = new FormData();
 					formData.append('file', file, fileName);
@@ -78,7 +77,7 @@
 					// Send the formData to the backend using an API call (e.g., fetch or axios)
 
 					try {
-						const response = await fetch('/api/images', {
+						const response = await fetch('/api/temp-images', {
 							method: 'POST',
 							body: formData,
 						});
