@@ -5,7 +5,7 @@ categories:
   - tutorial
   - demo
   - featured
-coverImage: 'markdown-tutorial/cover.jpg'
+coverImage: 'cover.jpg'
 date: '2023-07-31'
 published: true
 ---
@@ -95,7 +95,7 @@ like **`ingredients="{irishSodaBreadIngredients}"`**
 <br>
 
 <RecipeCard
-    img="/postImages/markdown-tutorial/irish-soda-bread.jpg"
+    img="/postImages/markdown-demo/irish-soda-bread.jpg"
     title="Irish Soda Bread"
     ingredients="{irishSodaBreadIngredients}"
     steps="{irishSodaBreadSteps}"

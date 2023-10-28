@@ -1,17 +1,26 @@
 import { writeFile, rename, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
-import { randomDefaultPhoto } from '$lib/utils/logic';
+import { randomDefaultPhoto, slugify } from '$lib/utils/logic';
 import type { PatchReqPostBody, PostReqPostBody } from './posts/constants';
 import type { Modify } from '$lib/utils/tsUtils';
 
+const makePostDir = async (slug: string): Promise<void> => {
+	if (!existsSync(`static/images/postImages/${slug}`)) {
+		await mkdir(`static/images/postImages/${slug}`);
+	}
+};
+
 const uploadAndGetCoverImage = async (
 	coverImage: string | undefined,
+	slug: string,
 	newImageFile: Blob | null,
 ): Promise<string> => {
 	if (newImageFile) {
 		const buffer = Buffer.from(await newImageFile.arrayBuffer());
-		const filePath = `static/images/postImages/${newImageFile.name}`;
 
+		await makePostDir(slug);
+
+		const filePath = `static/images/postImages/${slug}/${newImageFile.name}`;
 		await writeFile(filePath, buffer, 'base64');
 		return newImageFile.name;
 	}
@@ -39,8 +48,9 @@ export const getPostEditorUploadAndHandleImageUpload = async (
 		const { coverImage: image } = body;
 
 		const newImageFile = formData.get('newImage') as Blob | null;
+		const slug = slugify(body.title);
 
-		const coverImage = await uploadAndGetCoverImage(image, newImageFile);
+		const coverImage = await uploadAndGetCoverImage(image, slug, newImageFile);
 
 		return {
 			...body,
@@ -60,11 +70,9 @@ export const processContentImages = async (post: string, slug: string): Promise<
 			return post;
 		}
 
-		const newFolderPath = `postImages/${slug}`;
+		await makePostDir(slug);
 
-		if (!existsSync(`static/images/${newFolderPath}`)) {
-			await mkdir(`static/images/${newFolderPath}`);
-		}
+		const newFolderPath = `postImages/${slug}`;
 		for (const image of imagesToMove) {
 			await rename(`static/images/temp/${image}`, `static/images/${newFolderPath}/${image}`);
 		}

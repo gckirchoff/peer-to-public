@@ -43,7 +43,7 @@
 
 <main>
 	<RecipeCard
-		img="salmon-recipe/salmon.jpg"
+		img="/postImages/salmon-recipe/salmon.jpg"
 		title="Mediterranean Baked Salmon"
 		description="This Lemon Garlic Salmon Recipe makes tender, perfectly flaky baked salmon while lemon garlic sauce with olive oil hits all the right flavor notes. It's Mediterranean Diet friendly and gluten free."
 		prepTime={15}

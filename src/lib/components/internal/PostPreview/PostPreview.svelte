@@ -13,7 +13,7 @@
 	<article>
 		<a href="/posts/{post.slug}" class="card">
 			<div class="image-container">
-				<img src="/images/postImages/{post.coverImage}" alt={post.title} />
+				<img src="/images/postImages/{post.slug}/{post.coverImage}" alt={post.title} />
 			</div>
 			<div class="info">
 				<H4>

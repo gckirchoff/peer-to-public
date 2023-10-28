@@ -48,7 +48,7 @@
 			</div>
 		{/if}
 		<figure class="cover-image">
-			<img src="/images/postImages/{coverImage}" alt={title} />
+			<img src="/images/postImages/{slug}/{coverImage}" alt={title} />
 		</figure>
 		<CategoryTagsList>
 			{#each categories as category}
