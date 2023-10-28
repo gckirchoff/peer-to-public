@@ -1,12 +1,12 @@
-import { writeFile, rename, mkdir } from 'node:fs/promises';
+import { writeFile, rename, mkdir, copyFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { randomDefaultPhoto, slugify } from '$lib/utils/logic';
 import type { PatchReqPostBody, PostReqPostBody } from './posts/constants';
 import type { Modify } from '$lib/utils/tsUtils';
 
-const makePostDir = async (slug: string): Promise<void> => {
-	if (!existsSync(`static/images/postImages/${slug}`)) {
-		await mkdir(`static/images/postImages/${slug}`);
+const makeDir = async (path: string): Promise<void> => {
+	if (!existsSync(path)) {
+		await mkdir(path);
 	}
 };
 
@@ -15,12 +15,12 @@ const uploadAndGetCoverImage = async (
 	slug: string,
 	newImageFile: Blob | null,
 ): Promise<string> => {
+	const rootFolderPath = `static/images/postImages/${slug}`;
+	await makeDir(rootFolderPath);
+
 	if (newImageFile) {
 		const buffer = Buffer.from(await newImageFile.arrayBuffer());
-
-		await makePostDir(slug);
-
-		const filePath = `static/images/postImages/${slug}/${newImageFile.name}`;
+		const filePath = `${rootFolderPath}/${newImageFile.name}`;
 		await writeFile(filePath, buffer, 'base64');
 		return newImageFile.name;
 	}
@@ -29,7 +29,12 @@ const uploadAndGetCoverImage = async (
 		return coverImage;
 	}
 
-	return randomDefaultPhoto();
+	const randomCoverImage = randomDefaultPhoto();
+	await copyFile(
+		`static/images/default-backgrounds/${randomCoverImage}`,
+		`${rootFolderPath}/${randomCoverImage}`,
+	);
+	return randomCoverImage;
 };
 
 export type PostEditorUploadRet = Modify<
@@ -70,9 +75,9 @@ export const processContentImages = async (post: string, slug: string): Promise<
 			return post;
 		}
 
-		await makePostDir(slug);
-
 		const newFolderPath = `postImages/${slug}`;
+		await makeDir(`static/images/${newFolderPath}`);
+
 		for (const image of imagesToMove) {
 			await rename(`static/images/temp/${image}`, `static/images/${newFolderPath}/${image}`);
 		}
