@@ -94,7 +94,7 @@
 		// padding: var(--spacing-64);
 		border-radius: var(--rounded-4);
 		max-width: 100rem;
-		margin-top: 125px;
+		margin-top: 160px;
 
 		position: relative;
 
