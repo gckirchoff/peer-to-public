@@ -43,19 +43,18 @@
 			{/if}
 		</div>
 	</div>
+	<div class="recipe-instructions">
+		<H5>Ingredients</H5>
 
-	<H6>Ingredients</H6>
+		<label class="scale">
+			Scale:
+			<input bind:value={scale} type="number" />
+		</label>
 
-	<label class="scale">
-		Scale:
-		<input bind:value={scale} type="number" />
-	</label>
-
-	<ul class="all-ingredients-container">
-		{#each allFoodItems as { title = '', list }}
-			<li>
+		<ul class="all-ingredients-container">
+			{#each allFoodItems as { title = '', list }}
 				<ul>
-					<H5>{title}</H5>
+					{#if title !== ''}<H5>{title}</H5>{/if}
 					{#each list as { quantity, unit = '', item }}
 						<li>
 							<input id={item} type="checkbox" />
@@ -63,23 +62,25 @@
 						</li>
 					{/each}
 				</ul>
-			</li>
-		{/each}
-	</ul>
-	<br />
-	<ol>
-		{#each steps as step}
-			<li>
-				<Body1>
-					{#if typeof step === 'string'}
-						{step}
-					{:else}
-						<strong>{step.emphasis}</strong>{step.description}
-					{/if}
-				</Body1>
-			</li>
-		{/each}
-	</ol>
+			{/each}
+		</ul>
+		<div class="instructions">
+			<h5>Instructions</h5>
+			<ol>
+				{#each steps as step}
+					<li style="font-size: 2rem;">
+						<Body1 style="font-size: 2rem; line-height: 1.2rem">
+							{#if typeof step === 'string'}
+								{step}
+							{:else}
+								<strong>{step.emphasis}</strong>{step.description}
+							{/if}
+						</Body1>
+					</li>
+				{/each}
+			</ol>
+		</div>
+	</div>
 </article>
 
 <style lang="scss">
@@ -100,7 +101,7 @@
 			grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 			gap: var(--spacing-32);
 
-			padding: var(--spacing-128) var(--spacing-64) var(--spacing-64) var(--spacing-64);
+			padding: 130px var(--spacing-64) var(--spacing-64) var(--spacing-64);
 
 			figure {
 				position: absolute;
@@ -110,7 +111,7 @@
 				height: 250px;
 				width: 250px;
 				overflow: hidden;
-				border-radius: 50%; 
+				border-radius: 50%;
 				border: 8px solid var(--clr-primary-500);
 
 				img {
@@ -125,6 +126,8 @@
 				flex-direction: column;
 				gap: var(--spacing-4);
 
+				border-bottom: 1px solid var(--clr-surface-500);
+
 				.info-items {
 					display: flex;
 					flex-wrap: wrap;
@@ -134,34 +137,60 @@
 			}
 		}
 
-		.scale {
-			display: flex;
-			gap: var(--spacing-8);
+		.recipe-instructions {
+			padding: var(--spacing-32) var(--spacing-64);
+			position: relative;
 
-			input {
-				color: black;
+			.scale {
+				position: absolute;
+				top: 2rem;
+				right: 1rem;
+				display: flex;
+				gap: var(--spacing-8);
+
+				input {
+					color: black;
+					width: 60%;
+				}
+			}
+
+			.all-ingredients-container {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+				gap: var(--spacing-16);
+				padding: 0 0 var(--spacing-32) 0;
+			}
+			ul {
+				list-style: none;
+			}
+
+			label {
+				cursor: pointer;
+				user-select: none;
+			}
+			input[type='checkbox'] {
+				cursor: pointer;
+				user-select: none;
+				display: none;
+			}
+
+			ul li::before {
+				content: '';
+				display: inline-block;
+				width: 20px;
+				height: 20px;
+				border: 2px solid #007bff;
+				background-color: white;
+				border-radius: 3px;
+				margin-right: 10px;
+				vertical-align: middle;
+			}
+
+			.instructions {
+				font-size: 1rem;
+				border-top: 1px solid var(--clr-primary-500);
+				padding-top: var(--spacing-32);
 			}
 		}
-
-		.all-ingredients-container {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-			gap: var(--spacing-16);
-		}
-	}
-
-	ul {
-		list-style: none;
-	}
-
-	input[type='checkbox'],
-	label {
-		cursor: pointer;
-		user-select: none;
-	}
-
-	li::before {
-		content: '';
-		position: absolute;
 	}
 </style>
