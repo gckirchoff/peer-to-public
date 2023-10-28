@@ -48,7 +48,7 @@ export const getPostEditorUploadAndHandleImageUpload = async (
 		const { coverImage: image } = body;
 
 		const newImageFile = formData.get('newImage') as Blob | null;
-		const slug = slugify(body.title);
+		const slug = (body as PatchReqPostBody).slug ?? slugify(body.title);
 
 		const coverImage = await uploadAndGetCoverImage(image, slug, newImageFile);
 
