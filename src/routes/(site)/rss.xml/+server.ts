@@ -24,16 +24,16 @@ const render = (posts: Post[]): string => `<?xml version="1.0" encoding="UTF-8" 
 <title>${siteConfig.title}</title>
 <description>${siteConfig.description}</description>
 <link>${siteConfig.url}</link>
-<atom:link href="https://${siteConfig.url}/rss.xml" rel="self" type="application/rss+xml"/>
+<atom:link href="${siteConfig.url}rss.xml" rel="self" type="application/rss+xml"/>
 ${posts
 	.map(
 		(post) => `<item>
-<guid isPermaLink="true">https://${siteConfig.url}/posts/${post.slug}</guid>
+<guid isPermaLink="true">${siteConfig.url}/posts/${post.slug}</guid>
 <title>${post.title}</title>
-<link>https://${siteConfig.url}/posts/${post.slug}</link>
+<link>${siteConfig.url}/posts/${post.slug}</link>
 <description>${post.description}</description>
 <pubDate>${new Date(post.date).toUTCString()}</pubDate>
-</item>`
+</item>`,
 	)
 	.join('')}
 </channel>
