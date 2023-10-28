@@ -27,19 +27,23 @@
 		<div class="recipe-info-container">
 			<H5 style="color: var(--clr-surface-100);"><strong>{title}</strong></H5>
 			<div class="info-items">
-				<Body1 style="color: var(--clr-surface-100);"><strong>Prep Time:</strong> {prepTime}</Body1>
-				<Body1 style="color: var(--clr-surface-100);"><strong>Cook Time:</strong> {cookTime}</Body1>
-			</div>
-			<div class="info-items">
-				<Body1 style="color: var(--clr-surface-100);"
+				<Body1 style="color: var(--clr-surface-100); margin-bottom: var(--spacing-16);"
+					><strong>Prep Time:</strong> {prepTime}</Body1
+				>
+				<Body1 style="color: var(--clr-surface-100);  margin-bottom: var(--spacing-16);"
+					><strong>Cook Time:</strong> {cookTime}</Body1
+				>
+				<Body1 style="color: var(--clr-surface-100); margin-bottom: var(--spacing-16);"
 					><strong>Total Time:</strong> {totalTime}</Body1
 				>
-				<Body1 style="color: var(--clr-surface-100);"><strong>Yield:</strong> {result}</Body1>
+				<Body1 style="color: var(--clr-surface-100); margin-bottom: var(--spacing-16);"
+					><strong>Yield:</strong> {result}</Body1
+				>
 			</div>
-			<hr />
 			{#if description}
-				<H6 style="color: var(--clr-surface-100);">Description</H6>
-				<Body1 style="color: var(--clr-surface-100);">{description}</Body1>
+				<div class="description-container">
+					<Body1 style="color: var(--clr-surface-100);">{description}</Body1>
+				</div>
 			{/if}
 		</div>
 	</div>
@@ -54,7 +58,7 @@
 		<ul class="all-ingredients-container">
 			{#each allFoodItems as { title = '', list }}
 				<ul>
-					{#if title !== ''}<H5>{title}</H5>{/if}
+					{#if title !== ''}<H5 style="font-size: 2rem;">{title}</H5>{/if}
 					{#each list as { quantity, unit = '', item }}
 						<li>
 							<input id={item} type="checkbox" />
@@ -69,7 +73,7 @@
 			<ol>
 				{#each steps as step}
 					<li style="font-size: 2rem;">
-						<Body1 style="font-size: 2rem; line-height: 1.2rem">
+						<Body1 style="font-size: 2rem; line-height: 2.6rem; margin-bottom: var(--spacing-16)">
 							{#if typeof step === 'string'}
 								{step}
 							{:else}
@@ -101,7 +105,7 @@
 			grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 			gap: var(--spacing-32);
 
-			padding: 130px var(--spacing-64) var(--spacing-64) var(--spacing-64);
+			padding: 130px var(--spacing-64) var(--spacing-16) var(--spacing-64);
 
 			figure {
 				position: absolute;
@@ -115,7 +119,6 @@
 				border: 8px solid var(--clr-primary-500);
 
 				img {
-					height: 100%;
 					object-fit: cover;
 				}
 			}
@@ -126,7 +129,10 @@
 				flex-direction: column;
 				gap: var(--spacing-4);
 
-				border-bottom: 1px solid var(--clr-surface-500);
+				.description-container {
+					padding-top: var(--spacing-32);
+					border-top: 1px solid var(--clr-surface-500);
+				}
 
 				.info-items {
 					display: flex;
@@ -159,6 +165,10 @@
 				grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 				gap: var(--spacing-16);
 				padding: 0 0 var(--spacing-32) 0;
+
+				label {
+					font-size: 1.9rem;
+				}
 			}
 			ul {
 				list-style: none;
