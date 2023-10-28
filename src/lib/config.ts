@@ -6,7 +6,7 @@ export const siteConfig = {
 	description: 'An Easy to Use Site Template',
 	url: 'https://your-blog-template.vercel.app',
 	link: 'https://github.com/gckirchoff/blog-template',
-	author: 'Amadeus',
+	author: 'Amadeus Kirchoff',
 	pages: {
 		landing: {
 			miniAboutMe: {

@@ -1,5 +1,6 @@
 <script>
-	import { H3, Body1 } from '$lib/components/internal/typography';
+	import { siteConfig } from '$lib/config';
+	import { H3, H4, Body1 } from '$lib/components/internal/typography';
 	import { Github, Twitter, Youtube } from '$lib/icons';
 	import ContactForm from '$lib/components/internal/ContactForm/ContactForm.svelte';
 
@@ -32,6 +33,11 @@
 			</Body1>
 		</li>
 	</ul>
+
+	{#if siteConfig.author === 'Amadeus Kirchoff'}
+		<H4>Build your own blog!</H4>
+		<Body1>Make your own blog for a one-time purchase of $30! Contact below!</Body1>
+	{/if}
 
 	<ContactForm {form} />
 </div>
