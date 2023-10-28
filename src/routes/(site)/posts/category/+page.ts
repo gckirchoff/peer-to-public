@@ -12,9 +12,9 @@ export const load = async ({ fetch }) => {
 		(acc: { [category: string]: { count: number; image: string } }, post) => {
 			post.categories.forEach((category) => {
 				if (!(category in acc)) {
-					acc[category] = { count: 0, image: post.coverImage };
+					acc[category] = { count: 0, image: `${post.slug}/${post.coverImage}` };
 				}
-				acc[category].image = post.coverImage;
+				acc[category].image = `${post.slug}/${post.coverImage}`;
 				acc[category].count++;
 			});
 
