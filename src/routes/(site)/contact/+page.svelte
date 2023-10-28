@@ -34,11 +34,6 @@
 		</li>
 	</ul>
 
-	{#if siteConfig.author === 'Amadeus Kirchoff'}
-		<H4>Build your own blog!</H4>
-		<Body1>Make your own blog for a one-time purchase of $30! Contact below!</Body1>
-	{/if}
-
 	<ContactForm {form} />
 </div>
 
