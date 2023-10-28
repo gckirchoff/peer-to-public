@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { H5, H6 } from '$lib/components/internal/typography';
 	import Body1 from '$lib/components/internal/typography/Body1.svelte';
-	import H4 from '$lib/components/internal/typography/H4.svelte';
 	import { ensureTargetIsArray } from '$lib/utils/logic';
 	import type { IngredientSection, Step } from './types';
 
@@ -26,19 +25,21 @@
 			<img src="/images{img}" alt={title} />
 		</figure>
 		<div class="recipe-info-container">
-			<H5><strong>{title}</strong></H5>
+			<H5 style="color: var(--clr-surface-100);"><strong>{title}</strong></H5>
 			<div class="info-items">
-				<Body1><strong>Prep Time:</strong> {prepTime}</Body1>
-				<Body1><strong>Cook Time:</strong> {cookTime}</Body1>
+				<Body1 style="color: var(--clr-surface-100);"><strong>Prep Time:</strong> {prepTime}</Body1>
+				<Body1 style="color: var(--clr-surface-100);"><strong>Cook Time:</strong> {cookTime}</Body1>
 			</div>
 			<div class="info-items">
-				<Body1><strong>Total Time:</strong> {totalTime}</Body1>
-				<Body1><strong>Yield:</strong> {result}</Body1>
+				<Body1 style="color: var(--clr-surface-100);"
+					><strong>Total Time:</strong> {totalTime}</Body1
+				>
+				<Body1 style="color: var(--clr-surface-100);"><strong>Yield:</strong> {result}</Body1>
 			</div>
 			<hr />
 			{#if description}
-				<H6>Description</H6>
-				<Body1>{description}</Body1>
+				<H6 style="color: var(--clr-surface-100);">Description</H6>
+				<Body1 style="color: var(--clr-surface-100);">{description}</Body1>
 			{/if}
 		</div>
 	</div>
@@ -83,18 +84,34 @@
 
 <style lang="scss">
 	.card {
+		border: 1px solid var(--clr-primary-500);
 		background-color: var(--clr-surface-300);
-		padding: var(--spacing-64);
+		// padding: var(--spacing-64);
 		border-radius: var(--rounded-4);
 		max-width: 100rem;
+		margin-top: 125px;
+
+		position: relative;
 
 		.heading {
+			background-color: var(--clr-primary-500);
+			color: var(--clr-surface-100);
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 			gap: var(--spacing-32);
 
+			padding: var(--spacing-128) var(--spacing-64) var(--spacing-64) var(--spacing-64);
+
 			figure {
-				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 50%;
+				transform: translateX(-50%) translateY(-50%);
+				height: 250px;
+				width: 250px;
+				overflow: hidden;
+				border-radius: 50%; 
+				border: 8px solid var(--clr-primary-500);
 
 				img {
 					height: 100%;
@@ -103,6 +120,7 @@
 			}
 
 			.recipe-info-container {
+				text-align: center;
 				display: flex;
 				flex-direction: column;
 				gap: var(--spacing-4);
@@ -111,6 +129,7 @@
 					display: flex;
 					flex-wrap: wrap;
 					column-gap: var(--spacing-16);
+					justify-content: center;
 				}
 			}
 		}
