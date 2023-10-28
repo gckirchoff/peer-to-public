@@ -1,6 +1,9 @@
 <script>
 	import { H3, Body1 } from '$lib/components/internal/typography';
 	import { Github, Twitter, Youtube } from '$lib/icons';
+	import ContactForm from '$lib/components/internal/ContactForm/ContactForm.svelte';
+
+	export let form;
 </script>
 
 <div class="contact">
@@ -29,11 +32,17 @@
 			</Body1>
 		</li>
 	</ul>
+
+	<ContactForm {form} />
 </div>
 
 <style lang="scss">
 	@import '/src/styles/mixins.scss';
 	.contact {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-16);
+
 		@include respond('mobile') {
 			padding: var(--spacing-24);
 		}
