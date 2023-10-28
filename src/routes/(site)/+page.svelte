@@ -13,18 +13,18 @@
 	<div class="profile">
 		<div class="avatar">
 			<img
-				src="/images/{siteConfig.landingPage.miniAboutMe.img}"
-				alt={siteConfig.landingPage.miniAboutMe.quickDescription}
+				src="/images/config/{siteConfig.pages.landing.miniAboutMe.img}"
+				alt={siteConfig.pages.landing.miniAboutMe.quickDescription}
 			/>
 		</div>
 		<H5>Welcome!</H5>
-		<Body1>{siteConfig.landingPage.miniAboutMe.quickDescription}</Body1>
+		<Body1>{siteConfig.pages.landing.miniAboutMe.quickDescription}</Body1>
 	</div>
 
 	<div class="welcome">
-		<H2>{siteConfig.landingPage.welcome.header}</H2>
+		<H2>{siteConfig.pages.landing.welcome.header}</H2>
 		<H4 style="font-weight: var(--font-weight-light); padding-left: var(--spacing-2);">
-			{siteConfig.landingPage.welcome.description}
+			{siteConfig.pages.landing.welcome.description}
 		</H4>
 	</div>
 

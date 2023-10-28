@@ -1,8 +1,52 @@
 <script>
-	import Body1 from '$lib/components/internal/typography/Body1.svelte';
-	import H2 from '$lib/components/internal/typography/H2.svelte';
+	import { siteConfig } from '$lib/config';
+	import { Body1, H4 } from '$lib/components/internal/typography';
 </script>
 
-<H2>About</H2>
+<div class="about">
+	<div class="description">
+		<H4>About me</H4>
 
-<Body1>This is the about me section.</Body1>
+		{#each siteConfig.pages.about.content as paragraph}
+			<Body1>{paragraph}</Body1>
+		{/each}
+	</div>
+	<div class="image-container">
+		<img src="/images/config/{siteConfig.pages.about.img}" alt="me" />
+	</div>
+</div>
+
+<style lang="scss">
+	@import '/src/styles/mixins.scss';
+
+	.about {
+		max-width: 100rem;
+		margin: 0 auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap-reverse;
+		gap: var(--spacing-16);
+
+		@include respond('mobile') {
+			padding: var(--spacing-24);
+		}
+
+		.description {
+			display: flex;
+			flex-direction: column;
+			gap: var(--spacing-16);
+			flex: 1 1 50%;
+		}
+
+		.image-container {
+			flex: 0 1 36rem;
+			img {
+				border-radius: 50%;
+				aspect-ratio: 1/1;
+				float: right;
+				object-fit: cover;
+			}
+		}
+	}
+</style>
