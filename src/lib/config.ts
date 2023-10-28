@@ -42,6 +42,9 @@ export const siteConfig = {
 				it's all yours. Enjoy!`,
 			],
 		},
+		contact: {
+			formAccessKey: 'df313bb6-814b-48fc-a917-a40b8f839417', // go to https://www.staticforms.xyz/ to get this. It's free!
+		},
 	},
 };
 
