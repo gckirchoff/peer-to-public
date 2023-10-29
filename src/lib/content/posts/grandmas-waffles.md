@@ -15,7 +15,7 @@ updated: '2023-10-28'
 Below, you'll find the recipe of my grandmother, Jensen, that she said she cooked up in the kitchen in 1954. Have a try!
 
 <RecipeCard
-    img="/postImages/markdown-demo/waffles.jpg"
+    img="/postImages/grandmas-waffles/waffles.jpg"
     title="Fluffy Homemade Waffles"
     description="Nothing beats extra fluffy homemade waffles with a crisp exterior! "
     prepTime="{15}"
