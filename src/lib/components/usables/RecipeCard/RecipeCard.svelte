@@ -98,7 +98,7 @@
 		background-color: var(--clr-surface-300);
 		border-radius: var(--rounded-4);
 		max-width: 100rem;
-		margin-top: 160px;
+		margin-top: 16rem;
 
 		position: relative;
 
@@ -191,12 +191,12 @@
 			ul li::before {
 				content: '';
 				display: inline-block;
-				width: 20px;
-				height: 20px;
+				width: 2rem;
+				height: 2rem;
 				border: 2px solid #007bff;
 				background-color: white;
-				border-radius: 3px;
-				margin-right: 10px;
+				border-radius: var(--rounded-4);
+				margin-right: 1rem;
 				vertical-align: middle;
 			}
 
