@@ -54,11 +54,11 @@
 			transform: translate(-50%, -50%);
 			display: grid;
 			place-items: center;
-			max-height: calc(100% - 64px);
+			max-height: calc(100% - 6.4rem);
 			overflow-y: auto;
 
 			.modal {
-				max-width: 600px;
+				max-width: 60rem;
 				background-color: var(--clr-surface-500);
 				border-radius: var(--rounded-4);
 				padding: var(--spacing-24);
