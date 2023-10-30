@@ -59,10 +59,15 @@
 			{#each allFoodItems as { title = '', list }}
 				<ul>
 					{#if title !== ''}<H5 style="font-size: 2rem;">{title}</H5>{/if}
-					{#each list as { quantity, unit = '', item }}
+					{#each list as { quantity, unit = '', item, note }}
 						<li>
 							<input id={item} type="checkbox" />
-							<label for={item}>{quantity ? quantity * scale : ''} {unit} {item}</label>
+							<label for={item}>
+								{quantity ? quantity * scale : ''}
+								{unit}
+								{item}
+								{note && ` ${note}`}
+							</label>
 						</li>
 					{/each}
 				</ul>
@@ -91,7 +96,6 @@
 	.card {
 		border: 1px solid var(--clr-primary-500);
 		background-color: var(--clr-surface-300);
-		// padding: var(--spacing-64);
 		border-radius: var(--rounded-4);
 		max-width: 100rem;
 		margin-top: 160px;
