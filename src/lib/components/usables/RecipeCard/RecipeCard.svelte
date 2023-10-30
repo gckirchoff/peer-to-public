@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { H5, H6 } from '$lib/components/internal/typography';
+	import { H5 } from '$lib/components/internal/typography';
 	import Body1 from '$lib/components/internal/typography/Body1.svelte';
 	import { ensureTargetIsArray } from '$lib/utils/logic';
 	import type { IngredientSection, Step } from './types';
@@ -56,9 +56,9 @@
 		</label>
 
 		<ul class="all-ingredients-container">
-			{#each allFoodItems as { title = '', list }}
+			{#each allFoodItems as { title, list }}
 				<ul>
-					{#if title !== ''}<H5 style="font-size: 2rem;">{title}</H5>{/if}
+					<H5 style="font-size: 2rem;">{title}</H5>
 					{#each list as { quantity, unit = '', item, note }}
 						<li>
 							<input id={item} type="checkbox" />
