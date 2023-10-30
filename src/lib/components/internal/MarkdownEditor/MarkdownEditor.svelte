@@ -111,7 +111,5 @@
 <style>
 	@import 'https://cdn.jsdelivr.net/npm/vditor@3.8.7/dist/index.css';
 	@import 'https://cdn.jsdelivr.net/npm/vditor@3.8.7/dist/css/content-theme/light.css';
-	#vditor {
-		margin-top: 32px;
-	}
+
 </style>
