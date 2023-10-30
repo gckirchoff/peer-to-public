@@ -94,11 +94,12 @@
 
 <style lang="scss">
 	.card {
+		--image-dimension: 25rem;
 		border: 1px solid var(--clr-primary-500);
 		background-color: var(--clr-surface-300);
 		border-radius: var(--rounded-4);
 		max-width: 100rem;
-		margin-top: 16rem;
+		margin-top: calc((var(--image-dimension) * 0.5) + 3rem);
 
 		position: relative;
 
@@ -109,15 +110,16 @@
 			grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 			gap: var(--spacing-32);
 
-			padding: 13rem var(--spacing-64) var(--spacing-16) var(--spacing-64);
+			padding: calc((var(--image-dimension) * 0.5) + 1rem) var(--spacing-64) var(--spacing-16)
+				var(--spacing-64);
 
 			figure {
 				position: absolute;
 				top: 0;
 				left: 50%;
 				transform: translateX(-50%) translateY(-50%);
-				height: 25rem;
-				width: 25rem;
+				height: var(--image-dimension);
+				width: var(--image-dimension);
 				overflow: hidden;
 				border-radius: 50%;
 				border: 8px solid var(--clr-primary-500);
