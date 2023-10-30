@@ -87,9 +87,14 @@
 			.cover-image {
 				display: flex;
 				justify-content: center;
+				max-height: 60rem;
+				max-width: 80rem;
+				aspect-ratio: 16 / 9;
 
 				img {
-					width: clamp(400px, 75%, 900px);
+					object-fit: contain;
+					height: auto;
+					width: 100%;
 				}
 			}
 

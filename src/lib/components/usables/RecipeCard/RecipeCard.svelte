@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { H5, H6 } from '$lib/components/internal/typography';
+	import { H5 } from '$lib/components/internal/typography';
 	import Body1 from '$lib/components/internal/typography/Body1.svelte';
-	import H4 from '$lib/components/internal/typography/H4.svelte';
 	import { ensureTargetIsArray } from '$lib/utils/logic';
 	import type { IngredientSection, Step } from './types';
 
@@ -26,123 +25,186 @@
 			<img src="/images{img}" alt={title} />
 		</figure>
 		<div class="recipe-info-container">
-			<H5><strong>{title}</strong></H5>
+			<H5 style="color: var(--clr-surface-100);"><strong>{title}</strong></H5>
 			<div class="info-items">
-				<Body1><strong>Prep Time:</strong> {prepTime}</Body1>
-				<Body1><strong>Cook Time:</strong> {cookTime}</Body1>
+				<Body1 style="color: var(--clr-surface-100); margin-bottom: var(--spacing-16);"
+					><strong>Prep Time:</strong> {prepTime}</Body1
+				>
+				<Body1 style="color: var(--clr-surface-100);  margin-bottom: var(--spacing-16);"
+					><strong>Cook Time:</strong> {cookTime}</Body1
+				>
+				<Body1 style="color: var(--clr-surface-100); margin-bottom: var(--spacing-16);"
+					><strong>Total Time:</strong> {totalTime}</Body1
+				>
+				<Body1 style="color: var(--clr-surface-100); margin-bottom: var(--spacing-16);"
+					><strong>Yield:</strong> {result}</Body1
+				>
 			</div>
-			<div class="info-items">
-				<Body1><strong>Total Time:</strong> {totalTime}</Body1>
-				<Body1><strong>Yield:</strong> {result}</Body1>
-			</div>
-			<hr />
 			{#if description}
-				<H6>Description</H6>
-				<Body1>{description}</Body1>
+				<div class="description-container">
+					<Body1 style="color: var(--clr-surface-100);">{description}</Body1>
+				</div>
 			{/if}
 		</div>
 	</div>
+	<div class="recipe-instructions">
+		<H5>Ingredients</H5>
 
-	<H6>Ingredients</H6>
+		<label class="scale">
+			Scale:
+			<input bind:value={scale} type="number" />
+		</label>
 
-	<label class="scale">
-		Scale:
-		<input bind:value={scale} type="number" />
-	</label>
-
-	<ul class="all-ingredients-container">
-		{#each allFoodItems as { title = '', list }}
-			<li>
+		<ul class="all-ingredients-container">
+			{#each allFoodItems as { title, list }}
 				<ul>
-					<H5>{title}</H5>
-					{#each list as { quantity, unit = '', item }}
+					<H5 style="font-size: 2rem;">{title}</H5>
+					{#each list as { quantity, unit = '', item, note }}
 						<li>
 							<input id={item} type="checkbox" />
-							<label for={item}>{quantity ? quantity * scale : ''} {unit} {item}</label>
+							<label for={item}>
+								{quantity ? quantity * scale : ''}
+								{unit}
+								{item}
+								{note && ` ${note}`}
+							</label>
 						</li>
 					{/each}
 				</ul>
-			</li>
-		{/each}
-	</ul>
-	<br />
-	<ol>
-		{#each steps as step}
-			<li>
-				<Body1>
-					{#if typeof step === 'string'}
-						{step}
-					{:else}
-						<strong>{step.emphasis}</strong>{step.description}
-					{/if}
-				</Body1>
-			</li>
-		{/each}
-	</ol>
+			{/each}
+		</ul>
+		<div class="instructions">
+			<h5>Instructions</h5>
+			<ol>
+				{#each steps as step}
+					<li style="font-size: 2rem;">
+						<Body1 style="font-size: 2rem; line-height: 2.6rem; margin-bottom: var(--spacing-16)">
+							{#if typeof step === 'string'}
+								{step}
+							{:else}
+								<strong>{step.emphasis}</strong>{step.description}
+							{/if}
+						</Body1>
+					</li>
+				{/each}
+			</ol>
+		</div>
+	</div>
 </article>
 
 <style lang="scss">
 	.card {
+		border: 1px solid var(--clr-primary-500);
 		background-color: var(--clr-surface-300);
-		padding: var(--spacing-64);
 		border-radius: var(--rounded-4);
 		max-width: 100rem;
+		margin-top: 16rem;
+
+		position: relative;
 
 		.heading {
+			background-color: var(--clr-primary-500);
+			color: var(--clr-surface-100);
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 			gap: var(--spacing-32);
 
+			padding: 13rem var(--spacing-64) var(--spacing-16) var(--spacing-64);
+
 			figure {
-				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 50%;
+				transform: translateX(-50%) translateY(-50%);
+				height: 25rem;
+				width: 25rem;
+				overflow: hidden;
+				border-radius: 50%;
+				border: 8px solid var(--clr-primary-500);
 
 				img {
-					height: 100%;
 					object-fit: cover;
 				}
 			}
 
 			.recipe-info-container {
+				text-align: center;
 				display: flex;
 				flex-direction: column;
 				gap: var(--spacing-4);
+
+				.description-container {
+					padding-top: var(--spacing-32);
+					border-top: 1px solid var(--clr-surface-500);
+				}
 
 				.info-items {
 					display: flex;
 					flex-wrap: wrap;
 					column-gap: var(--spacing-16);
+					justify-content: center;
 				}
 			}
 		}
 
-		.scale {
-			display: flex;
-			gap: var(--spacing-8);
+		.recipe-instructions {
+			padding: var(--spacing-32) var(--spacing-64);
+			position: relative;
 
-			input {
-				color: black;
+			.scale {
+				position: absolute;
+				top: 2rem;
+				right: 1rem;
+				display: flex;
+				gap: var(--spacing-8);
+
+				input {
+					color: black;
+					width: 60%;
+				}
+			}
+
+			.all-ingredients-container {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+				gap: var(--spacing-16);
+				padding: 0 0 var(--spacing-32) 0;
+
+				label {
+					font-size: 1.9rem;
+				}
+			}
+			ul {
+				list-style: none;
+			}
+
+			label {
+				cursor: pointer;
+				user-select: none;
+			}
+			input[type='checkbox'] {
+				cursor: pointer;
+				user-select: none;
+				display: none;
+			}
+
+			ul li::before {
+				content: '';
+				display: inline-block;
+				width: 2rem;
+				height: 2rem;
+				border: 2px solid #007bff;
+				background-color: white;
+				border-radius: var(--rounded-4);
+				margin-right: 1rem;
+				vertical-align: middle;
+			}
+
+			.instructions {
+				font-size: 1rem;
+				border-top: 1px solid var(--clr-primary-500);
+				padding-top: var(--spacing-32);
 			}
 		}
-
-		.all-ingredients-container {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-			gap: var(--spacing-16);
-		}
-	}
-
-	ul {
-		list-style: none;
-	}
-
-	input[type='checkbox'],
-	label {
-		cursor: pointer;
-		user-select: none;
-	}
-
-	li::before {
-		content: '';
-		position: absolute;
 	}
 </style>

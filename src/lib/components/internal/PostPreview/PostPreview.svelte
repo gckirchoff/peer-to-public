@@ -52,10 +52,12 @@
 			display: block;
 			width: 100%;
 			aspect-ratio: 16 / 9;
+			
 		}
 
 		img {
 			width: 100%;
+			max-height: 30rem;
 			object-fit: cover;
 		}
 
