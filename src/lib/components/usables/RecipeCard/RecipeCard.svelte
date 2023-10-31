@@ -66,8 +66,11 @@
 								{quantity ? quantity * scale : ''}
 								{unit}
 								{item}
-								{note && ` ${note}`}
+								{#if note}
+									<span class="recipe-note">{note}</span>
+								{/if}
 							</label>
+							<span></span>
 						</li>
 					{/each}
 				</ul>
@@ -146,6 +149,8 @@
 					column-gap: var(--spacing-16);
 					justify-content: center;
 				}
+
+				
 			}
 		}
 
@@ -174,6 +179,11 @@
 
 				label {
 					font-size: 1.9rem;
+				}
+
+				.recipe-note {
+					color: var(--clr-primary-400);
+					font-size: 1.7rem;
 				}
 			}
 			ul {
