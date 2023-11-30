@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { dev } from '$app/environment';
 	import { preloadCode } from '$app/navigation';
+	import { inject } from '@vercel/analytics';
 
 	import '../../styles/styles.scss';
 	import { navItems } from '$lib/config';
@@ -13,6 +15,8 @@
 		const navRoutes = navItems.map((item) => item.route);
 		preloadCode(...navRoutes);
 	});
+
+	inject({ mode: dev ? 'development' : 'production' });
 </script>
 
 <Header />

@@ -36,6 +36,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@vercel/analytics": "^1.1.1",
 		"nanoid": "^5.0.1",
 		"vditor": "^3.9.6"
 	}
