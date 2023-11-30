@@ -87,8 +87,7 @@ export const getPostTemplate = ({
 	const postTemplate = `---
 title: "${title}"
 description: "${description}"
-categories:
-${categories.map((category) => `  - "${category}"\r`).join('')}
+categories: [ ${categories.map((category) => `"${category}"`).join(', ')} ]
 coverImage: "${coverImage}"
 date: '${publishedDate}'
 published: ${published}
