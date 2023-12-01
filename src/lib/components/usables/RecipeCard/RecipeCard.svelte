@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { H5 } from '$lib/components/internal/typography';
-	import Body1 from '$lib/components/internal/typography/Body1.svelte';
+	import { Body1 } from '$lib/components/internal/typography';
 	import { ensureTargetIsArray } from '$lib/utils/logic';
 	import type { IngredientSection, Step } from './types';
 	import Ingredients from './Ingredients/Ingredients.svelte';
@@ -15,7 +14,6 @@
 	export let ingredients: IngredientSection | IngredientSection[];
 	export let steps: Step[];
 
-	const totalTime = prepTime + cookTime;
 	const allFoodItems = ensureTargetIsArray(ingredients);
 </script>
 
