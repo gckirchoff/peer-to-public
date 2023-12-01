@@ -60,9 +60,9 @@
 				<ul>
 					<H5 style="font-size: 2rem;">{title}</H5>
 					{#each list as { quantity, unit = '', item, note }}
-						<li>
-							<input id={item} type="checkbox" />
-							<label for={item}>
+						<li class="ingredient-item">
+							<input id={item} type="checkbox" class="ingredient-checkbox" />
+							<label for={item} class="ingredient-label">
 								{quantity ? quantity * scale : ''}
 								{unit}
 								{item}
@@ -151,8 +151,6 @@
 					column-gap: var(--spacing-16);
 					justify-content: center;
 				}
-
-				
 			}
 		}
 
@@ -192,26 +190,47 @@
 				list-style: none;
 			}
 
+			.ingredient-item {
+				position: relative;
+			}
+
 			label {
 				cursor: pointer;
 				user-select: none;
 			}
-			input[type='checkbox'] {
+			.ingredient-checkbox {
 				cursor: pointer;
 				user-select: none;
 				display: none;
 			}
 
-			ul li::before {
+			.ingredient-label::before {
 				content: '';
 				display: inline-block;
 				width: 2rem;
 				height: 2rem;
-				border: 2px solid #007bff;
+				border: 2px solid var(--clr-primary-500);
 				background-color: white;
 				border-radius: var(--rounded-4);
 				margin-right: 1rem;
 				vertical-align: middle;
+			}
+
+			.ingredient-checkbox:checked + .ingredient-label::before {
+				background-color: var(--clr-primary-500);
+			}
+
+			.ingredient-label::after {
+				position: absolute;
+				top: .2rem;
+				left: .3rem;
+				content: '✓';
+				color: var(--clr-txt-neg);
+				display: none;
+			}
+
+			.ingredient-checkbox:checked + .ingredient-label::after {
+				display: block;
 			}
 
 			.instructions {
