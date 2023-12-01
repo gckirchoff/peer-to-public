@@ -3,6 +3,7 @@
 	import Body1 from '$lib/components/internal/typography/Body1.svelte';
 	import { ensureTargetIsArray } from '$lib/utils/logic';
 	import type { IngredientSection, Step } from './types';
+	import Ingredients from './Ingredients/Ingredients.svelte';
 
 	export let img: string;
 	export let title: string;
@@ -15,8 +16,6 @@
 
 	const totalTime = prepTime + cookTime;
 	const allFoodItems = ensureTargetIsArray(ingredients);
-
-	let scale = 1;
 </script>
 
 <article class="card">
@@ -48,34 +47,7 @@
 		</div>
 	</div>
 	<div class="recipe-instructions">
-		<H5>Ingredients</H5>
-
-		<label class="scale">
-			Scale:
-			<input bind:value={scale} type="number" />
-		</label>
-
-		<ul class="all-ingredients-container">
-			{#each allFoodItems as { title, list }}
-				<ul>
-					<H5 style="font-size: 2rem;">{title}</H5>
-					{#each list as { quantity, unit = '', item, note }}
-						<li class="ingredient-item">
-							<input id={item} type="checkbox" class="ingredient-checkbox" />
-							<label for={item} class="ingredient-label">
-								{quantity ? quantity * scale : ''}
-								{unit}
-								{item}
-								{#if note}
-									<span class="recipe-note">{note}</span>
-								{/if}
-							</label>
-							<span></span>
-						</li>
-					{/each}
-				</ul>
-			{/each}
-		</ul>
+		<Ingredients {allFoodItems} />
 		<div class="instructions">
 			<h5>Instructions</h5>
 			<ol>
@@ -157,81 +129,6 @@
 		.recipe-instructions {
 			padding: var(--spacing-32) var(--spacing-64);
 			position: relative;
-
-			.scale {
-				position: absolute;
-				top: 2rem;
-				right: 1rem;
-				display: flex;
-				gap: var(--spacing-8);
-
-				input {
-					color: black;
-					width: 60%;
-				}
-			}
-
-			.all-ingredients-container {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-				gap: var(--spacing-16);
-				padding: 0 0 var(--spacing-32) 0;
-
-				label {
-					font-size: 1.9rem;
-				}
-
-				.recipe-note {
-					color: var(--clr-primary-400);
-					font-size: 1.7rem;
-				}
-			}
-			ul {
-				list-style: none;
-			}
-
-			.ingredient-item {
-				position: relative;
-			}
-
-			label {
-				cursor: pointer;
-				user-select: none;
-			}
-			.ingredient-checkbox {
-				cursor: pointer;
-				user-select: none;
-				display: none;
-			}
-
-			.ingredient-label::before {
-				content: '';
-				display: inline-block;
-				width: 2rem;
-				height: 2rem;
-				border: 2px solid var(--clr-primary-500);
-				background-color: white;
-				border-radius: var(--rounded-4);
-				margin-right: 1rem;
-				vertical-align: middle;
-			}
-
-			.ingredient-checkbox:checked + .ingredient-label::before {
-				background-color: var(--clr-primary-500);
-			}
-
-			.ingredient-label::after {
-				position: absolute;
-				top: .2rem;
-				left: .3rem;
-				content: '✓';
-				color: var(--clr-txt-neg);
-				display: none;
-			}
-
-			.ingredient-checkbox:checked + .ingredient-label::after {
-				display: block;
-			}
 
 			.instructions {
 				font-size: 1rem;
