@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Body1 } from '$lib/components/internal/typography';
 	import { ensureTargetIsArray } from '$lib/utils/logic';
 	import type { IngredientSection, Step } from './types';
 	import Ingredients from './Ingredients/Ingredients.svelte';
