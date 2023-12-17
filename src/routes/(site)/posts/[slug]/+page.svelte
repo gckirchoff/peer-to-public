@@ -104,6 +104,10 @@
 				align-items: center;
 			}
 		}
+
+		.prose {
+			align-self: stretch;
+		}
 	}
 
 	.edit-button {
