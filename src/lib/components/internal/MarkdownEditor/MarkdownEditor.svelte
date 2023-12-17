@@ -2,7 +2,7 @@
 	// From https://svelte.dev/repl/d2b97bcce5b34a2690748ac459716125?version=3.44.2
 	import Vditor from 'vditor';
 	import { nanoid } from 'nanoid';
-	import type { PostImageRes } from '../../../../routes/api/v1/v1/temp-images/types';
+	import type { PostImageRes } from '../../../../routes/api/v1/temp-images/types';
 	export let value = '';
 	export let id = nanoid();
 	let vditor: Vditor | undefined = undefined;
