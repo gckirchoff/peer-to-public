@@ -1,7 +1,7 @@
 import type Post from '$lib/types/post.js';
 
 export const load = async ({ fetch }) => {
-	const postsRes = await fetch('/api/posts/all');
+	const postsRes = await fetch('/api/v1/posts/all');
 	const posts: Post[] = await postsRes.json();
 
 	const sortedPosts = [...posts].sort(

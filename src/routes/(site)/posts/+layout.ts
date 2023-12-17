@@ -2,7 +2,7 @@ import type { Tag } from '$lib/types/post.js';
 import type Post from '$lib/types/post.js';
 
 export const load = async ({ fetch }) => {
-	const res = await fetch(`/api/posts/all`);
+	const res = await fetch(`/api/v1/posts/all`);
 	const resJSON = (await res.json()) as Post[];
 
 	const featuredPosts: Tag[] = resJSON

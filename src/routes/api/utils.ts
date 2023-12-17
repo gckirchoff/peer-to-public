@@ -1,7 +1,7 @@
 import { writeFile, rename, mkdir, copyFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { randomDefaultPhoto, slugify } from '$lib/utils/logic';
-import type { PatchReqPostBody, PostReqPostBody } from './posts/constants';
+import type { PatchReqPostBody, PostReqPostBody } from './v1/posts/constants';
 import type { Modify } from '$lib/utils/tsUtils';
 
 const makeDir = async (path: string): Promise<void> => {

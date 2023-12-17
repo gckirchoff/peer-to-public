@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PostReqResponse } from '../../../../api/posts/constants';
+	import type { PostReqResponse } from '../../../../api/v1/posts/constants';
 	import PostEditor from './subcomponents/PostEditor/PostEditor.svelte';
 	import type { PostEditorBody } from './subcomponents/PostEditor/constants';
 
@@ -9,7 +9,7 @@
 
 	const handleCreatePost = async (body: FormData): Promise<boolean> => {
 		try {
-			const res = await fetch('/api/posts', {
+			const res = await fetch('/api/v1/posts', {
 				method: 'POST',
 				body,
 			});
