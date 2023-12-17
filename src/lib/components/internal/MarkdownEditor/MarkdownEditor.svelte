@@ -2,7 +2,7 @@
 	// From https://svelte.dev/repl/d2b97bcce5b34a2690748ac459716125?version=3.44.2
 	import Vditor from 'vditor';
 	import { nanoid } from 'nanoid';
-	import type { PostImageRes } from '../../../../routes/api/temp-images/types';
+	import type { PostImageRes } from '../../../../routes/api/v1/v1/temp-images/types';
 	export let value = '';
 	export let id = nanoid();
 	let vditor: Vditor | undefined = undefined;
@@ -64,7 +64,7 @@
 				value = val;
 			},
 			upload: {
-				// url: '/api/images',
+				// url: '/api/v1/images',
 				// linkToImgUrl: '/images/postImages/',
 				handler: async (files) => {
 					const file = files[0];
@@ -77,7 +77,7 @@
 					// Send the formData to the backend using an API call (e.g., fetch or axios)
 
 					try {
-						const response = await fetch('/api/temp-images', {
+						const response = await fetch('/api/v1/temp-images', {
 							method: 'POST',
 							body: formData,
 						});
@@ -111,5 +111,4 @@
 <style>
 	@import 'https://cdn.jsdelivr.net/npm/vditor@3.8.7/dist/index.css';
 	@import 'https://cdn.jsdelivr.net/npm/vditor@3.8.7/dist/css/content-theme/light.css';
-
 </style>
