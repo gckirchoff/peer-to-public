@@ -47,13 +47,13 @@
 }
 
 .prose > p > a,
-.prose > li > a {
+.prose > ul li a {
 	text-decoration: underline;
 	text-underline-offset: 4px;
 }
 
 .prose > p,
-.prose > li {
+.prose > ul li {
 	font-size: 2.2rem;
 	line-height: 3.2rem;
 	font-weight: 500;
@@ -170,6 +170,8 @@
 .prose > h5,
 .prose > h6,
 .prose > blockquote,
-.prose > p {
+.prose > p,
+.prose > ul,
+.prose > hr {
 	grid-column: 2;
 }
