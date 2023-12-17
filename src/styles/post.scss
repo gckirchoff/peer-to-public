@@ -1,6 +1,6 @@
 @import '/src/styles//mixins.scss';
 
-.prose hgroup {
+.prose > hgroup {
 	margin: var(--spacing-128) 0;
 	text-align: center;
 }
@@ -46,8 +46,8 @@
 	font-weight: inherit;
 }
 
-.prose p > a,
-.prose li > a {
+.prose > p > a,
+.prose > li > a {
 	text-decoration: underline;
 	text-underline-offset: 4px;
 }
@@ -95,13 +95,7 @@
 	font-weight: 700;
 }
 
-// .prose > p > img {
-// 	margin-left: auto;
-// 	margin-right: auto;
-// }
-
 .prose > table {
-	// width: 100%;
 	grid-column: 2;
 	border-collapse: collapse;
 	border: 1px solid #ccc;
@@ -175,6 +169,7 @@
 .prose > h4,
 .prose > h5,
 .prose > h6,
+.prose > blockquote,
 .prose > p {
 	grid-column: 2;
 }
