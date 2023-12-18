@@ -61,7 +61,7 @@ class PhotoGalleryUsable implements ComponentBuilder {
 	};
 }
 
-export const parseScript = (content: string): string => {
+export const parseScripts = (content: string): string => {
 	const extractedScriptContent = content.match(scriptContentMatcher)?.[1];
 	if (!extractedScriptContent) {
 		return `${defaultScript}
@@ -95,7 +95,7 @@ export const getPostTemplate = ({
 }: GetPostTemplateParams) => {
 	const publishedDate = publishDate ?? prettyDate();
 	const updateDate = update ? prettyDate() : null;
-	const parsedContent = parseScript(content);
+	const parsedContent = parseScripts(content);
 
 	const postTemplate = `---
 title: "${title}"

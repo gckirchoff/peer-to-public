@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
 import { hasDefaultScriptMatcher } from './constants';
-import { parseScript } from './logic';
+import { parseScripts } from './logic';
 
 const dummyPost = `
 # My Cool Post!
@@ -10,9 +10,9 @@ This is a post.
 
 const dummyPostMatcher = /My Cool Post/;
 
-describe('parseScript', () => {
+describe('parseScripts', () => {
 	it('Adds a script if post is made without one', () => {
-		const got = parseScript(dummyPost);
+		const got = parseScripts(dummyPost);
 
 		expect(/<script> \/\/ usables/.test(got)).toBe(true);
 		expect(dummyPostMatcher.test(got)).toBe(true);
@@ -25,7 +25,7 @@ describe('parseScript', () => {
 ${dummyPost}`;
 		const customScriptMatcher = /console.log\('hello'\);/;
 
-		const got = parseScript(content);
+		const got = parseScripts(content);
 
 		expect(hasDefaultScriptMatcher.test(got)).toBe(true);
 		expect(customScriptMatcher.test(got)).toBe(true);
@@ -40,7 +40,7 @@ ${dummyPost}`;
 </script>
 ${dummyPost}`;
 
-		const got = parseScript(content);
+		const got = parseScripts(content);
 
 		expect(got).toBe(content);
 	});
