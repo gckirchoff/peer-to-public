@@ -10,35 +10,29 @@
 	font-size: var(--font-48);
 	font-family: var(--font-accent);
 	line-height: 1.167;
-	margin-bottom: var(--spacing-24);
 }
 
 .prose > h2 {
 	color: var(--clr-primary-500);
 	font-weight: var(--font-weight-light);
 	font-size: var(--font-48);
-	margin-bottom: var(--spacing-24);
 }
 
 .prose > h3 {
 	font-size: var(--font-32);
-	margin-bottom: var(--spacing-24);
 }
 
 .prose > h4 {
 	font-size: var(--font-32);
 	font-weight: var(--font-weight-regular);
-	margin-bottom: var(--spacing-16);
 }
 .prose > h5 {
 	font-size: var(--font-24);
 	font-weight: var(--font-weight-medium);
-	margin-bottom: var(--spacing-16);
 }
 .prose > h6 {
 	font-size: var(--font-24);
 	font-weight: var(--font-weight-regular);
-	margin-bottom: var(--spacing-16);
 }
 
 .prose #table-of-contents + ul a {
@@ -59,12 +53,24 @@
 	font-weight: 500;
 }
 
-.prose > ul {
+.prose > h4,
+.prose > h5,
+.prose > h6 {
+	margin-bottom: var(--spacing-16);
+}
+
+.prose > h1,
+.prose > h2,
+.prose > h3,
+.prose > ul,
+.prose > p {
 	margin-bottom: var(--spacing-24);
 }
 
-.prose > p {
-	margin-bottom: var(--spacing-24);
+.prose > h1,
+.prose > h2,
+.prose > h3 {
+	margin-top: var(--spacing-8);
 }
 
 .prose > p > img,
