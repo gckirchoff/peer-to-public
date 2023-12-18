@@ -5,7 +5,8 @@ import type {
 	RecipeCard,
 	PhotoGallery,
 } from '../../../(site)/dev/admin/post/subcomponents/UsablesModal/constants';
-import type { ComponentBuilder } from './constants';
+import type { ComponentBuilder, GetPostTemplateParams } from './constants';
+import { defaultScript, scriptContentMatcher, hasDefaultScriptMatcher } from './constants';
 
 export class UsablesFactory {
 	createUsableBuilder = (usable: Usable): ComponentBuilder => {
@@ -59,24 +60,6 @@ class PhotoGalleryUsable implements ComponentBuilder {
 		return galleryComponent;
 	};
 }
-
-interface GetPostTemplateParams {
-	title: string;
-	description: string;
-	categories: string[];
-	coverImage: string;
-	published: boolean;
-	content: string;
-	publishDate?: string;
-	update?: boolean;
-}
-
-const defaultScript = `<script> // usables
-	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
-</script>`;
-
-const scriptContentMatcher = /<script>([\s\S]*?)<\/script>/;
-const hasDefaultScriptMatcher = /\/\/ usables/;
 
 const parseScript = (content: string): string => {
 	const extractedScriptContent = content.match(scriptContentMatcher)?.[1];
