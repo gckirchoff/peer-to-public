@@ -71,6 +71,35 @@ interface GetPostTemplateParams {
 	update?: boolean;
 }
 
+const defaultScript = `<script> // usables
+	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
+</script>`;
+
+const scriptContentMatcher = /<script>([\s\S]*?)<\/script>/;
+const hasDefaultScriptMatcher = /\/\/ usables/;
+
+const parseScript = (content: string): string => {
+	const extractedScriptContent = content.match(scriptContentMatcher)?.[1];
+	if (!extractedScriptContent) {
+		return `${defaultScript}
+${content}`;
+	}
+
+	const hasDefaultScript = hasDefaultScriptMatcher.test(content);
+	if (!hasDefaultScript) {
+		const combinedScript = defaultScript.replace(
+			'</script>',
+			`${extractedScriptContent}
+</script>`,
+		);
+		const contentAfterOriginalScript = content.split('</script>')?.[1] ?? content;
+		return `${combinedScript}
+${contentAfterOriginalScript}`;
+	}
+
+	return content;
+};
+
 export const getPostTemplate = ({
 	title,
 	description,
@@ -83,6 +112,7 @@ export const getPostTemplate = ({
 }: GetPostTemplateParams) => {
 	const publishedDate = publishDate ?? prettyDate();
 	const updateDate = update ? prettyDate() : null;
+	const parsedContent = parseScript(content);
 
 	const postTemplate = `---
 title: "${title}"
@@ -93,10 +123,7 @@ date: '${publishedDate}'
 published: ${published}
 ${update ? `updated: '${updateDate}'` : ''}
 ---
-<script> // usables
-	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
-</script>
-${content}`;
+${parsedContent}`;
 
 	return postTemplate;
 };
