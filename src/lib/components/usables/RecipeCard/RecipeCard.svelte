@@ -10,7 +10,7 @@
 	export let description = '';
 	export let prepTime: number;
 	export let cookTime: number;
-	export let result: string;
+	export let result: number;
 	export let ingredients: IngredientSection | IngredientSection[];
 	export let steps: Step[];
 
@@ -27,12 +27,13 @@
 
 <style lang="scss">
 	.card {
+		grid-column: content-start;
 		--image-dimension: 25rem;
 		border: 1px solid var(--clr-primary-500);
 		background-color: var(--clr-surface-300);
 		border-radius: var(--rounded-4);
-		max-width: 100rem;
 		margin-top: calc((var(--image-dimension) * 0.5) + 3rem);
+		margin-bottom: var(--spacing-24);
 		position: relative;
 
 		.recipe-instructions {
