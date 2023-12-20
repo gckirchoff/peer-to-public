@@ -9,7 +9,7 @@
 
 	const handleUpdatePost = async (body: FormData): Promise<boolean> => {
 		try {
-			const res = await fetch(`/api/posts/${slug}`, {
+			const res = await fetch(`/api/v1/posts/${slug}`, {
 				method: 'PATCH',
 				body,
 			});

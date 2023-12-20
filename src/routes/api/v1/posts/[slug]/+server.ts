@@ -6,7 +6,7 @@ import {
 	getPostEditorUploadAndHandleImageUpload,
 	processContentImages,
 	type PostEditorUploadRet,
-} from '../../utils.js';
+} from '../../../utils.js';
 
 export const PATCH = async ({ request, params }) => {
 	try {

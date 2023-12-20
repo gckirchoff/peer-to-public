@@ -14,7 +14,7 @@ export const load = async ({ params, fetch }) => {
 		const contentAfterFrontMatter = contentString.split('</script>')?.[1] ?? contentString;
 		const postContent = escapeComponents(contentAfterFrontMatter);
 
-		const allPostsRes = await fetch('/api/posts/all');
+		const allPostsRes = await fetch('/api/v1/posts/all');
 		const allPosts = (await allPostsRes.json()) as Post[];
 
 		const allCategories = Array.from(new Set(allPosts.flatMap((p) => p.categories)));

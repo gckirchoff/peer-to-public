@@ -1,44 +1,38 @@
 @import '/src/styles//mixins.scss';
 
-.prose hgroup {
+.prose > hgroup {
 	margin: var(--spacing-128) 0;
 	text-align: center;
 }
 
-.prose h1 {
+.prose > h1 {
 	color: var(--clr-primary-700);
 	font-size: var(--font-48);
 	font-family: var(--font-accent);
 	line-height: 1.167;
-	margin-bottom: var(--spacing-24);
 }
 
-.prose h2 {
+.prose > h2 {
 	color: var(--clr-primary-500);
 	font-weight: var(--font-weight-light);
 	font-size: var(--font-48);
-	margin-bottom: var(--spacing-24);
 }
 
-.prose h3 {
+.prose > h3 {
 	font-size: var(--font-32);
-	margin-bottom: var(--spacing-24);
 }
 
-.prose h4 {
+.prose > h4 {
 	font-size: var(--font-32);
 	font-weight: var(--font-weight-regular);
-	margin-bottom: var(--spacing-16);
 }
-.prose h5 {
+.prose > h5 {
 	font-size: var(--font-24);
 	font-weight: var(--font-weight-medium);
-	margin-bottom: var(--spacing-16);
 }
-.prose h6 {
+.prose > h6 {
 	font-size: var(--font-24);
 	font-weight: var(--font-weight-regular);
-	margin-bottom: var(--spacing-16);
 }
 
 .prose #table-of-contents + ul a {
@@ -46,29 +40,45 @@
 	font-weight: inherit;
 }
 
-.prose p > a,
-.prose li > a {
+.prose > p > a,
+.prose > ul li a {
 	text-decoration: underline;
 	text-underline-offset: 4px;
 }
 
-.prose p,
-.prose li {
+.prose > p,
+.prose > ul li {
 	font-size: 2.2rem;
 	line-height: 3.2rem;
 	font-weight: 500;
 }
 
-.prose p {
+.prose > h4,
+.prose > h5,
+.prose > h6 {
+	margin-bottom: var(--spacing-16);
+}
+
+.prose > h1,
+.prose > h2,
+.prose > h3,
+.prose > ul,
+.prose > p {
 	margin-bottom: var(--spacing-24);
 }
 
+.prose > h1,
+.prose > h2,
+.prose > h3 {
+	margin-top: var(--spacing-8);
+}
+
 .prose > p > img,
-.prose iframe,
-.prose video,
-.prose pre,
-.prose blockquote,
-.prose details {
+.prose > iframe,
+.prose > video,
+.prose > pre,
+.prose > blockquote,
+.prose > details {
 	margin-bottom: var(--spacing-32);
 }
 
@@ -76,7 +86,7 @@
 	list-style-type: decimal;
 }
 
-.prose blockquote {
+.prose > blockquote {
 	padding: var(--spacing-32);
 	color: var(--post-blockquote-txt);
 	background-color: var(--post-blockquote-bg);
@@ -86,20 +96,19 @@
 	box-shadow: var(--shadow-sm);
 }
 
-.prose blockquote p {
+.prose > blockquote > p {
 	margin-bottom: 0;
 }
 
-.prose details summary {
+.prose > details summary {
 	margin-bottom: var(--spacing-8);
 	font-weight: 700;
 }
 
 .prose > table {
-	width: 100%;
 	border-collapse: collapse;
 	border: 1px solid #ccc;
-	margin-bottom: 20px;
+	margin-bottom: var(--spacing-24);
 	font-size: 2rem;
 	font-weight: var(--font-weight-regular);
 	line-height: 2.8rem;
@@ -142,10 +151,37 @@
 	}
 }
 
-.prose iframe:not([height]) {
+.prose > iframe:not([height]) {
 	height: 90vh;
 }
 
 .prose {
-	max-width: 80ch;
+	align-self: stretch;
+	display: grid;
+	grid-template-columns: [main-start] 1fr [content-start] minmax(0px, 80ch) [content-end] 1fr [main-end];
+}
+
+.prose > * {
+	grid-column: 1/-1;
+}
+
+// TODO unwrap img from p tags
+.prose > p > img,
+.prose > img {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.prose > h1,
+.prose > h2,
+.prose > h3,
+.prose > h4,
+.prose > h5,
+.prose > h6,
+.prose > blockquote,
+.prose > p,
+.prose > ul,
+.prose > hr,
+.prose > table {
+	grid-column: content-start;
 }

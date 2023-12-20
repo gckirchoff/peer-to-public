@@ -3,7 +3,7 @@ import { writeFile } from 'node:fs/promises';
 
 import { escapeRegExp, slugify } from '$lib/utils/logic';
 import { UsablesFactory, getPostTemplate } from './logic';
-import { getPostEditorUploadAndHandleImageUpload, processContentImages } from '../utils';
+import { getPostEditorUploadAndHandleImageUpload, processContentImages } from '../../utils';
 
 export const POST = async ({ request }) => {
 	try {
