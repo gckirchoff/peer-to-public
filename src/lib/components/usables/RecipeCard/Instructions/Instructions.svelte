@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { Body1 } from '$lib/components/internal/typography';
+	import { Body1, H5 } from '$lib/components/internal/typography';
 	import type { Step } from '../types';
 
 	export let steps: Step[];
 </script>
 
 <div class="instructions">
-	<h5>Instructions</h5>
+	<H5 style="margin-bottom: var(--spacing-16);">Instructions</H5>
 	<ol>
 		{#each steps as step}
 			<li>
@@ -28,7 +28,6 @@
 		border-top: 1px solid var(--clr-primary-500);
 		padding-top: var(--spacing-32);
 
-		// TODO .prose css conflict
 		li {
 			font-size: 2rem;
 		}
