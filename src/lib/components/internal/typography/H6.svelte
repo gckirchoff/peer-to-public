@@ -9,7 +9,7 @@
 		font-size: var(--font-18);
 		line-height: 1.6;
 		font-weight: var(--font-weight-regular);
-		font-family: var(--font-accent);
+		font-family: var(--font-base);
 		color: var(--clr-txt);
 	}
 </style>
