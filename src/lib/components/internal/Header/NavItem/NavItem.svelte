@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { H6 } from '../../typography';
+	import { Body2 } from '../../typography';
 
 	export let href: string;
 
@@ -10,9 +10,9 @@
 <li>
 	<a {href} aria-current={isCurrentPage}>
 		<span class:active={isCurrentPage}>
-			<H6>
+			<Body2>
 				<slot />
-			</H6>
+			</Body2>
 		</span>
 	</a>
 </li>
