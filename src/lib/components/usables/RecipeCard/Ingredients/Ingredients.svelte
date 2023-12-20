@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { H5 } from '$lib/components/internal/typography';
+	import { H5, H6 } from '$lib/components/internal/typography';
 	import type { IngredientSection } from '../types';
 
 	export let allFoodItems: IngredientSection[];
@@ -7,17 +7,19 @@
 	let scale = 1;
 </script>
 
-<H5>Ingredients</H5>
+<div class="top-row">
+	<H5>Ingredients</H5>
 
-<label class="scale">
-	Scale:
-	<input bind:value={scale} type="number" />
-</label>
+	<label class="scale">
+		Scale:
+		<input bind:value={scale} type="number" />
+	</label>
+</div>
 
 <ul class="all-ingredients-container">
 	{#each allFoodItems as { title, list }}
 		<ul>
-			<H5 style="font-size: 2rem;">{title}</H5>
+			<H6 style="margin-bottom: var(--spacing-8);">{title}</H6>
 			{#each list as { quantity, unit = '', item, note }}
 				<li class="ingredient-item">
 					<input id={item} type="checkbox" class="ingredient-checkbox" />
@@ -37,16 +39,20 @@
 </ul>
 
 <style lang="scss">
-	.scale {
-		position: absolute;
-		top: 2rem;
-		right: 1rem;
+	.top-row {
 		display: flex;
-		gap: var(--spacing-8);
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: var(--spacing-16);
 
-		input {
-			color: black;
-			width: 60%;
+		.scale {
+			display: flex;
+			gap: var(--spacing-8);
+
+			input {
+				color: black;
+				width: 60%;
+			}
 		}
 	}
 
@@ -58,6 +64,7 @@
 
 		.ingredient-item {
 			position: relative;
+			margin-bottom: var(--spacing-8);
 
 			.ingredient-label {
 				font-size: 1.9rem;
@@ -86,7 +93,7 @@
 				}
 
 				.recipe-note {
-					color: var(--clr-primary-400);
+					color: var(--clr-primary-700);
 					font-size: 1.7rem;
 				}
 			}
