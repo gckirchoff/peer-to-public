@@ -5,10 +5,10 @@
 	export let title: string;
 	export let prepTime: number;
 	export let cookTime: number;
-	export let result: string;
+	export let result: number;
 	export let description = '';
 
-	const typographyStyle = 'color: var(--clr-surface-100);';
+	const typographyStyle = 'color: var(--clr-surface-100); margin-bottom: var(--spacing-24);';
 
 	$: totalTime = prepTime + cookTime;
 </script>
@@ -88,7 +88,7 @@
 			}
 
 			.description-container {
-				padding-top: var(--spacing-32);
+				padding-top: var(--spacing-24);
 				border-top: 1px solid var(--clr-surface-500);
 			}
 		}
