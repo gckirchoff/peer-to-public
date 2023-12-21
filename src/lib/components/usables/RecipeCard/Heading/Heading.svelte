@@ -49,9 +49,6 @@
 	.heading {
 		background-color: var(--clr-primary-500);
 		color: var(--clr-surface-100);
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-		gap: var(--spacing-32);
 
 		padding: calc((var(--image-dimension) * 0.5) + 1rem) var(--spacing-64) var(--spacing-16)
 			var(--spacing-64);
