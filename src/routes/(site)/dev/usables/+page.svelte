@@ -48,7 +48,7 @@
 		description="This Lemon Garlic Salmon Recipe makes tender, perfectly flaky baked salmon while lemon garlic sauce with olive oil hits all the right flavor notes. It's Mediterranean Diet friendly and gluten free."
 		prepTime={15}
 		cookTime={30}
-		result="2 servings"
+		result={2}
 		{ingredients}
 		{steps}
 	/>
