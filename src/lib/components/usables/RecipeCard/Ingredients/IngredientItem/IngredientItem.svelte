@@ -1,15 +1,18 @@
 <script lang="ts">
 	import type { Ingredient } from '../../types';
+	import { nanoid } from 'nanoid';
 
 	export let ingredient: Ingredient;
 	export let scale: number;
+
+	const ingredientId = nanoid();
 
 	$: ({ quantity, unit = '', item, note } = ingredient);
 </script>
 
 <li class="ingredient-item">
-	<input id={item} type="checkbox" class="ingredient-checkbox" />
-	<label for={item} class="ingredient-label">
+	<input id={`${item}-${ingredientId}`} type="checkbox" class="ingredient-checkbox" />
+	<label for={`${item}-${ingredientId}`} class="ingredient-label">
 		{quantity ? quantity * scale : ''}
 		{unit}
 		{item}
