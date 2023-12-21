@@ -5,7 +5,8 @@ import type {
 	RecipeCard,
 	PhotoGallery,
 } from '../../../(site)/dev/admin/post/subcomponents/UsablesModal/constants';
-import type { ComponentBuilder } from './constants';
+import type { ComponentBuilder, GetPostTemplateParams } from './constants';
+import { defaultScript, scriptContentMatcher, hasDefaultScriptMatcher } from './constants';
 
 export class UsablesFactory {
 	createUsableBuilder = (usable: Usable): ComponentBuilder => {
@@ -60,16 +61,27 @@ class PhotoGalleryUsable implements ComponentBuilder {
 	};
 }
 
-interface GetPostTemplateParams {
-	title: string;
-	description: string;
-	categories: string[];
-	coverImage: string;
-	published: boolean;
-	content: string;
-	publishDate?: string;
-	update?: boolean;
-}
+export const parseScripts = (content: string): string => {
+	const extractedScriptContent = content.match(scriptContentMatcher)?.[1];
+	if (!extractedScriptContent) {
+		return `${defaultScript}
+${content}`;
+	}
+
+	const hasDefaultScript = hasDefaultScriptMatcher.test(content);
+	if (!hasDefaultScript) {
+		const combinedScript = defaultScript.replace(
+			'</script>',
+			`${extractedScriptContent}
+</script>`,
+		);
+		const contentAfterOriginalScript = content.split('</script>')?.[1] ?? content;
+		return `${combinedScript}
+${contentAfterOriginalScript}`;
+	}
+
+	return content;
+};
 
 export const getPostTemplate = ({
 	title,
@@ -83,6 +95,7 @@ export const getPostTemplate = ({
 }: GetPostTemplateParams) => {
 	const publishedDate = publishDate ?? prettyDate();
 	const updateDate = update ? prettyDate() : null;
+	const parsedContent = parseScripts(content);
 
 	const postTemplate = `---
 title: "${title}"
@@ -93,10 +106,7 @@ date: '${publishedDate}'
 published: ${published}
 ${update ? `updated: '${updateDate}'` : ''}
 ---
-<script> // usables
-	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
-</script>
-${content}`;
+${parsedContent}`;
 
 	return postTemplate;
 };

@@ -17,6 +17,17 @@ export type PostReqResponse = {
 	status: 'success';
 };
 
+export interface GetPostTemplateParams {
+	title: string;
+	description: string;
+	categories: string[];
+	coverImage: string;
+	published: boolean;
+	content: string;
+	publishDate?: string;
+	update?: boolean;
+}
+
 export interface ComponentBuilder {
 	buildComponent: () => string;
 }
@@ -26,3 +37,10 @@ export const usableImports: Record<UsableType, string> = {
 		"import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte'",
 	[UsableType.PhotoGallery]: 'TODO', // ! TODO
 };
+
+export const defaultScript = `<script> // usables
+	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
+</script>`;
+
+export const scriptContentMatcher = /<script>([\s\S]*?)<\/script>/;
+export const hasDefaultScriptMatcher = /\/\/ usables/;
