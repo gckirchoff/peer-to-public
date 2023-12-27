@@ -1,0 +1,4 @@
+infectionCount,item,probability,coins,triesUntil50,triesUntil95,frequency,isInstance,source
+1,Covid-19,0.146,2.775959726,4.391897344,18.98146452,per infection,TRUE,https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00015-eng.htm
+2,Covid-19,0.254,1.977099598,2.365450433,10.22330668,per infection,TRUE,https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00015-eng.htm
+3,Covid-19,0.379,1.399730246,1.454894997,6.287951561,per infection,TRUE,https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00015-eng.htm
