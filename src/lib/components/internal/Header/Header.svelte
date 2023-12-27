@@ -2,10 +2,11 @@
 	import { navItems, siteConfig } from '$lib/config';
 	import LightModeToggle from '../LightModeToggle/LightModeToggle.svelte';
 	import { H4 } from '../typography';
-	import NavItem from './NavItem/NavItem.svelte';
+	import NavItem from '../NavItem/NavItem.svelte';
+	import { headerHeight } from '../constants';
 </script>
 
-<header>
+<header style="--height: {headerHeight}">
 	<nav>
 		<a href="/" class="site-name">
 			<H4 style="font-family: var(--font-base);">
@@ -25,6 +26,7 @@
 
 <style lang="scss">
 	header {
+		min-height: var(--height);
 		padding: var(--spacing-16) var(--spacing-24);
 		background-color: var(--clr-surface-300);
 
