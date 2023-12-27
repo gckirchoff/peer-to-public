@@ -12,7 +12,7 @@ export const siteConfig = {
 			miniAboutMe: {
 				img: 'me.jpg',
 				quickDescription:
-					'We work with an international team of scientists and volunteers, united by the sole purpose of informing the public and government officials on the dangers of Covid-19',
+					'This site is the result of the collaberative efforts of a team of scientists and volunteers, united by the sole purpose of informing the public and government officials on the dangers of Covid-19',
 			},
 			welcome: {
 				header: 'Lucid Covid',
