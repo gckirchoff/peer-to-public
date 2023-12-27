@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { Body2 } from '../../typography';
+	import { Body2 } from '../typography';
 
 	export let href: string;
 
