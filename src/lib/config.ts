@@ -2,7 +2,7 @@ import { dev } from '$app/environment';
 
 // Main config for entire website
 export const siteConfig = {
-	title: 'Site Template',
+	title: 'Lucid Covid',
 	description: 'An Easy to Use Site Template',
 	url: 'https://your-blog-template.vercel.app',
 	link: 'https://github.com/gckirchoff/blog-template',
