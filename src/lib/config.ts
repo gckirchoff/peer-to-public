@@ -3,7 +3,7 @@ import { dev } from '$app/environment';
 // Main config for entire website
 export const siteConfig = {
 	title: 'Lucid Covid',
-	description: 'Clear, visual explanations about SARS-CoV-2 and its effects',
+	description: 'Clear, visual explanations about SARS-CoV-2',
 	url: 'https://your-blog-template.vercel.app',
 	link: 'https://github.com/gckirchoff/lucid-covid',
 	author: 'Gregory Kirchoff',
@@ -16,7 +16,7 @@ export const siteConfig = {
 			},
 			welcome: {
 				header: 'Lucid Covid',
-				description: 'Clear, visual explanations about SARS-CoV-2 and its effects',
+				description: 'Clear, visual explanations about SARS-CoV-2',
 			},
 		},
 		about: {
