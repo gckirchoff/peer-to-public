@@ -83,10 +83,13 @@ ${contentAfterOriginalScript}`;
 	return content;
 };
 
+const frontMatterArray = (arr: string[]): string => arr.map((item) => `"${item}"`).join(', ');
+
 export const getPostTemplate = ({
 	title,
 	description,
 	categories,
+	authors,
 	coverImage,
 	published,
 	content,
@@ -100,7 +103,8 @@ export const getPostTemplate = ({
 	const postTemplate = `---
 title: "${title}"
 description: "${description}"
-categories: [ ${categories.map((category) => `"${category}"`).join(', ')} ]
+categories: [ ${frontMatterArray(categories)} ]
+authors: [ ${frontMatterArray(authors)} ]
 coverImage: "${coverImage}"
 date: '${publishedDate}'
 published: ${published}
