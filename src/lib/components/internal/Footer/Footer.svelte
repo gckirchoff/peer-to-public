@@ -1,34 +1,31 @@
-<script>
+<script lang="ts">
 	import { navItems, siteConfig } from '$lib/config';
-	import LightModeToggle from '../LightModeToggle/LightModeToggle.svelte';
-	import { H4 } from '../typography';
 	import NavItem from '../NavItem/NavItem.svelte';
-	import { headerHeight } from '../constants';
+	import { Body2 } from '../typography';
+	import { footerHeight } from '../constants';
 </script>
 
-<header style="--height: {headerHeight}">
+<footer style="--height: {footerHeight}">
 	<nav>
-		<a href="/" class="site-name">
-			<H4 style="font-family: var(--font-base);">
-				{siteConfig.title}
-			</H4>
-		</a>
 		<ul>
 			{#each navItems as { route, title } (route)}
 				<NavItem href={route}>
 					<div class="nav-item">{title}</div>
 				</NavItem>
 			{/each}
-			<LightModeToggle />
+			<NavItem href="/rss.xml">RSS</NavItem>
 		</ul>
 	</nav>
-</header>
+	<Body2>©{new Date().getFullYear()} {siteConfig.author}</Body2>
+</footer>
 
 <style lang="scss">
-	header {
+	footer {
 		min-height: var(--height);
 		padding: var(--spacing-16) var(--spacing-24);
 		background-color: var(--clr-surface-300);
+		display: flex;
+		justify-content: space-between;
 
 		--flex-gap: var(--spacing-24);
 		--row-gap: var(--spacing-8);
@@ -48,10 +45,6 @@
 				gap: var(--flex-gap);
 				row-gap: var(--row-gap);
 				list-style: none;
-
-				.nav-item {
-					font-family: var(--font-base);
-				}
 			}
 		}
 	}
