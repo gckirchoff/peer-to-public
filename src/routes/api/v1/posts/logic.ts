@@ -83,7 +83,8 @@ ${contentAfterOriginalScript}`;
 	return content;
 };
 
-const frontMatterArray = (arr: string[]): string => arr.map((item) => `"${item}"`).join(', ');
+const frontMatterArray = (arr: string[]): string =>
+	`[ ${arr.map((item) => `"${item}"`).join(', ')} ]`;
 
 export const getPostTemplate = ({
 	title,
@@ -103,8 +104,8 @@ export const getPostTemplate = ({
 	const postTemplate = `---
 title: "${title}"
 description: "${description}"
-categories: [ ${frontMatterArray(categories)} ]
-authors: [ ${frontMatterArray(authors)} ]
+categories: ${frontMatterArray(categories)}
+authors: ${frontMatterArray(authors)}
 coverImage: "${coverImage}"
 date: '${publishedDate}'
 published: ${published}
