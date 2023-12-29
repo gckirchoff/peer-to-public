@@ -8,7 +8,8 @@ import { getPostEditorUploadAndHandleImageUpload, processContentImages } from '.
 export const POST = async ({ request }) => {
 	try {
 		const body = await getPostEditorUploadAndHandleImageUpload(request);
-		const { title, description, categories, published, coverImage, content, usables } = body;
+		const { title, description, categories, published, coverImage, content, usables, authors } =
+			body;
 
 		const fileName = slugify(title);
 
@@ -16,6 +17,7 @@ export const POST = async ({ request }) => {
 			title,
 			description,
 			categories,
+			authors,
 			coverImage,
 			published,
 			content,

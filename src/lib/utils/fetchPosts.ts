@@ -36,11 +36,12 @@ const fetchPosts = async ({
 		sortedPosts = sortedPosts.slice(0, limit);
 	}
 
-	const finalPosts = sortedPosts.map((post) => ({
+	const finalPosts: Post[] = sortedPosts.map((post) => ({
 		title: post.title,
 		date: post.date,
 		description: post.description,
 		categories: post.categories,
+		authors: post.authors,
 		coverImage: post.coverImage,
 		slug: post.slug,
 		published: post.published,
