@@ -3,7 +3,7 @@
 	import { csv } from 'd3';
 
 	import Chart from './Chart/Chart.svelte';
-	import type { HandleChangeEvent, Outcome, RiskItem, View } from './constants';
+	import type { HandleChangeEvent, Mode, Outcome, RiskItem, View } from './constants';
 	import { dataFolder } from './constants';
 	import {
 		baselineOverTime,
@@ -14,20 +14,22 @@
 	} from './logic';
 	import Switch from '../../Switch.svelte';
 
+	export let mode: Mode = 'auto';
+
 	let data: RiskItem[] | null = null;
 
-	let view: View = 'instance';
+	let view: View = mode === 'auto' ? 'instance' : mode;
 	let outlookWindow = 1;
 	let vaccinated = false;
 	let outcome: Outcome = 'mortality';
 	let input: number = 40;
 
+	let mortalityByAgeCovid: RiskItem[];
+	let disabilityByReinfectionCovid: RiskItem[];
+
 	let baselineMortality: RiskItem[];
 	let mortalityByAge: RiskItem[];
-	let mortalityByAgeCovid: RiskItem[];
-
 	let baselineDisability: RiskItem[];
-	let disabilityByReinfectionCovid: RiskItem[];
 
 	let mortalityOutlookBaseline: RiskItem[];
 	let disabilityOutlookBaseline: RiskItem[];
@@ -35,27 +37,37 @@
 	let hasMounted = false;
 
 	onMount(async () => {
-		baselineMortality = await csv(`${dataFolder}/micromortsBaseline.csv`, processMortalityItem);
-		mortalityByAge = await csv(`${dataFolder}/mortalityByAge.csv`, processAgeItem);
 		mortalityByAgeCovid = await csv(`${dataFolder}/mortalityByAgeCovid.csv`, processAgeItem);
-
-		baselineDisability = await csv(`${dataFolder}/disabilityBaseline.csv`, processMortalityItem);
 		disabilityByReinfectionCovid = await csv(
 			`${dataFolder}/disabilityByReinfectionCovid.csv`,
 			processMortalityItem,
 		);
 
-		mortalityOutlookBaseline = await csv(
-			`${dataFolder}/mortalityOutlookBaseline.csv`,
-			processMortalityItem,
-		);
+		if (mode !== 'outlook') {
+			baselineMortality = await csv(`${dataFolder}/micromortsBaseline.csv`, processMortalityItem);
+			mortalityByAge = await csv(`${dataFolder}/mortalityByAge.csv`, processAgeItem);
+			baselineDisability = await csv(`${dataFolder}/disabilityBaseline.csv`, processMortalityItem);
+		}
 
-		disabilityOutlookBaseline = await csv(
-			`${dataFolder}/disabilityOutlookBaseline.csv`,
-			processMortalityItem,
-		);
+		if (mode !== 'instance') {
+			mortalityOutlookBaseline = await csv(
+				`${dataFolder}/mortalityOutlookBaseline.csv`,
+				processMortalityItem,
+			);
+			disabilityOutlookBaseline = await csv(
+				`${dataFolder}/disabilityOutlookBaseline.csv`,
+				processMortalityItem,
+			);
+		}
 
-		data = [...baselineMortality, mortalityByAge[input], mortalityByAgeCovid[input]];
+		if (mode !== 'outlook') {
+			data = [...baselineMortality, mortalityByAge[input], mortalityByAgeCovid[input]];
+		} else {
+			const baselineData = baselineOverTime(mortalityOutlookBaseline, outlookWindow);
+			const newCovidRow = getCovidRow(input, outlookWindow, vaccinated, mortalityByAgeCovid);
+
+			data = [...baselineData, newCovidRow];
+		}
 		hasMounted = true;
 	});
 
@@ -127,10 +139,16 @@
 		<option value="mortality">killed</option>
 		<option value="disability">injured/Long Covid</option>
 	</select>
-	<select bind:value={view}>
-		<option value="instance">from my next Infection</option>
-		<option value="outlook">in the next</option>
-	</select>
+	{#if mode === 'auto'}
+		<select bind:value={view}>
+			<option value="instance">from my next Infection</option>
+			<option value="outlook">in the next</option>
+		</select>
+	{:else if mode === 'instance'}
+		<h3>from my next infection</h3>
+	{:else}
+		<h3>in the next</h3>
+	{/if}
 	{#if view === 'outlook'}
 		<input
 			on:input={handleOutlookWindowChange}
