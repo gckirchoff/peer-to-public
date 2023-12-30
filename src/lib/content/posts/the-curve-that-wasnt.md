@@ -2,7 +2,7 @@
 title: "The Curve that Wasn't"
 description: "\"It's tough to make predictions, especially about the future\" - Yogi Berra"
 categories: [ "covid-19", "statistics" ]
-authors: [ "Gregory Kirchoff" ]
+authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "flatten-the-curve.png"
 date: '2023-12-30'
 published: true

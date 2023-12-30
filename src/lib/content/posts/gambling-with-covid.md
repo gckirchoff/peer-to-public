@@ -2,11 +2,11 @@
 title: "Gambling with Covid"
 description: "It's been said the chances of getting Long Covid is a 'roll of the dice' each time you are infected. How many times can we expect to be able to play this game?"
 categories: [ "covid-19", "statistics" ]
-authors: [ "Gregory Kirchoff" ]
+authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "coin-stack-ibrahim-rifath-unsplash.jpg"
 date: '2023-12-21'
 published: true
-updated: '2023-12-30'
+
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';

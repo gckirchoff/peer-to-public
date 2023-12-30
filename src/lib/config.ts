@@ -4,9 +4,9 @@ import { dev } from '$app/environment';
 export const siteConfig = {
 	title: 'Clear Covid',
 	description: 'Simple, visual explanations about SARS-CoV-2',
-	url: 'https://your-blog-template.vercel.app',
+	url: 'https://clear-covid.vercel.app',
 	link: 'https://github.com/gckirchoff/lucid-covid',
-	author: 'Gregory Kirchoff',
+	author: 'Clear Covid',
 	pages: {
 		landing: {
 			miniAboutMe: {
