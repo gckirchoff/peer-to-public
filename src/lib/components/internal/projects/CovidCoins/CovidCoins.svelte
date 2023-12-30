@@ -23,6 +23,7 @@
 	let vaccinated = false;
 	let outcome: Outcome = 'mortality';
 	let input: number = 40;
+	let longCovidRate = 0.146;
 
 	let mortalityByAgeCovid: RiskItem[];
 	let disabilityByReinfectionCovid: RiskItem[];
@@ -97,7 +98,13 @@
 				if (outcome === 'mortality') {
 					data = [...baselineMortality, mortalityByAge[input], mortalityByAgeCovid[input]];
 				} else if (outcome === 'disability') {
-					data = [...baselineDisability, disabilityByReinfectionCovid[0]];
+					const coins = representProbabilityAsCoins(longCovidRate);
+					const covidRow: RiskItem = {
+						...disabilityByReinfectionCovid[0],
+						probability: longCovidRate,
+						coins,
+					};
+					data = [...baselineDisability, covidRow];
 				}
 			} else if (view === 'outlook') {
 				if (outcome === 'mortality') {
@@ -111,9 +118,8 @@
 
 					const covidFrequencyPerYear = vaccinated ? 1 : 2;
 					const covidRow = disabilityByReinfectionCovid[0];
-					const pCovidDeath = covidRow.probability;
 					const chanceOfDisability =
-						1 - Math.pow(1 - pCovidDeath, covidFrequencyPerYear * outlookWindow);
+						1 - Math.pow(1 - longCovidRate, covidFrequencyPerYear * outlookWindow);
 					const covidDisabilityCoins = representProbabilityAsCoins(chanceOfDisability);
 					const newCovidRow: RiskItem = {
 						...covidRow,
@@ -169,6 +175,11 @@
 	{#if view === 'outlook'}
 		<h3>if I get vaccinated every year</h3>
 		<Switch bind:value={vaccinated} label="" />
+	{/if}
+	{#if outcome === 'disability'}
+		<h3>assuming a long covid rate of</h3>
+		<input bind:value={longCovidRate} type="range" min="0.01" max="0.25" step="0.01" />
+		<h3>{(longCovidRate * 100).toFixed(1)}% per infection</h3>
 	{/if}
 </div>
 
