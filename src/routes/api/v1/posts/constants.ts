@@ -5,13 +5,17 @@ export type PostReqPostBody = {
 	title: string;
 	description: string;
 	categories: string[];
+	authors: string[];
 	content: string;
 	usables: { [id: string]: Usable };
 	published: boolean;
 	coverImage?: string;
 };
 
-export type PatchReqPostBody = PostReqPostBody & { slug: string; date: string };
+export interface PatchReqPostBody extends PostReqPostBody {
+	slug: string;
+	date: string;
+}
 
 export type PostReqResponse = {
 	status: 'success';
@@ -21,6 +25,7 @@ export interface GetPostTemplateParams {
 	title: string;
 	description: string;
 	categories: string[];
+	authors: string[];
 	coverImage: string;
 	published: boolean;
 	content: string;

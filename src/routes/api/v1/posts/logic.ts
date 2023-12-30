@@ -1,4 +1,4 @@
-import { prettyDate } from '$lib/utils/logic';
+import { escapeString, prettyDate } from '$lib/utils/logic';
 import { UsableType } from '../../../(site)/dev/admin/post/subcomponents/UsablesModal/constants';
 import type {
 	Usable,
@@ -83,10 +83,14 @@ ${contentAfterOriginalScript}`;
 	return content;
 };
 
+const frontMatterArray = (arr: string[]): string =>
+	`[ ${arr.map((item) => `"${item}"`).join(', ')} ]`;
+
 export const getPostTemplate = ({
 	title,
 	description,
 	categories,
+	authors,
 	coverImage,
 	published,
 	content,
@@ -98,9 +102,10 @@ export const getPostTemplate = ({
 	const parsedContent = parseScripts(content);
 
 	const postTemplate = `---
-title: "${title}"
-description: "${description}"
-categories: [ ${categories.map((category) => `"${category}"`).join(', ')} ]
+title: "${escapeString(title)}"
+description: "${escapeString(description)}"
+categories: ${frontMatterArray(categories)}
+authors: ${frontMatterArray(authors)}
 coverImage: "${coverImage}"
 date: '${publishedDate}'
 published: ${published}

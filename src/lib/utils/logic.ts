@@ -40,3 +40,5 @@ export const getRandomInt = (min: number, max: number): number => {
 export const capitalize = (text: string): string => text[0].toUpperCase() + text.slice(1);
 
 export const randomDefaultPhoto = (): string => `default-background-${getRandomInt(1, 7)}.jpg`;
+
+export const escapeString = (str: string): string => str.replaceAll('"', '\\"');
