@@ -105,7 +105,7 @@
 					const covidDisabilityCoins = representProbabilityAsCoins(chanceOfDisability);
 					const newCovidRow: RiskItem = {
 						...covidRow,
-						item: 'Office Worker During Panemic',
+						item: 'Office Worker During Pandemic',
 						probability: chanceOfDisability,
 						coins: covidDisabilityCoins,
 						frequencyPerYear: covidFrequencyPerYear,

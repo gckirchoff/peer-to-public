@@ -58,7 +58,7 @@
 	>
 		{#if d.coins <= 0}
 			<Bad size={coinDiameter} />
-		{:else if d.item === 'Covid-19' || d.item === 'Office Worker During Panemic'}
+		{:else if d.item === 'Covid-19' || d.item === 'Office Worker During Pandemic'}
 			<CovidCoin size={coinDiameter} />
 		{:else if outcome === 'mortality'}
 			<RegularCoin size={coinDiameter} />

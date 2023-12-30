@@ -77,7 +77,7 @@ export const getCovidRow = (
 
 	const newCovidRow: RiskItem = {
 		...mortalityByAgeCovid[age],
-		item: 'Office Worker During Panemic',
+		item: 'Office Worker During Pandemic',
 		probability: pAdverseCovidOutcome,
 		coins: covidCoins,
 		frequencyPerYear: covidFrequencyPerYear,
