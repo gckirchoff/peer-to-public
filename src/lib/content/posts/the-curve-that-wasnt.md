@@ -2,11 +2,11 @@
 title: "The Curve that Wasn't"
 description: "\"It's tough to make predictions, especially about the future\" - Yogi Berra"
 categories: [ "covid-19", "statistics" ]
-authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
+authors: [ "Clear Covid" ]
 coverImage: "flatten-the-curve.png"
 date: '2023-12-30'
 published: true
-
+updated: '2023-12-30'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
