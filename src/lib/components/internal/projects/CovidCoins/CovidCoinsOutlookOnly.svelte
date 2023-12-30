@@ -16,17 +16,14 @@
 
 	let data: RiskItem[] | null = null;
 
-	let view: View = 'instance';
+	const view: View = 'outlook';
 	let outlookWindow = 1;
 	let vaccinated = false;
 	let outcome: Outcome = 'mortality';
 	let input: number = 40;
 
-	let baselineMortality: RiskItem[];
-	let mortalityByAge: RiskItem[];
 	let mortalityByAgeCovid: RiskItem[];
 
-	let baselineDisability: RiskItem[];
 	let disabilityByReinfectionCovid: RiskItem[];
 
 	let mortalityOutlookBaseline: RiskItem[];
@@ -35,11 +32,7 @@
 	let hasMounted = false;
 
 	onMount(async () => {
-		baselineMortality = await csv(`${dataFolder}/micromortsBaseline.csv`, processMortalityItem);
-		mortalityByAge = await csv(`${dataFolder}/mortalityByAge.csv`, processAgeItem);
 		mortalityByAgeCovid = await csv(`${dataFolder}/mortalityByAgeCovid.csv`, processAgeItem);
-
-		baselineDisability = await csv(`${dataFolder}/disabilityBaseline.csv`, processMortalityItem);
 		disabilityByReinfectionCovid = await csv(
 			`${dataFolder}/disabilityByReinfectionCovid.csv`,
 			processMortalityItem,
@@ -55,7 +48,11 @@
 			processMortalityItem,
 		);
 
-		data = [...baselineMortality, mortalityByAge[input], mortalityByAgeCovid[input]];
+		const baselineData = baselineOverTime(mortalityOutlookBaseline, outlookWindow);
+
+		const newCovidRow = getCovidRow(input, outlookWindow, vaccinated, mortalityByAgeCovid);
+
+		data = [...baselineData, newCovidRow];
 		hasMounted = true;
 	});
 
@@ -81,13 +78,7 @@
 
 	$: {
 		if (hasMounted) {
-			if (view === 'instance') {
-				if (outcome === 'mortality') {
-					data = [...baselineMortality, mortalityByAge[input], mortalityByAgeCovid[input]];
-				} else if (outcome === 'disability') {
-					data = [...baselineDisability, disabilityByReinfectionCovid[0]];
-				}
-			} else if (view === 'outlook') {
+			if (view === 'outlook') {
 				if (outcome === 'mortality') {
 					const baselineData = baselineOverTime(mortalityOutlookBaseline, outlookWindow);
 
@@ -127,10 +118,7 @@
 		<option value="mortality">killed</option>
 		<option value="disability">injured/Long Covid</option>
 	</select>
-	<select bind:value={view}>
-		<option value="instance">from my next Infection</option>
-		<option value="outlook">in the next</option>
-	</select>
+	<h3>in the next</h3>
 	{#if view === 'outlook'}
 		<input
 			on:input={handleOutlookWindowChange}
@@ -149,7 +137,7 @@
 		<h3>years old</h3>
 	{/if}
 	{#if view === 'outlook'}
-		<h3>if I get vaccinated every year</h3>
+		<h3>{outcome === 'mortality' ? 'and' : 'if'} I get vaccinated every year</h3>
 		<Switch bind:value={vaccinated} label="" />
 	{/if}
 </div>

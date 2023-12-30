@@ -2,13 +2,14 @@
 	import { fly } from 'svelte/transition';
 	import type { ScaleBand, ScaleLinear } from 'd3';
 
-	import type { Outcome, RiskItem } from '../../constants';
+	import type { Outcome, RiskItem, View } from '../../constants';
 
 	export let data: RiskItem;
 	export let xScale: ScaleBand<string>;
 	export let yScale: ScaleLinear<number, number, never>;
 	export let width: number;
 	export let outcome: Outcome;
+	export let view: View;
 
 	const xNudge = 15;
 	const yNudge = 15;
@@ -24,6 +25,11 @@
 
 	$: outcomeText =
 		outcome === 'mortality' ? 'death' : data.item === 'Covid-19' ? 'long covid' : 'injury';
+
+	$: probability = Math.round(data.probability * 1000) / 10;
+	$: tooltipTitle = `${data.item} - ${data.coins > 0 ? `${data.coins} coins` : `${probability}%`}`;
+
+	$: tooltipProbability = (data.probability * 100).toFixed(4);
 </script>
 
 <div
@@ -33,18 +39,23 @@
 	in:fly={{ y: -20 }}
 	out:fly={{ y: 20 }}
 >
-	<h1 class="item">{data.item} - {data.coins} coins</h1>
-	<p class="frequency">{data.frequency}</p>
-	<a class="source" href={data.source} target="_blank">Source</a>
-	<h3 class="tries-title">Can attempt:</h3>
-	<h4>
-		<span class="highlight">{Math.round(data.triesUntil50)}</span> times until a
-		<span class="highlight">50%</span> chance of {outcomeText}
-	</h4>
-	<h4>
-		<span class="highlight">{Math.round(data.triesUntil95)}</span> times until a
-		<span class="highlight">95%</span> chance of {outcomeText}
-	</h4>
+	<h1 class="item">{tooltipTitle}</h1>
+	{#if view === 'instance'}
+		<p class="frequency">{data.frequency} - {tooltipProbability}%</p>
+		<a class="source" href={data.source} target="_blank">Source</a>
+		<h3 class="tries-title">Can attempt:</h3>
+		<h4>
+			<span class="highlight">{Math.round(data.triesUntil50)}</span> times until a
+			<span class="highlight">50%</span> chance of {outcomeText}
+		</h4>
+		<h4>
+			<span class="highlight">{Math.round(data.triesUntil95)}</span> times until a
+			<span class="highlight">95%</span> chance of {outcomeText}
+		</h4>
+	{:else}
+		<p class="frequency">{data.frequencyPerYearDescriptor}</p>
+		<p class="frequency">{tooltipProbability}%</p>
+	{/if}
 </div>
 
 <style lang="scss">

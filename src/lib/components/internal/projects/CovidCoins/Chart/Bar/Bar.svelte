@@ -6,8 +6,9 @@
 	import RegularCoin from '../../icons/RegularCoin.svelte';
 	import CovidCoin from '../../icons/CovidCoin.svelte';
 	import InjuryCoin from '../../icons/InjuryCoin.svelte';
+	import Bad from '../../icons/Bad.svelte';
 	import type { Outcome, RiskItem } from '../../constants';
-	import { getCoins } from './logic';
+	import { getCoins, splitSentenceDownMiddle } from './logic';
 
 	export let d: RiskItem;
 	export let xScale: ScaleBand<string>;
@@ -17,7 +18,7 @@
 	export let outcome: Outcome;
 	export let barsSwappedPlaces: boolean;
 
-	$: coinDiameter = xScale.bandwidth();
+	$: coinDiameter = Math.min(xScale.bandwidth(), 100);
 	$: coinRadius = coinDiameter / 2;
 
 	$: coins = getCoins({
@@ -30,7 +31,7 @@
 	});
 </script>
 
-<rect
+<!-- <rect
 	x={7}
 	y={-(innerHeight - yScale(d.coins))}
 	width={xScale.bandwidth()}
@@ -38,7 +39,7 @@
 	fill="black"
 	style="transition: all 300ms ease;"
 	opacity={0}
-/>
+/> -->
 {#each coins as coin}
 	<g
 		transform="translate({0} {coin.yPosition})"
@@ -55,7 +56,9 @@
 			easing: backOut,
 		}}
 	>
-		{#if d.item === 'Covid-19'}
+		{#if d.coins <= 0}
+			<Bad size={coinDiameter} />
+		{:else if d.item === 'Covid-19' || d.item === 'Office Worker During Panemic'}
 			<CovidCoin size={coinDiameter} />
 		{:else if outcome === 'mortality'}
 			<RegularCoin size={coinDiameter} />
@@ -64,11 +67,13 @@
 		{/if}
 	</g>
 {/each}
-{#each d.item.split(' ') as word, index}
-	<text x={0} y={0} dx={coinRadius} dy={index * 18 + coinRadius} text-anchor="middle">
-		{word}
-	</text>
-{/each}
+<g class="label-container" transform="translate({coinRadius} {coinRadius})">
+	{#each splitSentenceDownMiddle(d.item) as words, index}
+		<text x={0} y={0} dy={`${index * 1.5}rem`} text-anchor="start">
+			{words}
+		</text>
+	{/each}
+</g>
 
 <style lang="scss">
 	text {
@@ -76,5 +81,7 @@
 		font-family: var(--font-base);
 		user-select: none;
 		fill: #464646;
+		transform: rotate(50deg);
+		transform-origin: top left;
 	}
 </style>

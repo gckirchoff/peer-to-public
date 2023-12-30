@@ -2,15 +2,16 @@
 title: "Gambling with Covid"
 description: "It's been said the chances of getting Long Covid is a 'roll of the dice' each time you are infected. How many times can we expect to be able to play this game?"
 categories: [ "covid-19", "statistics" ]
+authors: [ "Gregory Kirchoff" ]
 coverImage: "coin-stack-ibrahim-rifath-unsplash.jpg"
 date: '2023-12-21'
 published: true
-updated: '2023-12-26'
+updated: '2023-12-30'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
 
-  import CovidCoins from '$lib/components/internal/projects/CovidCoins/CovidCoins.svelte';
+  import CovidCoinsInstanceOnly from '$lib/components/internal/projects/CovidCoins/CovidCoinsInstanceOnly.svelte';
   
 </script>
 
@@ -24,4 +25,4 @@ One way to look at the riskiness of a situation is to flip some coins. The chanc
 
 Explore the below visualization to gain a better understanding of the relative risks of various outcomes.
 
-<CovidCoins />
+<CovidCoinsInstanceOnly />

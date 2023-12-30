@@ -1,9 +1,11 @@
-item,micromorts,coins,triesUntil50,triesUntil95,frequency,isInstance,source
-Skydiving,8,16.93156857,86643.051,374465.0363,per jump,TRUE,https://www.uspa.org/discover/faqs/safety
-BASE Jumping,430,11.18337572,1611.623589,6965.321267,per jump,TRUE,https://journals.lww.com/jtrauma/abstract/2007/05000/how_dangerous_is_base_jumping__an_analysis_of.6.aspx
-Scuba Diving,5,17.60964047,138629.0895,599144.9568,per dive,TRUE,https://web.archive.org/web/20140728111842/http://www.bsac.com/page.asp?section=3780&sectionTitle=UK+Diving+Fatalities+Review
-Ascending Mt. Everest,37932,4.720440749,17.92460786,77.46886632,per ascent,TRUE,https://earthobservatory.nasa.gov/images/82578/the-worlds-tallest-mountain
-Travelling by Jet,1,19.93156857,693146.834,2995730.776,"per 1,000 miles (NYC to Orlando, FL)",TRUE,https://archive.ph/20120714164305/http://stanford-online.stanford.edu/sdrmda61w/session10b/slides/sld031.htm
-Travelling by Motorcycle,167,12.54786428,4150.235336,17937.0187,"per 1,000 miles (NYC to Orlando, FL)",TRUE,https://en.wikipedia.org/wiki/Micromort
-Travelling by Car,4,17.93156857,173286.4486,748931.5705,"per 1,000 miles (NYC to Orlando, FL)",TRUE,https://plus.maths.org/content/os/issue55/features/risk/index
-Giving Birth (vaginal),120,13.02467797,5775.879924,24962.93772,per birth,TRUE,https://en.wikipedia.org/wiki/Micromort#cite_note-:0-30
+item,micromorts,probability,coins,triesUntil50,triesUntil95,frequency,isInstance,prognostic,frequencyPerYear,frequencyPerYearDescriptor,source,prognosticSource,description
+Skydiving,8,0.000008,16.93156857,86643.051,374465.0363,per jump,TRUE,FALSE,,,https://www.uspa.org/discover/faqs/safety,,
+BASE Jumping,430,0.00043,11.18337572,1611.623589,6965.321267,per jump,TRUE,FALSE,,,https://journals.lww.com/jtrauma/abstract/2007/05000/how_dangerous_is_base_jumping__an_analysis_of.6.aspx,,
+Scuba Diving,5,0.000005,17.60964047,138629.0895,599144.9568,per dive,TRUE,FALSE,,,https://web.archive.org/web/20140728111842/http://www.bsac.com/page.asp?section=3780&sectionTitle=UK+Diving+Fatalities+Review,,
+Ascending Mt. Everest,37932,0.037932,4.720440749,17.92460786,77.46886632,per ascent,TRUE,FALSE,,,https://earthobservatory.nasa.gov/images/82578/the-worlds-tallest-mountain,,
+Travelling by Jet,1,0.000001,19.93156857,693146.834,2995730.776,"per 1,000 miles (NYC to Orlando, FL)",TRUE,TRUE,11.467,11467 average miles per U.S. citizen per year,https://archive.ph/20120714164305/http://stanford-online.stanford.edu/sdrmda61w/session10b/slides/sld031.htm,https://afdc.energy.gov/data/10309,
+Travelling by Motorcycle,167,0.000167,12.54786428,4150.235336,17937.0187,"per 1,000 miles (NYC to Orlando, FL)",TRUE,TRUE,2.312,2312 average miles per U.S. citizen per year,https://en.wikipedia.org/wiki/Micromort,https://afdc.energy.gov/data/10309,
+Travelling by Car,4,0.000004,17.93156857,173286.4486,748931.5705,"per 1,000 miles (NYC to Orlando, FL)",TRUE,TRUE,0.7028,702.8 average miles per U.S. citizen per year,https://plus.maths.org/content/os/issue55/features/risk/index,"https://www.statista.com/statistics/742763/regional-carriers-average-passenger-trip-length/#:~:text=The%20statistic%20presents%20the%20U.S.,from%20495%20miles%20in%202019.",Average is 502 per american. Average American travels 1.4 times a year.
+Giving Birth (vaginal),120,0.00012,13.02467797,5775.879924,24962.93772,per birth,TRUE,FALSE,,,https://en.wikipedia.org/wiki/Micromort#cite_note-:0-30,,
+Gunshot to Abdomen,117000,0.117,3.095419565,5.570575777,24.07562796,per hospital admission,TRUE,FALSE,,,https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1493651/,,
+Atronaut Mission,7000,0.007,7.158429363,98.67404645,426.4621336,per spaceflight mission,TRUE,FALSE,,,https://talkingastronomie.wordpress.com/2023/03/04/how-many-astronauts-have-died-exploring-the-risks-of-space-travel-death-rate-floating-in-space-smell-of-space-and-astronaut-salaries/,,

@@ -2,7 +2,7 @@
 	import { flip } from 'svelte/animate';
 	import { scaleLinear, scaleBand } from 'd3';
 
-	import type { Outcome, RiskItem } from '../constants';
+	import type { Outcome, RiskItem, View } from '../constants';
 	import Bar from './Bar/Bar.svelte';
 	import AxisY from './AxisY/AxisY.svelte';
 	import Tooltip from './Tooltip/Tooltip.svelte';
@@ -10,8 +10,9 @@
 
 	export let data: RiskItem[];
 	export let outcome: Outcome;
+	export let view: View;
 
-	$: usedData = data.toSorted((a, b) => b.coins - a.coins);
+	$: usedData = data.toSorted((a, b) => a.probability - b.probability);
 	let prevUsedData: RiskItem[] = [];
 	let barsSwappedPlaces: boolean;
 
@@ -23,8 +24,8 @@
 	const margin = {
 		top: 60,
 		left: 30,
-		bottom: 90,
-		right: 0,
+		bottom: 175,
+		right: 30,
 	};
 
 	let width = 400;
@@ -65,10 +66,11 @@
 					<Bar {d} {xScale} {yScale} {columnIndex} {innerHeight} {outcome} {barsSwappedPlaces} />
 				</g>
 			{/each}
+			<text class="axis-title" x={innerWidth} y={0} dy={-10} text-anchor="end">Riskiness &rarr;</text>
 		</g>
 	</svg>
 	{#if hoveredBar}
-		<Tooltip data={hoveredBar} {xScale} {yScale} width={innerWidth} {outcome} />
+		<Tooltip data={hoveredBar} {xScale} {yScale} width={innerWidth} {outcome} {view} />
 	{/if}
 </div>
 
