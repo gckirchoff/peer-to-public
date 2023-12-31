@@ -3,7 +3,7 @@
 	import { csv } from 'd3';
 
 	import Chart from './Chart/Chart.svelte';
-	import type { HandleChangeEvent, Outcome, RiskItem, View } from './constants';
+	import type { HandleChangeEvent, Mode, Outcome, RiskItem, View } from './constants';
 	import { dataFolder } from './constants';
 	import {
 		baselineOverTime,
@@ -14,20 +14,23 @@
 	} from './logic';
 	import Switch from '../../Switch.svelte';
 
+	export let mode: Mode = 'auto';
+
 	let data: RiskItem[] | null = null;
 
-	let view: View = 'instance';
+	let view: View = mode === 'auto' ? 'instance' : mode;
 	let outlookWindow = 1;
 	let vaccinated = false;
 	let outcome: Outcome = 'mortality';
 	let input: number = 40;
+	let longCovidRate = 0.146;
+
+	let mortalityByAgeCovid: RiskItem[];
+	let disabilityByReinfectionCovid: RiskItem[];
 
 	let baselineMortality: RiskItem[];
 	let mortalityByAge: RiskItem[];
-	let mortalityByAgeCovid: RiskItem[];
-
 	let baselineDisability: RiskItem[];
-	let disabilityByReinfectionCovid: RiskItem[];
 
 	let mortalityOutlookBaseline: RiskItem[];
 	let disabilityOutlookBaseline: RiskItem[];
@@ -35,27 +38,37 @@
 	let hasMounted = false;
 
 	onMount(async () => {
-		baselineMortality = await csv(`${dataFolder}/micromortsBaseline.csv`, processMortalityItem);
-		mortalityByAge = await csv(`${dataFolder}/mortalityByAge.csv`, processAgeItem);
 		mortalityByAgeCovid = await csv(`${dataFolder}/mortalityByAgeCovid.csv`, processAgeItem);
-
-		baselineDisability = await csv(`${dataFolder}/disabilityBaseline.csv`, processMortalityItem);
 		disabilityByReinfectionCovid = await csv(
 			`${dataFolder}/disabilityByReinfectionCovid.csv`,
 			processMortalityItem,
 		);
 
-		mortalityOutlookBaseline = await csv(
-			`${dataFolder}/mortalityOutlookBaseline.csv`,
-			processMortalityItem,
-		);
+		if (mode !== 'outlook') {
+			baselineMortality = await csv(`${dataFolder}/micromortsBaseline.csv`, processMortalityItem);
+			mortalityByAge = await csv(`${dataFolder}/mortalityByAge.csv`, processAgeItem);
+			baselineDisability = await csv(`${dataFolder}/disabilityBaseline.csv`, processMortalityItem);
+		}
 
-		disabilityOutlookBaseline = await csv(
-			`${dataFolder}/disabilityOutlookBaseline.csv`,
-			processMortalityItem,
-		);
+		if (mode !== 'instance') {
+			mortalityOutlookBaseline = await csv(
+				`${dataFolder}/mortalityOutlookBaseline.csv`,
+				processMortalityItem,
+			);
+			disabilityOutlookBaseline = await csv(
+				`${dataFolder}/disabilityOutlookBaseline.csv`,
+				processMortalityItem,
+			);
+		}
 
-		data = [...baselineMortality, mortalityByAge[input], mortalityByAgeCovid[input]];
+		if (mode !== 'outlook') {
+			data = [...baselineMortality, mortalityByAge[input], mortalityByAgeCovid[input]];
+		} else {
+			const baselineData = baselineOverTime(mortalityOutlookBaseline, outlookWindow);
+			const newCovidRow = getCovidRow(input, outlookWindow, vaccinated, mortalityByAgeCovid);
+
+			data = [...baselineData, newCovidRow];
+		}
 		hasMounted = true;
 	});
 
@@ -85,7 +98,13 @@
 				if (outcome === 'mortality') {
 					data = [...baselineMortality, mortalityByAge[input], mortalityByAgeCovid[input]];
 				} else if (outcome === 'disability') {
-					data = [...baselineDisability, disabilityByReinfectionCovid[0]];
+					const coins = representProbabilityAsCoins(longCovidRate);
+					const covidRow: RiskItem = {
+						...disabilityByReinfectionCovid[0],
+						probability: longCovidRate,
+						coins,
+					};
+					data = [...baselineDisability, covidRow];
 				}
 			} else if (view === 'outlook') {
 				if (outcome === 'mortality') {
@@ -99,9 +118,8 @@
 
 					const covidFrequencyPerYear = vaccinated ? 1 : 2;
 					const covidRow = disabilityByReinfectionCovid[0];
-					const pCovidDeath = covidRow.probability;
 					const chanceOfDisability =
-						1 - Math.pow(1 - pCovidDeath, covidFrequencyPerYear * outlookWindow);
+						1 - Math.pow(1 - longCovidRate, covidFrequencyPerYear * outlookWindow);
 					const covidDisabilityCoins = representProbabilityAsCoins(chanceOfDisability);
 					const newCovidRow: RiskItem = {
 						...covidRow,
@@ -127,10 +145,16 @@
 		<option value="mortality">killed</option>
 		<option value="disability">injured/Long Covid</option>
 	</select>
-	<select bind:value={view}>
-		<option value="instance">from my next Infection</option>
-		<option value="outlook">in the next</option>
-	</select>
+	{#if mode === 'auto'}
+		<select bind:value={view}>
+			<option value="instance">from my next Infection</option>
+			<option value="outlook">in the next</option>
+		</select>
+	{:else if mode === 'instance'}
+		<h3>from my next infection</h3>
+	{:else}
+		<h3>in the next</h3>
+	{/if}
 	{#if view === 'outlook'}
 		<input
 			on:input={handleOutlookWindowChange}
@@ -151,6 +175,11 @@
 	{#if view === 'outlook'}
 		<h3>if I get vaccinated every year</h3>
 		<Switch bind:value={vaccinated} label="" />
+	{/if}
+	{#if outcome === 'disability'}
+		<h3>assuming a long covid rate of</h3>
+		<input bind:value={longCovidRate} type="range" min="0.01" max="0.25" step="0.01" />
+		<h3>{(longCovidRate * 100).toFixed(1)}% per infection</h3>
 	{/if}
 </div>
 

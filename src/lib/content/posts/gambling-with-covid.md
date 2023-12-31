@@ -11,7 +11,7 @@ updated: '2023-12-30'
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
 
-  import CovidCoinsInstanceOnly from '$lib/components/internal/projects/CovidCoins/CovidCoinsInstanceOnly.svelte';
+  import CovidCoins from '$lib/components/internal/projects/CovidCoins/CovidCoins.svelte';
   
 </script>
 
@@ -25,4 +25,4 @@ One way to look at the riskiness of a situation is to flip some coins. The chanc
 
 Explore the below visualization to gain a better understanding of the relative risks of various outcomes.
 
-<CovidCoinsInstanceOnly />
+<CovidCoins mode="instance" />

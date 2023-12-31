@@ -42,6 +42,8 @@ export type HandleChangeEvent<T extends HTMLElement> = Event & {
 	currentTarget: EventTarget & T;
 };
 
+export type Mode = 'auto' | 'instance' | 'outlook';
+
 export type View = 'instance' | 'outlook';
 
 export type Outcome = 'mortality' | 'disability';

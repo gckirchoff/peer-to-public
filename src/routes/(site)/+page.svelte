@@ -44,7 +44,6 @@
 
 	main {
 		@include base-layout;
-		grid-template-rows: 50vh;
 		row-gap: var(--spacing-16);
 
 		.profile {

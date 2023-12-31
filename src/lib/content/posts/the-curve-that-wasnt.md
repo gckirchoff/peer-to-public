@@ -11,7 +11,7 @@ updated: '2023-12-30'
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
 
-  import CovidCoinsOutlookOnly from '$lib/components/internal/projects/CovidCoins/CovidCoinsOutlookOnly.svelte';
+  import CovidCoins from '$lib/components/internal/projects/CovidCoins/CovidCoins.svelte';
 </script>
 
 An initial hope, and now a delusion, was and is that the Covid-19 pandemic would largely recede by its own accords. It began as “flatten the curve.” This pseudo-compassionate doctrine worked under the premise that roughly the same number of people would be infected by the second SARS coronavirus, but as long as it wasn’t enough infections at once as to overwhelm the healthcare system, this was fine. And then the curve was planned to go back down to zero. This plan seems much more concerned with healthcare infastructure than personal health and well-being, because it doesn’t address any concerns about the non-ICU-bed-taking effects of Covid-19 infections such as symptomatic Long Covid and Covid’s long-term effects on nearly every organ system.
@@ -25,4 +25,4 @@ Where we stand now is that all of these previous theories have not come to the r
 How bad is this? The chance of death is low for a 30 year old contracting Covid-19, for example. A chance of 2-15% might even sound low for getting symptomatic Long Covid after a covid infection. Here lies the difficulty of assessing probability over time. Time is what makes 1% dangerous. Say you partake in an activity that has a 1% chance of mortality once a day every day. You won’t make it to the end of the year. The calculations come out to a 95% chance of dying in roughly 300 days (Log(0.05)/(Log(1-0.01)) = 298 days). Understanding risk over time, you wouldn't want to get on an airplane if they had a 1% chance of crashing each time. You also wouldn't want to live in a world with unrestricted covid.
 
 
-<CovidCoinsOutlookOnly />
+<CovidCoins mode="outlook" />
