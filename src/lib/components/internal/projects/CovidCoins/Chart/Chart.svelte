@@ -21,15 +21,15 @@
 		prevUsedData = usedData;
 	}
 
-	const margin = {
-		top: 60,
-		left: 30,
-		bottom: 175,
-		right: 30,
-	};
-
 	let width = 400;
 	let height = 550;
+
+	$: margin = {
+		top: 60,
+		left: 30,
+		bottom: 100 + width * 0.05,
+		right: 30,
+	};
 
 	let hoveredBar: RiskItem | null = null;
 
@@ -66,7 +66,9 @@
 					<Bar {d} {xScale} {yScale} {columnIndex} {innerHeight} {outcome} {barsSwappedPlaces} />
 				</g>
 			{/each}
-			<text class="axis-title" x={innerWidth} y={0} dy={-10} text-anchor="end">Riskiness &rarr;</text>
+			<text class="axis-title" x={innerWidth} y={0} dy={-10} text-anchor="end"
+				>Riskiness &rarr;</text
+			>
 		</g>
 	</svg>
 	{#if hoveredBar}
