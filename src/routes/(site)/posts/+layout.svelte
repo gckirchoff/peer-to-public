@@ -26,7 +26,7 @@
 </div>
 
 <style lang="scss">
-	@import '/src/styles//mixins.scss';
+	@import '/src/styles/mixins.scss';
 
 	.layout {
 		@include base-layout;
