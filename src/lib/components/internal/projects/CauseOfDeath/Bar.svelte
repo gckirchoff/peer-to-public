@@ -41,12 +41,10 @@ on:mouseover={() => {
 			dy={data.height / 2 + 5}
 			dominant-baseline="middle"
 		>
-			{data.data.year2020} deaths
+			{data.data.year2020.toLocaleString()} deaths
 		</text>
 	</g>
 {/if}
-
-<!-- <text x={data.x} y={data.y}>{data.data.subType}</text> -->
 
 <style lang="scss">
 	rect {
