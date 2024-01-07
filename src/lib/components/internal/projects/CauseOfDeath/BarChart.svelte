@@ -6,18 +6,19 @@
 	import AxisX from './AxisX.svelte';
 	import AxisY from './AxisY.svelte';
 	import Bar from './Bar.svelte';
+	import Tooltip from './Tooltip.svelte';
 
-	import type { BarData, MortalityData, Stage } from './constants';
 	import {
 		getBarData,
 		getDomainValuesForColorScale,
 		getMaxDeathForEachCategory,
 		getYValuesBySubType,
 	} from './logic';
-	import Tooltip from './Tooltip.svelte';
+	import type { BarData, MortalityData } from './constants';
+	import { stages } from './constants';
 
 	let width = 400;
-	let height = 400;
+	let height = 600;
 	const margin = {
 		top: 20,
 		right: 15,
@@ -26,10 +27,11 @@
 	};
 
 	export let mortalityData: MortalityData[] = [];
+	export let currentStep: number | undefined;
 
 	$: innerWidth = width - margin.left - margin.right;
 	$: innerHeight = height - margin.top - margin.bottom;
-	let stage: Stage = 'initial';
+	$: stage = stages[currentStep ?? 0];
 
 	$: yDomain =
 		stage === 'flattened'
@@ -54,12 +56,6 @@
 		hoveredData = data;
 	};
 </script>
-
-<select bind:value={stage}>
-	<option value="initial">Initial</option>
-	<option value="differentiated">Differentiated</option>
-	<option value="flattened">Flattened</option>
-</select>
 
 <div bind:clientWidth={width} class="chart-container">
 	<svg {width} {height} on:mouseleave={() => (hoveredData = null)} role="application">
@@ -86,5 +82,6 @@
 
 	.chart-container {
 		position: relative;
+		width: 100%;
 	}
 </style>
