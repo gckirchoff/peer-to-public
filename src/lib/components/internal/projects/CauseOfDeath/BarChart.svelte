@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
 	import { group, max } from 'd3-array';
-	import { schemeSet1 } from 'd3-scale-chromatic';
+	import { schemeCategory10 } from 'd3-scale-chromatic';
 
 	import AxisX from './AxisX.svelte';
 	import AxisY from './AxisY.svelte';
@@ -18,17 +18,17 @@
 	import { stages } from './constants';
 	import InfoBox from './InfoBox/InfoBox.svelte';
 
+	export let mortalityData: MortalityData[] = [];
+	export let currentStep: number | undefined;
+
 	let width = 400;
 	let height = 600;
 	const margin = {
 		top: 20,
 		right: 15,
-		bottom: 20,
-		left: 190,
+		bottom: 40,
+		left: 370,
 	};
-
-	export let mortalityData: MortalityData[] = [];
-	export let currentStep: number | undefined;
 
 	$: innerWidth = width - margin.left - margin.right;
 	$: innerHeight = height - margin.top - margin.bottom;
@@ -47,7 +47,7 @@
 
 	$: colorScale = scaleOrdinal<string, string>()
 		.domain([...getDomainValuesForColorScale(mortalityData)])
-		.range(schemeSet1);
+		.range(schemeCategory10);
 
 	$: bars = getBarData(mortalityData, xScale, yScale, colorScale, stage);
 
@@ -62,7 +62,7 @@
 	<svg {width} {height} on:mouseleave={() => (hoveredData = null)} role="application">
 		<g class="inner-chart" transform="translate({margin.left}, {margin.top})">
 			<AxisX width={innerWidth} height={innerHeight} {xScale} />
-			<AxisY {yScale} />
+			<AxisY {yScale} {bars} {stage} />
 			{#each bars as data (data.data.year2020)}
 				<Bar {data} {stage} {hoveredData} {updateHoveredData} {innerHeight} />
 			{/each}
@@ -79,7 +79,7 @@
 <style lang="scss">
 	:global(.tick text, .axis-title) {
 		font-weight: 400;
-		font-size: 12px;
+		font-size: 2rem;
 		fill: var(--clr-txt);
 	}
 
