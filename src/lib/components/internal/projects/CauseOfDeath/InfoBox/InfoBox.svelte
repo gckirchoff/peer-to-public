@@ -20,7 +20,15 @@
 		top: 50%;
 		left: 65%;
 		max-width: 20vw;
+		box-shadow: rgba(0, 0, 0, 0.15) 2px 3px 8px;
+		border-radius: 0.5rem;
+		pointer-events: none;
+		
 		padding: 2rem;
-		background-color: plum;
+		border-radius: 1rem;
+		background-color: white;
+
+		
+		font-size: 1.8rem;
 	}
 </style>
