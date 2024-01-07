@@ -15,8 +15,8 @@
 		getYValuesBySubType,
 	} from './logic';
 	import type { BarData, MortalityData } from './constants';
-	import { stages, infoBoxContent } from './constants';
-	import { fade } from 'svelte/transition';
+	import { stages } from './constants';
+	import InfoBox from './InfoBox/InfoBox.svelte';
 
 	let width = 400;
 	let height = 600;
@@ -33,7 +33,6 @@
 	$: innerWidth = width - margin.left - margin.right;
 	$: innerHeight = height - margin.top - margin.bottom;
 	$: stage = stages[currentStep ?? 0];
-	$: infoBoxText = infoBoxContent[currentStep ?? 0];
 
 	$: yDomain =
 		stage === 'flattened'
@@ -70,11 +69,7 @@
 		</g>
 	</svg>
 
-	{#key infoBoxText}
-		<div class="info-box" in:fade={{ delay: 700 }} out:fade>
-			<p>{infoBoxContent[currentStep ?? 0]}</p>
-		</div>
-	{/key}
+	<InfoBox {currentStep} />
 
 	{#if false}
 		<Tooltip data={hoveredData} {width} {yScale} />
