@@ -21,6 +21,7 @@ on:mouseover={() => {
 	x={data.x}
 	y={data.y}
 	fill={data.color}
+	stroke={data.color}
 />
 
 {#if hoveredData?.data.year2020 === data?.data.year2020 && stage === 'flattened'}
