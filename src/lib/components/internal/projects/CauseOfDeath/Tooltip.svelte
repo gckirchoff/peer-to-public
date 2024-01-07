@@ -25,7 +25,7 @@
 	bind:clientWidth={tooltipWidth}
 >
 	<h1>{data.data.subType || data.data.type}</h1>
-	<h2><span>{data.data.year2020} deaths</span></h2>
+	<h2><span>{data.data.year2020.toLocaleString()} deaths</span></h2>
 </div>
 
 <style lang="scss">
@@ -48,12 +48,12 @@
 	}
 
 	h2 {
-		font-size: 1.5rem;
 		font-weight: 500;
 		text-transform: uppercase;
 	}
-
+	
 	span {
+		font-size: 1rem;
 		background: #dda0dd50;
 		font-size: 80%;
 		margin-left: 2px;
