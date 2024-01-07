@@ -3,14 +3,16 @@
 	import { fly } from 'svelte/transition';
 
 	export let data: BarData;
+	export let width: number;
 
 	const xNudge = data.width * 0.5;
 	const yNudge = data.height * 1.5;
 
+	let tooltipWidth: number;
+
 	$: x = data.x;
 	$: y = data.y;
-	// $: xPosition = x + tooltipWidth > width ? x - tooltipWidth - xNudge : x + xNudge;
-	$: xPosition = x;
+	$: xPosition = x + tooltipWidth > width ? x - tooltipWidth - xNudge : x + xNudge;
 	$: yPosition = y + yNudge;
 </script>
 
@@ -20,6 +22,7 @@
 	style="position: absolute; top: {yPosition}px; left: {xPosition}px"
 	in:fly={{ y: -10 }}
 	out:fly={{ y: 10 }}
+	bind:clientWidth={tooltipWidth}
 >
 	<h1>{data.data.subType || data.data.type}</h1>
 	<h2><span>{data.data.year2020} deaths</span></h2>
