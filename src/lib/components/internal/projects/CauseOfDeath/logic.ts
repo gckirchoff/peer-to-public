@@ -2,7 +2,6 @@ import type { ScaleBand, ScaleLinear, ScaleOrdinal } from 'd3-scale';
 import type {
 	BarData,
 	MortalityData,
-	MortalityDataHierarchical,
 	Stage,
 	UnprocessedMortalityData,
 } from './constants';
@@ -35,7 +34,8 @@ export const getBarData = (
 
 		const height = yScale.bandwidth();
 		const width = xScale(disease.year2020);
-		const color = colorScale(stage === 'initial' ? disease.type : disease.subType);
+
+		const color = colorScale(stage === 'initial' ? disease.type : disease.subType || disease.type);
 		const name = getName(disease.type, disease.subType);
 
 		bars.push({
@@ -50,6 +50,13 @@ export const getBarData = (
 	});
 
 	return bars;
+};
+
+export const getBarName = (bar: BarData): string => {
+	if (bar.data.type === 'Cancer' || bar.data.type === 'Stroke') {
+		return bar.data.type;
+	}
+	return '';
 };
 
 export const getMaxDeathForEachCategory = (mortalityData: MortalityData[]): number[] => {
