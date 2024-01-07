@@ -71,8 +71,8 @@
 
 	<InfoBox {currentStep} />
 
-	{#if false}
-		<Tooltip data={hoveredData} {width} {yScale} />
+	{#if hoveredData && stage === 'differentiated'}
+		<Tooltip data={hoveredData} {width} />
 	{/if}
 </div>
 
