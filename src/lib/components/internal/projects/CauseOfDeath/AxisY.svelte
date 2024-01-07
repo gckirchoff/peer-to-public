@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { ScaleBand } from 'd3-scale';
 
-	export let width: number;
 	export let yScale: ScaleBand<string>;
 	$: yLabels = yScale.domain();
 </script>

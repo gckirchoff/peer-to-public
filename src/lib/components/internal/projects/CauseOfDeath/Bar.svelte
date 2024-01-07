@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import type { BarData } from './constants';
+	import type { BarData, Stage } from './constants';
 
 	export let data: BarData;
+	export let stage: Stage;
 
 	export let hoveredData: BarData | null;
 	export let updateHoveredData: (data: BarData) => void;
@@ -10,7 +11,9 @@
 </script>
 
 <rect
-	on:mouseover={() => updateHoveredData(data)}
+on:mouseover={() => {
+		
+		updateHoveredData(data)}}
 	on:focus={() => updateHoveredData(data)}
 	role="tooltip"
 	height={data.height}
@@ -20,8 +23,8 @@
 	fill={data.color}
 />
 
-{#if hoveredData?.data.year2020 === data?.data.year2020}
-	<g transition:fade={{ duration: 250 }}>
+{#if hoveredData?.data.year2020 === data?.data.year2020 && stage === 'flattened'}
+	<g transition:fade={{ duration: 200 }}>
 		<line
 			x1={data.x + data.width}
 			y1={data.y}

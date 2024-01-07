@@ -5,6 +5,7 @@ export interface BarData {
 	height: number;
 	color: string;
 	data: MortalityData;
+	name: string;
 }
 
 type Modify<T, K> = Omit<T, keyof K> & K;
@@ -27,11 +28,6 @@ export interface MortalityData {
 	type: string;
 	year2020: number;
 	year2021: number;
-}
-
-export interface MortalityDataHierarchical {
-	type: string;
-	subTypes: MortalityData[];
 }
 
 export type Stage = 'initial' | 'differentiated' | 'flattened';

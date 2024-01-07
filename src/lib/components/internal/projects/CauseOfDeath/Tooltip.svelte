@@ -1,12 +1,8 @@
 <script lang="ts">
-	import type { ScaleBand, ScaleLinear } from 'd3-scale';
 	import type { BarData } from './constants';
-	import { fade, fly } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 
 	export let data: BarData;
-	export let width: number;
-	export let yScale: ScaleBand<string>;
-	let tooltipWidth = 0;
 
 	const xNudge = data.width * 0.5;
 	const yNudge = data.height * 1.5;

@@ -3,56 +3,88 @@ import type {
 	BarData,
 	MortalityData,
 	MortalityDataHierarchical,
+	Stage,
 	UnprocessedMortalityData,
 } from './constants';
 import { max } from 'd3-array';
 
 export const getBarData = (
-	groupedData: MortalityDataHierarchical[],
+	mortalityData: MortalityData[],
 	xScale: ScaleLinear<number, number, never>,
 	yScale: ScaleBand<string>,
 	colorScale: ScaleOrdinal<string, string, never>,
-	differentiateColors: boolean,
-	differentiateSubtypes: boolean,
+	stage: Stage,
 ): BarData[] => {
 	const bars: BarData[] = [];
-	groupedData.forEach((group) => {
-		group.subTypes.forEach((item, index) => {
-			const prevItem = group.subTypes[index - 1];
-			const previousBar = bars.at(-1);
-			let x: number;
-			let y: number;
-			if (differentiateSubtypes) {
-				x = 0;
-			} else {
-				if (prevItem && previousBar) {
-					x = previousBar.x + previousBar.width;
-				} else {
-					x = 0;
-				}
-			}
-			if (differentiateSubtypes) {
-				y = (yScale(item.subType || item.type) as number) - yScale.bandwidth() * 0.5;
-			} else {
-				y = (yScale(group.type) as number) - yScale.bandwidth() * 0.5;
-			}
-			const height = yScale.bandwidth();
-			const width = xScale(item.year2020);
-			const color = colorScale(differentiateColors ? item.subType : item.type);
 
-			bars.push({
-				x,
-				y,
-				height,
-				width,
-				color,
-				data: item,
-			});
+	mortalityData.forEach((disease, index, array) => {
+		let x = 0;
+		let y = 0;
+		y =
+			(yScale(stage === 'flattened' ? disease.subType || disease.type : disease.type) as number) -
+			yScale.bandwidth() * 0.5;
+
+		if (stage === 'initial' || stage === 'differentiated') {
+			const prevBar = bars.at(-1);
+			const currentTypeIsSameAsPrevious = array[index - 1]?.type === disease.type;
+
+			if (currentTypeIsSameAsPrevious && prevBar) {
+				x = prevBar.x + prevBar.width;
+			}
+		}
+
+		const height = yScale.bandwidth();
+		const width = xScale(disease.year2020);
+		const color = colorScale(stage === 'initial' ? disease.type : disease.subType);
+		const name = getName(disease.type, disease.subType);
+
+		bars.push({
+			x,
+			y,
+			height,
+			width,
+			color,
+			name,
+			data: disease,
 		});
 	});
 
 	return bars;
 };
+
+export const getMaxDeathForEachCategory = (mortalityData: MortalityData[]): number[] => {
+	const categorized = mortalityData.reduce((acc: { [type: string]: number }, cur) => {
+		if (!acc[cur.type]) {
+			acc[cur.type] = 0;
+		}
+		acc[cur.type] += cur.year2020;
+
+		return acc;
+	}, {});
+
+	const values = Object.values(categorized);
+
+	return values;
+};
+
+const getName = (type: string, subType: string | undefined): string => {
+	if (type === 'Cancer') {
+		return `${subType} ${type}`;
+	}
+	return subType || type;
+};
+
+export const getYValuesBySubType = (mortalityData: MortalityData[]): string[] =>
+	mortalityData
+		.reduce((acc: { name: string; quantity: number }[], cur) => {
+			acc.push({
+				name: cur.subType || cur.type,
+				quantity: cur.year2020,
+			});
+			return acc;
+		}, [])
+		.sort((a, b) => b.quantity - a.quantity)
+		.map(({ name }) => name);
 
 export const getMaxValue = (data: MortalityDataHierarchical[]): number => {
 	return max(data, (d) => {
@@ -72,3 +104,12 @@ export const parseMortalityData = (d: UnprocessedMortalityData): MortalityData =
 		year2021: +Math.round(+d.year2021),
 	};
 };
+
+export const getDomainValuesForColorScale = (mortalityData: MortalityData[]): string[] =>
+	mortalityData.map((d) => {
+		if (d.subType === 'Total') {
+			return d.type;
+		} else {
+			return d.subType;
+		}
+	});
