@@ -42,14 +42,26 @@
 	$: linePercent = (currentStep ?? 0) / (data.length - 1);
 </script>
 
-<div class="chart-container" bind:clientWidth={width} bind:clientHeight={height}>
-	<svg {width} {height}>
-		<g transform="translate({margin.left} {margin.top})">
-			<AxisX {xScale} {dateFormatter} height={innerHeight} />
-			<AxisY {yScale} width={innerWidth} />
-			<AnimatedLine d={path} fill="none" stroke="steelblue" strokeWidth="2" percent={linePercent} />
-		</g>
-	</svg>
+<div class="viz">
+	<div class="headlines-container">
+		<div class="headline"></div>
+		<div class="headline"></div>
+	</div>
+	<div class="chart-container" bind:clientWidth={width} bind:clientHeight={height}>
+		<svg {width} {height}>
+			<g transform="translate({margin.left} {margin.top})">
+				<AxisX {xScale} {dateFormatter} height={innerHeight} />
+				<AxisY {yScale} width={innerWidth} />
+				<AnimatedLine
+					d={path}
+					fill="none"
+					stroke="steelblue"
+					strokeWidth="2"
+					percent={linePercent}
+				/>
+			</g>
+		</svg>
+	</div>
 </div>
 
 <style lang="scss">
@@ -59,8 +71,29 @@
 		fill: #747474;
 	}
 
-	.chart-container {
+	.viz {
+		position: relative;
 		width: 100%;
-		height: 80vh;
+		height: 90%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 5%;
+
+		.headlines-container {
+			display: flex;
+			justify-content: space-between;
+			flex: 0 1 30%;
+
+			.headline {
+				width: 45%;
+				background-color: plum;
+				border-radius: var(--rounded-4);
+			}
+		}
+
+		.chart-container {
+			flex: 0 1 60%;
+		}
 	}
 </style>
