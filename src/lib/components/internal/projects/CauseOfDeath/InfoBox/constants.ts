@@ -1,5 +1,5 @@
 export const infoBoxContent = [
-	'Heart disease was the number one cause of death in 2020.',
-	'But that is a category, while COVID-19 is a singular cause of death.',
-	'We should be comparing apples to apples - singular cause to singular cause - rather than comparing singular causes to categories.',
+	'COVID-19 was the third-leading cause of death in 2020, preceded by heart disease and cancer.',
+	'However, heart disease and cancer are umbrella terms that encompass many individual causes of death.',
+	'We should be comparing apples to apples, rather than comparing singular causes to entire categories.',
 ];
