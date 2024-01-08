@@ -4,7 +4,7 @@ import type {
 	MortalityData,
 	Stage,
 	UnprocessedMortalityData,
-} from './constants';
+} from './Chart/constants';
 import { max } from 'd3-array';
 
 export const getBarData = (

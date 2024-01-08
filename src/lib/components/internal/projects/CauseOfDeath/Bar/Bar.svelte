@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import type { BarData, Stage } from './constants';
+	import type { BarData, Stage } from '../../constants';
 
 	export let data: BarData;
 	export let stage: Stage;
@@ -11,9 +11,9 @@
 </script>
 
 <rect
-on:mouseover={() => {
-		
-		updateHoveredData(data)}}
+	on:mouseover={() => {
+		updateHoveredData(data);
+	}}
 	on:focus={() => updateHoveredData(data)}
 	role="tooltip"
 	height={data.height}

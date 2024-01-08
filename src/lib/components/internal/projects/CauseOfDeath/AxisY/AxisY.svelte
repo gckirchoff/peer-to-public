@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ScaleBand } from 'd3-scale';
-	import type { BarData, Stage } from './constants';
-	import { getBarName } from './logic';
+	import type { BarData, Stage } from '../../constants';
+	import { getBarName } from '../logic';
 
 	export let yScale: ScaleBand<string>;
 	export let bars: BarData[];

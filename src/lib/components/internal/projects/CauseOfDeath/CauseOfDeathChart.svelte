@@ -5,7 +5,7 @@
 	import type { MortalityData } from './constants';
 	import { parseMortalityData } from './logic';
 	import ScrollyTelly from './ScrollyTelly/ScrollyTelly.svelte';
-	import BarChart from './BarChart.svelte';
+	import BarChart from './Chart/BarChart.svelte';
 
 	let mortalityData: MortalityData[] = [];
 

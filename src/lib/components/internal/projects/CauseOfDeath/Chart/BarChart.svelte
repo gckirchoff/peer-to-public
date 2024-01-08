@@ -3,20 +3,20 @@
 	import { group, max } from 'd3-array';
 	import { schemeCategory10 } from 'd3-scale-chromatic';
 
-	import AxisX from './AxisX.svelte';
-	import AxisY from './AxisY.svelte';
-	import Bar from './Bar.svelte';
-	import Tooltip from './Tooltip.svelte';
+	import AxisX from '../AxisX/AxisX.svelte';
+	import AxisY from '../AxisY/AxisY.svelte';
+	import Bar from '../Bar/Bar.svelte';
+	import Tooltip from '../Tooltip/Tooltip.svelte';
 
 	import {
 		getBarData,
 		getDomainValuesForColorScale,
 		getMaxDeathForEachCategory,
 		getYValuesBySubType,
-	} from './logic';
-	import type { BarData, MortalityData } from './constants';
-	import { stages } from './constants';
-	import InfoBox from './InfoBox/InfoBox.svelte';
+	} from '../logic';
+	import type { BarData, MortalityData } from '../constants';
+	import { stages } from '../constants';
+	import InfoBox from '../InfoBox/InfoBox.svelte';
 
 	export let mortalityData: MortalityData[] = [];
 	export let currentStep: number | undefined;
