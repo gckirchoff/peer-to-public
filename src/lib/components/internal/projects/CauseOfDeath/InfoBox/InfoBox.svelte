@@ -18,8 +18,8 @@
 	.info-box {
 		position: absolute;
 		top: 50%;
-		left: 65%;
-		max-width: 20vw;
+		right: 0;
+		max-width: 40%;
 		box-shadow: rgba(0, 0, 0, 0.15) 2px 3px 8px;
 		border-radius: 0.5rem;
 		pointer-events: none;
