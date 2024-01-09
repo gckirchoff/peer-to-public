@@ -12,7 +12,7 @@ export const siteConfig = {
 			miniAboutMe: {
 				img: 'me.png',
 				quickDescription:
-					'This site is the result of the collaberative efforts of a team of scientists and volunteers, united by the sole purpose of informing the public and government officials on various scientific concepts',
+					'This site is the result of the collaborative efforts of a team of scientists and volunteers, united by the sole purpose of informing the public and government officials on various scientific concepts, especially the ongoing SARS-CoV-2 pandemic.',
 			},
 			welcome: {
 				header: 'Data Quill',
