@@ -6,12 +6,18 @@
 	export let scrollHeight: string | number = '90vh';
 
 	$: renderedSteps = Array.isArray(steps) ? steps : (new Array(steps).fill('') as string[]);
+
+	$: lastIndex = renderedSteps.length - 1;
 </script>
 
 <div class="steps">
 	<Scrolly bind:value={currentStep}>
 		{#each renderedSteps as step, i}
-			<div class="step" class:active={currentStep === i} style="height: {scrollHeight}">
+			<div
+				class="step"
+				class:active={currentStep === i}
+				style="height: {i === lastIndex ? '120vh' : scrollHeight}"
+			>
 				{#if step}
 					<div class="step-content">
 						<p>{step}</p>
