@@ -8,8 +8,8 @@
 
 <style lang="scss">
 	button {
-		color: var(--clr-txt);
-		background-color: var(--clr-primary-300);
+		color: var(--clr-text-on-primary);
+		background-color: var(--clr-primary-500);
 		padding: var(--spacing-4) var(--spacing-8);
 		border-radius: var(--rounded-4);
 		transition: all 0.1s;
