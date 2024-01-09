@@ -93,13 +93,4 @@
 		width: 100%;
 		position: relative;
 	}
-
-	.info-box {
-		position: absolute;
-		top: 50%;
-		left: 65%;
-		max-width: 20vw;
-		padding: 2rem;
-		background-color: plum;
-	}
 </style>
