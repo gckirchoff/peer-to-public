@@ -10,8 +10,8 @@
 
 <style lang="scss">
 	a {
-		color: var(--clr-txt);
-		background-color: var(--clr-primary-300);
+		color: var(--clr-text-on-primary);
+		background-color: var(--clr-primary-500);
 		font-size: var(--font-14);
 		font-weight: var(--font-weight-regular);
 		text-transform: uppercase;
