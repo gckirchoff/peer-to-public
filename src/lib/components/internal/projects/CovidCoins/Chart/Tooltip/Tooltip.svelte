@@ -55,6 +55,7 @@
 	{:else}
 		<p class="frequency">{data.frequencyPerYearDescriptor}</p>
 		<p class="frequency">{tooltipProbability}%</p>
+		<a class="source" href={data.source} target="_blank">Source</a>
 	{/if}
 </div>
 
