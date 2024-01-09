@@ -15,7 +15,7 @@
 		getYValuesBySubType,
 	} from '../logic';
 	import type { BarData, MortalityData } from '../constants';
-	import { stages } from '../constants';
+	import { smallScreen, stages } from '../constants';
 	import InfoBox from '../InfoBox/InfoBox.svelte';
 
 	export let mortalityData: MortalityData[] = [];
@@ -23,11 +23,13 @@
 
 	let width = 400;
 	let height = 600;
-	const margin = {
+	let windowWidth = 1000;
+
+	$: margin = {
 		top: 20,
 		right: 15,
 		bottom: 40,
-		left: 370,
+		left: windowWidth < smallScreen ? 0 : 370,
 	};
 
 	$: innerWidth = width - margin.left - margin.right;
@@ -62,6 +64,8 @@
 		hoveredData = null;
 	}
 </script>
+
+<svelte:window bind:innerWidth={windowWidth} />
 
 <div bind:clientWidth={width} class="chart-container">
 	<svg {width} {height} on:mouseleave={() => (hoveredData = null)} role="application">

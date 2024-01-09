@@ -33,3 +33,5 @@ export interface MortalityData {
 export type Stage = 'initial' | 'differentiated' | 'flattened';
 
 export const stages: Stage[] = ['initial', 'differentiated', 'flattened'];
+
+export const smallScreen = 1150;
