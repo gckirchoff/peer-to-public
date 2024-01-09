@@ -1,11 +1,10 @@
 rank,type,subType,percent,year2020,year2021,source
-1,Heart disease,Coronary Heart Disease,41.20,316444.428,,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#F14-1
-1,Heart disease,Stroke,17.30,132875.937,,
-1,Heart disease,Minor Cardiovascular Diseases Combined,16.80,129035.592,,
-1,Heart disease,High Blood Pressure,12.90,99080.901,,
-1,Heart disease,Heart Failure,9.20,70662.348,,
-1,Heart disease,Diseases of the Arteries,2.60,19969.794,,
-2,Cancer,Colon and Rectum,,51869,,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
+1,Heart disease,Coronary Heart Disease,41.20,382629.756,,
+1,Heart disease,High Blood Pressure,12.90,119803.977,,
+1,Heart disease,Heart Failure,9.20,85441.596,,
+1,Heart disease,Diseases of the Arteries,2.60,24146.538,,
+1,Heart disease,Other Heart Disease,16.80,227537.784,,
+2,Cancer,Colon and Rectum,,51869,604553,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
 2,Cancer,Pancreas,,46774,,
 2,Cancer,Female Breast,,42273,,
 2,Cancer,Prostate,,32707,,
@@ -18,9 +17,9 @@ rank,type,subType,percent,year2020,year2021,source
 3,COVID-19,Deaths from COVID-19,,350831,,https://www.cdc.gov/nchs/pressroom/podcasts/2022/20220107/20220107.htm
 3,COVID-19,Deaths Involving COVID-19,,34000,,
 4,Unintentional injuries,,100.00,200955,219487,
-5,Stroke,Ischemic,62.40,100004.736,,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123
-5,Stroke,ICH,27.90,44713.656,,
-5,Stroke,SAH,9.70,15545.608,,
+5,Stroke,Ischemic,62.40,100004.736,,
+5,Stroke,Intracerebral Hemorrhage,27.90,44713.656,,
+5,Stroke,Subarachnoid Hemorrhage,9.70,15545.608,,
 6,Chronic lower respiratory diseases,,100.00,152657,142047,
 7,Alzheimer disease,,,134242,119314,
 8,Diabetes,,,102188,103004,

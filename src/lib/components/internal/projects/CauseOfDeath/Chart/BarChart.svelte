@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { scaleLinear, scaleOrdinal, scaleBand } from 'd3-scale';
-	import { group, max } from 'd3-array';
+	import { max } from 'd3-array';
 	import { schemeCategory10 } from 'd3-scale-chromatic';
 
 	import AxisX from '../AxisX/AxisX.svelte';

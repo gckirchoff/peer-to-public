@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { ScaleLinear } from 'd3-scale';
-	import type { DataItem } from '../../constants';
 
 	export let width = 100;
 	export let height = 100;

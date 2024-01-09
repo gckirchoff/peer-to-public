@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { BarData } from '../../constants';
+	import type { BarData } from '../constants';
 	import { fly } from 'svelte/transition';
 
 	export let data: BarData;
