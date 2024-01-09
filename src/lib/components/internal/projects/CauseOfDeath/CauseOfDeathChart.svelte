@@ -20,7 +20,7 @@
 	<ScrollyTelly
 		bind:currentStep
 		steps={3}
-		scrollHeight="60vh"
+		scrollHeight="50vh"
 	>
 		<BarChart {mortalityData} {currentStep} />
 	</ScrollyTelly>
