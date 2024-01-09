@@ -47,15 +47,17 @@ html[color-theme='dark'] {
 
 html[color-theme='light'] {
 	/* Palette ---------------------------------- */
-	$clr-primary: #4f758e;
-	$clr-secondary: #bee761;
-	$clr-tertiary: #ecc122;
+	$clr-primary: #071828;
+	$clr-secondary: #8b1010;
+	$clr-tertiary: rgb(237, 237, 180);
 	$clr-success: #5cb85c;
 	$clr-warning: #eab308;
 	$clr-error: #d41976;
-	$clr-surface: #dfdddd;
+	$clr-surface: rgb(231, 231, 231);
+	
+	--clr-primary-background-txt: var(--clr-txt);
 	/* ------------------------------------------ */
-
+	
 	@include color-palette(primary, $clr-primary);
 	@include color-palette(secondary, $clr-secondary);
 	@include color-palette(tertiary, $clr-tertiary);
@@ -63,10 +65,6 @@ html[color-theme='light'] {
 	@include color-palette(warning, $clr-warning);
 	@include color-palette(error, $clr-error);
 	@include color-palette(surface, $clr-surface);
-
-	--clr-txt: hsl(220 10% 10%);
-	--clr-txt-neg: hsl(0 0% 98%);
-	--clr-link-txt: var(--clr-primary-400);
 
 	/* Post */
 	--post-overlay-bg: radial-gradient(hsl(0 0% 100% / 60%), var(--clr-surface-500));
