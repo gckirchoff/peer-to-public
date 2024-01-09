@@ -56,6 +56,11 @@
 	const updateHoveredData = (data: BarData): void => {
 		hoveredData = data;
 	};
+
+	$: {
+		stage; // if stage changes
+		hoveredData = null;
+	}
 </script>
 
 <div bind:clientWidth={width} class="chart-container">
