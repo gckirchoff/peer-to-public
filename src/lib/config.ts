@@ -2,21 +2,21 @@ import { dev } from '$app/environment';
 
 // Main config for entire website
 export const siteConfig = {
-	title: 'Clear Covid',
+	title: 'Data Quill',
 	description: 'Simple, visual explanations about SARS-CoV-2',
 	url: 'https://clear-covid.vercel.app',
 	link: 'https://github.com/gckirchoff/lucid-covid',
-	author: 'Clear Covid',
+	author: 'Data Quill',
 	pages: {
 		landing: {
 			miniAboutMe: {
 				img: 'me.jpg',
 				quickDescription:
-					'This site is the result of the collaberative efforts of a team of scientists and volunteers, united by the sole purpose of informing the public and government officials on the dangers of Covid-19',
+					'This site is the result of the collaberative efforts of a team of scientists and volunteers, united by the sole purpose of informing the public and government officials on various scientific concepts',
 			},
 			welcome: {
-				header: 'Clear Covid',
-				description: 'Simple, visual explanations about SARS-CoV-2',
+				header: 'Data Quill',
+				description: 'Simple, visual explanations',
 			},
 		},
 		about: {
