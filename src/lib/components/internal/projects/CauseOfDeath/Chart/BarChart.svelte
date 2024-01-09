@@ -80,7 +80,7 @@
 
 	<InfoBox {currentStep} />
 
-	{#if hoveredData && stage === 'differentiated'}
+	{#if hoveredData && (stage === 'differentiated' || (stage === 'flattened' && smallScreen))}
 		<Tooltip data={hoveredData} {width} />
 	{/if}
 </div>
