@@ -10,7 +10,7 @@ export const siteConfig = {
 	pages: {
 		landing: {
 			miniAboutMe: {
-				img: 'me.jpg',
+				img: 'me.png',
 				quickDescription:
 					'This site is the result of the collaberative efforts of a team of scientists and volunteers, united by the sole purpose of informing the public and government officials on various scientific concepts',
 			},
@@ -20,7 +20,7 @@ export const siteConfig = {
 			},
 		},
 		about: {
-			img: 'me.jpg',
+			img: 'me.png',
 			content: [
 				`SARS-CoV-2 is not the common cold and never will be. It is a SARS coronavirus. The implications of this
 				are major and require eradication to be the end-goal.`,
