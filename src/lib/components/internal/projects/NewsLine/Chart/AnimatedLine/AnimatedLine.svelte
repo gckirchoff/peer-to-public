@@ -7,10 +7,12 @@
 	export let strokeWidth: string | number = '1';
 	export let style = '';
 	export let percent = 1;
+	export let stiffness = 0.08;
+	export let damping = 0.4;
 
 	let svgLine: SVGPathElement;
 
-	let percentThroughLength = spring(1 - percent, { stiffness: 0.08, damping: 0.4 });
+	let percentThroughLength = spring(1 - percent, { stiffness, damping });
 	$: $percentThroughLength = 1 - percent;
 
 	$: lineStyles =
