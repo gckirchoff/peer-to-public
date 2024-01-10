@@ -1,7 +1,16 @@
+import type { Modify } from '$lib/types/util';
+
 export interface WastewaterReport {
 	date: string;
 	value: number;
 }
+
+export type UnprocessedWastewaterReport = Modify<
+	WastewaterReport,
+	{
+		value: string;
+	}
+>;
 
 export const fakeData: WastewaterReport[] = [
 	{
