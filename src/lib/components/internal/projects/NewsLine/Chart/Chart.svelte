@@ -13,8 +13,10 @@
 		left: 40,
 	};
 
+	const stoppingPoints = [20, 40, 150, 180, 200];
+
 	export let data: WastewaterReport[];
-	export let currentStep: number | undefined = data.length - 1;
+	export let currentStep: number | undefined;
 
 	const xAccessor = (d: WastewaterReport) => new Date(d.date);
 	const yAccessor = (d: WastewaterReport) => d.value;
@@ -39,7 +41,8 @@
 		.y((d) => yScale(yAccessor(d)))
 		.curve(curveNatural)(data);
 
-	$: linePercent = (currentStep ?? 0) / (data.length - 1);
+	$: stoppingPoint = stoppingPoints[currentStep ?? 0];
+	$: linePercent = stoppingPoint / (data.length - 1);
 </script>
 
 <div class="viz">
@@ -58,6 +61,8 @@
 					stroke="steelblue"
 					strokeWidth="2"
 					percent={linePercent}
+					stiffness={0.08}
+					damping={0.8}
 				/>
 			</g>
 		</svg>
