@@ -1,9 +1,9 @@
 <script lang="ts">
+	import { spring } from 'svelte/motion';
 	import { extent, scaleLinear, scaleTime, line, curveNatural, utcFormat } from 'd3';
 
 	import AxisY from './AxisY/AxisY.svelte';
 	import AxisX from './AxisX/AxisX.svelte';
-	import AnimatedLine from './AnimatedLine/AnimatedLine.svelte';
 	import type { WastewaterReport } from '../constants';
 	import { stoppingPoints } from './constants';
 	import Article from './Article/Article.svelte';
@@ -41,10 +41,14 @@
 		.y((d) => yScale(yAccessor(d)))
 		.curve(curveNatural)(data);
 
-	$: console.log(data[stoppingPoint.index]);
-
 	$: stoppingPoint = stoppingPoints[currentStep ?? 0];
-	$: linePercent = stoppingPoint.index / (data.length - 1);
+
+	let linePercent = spring(0, {
+		stiffness: 0.08,
+		damping: 0.8,
+	});
+
+	$: $linePercent = stoppingPoint.index / (data.length - 1);
 </script>
 
 <div class="viz">
@@ -57,15 +61,11 @@
 			<g transform="translate({margin.left} {margin.top})">
 				<AxisX {xScale} {dateFormatter} height={innerHeight} />
 				<AxisY {yScale} width={innerWidth} />
-				<AnimatedLine
-					d={path}
-					fill="none"
-					stroke="steelblue"
-					strokeWidth="2"
-					percent={linePercent}
-					stiffness={0.08}
-					damping={0.8}
-				/>
+				<mask id="line-mask">
+					<rect x={0} y={0} width={innerWidth} height={innerHeight} fill="black" />
+					<rect x={0} y={0} width={innerWidth * $linePercent} height={innerHeight} fill="white" />
+				</mask>
+				<path d={path} fill="none" stroke="steelblue" stroke-width="2" mask="url(#line-mask)" />
 			</g>
 		</svg>
 	</div>

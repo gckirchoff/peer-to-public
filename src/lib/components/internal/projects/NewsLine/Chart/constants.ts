@@ -27,7 +27,7 @@ export const stoppingPoints: StoppingPoint[] = [
 		},
 	},
 	{
-		index: 190,
+		index: 200,
 		media: {
 			img: '',
 			href: '',
