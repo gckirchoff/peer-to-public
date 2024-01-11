@@ -53,14 +53,14 @@ html[color-theme='light'] {
 	--clr-txt: hsl(220 10% 10%);
 	--clr-txt-neg: hsl(0 0% 98%);
 
-	$clr-primary: #071828;
+	$clr-primary: #022B36;
 	$clr-secondary: #8b1010;
 	$clr-tertiary: rgb(237, 237, 180);
 	$clr-success: #5cb85c;
 	$clr-warning: #eab308;
 	$clr-error: #d41976;
-	$clr-surface: rgb(231, 231, 231);
-	
+	$clr-surface: #EEF5FF;
+
 	--clr-text-on-primary: var(--clr-txt-neg);
 
 	@include color-palette(primary, $clr-primary);
