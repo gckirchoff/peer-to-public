@@ -4,8 +4,8 @@ import { dev } from '$app/environment';
 export const siteConfig = {
 	title: 'Data Quill',
 	description: 'Simple, visual explanations about SARS-CoV-2',
-	url: 'https://clear-covid.vercel.app',
-	link: 'https://github.com/gckirchoff/lucid-covid',
+	url: 'https://www.thedataquill.com/',
+	link: 'https://github.com/gckirchoff/data-quill',
 	author: 'Data Quill',
 	pages: {
 		landing: {

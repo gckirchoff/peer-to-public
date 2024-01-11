@@ -13,14 +13,18 @@
 	<ul>
 		<li>
 			<Body1>
-				<a href="/contact" target="_blank" rel="noopener noreferrer">
+				<a href="https://twitter.com/gckirchoff" target="_blank" rel="noopener noreferrer">
 					<Twitter /> Twitter
 				</a>
 			</Body1>
 		</li>
 		<li>
 			<Body1>
-				<a href="/contact" target="_blank" rel="noopener noreferrer">
+				<a
+					href="https://github.com/gckirchoff/data-quill"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
 					<Github /> Github
 				</a>
 			</Body1>
