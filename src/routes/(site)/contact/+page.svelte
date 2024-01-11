@@ -14,13 +14,6 @@
 		<li>
 			<Body1>
 				<a href="/contact" target="_blank" rel="noopener noreferrer">
-					<Youtube /> Youtube
-				</a>
-			</Body1>
-		</li>
-		<li>
-			<Body1>
-				<a href="/contact" target="_blank" rel="noopener noreferrer">
 					<Twitter /> Twitter
 				</a>
 			</Body1>
