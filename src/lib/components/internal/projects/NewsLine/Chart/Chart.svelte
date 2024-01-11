@@ -49,8 +49,8 @@
 
 <div class="viz">
 	<div class="headlines-container">
-		<Article article={stoppingPoint.media} />
 		<Article article={stoppingPoint.science} />
+		<Article article={stoppingPoint.media} />
 	</div>
 	<div class="chart-container" bind:clientWidth={width} bind:clientHeight={height}>
 		<svg {width} {height}>
