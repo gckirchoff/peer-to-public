@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { extent, scaleLinear, scaleTime, line, curveNatural, utcFormat } from 'd3';
 
-	import type { WastewaterReport } from '../constants';
 	import AxisY from './AxisY/AxisY.svelte';
 	import AxisX from './AxisX/AxisX.svelte';
 	import AnimatedLine from './AnimatedLine/AnimatedLine.svelte';
+	import type { WastewaterReport } from '../constants';
+	import { stoppingPoints } from './constants';
+	import Article from './Article/Article.svelte';
 
 	const margin = {
 		top: 25,
@@ -12,8 +14,6 @@
 		bottom: 20,
 		left: 40,
 	};
-
-	const stoppingPoints = [20, 40, 150, 180, 200];
 
 	export let data: WastewaterReport[];
 	export let currentStep: number | undefined;
@@ -41,14 +41,16 @@
 		.y((d) => yScale(yAccessor(d)))
 		.curve(curveNatural)(data);
 
+	$: console.log(data[stoppingPoint.index]);
+
 	$: stoppingPoint = stoppingPoints[currentStep ?? 0];
-	$: linePercent = stoppingPoint / (data.length - 1);
+	$: linePercent = stoppingPoint.index / (data.length - 1);
 </script>
 
 <div class="viz">
 	<div class="headlines-container">
-		<div class="headline"></div>
-		<div class="headline"></div>
+		<Article article={stoppingPoint.media} />
+		<Article article={stoppingPoint.science} />
 	</div>
 	<div class="chart-container" bind:clientWidth={width} bind:clientHeight={height}>
 		<svg {width} {height}>
@@ -88,13 +90,8 @@
 		.headlines-container {
 			display: flex;
 			justify-content: space-between;
+			align-items: center;
 			flex: 0 1 30%;
-
-			.headline {
-				width: 45%;
-				background-color: plum;
-				border-radius: var(--rounded-4);
-			}
 		}
 
 		.chart-container {
