@@ -22,12 +22,13 @@ export const siteConfig = {
 		about: {
 			img: 'me.png',
 			content: [
+				`Data Quill is the result of the collaborative efforts of scientists and data visualization developers.`,
+				`The purpose of this site is to make difficult-to-understand yet important issues feel intuitive
+				through the use of engaging, interactive articles.`,
+				`Our primary goal is to educate the public and government about the importance of stopping SARS-CoV-2 infections.`,
 				`SARS-CoV-2 is not the common cold and never will be. It is a SARS coronavirus. The implications of this
-				are major and require eradication to be the end-goal.`,
-				`The purpose of this site is to help the public and governing bodies to understand the importance of this goal.`,
-				`The posts and visualizations on this site are created through the collaberative efforts of numerous
-				scientists and volunteers.`,
-				`To reach out for further information or collaberation, please use the contact form to get in touch!`,
+				are major and require the prevention of infection.`,
+				`To reach out for further information or collaboration, please use the contact form to get in touch!`,
 			],
 		},
 		contact: {
