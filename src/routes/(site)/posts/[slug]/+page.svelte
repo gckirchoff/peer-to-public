@@ -64,7 +64,7 @@
 			{/if}
 			<Body2>By: {authors?.join(', ') ?? siteConfig.author}</Body2>
 		</div>
-		<H1>{title}</H1>
+		<H1 style="text-align: center;">{title}</H1>
 	</div>
 	<div class="prose">
 		<PostContent />
