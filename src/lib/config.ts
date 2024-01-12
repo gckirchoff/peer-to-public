@@ -12,7 +12,7 @@ export const siteConfig = {
 			miniAboutMe: {
 				img: 'me.png',
 				quickDescription:
-					'This site is the result of the collaborative efforts of a team of scientists and volunteers, united by the sole purpose of informing the public and government officials on various scientific concepts, especially the ongoing SARS-CoV-2 pandemic.',
+					'Explore key insights into the ongoing SARS-CoV-2 pandemic through interactive, visual articles. We are scientists and data vizualization experts, with an aim to inform both the public and government officials by contributing to a deeper understanding of the current health landscape.',
 			},
 			welcome: {
 				header: 'Data Quill',
