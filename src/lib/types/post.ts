@@ -3,6 +3,7 @@ export default interface Post {
 	date: string;
 	description: string;
 	categories: string[];
+	authors?: string[];
 	slug: string;
 	published: boolean;
 	coverImage: string;

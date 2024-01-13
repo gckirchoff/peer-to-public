@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
 
+	import { siteConfig } from '$lib/config.js';
 	import Button from '$lib/components/internal/Button/Button.svelte';
 	import CategoryTag from '$lib/components/internal/CategoryTag/CategoryTag.svelte';
 	import CategoryTagsList from '$lib/components/internal/CategoryTagsList/CategoryTagsList.svelte';
@@ -13,6 +14,7 @@
 		date,
 		description,
 		categories,
+		authors,
 		slug,
 		coverImage,
 		coverWidth,
@@ -60,8 +62,9 @@
 			{#if updated}
 				<Body2>Updated: {updated}</Body2>
 			{/if}
+			<Body2>By: {authors?.join(', ') ?? siteConfig.author}</Body2>
 		</div>
-		<H1>{title}</H1>
+		<H1 style="text-align: center;">{title}</H1>
 	</div>
 	<div class="prose">
 		<PostContent />

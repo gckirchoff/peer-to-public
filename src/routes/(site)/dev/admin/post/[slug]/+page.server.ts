@@ -3,6 +3,7 @@ import { redirect } from '@sveltejs/kit';
 
 import type Post from '$lib/types/post.js';
 import { escapeComponents } from '$lib/utils/logic.js';
+import { getAllAuthors } from '../logic.js';
 
 export const load = async ({ params, fetch }) => {
 	const { slug } = params;
@@ -18,11 +19,13 @@ export const load = async ({ params, fetch }) => {
 		const allPosts = (await allPostsRes.json()) as Post[];
 
 		const allCategories = Array.from(new Set(allPosts.flatMap((p) => p.categories)));
+		const allAuthors = getAllAuthors(allPosts);
 
 		return {
 			postContent,
 			meta: { ...(post.metadata as Post), slug: params.slug },
 			allCategories,
+			allAuthors,
 		};
 	} catch (err) {
 		throw redirect(301, '/posts');

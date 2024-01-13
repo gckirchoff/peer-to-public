@@ -48,6 +48,9 @@
 		flex-direction: column;
 		gap: var(--spacing-32);
 		margin-bottom: var(--spacing-32);
+		align-self: start;
+		position: sticky;
+		top: var(--spacing-24);
 
 		@include respond('tab-port') {
 			display: none;

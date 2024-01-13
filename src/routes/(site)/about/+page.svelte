@@ -5,7 +5,7 @@
 
 <div class="about">
 	<div class="description">
-		<H4>About me</H4>
+		<H4>About</H4>
 
 		{#each siteConfig.pages.about.content as paragraph}
 			<Body1>{paragraph}</Body1>

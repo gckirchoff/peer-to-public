@@ -4,7 +4,7 @@
 	import PostEditor from '../subcomponents/PostEditor/PostEditor.svelte';
 
 	export let data;
-	const { postContent, meta, allCategories } = data;
+	const { postContent, meta, allCategories, allAuthors } = data;
 	const { slug } = meta;
 
 	const handleUpdatePost = async (body: FormData): Promise<boolean> => {
@@ -54,6 +54,7 @@
 <PostEditor
 	handlePostAction={handleUpdatePost}
 	{allCategories}
+	{allAuthors}
 	mdValue={postContent}
 	postMetaData={meta}
 />

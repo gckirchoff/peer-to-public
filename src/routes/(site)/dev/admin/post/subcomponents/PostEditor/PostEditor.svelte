@@ -2,6 +2,7 @@
 	import { browser } from '$app/environment';
 	import { fly } from 'svelte/transition';
 
+	import { siteConfig } from '$lib/config';
 	import MultiSelect from '$lib/components/internal/MultiSelect/MultiSelect.svelte';
 	import { H4 } from '$lib/components/internal/typography';
 	import MarkdownEditor from '$lib/components/internal/MarkdownEditor/MarkdownEditor.svelte';
@@ -15,10 +16,12 @@
 
 	export let handlePostAction: (body: FormData) => Promise<boolean>;
 	export let allCategories: string[];
+	export let allAuthors: string[];
 	export let postMetaData: PostEditorMetaData = {
 		title: '',
 		description: '',
 		categories: [],
+		authors: [siteConfig.author],
 		published: false,
 		coverImage: undefined,
 		slug: undefined,
@@ -31,6 +34,7 @@
 	let formTitle = postMetaData.title;
 	let formDescription = postMetaData.description;
 	let formCategories = [...postMetaData.categories];
+	let formAuthors = [...(postMetaData.authors ?? [siteConfig.author])];
 	let formMdValue = mdValue;
 	let formPublished = postMetaData.published;
 	let formCoverImage = postMetaData.coverImage;
@@ -73,6 +77,12 @@
 				return;
 			}
 
+			if (!formAuthors.length) {
+				errorText = 'Must have at least one author';
+				setTimeout(() => (errorText = ''), 5000);
+				return;
+			}
+
 			const formData = new FormData();
 
 			const file = newImage?.[0];
@@ -91,6 +101,7 @@
 				usables,
 				slug: postMetaData.slug,
 				date: postMetaData.date,
+				authors: formAuthors,
 			};
 
 			formData.append('data', JSON.stringify(body));
@@ -149,6 +160,13 @@
 		<MultiSelect id="categories" bind:value={formCategories}>
 			{#each allCategories as category}
 				<option value={category}>{category}</option>
+			{/each}
+		</MultiSelect>
+	</div>
+	<div>
+		<MultiSelect id="authors" bind:value={formAuthors}>
+			{#each allAuthors as author}
+				<option value={author}>{author}</option>
 			{/each}
 		</MultiSelect>
 	</div>
