@@ -19,6 +19,24 @@
 			return false;
 		}
 	};
+
+	const handleDeletePost = async (): Promise<void> => {
+		const result = confirm('Are you sure you want to delete this post?');
+
+		if (result) {
+			try {
+				const res = await fetch(`/api/v1/posts/${slug}`, {
+					method: 'DELETE',
+				});
+
+				const { status } = await res.json();
+				// return status === 'success';
+			} catch (error) {
+				console.error('Error deleting post:', error);
+				// return false;
+			}
+		}
+	};
 </script>
 
 <div class="edit-post-header">
@@ -26,6 +44,11 @@
 	<a href="/posts/{slug}" target="_blank">
 		<Button>See Current Post</Button>
 	</a>
+	<div class="delete-button">
+		<a href="/dev/admin/post/{slug}">
+			<Button on:click={handleDeletePost}>Delete Post</Button>
+		</a>
+	</div>
 </div>
 
 <PostEditor
