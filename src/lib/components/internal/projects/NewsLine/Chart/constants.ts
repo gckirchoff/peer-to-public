@@ -12,6 +12,20 @@ export interface StoppingPoint {
 
 export const stoppingPoints: StoppingPoint[] = [
 	{
+		index: 0,
+		media: {
+			img: 'pandemic-declaration.png',
+			href: 'https://time.com/5791661/who-coronavirus-pandemic-declaration/',
+			description:
+				'The WHO declares COVID-19 to be a pandemic. 118,000 confirmed cases occured in over 110 countries and territories.',
+		},
+		science: {
+			img: 'what-is-covid.png',
+			href: 'https://www.sciencedirect.com/science/article/pii/S2090123220300540',
+			description: '',
+		},
+	},
+	{
 		index: 39,
 		media: {
 			img: 'kids-in-schools.png',
