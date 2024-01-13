@@ -76,10 +76,9 @@ export const DELETE = async ({ params }) => {
 		const filePath = `src/lib/content/posts/${slug}.md`;
 		await unlink(filePath);
 
-		const rootImageFolderPath = `static/images/postImages/${slug}`;
-		console.log(`rootImageFolderPath`, rootImageFolderPath);
+		const rootImageFolderPath = `static/images/postImages/${slug}`
+
 		await rm(rootImageFolderPath, { recursive: true });
-		console.log(`Deleted ${rootImageFolderPath}`);
 
 		return json({
 			status: 'success',
