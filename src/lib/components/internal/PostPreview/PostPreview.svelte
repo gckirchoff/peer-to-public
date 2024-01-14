@@ -49,15 +49,12 @@
 		position: relative;
 
 		.image-container {
-			display: block;
-			width: 100%;
-			aspect-ratio: 16 / 9;
-			
+			height: 28rem;
 		}
 
 		img {
 			width: 100%;
-			max-height: 30rem;
+			height: 100%;
 			object-fit: cover;
 		}
 
