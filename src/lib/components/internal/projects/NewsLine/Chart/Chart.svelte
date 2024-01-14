@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
 	import { spring } from 'svelte/motion';
 	import { extent, scaleLinear, scaleTime, line, curveNatural, utcFormat } from 'd3';
 
@@ -23,7 +24,7 @@
 	const dateFormatter = utcFormat('%b %Y');
 
 	let width = 400;
-	let height = 1;
+	let height = 50;
 
 	$: innerWidth = width - margin.left - margin.right;
 	$: innerHeight = height - margin.top - margin.bottom;
@@ -56,7 +57,13 @@
 		<Article article={stoppingPoint.science} />
 		<Article article={stoppingPoint.media} />
 	</div>
-	<div class="description">{stoppingPoint.description}</div>
+	<div class="description-container">
+		{#key stoppingPoint.description}
+			<div class="description" in:fade={{ delay: 1500 }} out:fade={{ delay: 600, duration: 200 }}>
+				{stoppingPoint.description}
+			</div>
+		{/key}
+	</div>
 	<div class="chart-container" bind:clientWidth={width} bind:clientHeight={height}>
 		<svg {width} {height}>
 			<g transform="translate({margin.left} {margin.top})">
@@ -93,20 +100,27 @@
 		}
 
 		.headlines-container {
-			// align-self: flex-start;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			flex-wrap: wrap;
+			overflow: hidden;
 		}
 
-		.description {
-			padding: var(--spacing-16);
-			max-width: 72rem;
-			align-self: flex-start;
-			justify-self: center;
-			background-color: var(--clr-surface-600);
-			border-radius: var(--rounded-4);
+		.description-container {
+			position: relative;
+
+			.description {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				padding: var(--spacing-16);
+				width: clamp(40rem, 50vw, 75rem);
+				background-color: var(--clr-surface-600);
+				border-radius: var(--rounded-4);
+				max-height: 100%;
+				overflow-y: auto;
+			}
 		}
 	}
 </style>

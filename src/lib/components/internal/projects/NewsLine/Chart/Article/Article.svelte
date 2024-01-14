@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
+
 	import type { Article } from '../constants';
 
 	export let article: Article;
@@ -6,17 +8,28 @@
 
 <a class="headline" href={article.href} target="_blank">
 	{#if article.img}
-		<img src="/data/NewsLine/{article.img}" alt={article.alt} />
+		{#key article.img}
+			<img
+				src="/data/NewsLine/{article.img}"
+				alt={article.alt}
+				in:fade={{ delay: 1200 }}
+				out:fade={{ delay: 600, duration: 200 }}
+			/>
+		{/key}
 	{/if}
 </a>
 
 <style lang="scss">
 	.headline {
-		width: 45%;
+		height: 100%;
+		max-width: 30vw;
 		border-radius: var(--rounded-4);
-		background-color: plum;
 		display: flex;
 		align-items: center;
-		min-height: 80%;
+
+		img {
+			max-width: 100%;
+			height: auto;
+		}
 	}
 </style>
