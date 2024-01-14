@@ -6,7 +6,7 @@
 
 <a class="headline" href={article.href} target="_blank">
 	{#if article.img}
-		<img src="/data/NewsLine/{article.img}" alt={article.description} />
+		<img src="/data/NewsLine/{article.img}" alt={article.alt} />
 	{/if}
 </a>
 
