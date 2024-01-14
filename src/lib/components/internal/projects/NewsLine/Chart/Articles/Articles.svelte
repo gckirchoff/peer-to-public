@@ -14,10 +14,10 @@
 
 <style lang="scss">
 	.headlines-container {
-		display: flex;
-		justify-content: space-between;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
 		align-items: center;
+		column-gap: var(--spacing-8);
 		overflow: hidden;
-		flex-wrap: wrap;
 	}
 </style>

@@ -85,10 +85,10 @@
 		height: 100%;
 		display: grid;
 		grid-template-columns: 1fr;
-		grid-template-rows: 2fr 1fr 2fr;
+		grid-template-rows: 35rem 1fr 2fr;
 
-		@include respond('mobile') {
-			grid-template-rows: 2fr 1fr 1fr;
-		}
+		// @include respond('mobile') {
+		// 	grid-template-rows: 2fr 1fr 1fr;
+		// }
 	}
 </style>
