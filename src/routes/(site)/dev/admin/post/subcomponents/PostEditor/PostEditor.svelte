@@ -29,7 +29,7 @@
 	};
 
 	export let mdValue =
-		'# Hi Everybody!\r## Hi Doctor Nik!\r> "You\'ve tried the best, now try the rest!"\r>\r>-Dr Nik\r\rDr Nik Riviera is a quack';
+		'# Example Header\r## Example Subtitle\r> "Block quote example"\r>\r>-Anonymous\r\rContent goes here...';
 
 	let formTitle = postMetaData.title;
 	let formDescription = postMetaData.description;
