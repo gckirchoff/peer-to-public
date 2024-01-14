@@ -23,7 +23,7 @@
 	const dateFormatter = utcFormat('%b %Y');
 
 	let width = 400;
-	let height = 400;
+	let height = 1;
 
 	$: innerWidth = width - margin.left - margin.right;
 	$: innerHeight = height - margin.top - margin.bottom;
@@ -56,6 +56,7 @@
 		<Article article={stoppingPoint.science} />
 		<Article article={stoppingPoint.media} />
 	</div>
+	<div style="background-color: red;">stuff is here and here stuff is here and here\n stuff is here and herestuff is here and here stuff is here and here stuff is here and here stuff is here and here stuff is here and here stuff is here and herestuff is here and here</div>
 	<div class="chart-container" bind:clientWidth={width} bind:clientHeight={height}>
 		<svg {width} {height}>
 			<g transform="translate({margin.left} {margin.top})">
@@ -81,21 +82,16 @@
 	.viz {
 		position: relative;
 		width: 100%;
-		height: 90%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		gap: 5%;
+		height: 100%;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 2fr min-content 2fr;
 
 		.headlines-container {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			flex: 0 1 30%;
-		}
-
-		.chart-container {
-			flex: 0 1 60%;
+			flex-wrap: wrap;
 		}
 	}
 </style>
