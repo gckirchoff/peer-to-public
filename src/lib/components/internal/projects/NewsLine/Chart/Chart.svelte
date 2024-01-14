@@ -5,9 +5,10 @@
 
 	import AxisY from './AxisY/AxisY.svelte';
 	import AxisX from './AxisX/AxisX.svelte';
+	import Article from './Article/Article.svelte';
+	import Description from './Description/Description.svelte';
 	import type { WastewaterReport } from '../constants';
 	import { stoppingPoints } from './constants';
-	import Article from './Article/Article.svelte';
 
 	const margin = {
 		top: 25,
@@ -57,13 +58,7 @@
 		<Article article={stoppingPoint.science} />
 		<Article article={stoppingPoint.media} />
 	</div>
-	<div class="description-container">
-		{#key stoppingPoint.description}
-			<div class="description" in:fade={{ delay: 1500 }} out:fade={{ delay: 600, duration: 200 }}>
-				{stoppingPoint.description}
-			</div>
-		{/key}
-	</div>
+	<Description description={stoppingPoint.description} />
 	<div class="chart-container" bind:clientWidth={width} bind:clientHeight={height}>
 		<svg {width} {height}>
 			<g transform="translate({margin.left} {margin.top})">
@@ -104,23 +99,6 @@
 			justify-content: space-between;
 			align-items: center;
 			overflow: hidden;
-		}
-
-		.description-container {
-			position: relative;
-
-			.description {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				padding: var(--spacing-16);
-				width: clamp(40rem, 50vw, 75rem);
-				background-color: var(--clr-surface-600);
-				border-radius: var(--rounded-4);
-				max-height: 100%;
-				overflow-y: auto;
-			}
 		}
 	}
 </style>
