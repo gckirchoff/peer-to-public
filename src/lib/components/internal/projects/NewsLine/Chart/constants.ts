@@ -23,7 +23,7 @@ export const stoppingPoints: StoppingPoint[] = [
 		},
 		science: {
 			img: 'what-is-covid.png',
-			href: 'https://www.sciencedirect.com/science/article/pii/S2090123220300540',
+			href: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7081812/',
 			alt: 'Description of COVID-19 from the beginning of the pandemic',
 		},
 	},
