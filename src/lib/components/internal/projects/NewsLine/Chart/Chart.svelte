@@ -56,7 +56,7 @@
 		<Article article={stoppingPoint.science} />
 		<Article article={stoppingPoint.media} />
 	</div>
-	<div style="background-color: red;">stuff is here and here stuff is here and here\n stuff is here and herestuff is here and here stuff is here and here stuff is here and here stuff is here and here stuff is here and here stuff is here and herestuff is here and here</div>
+	<div class="description">{stoppingPoint.description}</div>
 	<div class="chart-container" bind:clientWidth={width} bind:clientHeight={height}>
 		<svg {width} {height}>
 			<g transform="translate({margin.left} {margin.top})">
@@ -73,6 +73,7 @@
 </div>
 
 <style lang="scss">
+	@import '/src/styles/mixins.scss';
 	:global(.tick text) {
 		font-weight: 400;
 		font-size: 15px;
@@ -85,13 +86,27 @@
 		height: 100%;
 		display: grid;
 		grid-template-columns: 1fr;
-		grid-template-rows: 2fr min-content 2fr;
+		grid-template-rows: 2fr 1fr 2fr;
+
+		@include respond('mobile') {
+			grid-template-rows: 2fr 1fr 1fr;
+		}
 
 		.headlines-container {
+			// align-self: flex-start;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
 			flex-wrap: wrap;
+		}
+
+		.description {
+			padding: var(--spacing-16);
+			max-width: 72rem;
+			align-self: flex-start;
+			justify-self: center;
+			background-color: var(--clr-surface-600);
+			border-radius: var(--rounded-4);
 		}
 	}
 </style>
