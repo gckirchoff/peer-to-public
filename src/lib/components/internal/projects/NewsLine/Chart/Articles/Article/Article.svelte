@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 
-	import type { Article } from '../constants';
+	import type { Article } from '../../constants';
 
 	export let article: Article;
 </script>

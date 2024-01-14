@@ -5,7 +5,7 @@
 
 	import AxisY from './AxisY/AxisY.svelte';
 	import AxisX from './AxisX/AxisX.svelte';
-	import Article from './Article/Article.svelte';
+	import Articles from './Articles/Articles.svelte';
 	import Description from './Description/Description.svelte';
 	import type { WastewaterReport } from '../constants';
 	import { stoppingPoints } from './constants';
@@ -54,10 +54,7 @@
 </script>
 
 <div class="viz">
-	<div class="headlines-container">
-		<Article article={stoppingPoint.science} />
-		<Article article={stoppingPoint.media} />
-	</div>
+	<Articles {stoppingPoint} />
 	<Description description={stoppingPoint.description} />
 	<div class="chart-container" bind:clientWidth={width} bind:clientHeight={height}>
 		<svg {width} {height}>
@@ -92,13 +89,6 @@
 
 		@include respond('mobile') {
 			grid-template-rows: 2fr 1fr 1fr;
-		}
-
-		.headlines-container {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			overflow: hidden;
 		}
 	}
 </style>
