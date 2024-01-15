@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
-
 	import Article from './Article/Article.svelte';
 	import type { StoppingPoint } from '../constants';
 
