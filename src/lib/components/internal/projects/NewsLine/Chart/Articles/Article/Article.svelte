@@ -22,7 +22,6 @@
 <style lang="scss">
 	.headline {
 		height: 100%;
-		max-width: 30vw;
 		border-radius: var(--rounded-4);
 		display: flex;
 		align-items: center;
