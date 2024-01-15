@@ -33,5 +33,9 @@
 				max-height: 17rem;
 			}
 		}
+
+		@include respond('tab-land') {
+			width: max-content;
+		}
 	}
 </style>

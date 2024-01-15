@@ -21,6 +21,7 @@
 
 		@include respond('tab-land') {
 			grid-template-columns: 1fr;
+			justify-items: center;
 		}
 	}
 </style>
