@@ -1,13 +1,17 @@
 <script lang="ts">
 	import { fade, fly } from 'svelte/transition';
 
+	import { Body1 } from '$lib/components/internal/typography';
+
 	export let description: string;
 </script>
 
 <div class="description-container">
 	{#key description}
 		<div class="description" in:fly={{ y: 10, delay: 1200 }} out:fade>
-			{description}
+			<Body1>
+				{description}
+			</Body1>
 		</div>
 	{/key}
 </div>
@@ -22,7 +26,7 @@
 			left: 50%;
 			transform: translate(-50%, -50%);
 			padding: var(--spacing-16);
-			width: clamp(40rem, 50vw, 75rem);
+			width: clamp(40rem, 50vw, 80rem);
 			background-color: var(--clr-secondary-100);
 			border-radius: var(--rounded-4);
 			max-height: 100%;
