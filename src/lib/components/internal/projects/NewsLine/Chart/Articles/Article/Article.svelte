@@ -20,15 +20,18 @@
 </a>
 
 <style lang="scss">
+	@import '/src/styles/mixins.scss';
 	.headline {
-		height: 100%;
 		border-radius: var(--rounded-4);
-		display: flex;
-		align-items: center;
 
 		img {
-			max-width: 100%;
-			height: auto;
+			min-height: 17rem;
+			width: auto;
+			object-fit: scale-down;
+
+			@include respond('tab-land') {
+				max-height: 17rem;
+			}
 		}
 	}
 </style>

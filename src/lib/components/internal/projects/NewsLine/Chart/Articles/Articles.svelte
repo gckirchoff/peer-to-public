@@ -11,11 +11,16 @@
 </div>
 
 <style lang="scss">
+	@import '/src/styles/mixins.scss';
 	.headlines-container {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+		grid-template-columns: 1fr 1fr;
 		align-items: center;
 		column-gap: var(--spacing-8);
 		overflow: hidden;
+
+		@include respond('tab-land') {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>
