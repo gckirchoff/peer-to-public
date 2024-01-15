@@ -12,8 +12,8 @@
 			<img
 				src="/data/NewsLine/{article.img}"
 				alt={article.alt}
-				in:fade={{ delay: 1200 }}
-				out:fade={{ delay: 600, duration: 200 }}
+				in:fade={{ delay: 1000 }}
+				out:fade
 			/>
 		{/key}
 	{/if}

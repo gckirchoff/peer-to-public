@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
-	import { spring } from 'svelte/motion';
 	import { extent, scaleLinear, scaleTime, line, curveNatural, utcFormat } from 'd3';
 
 	import AxisY from './AxisY/AxisY.svelte';
@@ -45,12 +43,10 @@
 
 	$: stoppingPoint = stoppingPoints[currentStep ?? 0];
 
-	let linePercent = spring(0, {
-		stiffness: 0.08,
-		damping: 0.8,
-	});
+	$: linePercent = stoppingPoint.index / (data.length - 1);
 
-	$: $linePercent = stoppingPoint.index / (data.length - 1);
+	$: flooredInnerHeight = Math.max(innerHeight, 0);
+	$: flooredInnerWidth = Math.max(innerWidth, 0);
 </script>
 
 <div class="viz">
@@ -59,22 +55,17 @@
 	<div class="chart-container" bind:clientWidth={width} bind:clientHeight={height}>
 		<svg {width} {height}>
 			<g transform="translate({margin.left} {margin.top})">
-				<AxisX {xScale} {dateFormatter} height={innerHeight > 0 ? innerHeight : 0} />
-				<AxisY {yScale} width={innerWidth} />
+				<AxisX {xScale} {dateFormatter} height={flooredInnerHeight} />
+				<AxisY {yScale} width={flooredInnerWidth} />
 				<mask id="line-mask">
+					<rect x={0} y={0} width={flooredInnerWidth} height={flooredInnerHeight} fill="black" />
 					<rect
 						x={0}
 						y={0}
-						width={innerWidth}
-						height={innerHeight > 0 ? innerHeight : 0}
-						fill="black"
-					/>
-					<rect
-						x={0}
-						y={0}
-						width={innerWidth * $linePercent}
-						height={innerHeight > 0 ? innerHeight : 0}
+						height={flooredInnerHeight}
 						fill="white"
+						class="curtain"
+						style="width: {linePercent * 100}%"
 					/>
 				</mask>
 				<path d={path} fill="none" stroke="steelblue" stroke-width="2" mask="url(#line-mask)" />
@@ -102,5 +93,9 @@
 		// @include respond('mobile') {
 		// 	grid-template-rows: 2fr 1fr 1fr;
 		// }
+
+		.curtain {
+			transition: width 500ms 1500ms ease;
+		}
 	}
 </style>

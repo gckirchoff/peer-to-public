@@ -6,7 +6,7 @@
 
 <div class="description-container">
 	{#key description}
-		<div class="description" in:fade={{ delay: 1500 }} out:fade={{ delay: 600, duration: 200 }}>
+		<div class="description" in:fade={{ delay: 1200 }} out:fade>
 			{description}
 		</div>
 	{/key}
