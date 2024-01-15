@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 
 	import type { Article } from '../../constants';
 
@@ -12,7 +12,7 @@
 			<img
 				src="/data/NewsLine/{article.img}"
 				alt={article.alt}
-				in:fade={{ delay: 1000 }}
+				in:fly={{ y: 10, delay: 1000 }}
 				out:fade
 			/>
 		{/key}
