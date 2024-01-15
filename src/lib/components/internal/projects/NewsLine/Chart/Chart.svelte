@@ -59,11 +59,23 @@
 	<div class="chart-container" bind:clientWidth={width} bind:clientHeight={height}>
 		<svg {width} {height}>
 			<g transform="translate({margin.left} {margin.top})">
-				<AxisX {xScale} {dateFormatter} height={innerHeight} />
+				<AxisX {xScale} {dateFormatter} height={innerHeight > 0 ? innerHeight : 0} />
 				<AxisY {yScale} width={innerWidth} />
 				<mask id="line-mask">
-					<rect x={0} y={0} width={innerWidth} height={innerHeight} fill="black" />
-					<rect x={0} y={0} width={innerWidth * $linePercent} height={innerHeight} fill="white" />
+					<rect
+						x={0}
+						y={0}
+						width={innerWidth}
+						height={innerHeight > 0 ? innerHeight : 0}
+						fill="black"
+					/>
+					<rect
+						x={0}
+						y={0}
+						width={innerWidth * $linePercent}
+						height={innerHeight > 0 ? innerHeight : 0}
+						fill="white"
+					/>
 				</mask>
 				<path d={path} fill="none" stroke="steelblue" stroke-width="2" mask="url(#line-mask)" />
 			</g>
