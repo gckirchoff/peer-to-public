@@ -79,7 +79,7 @@
 	:global(.tick text) {
 		font-weight: 400;
 		font-size: 15px;
-		fill: #747474;
+		fill: #565656;
 	}
 
 	.viz {
@@ -89,10 +89,6 @@
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-template-rows: 35rem 1fr 2fr;
-
-		// @include respond('mobile') {
-		// 	grid-template-rows: 2fr 1fr 1fr;
-		// }
 
 		.curtain {
 			transition: width 500ms 1500ms ease;
