@@ -27,7 +27,7 @@
 			transform: translate(-50%, -50%);
 			padding: var(--spacing-16);
 			width: clamp(40rem, 50vw, 80rem);
-			background-color: var(--clr-secondary-100);
+			background-color: #D3D3D3;
 			border-radius: var(--rounded-4);
 			max-height: 100%;
 			overflow-y: auto;
