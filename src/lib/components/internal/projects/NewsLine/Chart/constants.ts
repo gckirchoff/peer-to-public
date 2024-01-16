@@ -15,7 +15,7 @@ export const stoppingPoints: StoppingPoint[] = [
 	{
 		index: 0,
 		description:
-			'The WHO declares COVID-19 to be a pandemic. At this point, we know that SARS-CoV-2 is most closely related to the original SARS virus, that it infects ACE-2 receptors on the endothelial linings and that transmission is airborne.',
+			'The WHO declares COVID-19 to be a global pandemic. At this point, we know that SARS-CoV-2 is most closely related to the original SARS virus, that it infects ACE-2 receptors on the endothelial linings, and that transmission is airborne.',
 		media: {
 			img: 'pandemic-declaration.png',
 			href: 'https://time.com/5791661/who-coronavirus-pandemic-declaration/',
@@ -25,6 +25,21 @@ export const stoppingPoints: StoppingPoint[] = [
 			img: 'what-is-covid.png',
 			href: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7081812/',
 			alt: 'Description of COVID-19 from the beginning of the pandemic',
+		},
+	},
+	{
+		index: 1,
+		description:
+			'However, comparisons to the flu and common cold, rather than SARS-1, have already begun. Fox News describes COVID-19 as a flu-like illness that has killed "a small fraction of the number of people that the flu kills every year." Long term health problems following COVID-19\'s closest cousin, SARS-1, have been know for over a decade, but comparisons are not mentioned.',
+		media: {
+			img: 'fox-covid-vs-flu.png',
+			href: 'https://www.fox5ny.com/news/flu-vs-common-cold-vs-covid-19-similar-symptoms-many-questions',
+			alt: 'Fox News comparison of flu vs common cold vs COVID-19',
+		},
+		science: {
+			img: 'sars-1-long-term.png',
+			href: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7192220/',
+			alt: 'Study describing long SARS',
 		},
 	},
 	{
