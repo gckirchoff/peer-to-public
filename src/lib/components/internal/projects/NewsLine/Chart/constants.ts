@@ -45,7 +45,7 @@ export const stoppingPoints: StoppingPoint[] = [
 	{
 		index: 3,
 		description:
-			"As previously mentioned, SARS-CoV-2's predecessor, SARS-CoV-1, did spread in the air. Numerous case reports have already published about SARS-CoV-2 exhibiting airborne spread. Despite this evidence, and abiding by the precautionary principle, the WHO releases a factcheck stating that COVID-19 is NOT airborne.",
+			"As previously mentioned, SARS-CoV-2's predecessor, SARS-CoV-1, did spread in the air. Numerous case reports have already been published about SARS-CoV-2 exhibiting airborne spread. Despite this evidence, and abiding by the precautionary principle, the WHO releases a factcheck stating that COVID-19 is NOT airborne.",
 		media: {
 			img: 'who-fact-check.png',
 			href: 'https://twitter.com/WHO/status/1243972193169616898?t=MYMdqe-2l7op2rPONbVj-g&s=19&fbclid=IwAR2jU0p9ioVivpk4Rl5RyPIbbuswZTqW2wpLVa59eNMDQdt8GGIOM8feobE',
