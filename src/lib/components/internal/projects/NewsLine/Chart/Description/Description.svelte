@@ -26,8 +26,9 @@
 			left: 50%;
 			transform: translate(-50%, -50%);
 			padding: var(--spacing-16);
-			width: clamp(40rem, 50vw, 80rem);
-			background-color: #D3D3D3;
+			width: clamp(40rem, 50vw, 90rem);
+			border-top: 1px solid rgb(108, 108, 108);
+			border-bottom: 1px solid rgb(108, 108, 108);
 			border-radius: var(--rounded-4);
 			max-height: 100%;
 			overflow-y: auto;
