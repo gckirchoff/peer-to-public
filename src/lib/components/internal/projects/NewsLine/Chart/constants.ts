@@ -58,18 +58,18 @@ export const stoppingPoints: StoppingPoint[] = [
 		},
 	},
 	{
-		index: 39,
+		index: 8,
 		description:
-			'Researchers find elevated levels of C5b9, a marker of blood vessel damage, in all children infected with COVID-19. This includes mild and even asymptomatic COVID-19 infections. On the same day, the Kansas State Board of Education states that children must be present for in-person instruction citing that the virus does not "take hold as easily among younger students." The decision was based on the opinions of public health experts, including those in the Kansas Department of Health and Environment',
+			'Many governments are embracing the doctrine of "flatten the curve." This approach prioritizes public health infastructure over individual health. The goal is not necessarily to decrease the amount of people infected, but the rate at which they are infected as to not overwhelm the health system. COVID-19 at this point is known to infect macrophages (a component of the innate immune system), blood vessels, and heart cells. Damage to these sites can lead to immune dysfunction, myocardial dysfunction and damage, blood vessel dysfunction, plaque instability, and myocardial infarctions. It is apparently okay for individuals to experience this as long as not too many of them become burdensome once.',
 		media: {
-			img: 'kids-in-schools.png',
-			href: 'https://www.cjonline.com/story/news/education/2020/12/08/state-board-of-ed-elementary-schools-should-stay-open-regardless-of-covid-19-spread/43262919/',
-			alt: 'Board of health states children must be in-person during pandemic',
+			img: 'flatten-curve.png',
+			href: 'https://www.theatlantic.com/politics/archive/2020/04/coronavirus-san-francisco-london-breed/609808/',
+			alt: 'Article describing city success',
 		},
 		science: {
-			img: 'chop-pediatric-biomarkers.png',
-			href: 'https://www.chop.edu/news/chop-researchers-find-elevated-biomarker-related-blood-vessel-damage-all-children-sars-cov-2?fbclid=IwAR2WjS8OdLGNQ2B1Tvqlr1ypm6to9JOWYIqx9quV7GPlL2rEs1g6MjGzLnA',
-			alt: 'Researchers find blood vessel damage in all kids infected by SARS-CoV-2',
+			img: 'april-2020-cardiac.png',
+			href: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7197627/',
+			alt: 'Study describing COVID-19 cardiac complications',
 		},
 	},
 	{
