@@ -29,7 +29,7 @@ export const stoppingPoints: StoppingPoint[] = [
 	{
 		index: 0,
 		description:
-			'The WHO declares COVID-19 to be a global pandemic. At this point, we know that SARS-CoV-2 is most closely related to the original SARS virus, that it infects ACE-2 receptors on the endothelial linings, and that transmission is airborne.',
+			'The WHO declares COVID-19 to be a global pandemic. At this point, we know that SARS-CoV-2 is most closely related to SARS-CoV-1, that it infects ACE-2 receptors on the endothelial linings, and that transmission is airborne.',
 		media: {
 			img: 'pandemic-declaration.png',
 			href: 'https://time.com/5791661/who-coronavirus-pandemic-declaration/',
@@ -44,7 +44,7 @@ export const stoppingPoints: StoppingPoint[] = [
 	{
 		index: 1,
 		description:
-			'However, comparisons to the flu and common cold, rather than SARS-1, have already begun. Fox News describes COVID-19 as a flu-like illness that has killed "a small fraction of the number of people that the flu kills every year." Long term health problems following COVID-19\'s closest cousin, SARS-1, have been know for over a decade, but comparisons are not mentioned.',
+			'It is established that SARS-CoV-1 frequently causes long term health problems. However, SARS-CoV-2 is compared to the flu and common cold, not SARS-1. Fox News describes COVID-19 as a flu-like illness that has killed "a small fraction of the number of people that the flu kills every year." This statement is particularly egregious given that COVID-19 has just begun.',
 		media: {
 			img: 'fox-covid-vs-flu.png',
 			href: 'https://www.fox5ny.com/news/flu-vs-common-cold-vs-covid-19-similar-symptoms-many-questions',
@@ -89,7 +89,7 @@ export const stoppingPoints: StoppingPoint[] = [
 	{
 		index: 12,
 		description:
-			'Herd immunity becomes a goal that supports the supposedly positive aspects of being infected. This idea is promoted by political leaders and corporations who support the use of Laissez-faire socioeconomic principles and social darwinism as a means of public health disease control. It also makes the grand assumption that the disease that is rampantly spreading across the planet will go away all by itself through "natural processes" and will not attempt to evolve escape variants. The concept of herd immunity at a global scale is the same as implying that we only need one antibiotic for a certain bacteria, and that that bacteria will not evolve escape variants. We know this is false and that antibiotic-resistance is a constant struggle for public health. Numerous scientific articles have been published that the COVID-19 infections that some are pushing for may have long-term neurological consequences.',
+			'Herd immunity becomes a goal that supports the supposedly positive aspects of being infected. This idea is promoted by political leaders and corporations who support the use of Laissez-faire socioeconomic principles and social darwinism as a means of public health disease control. It also makes the grand assumption that the disease that is rampantly spreading across the planet will go away all by itself through "natural processes" and gives no consideration to mutation derived immune escape. This is the reason antibiotic-resistant bacteria is such a large and ongoing public health issue. It also disregards the serious threat of long-term injury from contracting COVID-19.',
 		media: {
 			img: 'may-2020-herd-immunity.png',
 			href: 'https://www.cnbc.com/2020/05/20/coronavirus-investor-ricky-sandler-pushes-herd-immunity-after-fund-loses-billions.html',
@@ -99,6 +99,21 @@ export const stoppingPoints: StoppingPoint[] = [
 			img: 'june-2020-neuro.png',
 			href: 'https://alzres.biomedcentral.com/articles/10.1186/s13195-020-00640-3',
 			alt: 'Study describing potential long-term neurological consequences of COVID-19',
+		},
+	},
+	{
+		index: 22,
+		description:
+			'The UK launches "eat out to help out" to exchange the safety of its citizens for the financial stability of the restaurant industry.',
+		media: {
+			img: 'august-2020-eat-out.png',
+			href: 'https://amp.theguardian.com/business/2020/aug/11/covid-19-eat-out-to-help-out-used-10m-times-in-schemes-first-week?fbclid=IwAR2N7K0IuEPE0X_P1ZTKuFwhMgmjvb27Ja27GvTYcRrarU79zv1MG1s1-ss',
+			alt: 'Rishi Sunak launches eat out to help out',
+		},
+		science: {
+			img: 'nov-2020-korean-restaurant.png',
+			href: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7707926/?fbclid=IwAR194OAsoSPpmBV_9GGVsnOmHvkgW-NVH5N-hMEbG-pW6a5qzFx5tVRF4eE',
+			alt: 'Study describing spread of COVID-19 in restaurant setting',
 		},
 	},
 	{
