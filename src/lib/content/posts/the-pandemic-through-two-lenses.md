@@ -5,7 +5,7 @@ categories: [ "covid-19" ]
 authors: [ "Gregory Kirchoff" ]
 coverImage: "default-background-4.jpg"
 date: '2024-01-06'
-published: true
+published: false
 updated: '2024-01-20'
 ---
 <script> // usables

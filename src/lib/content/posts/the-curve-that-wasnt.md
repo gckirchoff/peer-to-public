@@ -5,7 +5,7 @@ categories: [ "covid-19", "statistics" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "flatten-the-curve.png"
 date: '2023-12-30'
-published: true
+published: false
 updated: '2024-01-20'
 ---
 <script> // usables
