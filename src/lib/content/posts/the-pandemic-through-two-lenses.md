@@ -1,8 +1,8 @@
 ---
 title: "The Pandemic Through Two Lenses"
-description: "In progress"
+description: "Supposedly \"following the science\" has given science a bad name. Science is slower and more methodical than has been apparent in recent years. Let's take a retrospective journey through the pandemic from two perspectives."
 categories: [ "covid-19" ]
-authors: [ "Clear Covid" ]
+authors: [ "Gregory Kirchoff" ]
 coverImage: "default-background-4.jpg"
 date: '2024-01-06'
 published: false
