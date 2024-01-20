@@ -102,6 +102,21 @@ export const stoppingPoints: StoppingPoint[] = [
 		},
 	},
 	{
+		index: 25,
+		description:
+			'The UK government "prepares to launch a publicity drive to persuade the public to return to the office". Many governments are acting similarly due to financial pressures, despite research showing that working in offices is not safe.',
+		media: {
+			img: 'august-2020-return-to-office.png',
+			href: 'https://www.theguardian.com/politics/2020/aug/28/grant-shapps-safe-to-return-to-work-in-offices-in-england-coronavirus?fbclid=IwAR1TYNqzEMGEUCNJJ92TstpisdAt8glLKO2xRUR35rjCizn29v1NG0ifJ9U',
+			alt: 'Grant Shapps says it is safe to return to work in offices',
+		},
+		science: {
+			img: 'august-2020-call-center.png',
+			href: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7392450/?fbclid=IwAR1D9op3Q9HoE-_NRV3Glksapa6zwOV9vfBmPGRIwDHl9xXszTOjGZI7nEs',
+			alt: 'Study describing outbreak in call center',
+		},
+	},
+	{
 		index: 39,
 		description:
 			'Researchers find elevated levels of C5b9, a marker of blood vessel damage, in all children infected with COVID-19. This includes mild and even asymptomatic COVID-19 infections. On the same day, the Kansas State Board of Education states that children must be present for in-person instruction citing that the virus does not "take hold as easily among younger students." The decision was based on the opinions of public health experts, including those in the Kansas Department of Health and Environment',
