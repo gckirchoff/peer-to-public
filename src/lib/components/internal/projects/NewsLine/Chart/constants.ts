@@ -73,6 +73,21 @@ export const stoppingPoints: StoppingPoint[] = [
 		},
 	},
 	{
+		index: 12,
+		description:
+			'Herd immunity becomes a goal that supports the supposedly positive aspects of being infected. This idea is promoted by political leaders and corporations who support the use of Laissez-faire socioeconomic principles and social darwinism as a means of public health disease control. It also makes the grand assumption that the disease that is rampantly spreading across the planet will go away all by itself through "natural processes" and will not attempt to evolve escape variants. The concept of herd immunity at a global scale is the same as implying that we only need one antibiotic for a certain bacteria, and that that bacteria will not evolve escape variants. We know this is false and that antibiotic-resistance is a constant struggle for public health. Numerous scientific articles have been published that the COVID-19 infections that some are pushing for may have long-term neurological consequences.',
+		media: {
+			img: 'may-2020-herd-immunity.png',
+			href: 'https://www.cnbc.com/2020/05/20/coronavirus-investor-ricky-sandler-pushes-herd-immunity-after-fund-loses-billions.html',
+			alt: 'Hedge Fund Manager Supports Herd Immunity',
+		},
+		science: {
+			img: 'june-2020-neuro.png',
+			href: 'https://alzres.biomedcentral.com/articles/10.1186/s13195-020-00640-3',
+			alt: 'Study describing potential long-term neurological consequences of COVID-19',
+		},
+	},
+	{
 		index: 39,
 		description:
 			'Researchers find elevated levels of C5b9, a marker of blood vessel damage, in all children infected with COVID-19. This includes mild and even asymptomatic COVID-19 infections. On the same day, the Kansas State Board of Education states that children must be present for in-person instruction citing that the virus does not "take hold as easily among younger students." The decision was based on the opinions of public health experts, including those in the Kansas Department of Health and Environment',
