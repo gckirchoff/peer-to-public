@@ -5,7 +5,7 @@ categories: [ "covid-19", "statistics" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "coin-stack-ibrahim-rifath-unsplash.jpg"
 date: '2023-12-21'
-published: false
+published: true
 updated: '2024-01-20'
 ---
 <script> // usables
