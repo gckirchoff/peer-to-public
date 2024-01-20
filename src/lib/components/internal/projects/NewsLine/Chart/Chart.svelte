@@ -6,7 +6,7 @@
 	import Articles from './Articles/Articles.svelte';
 	import Description from './Description/Description.svelte';
 	import type { WastewaterReport } from '../constants';
-	import { stoppingPoints } from './constants';
+	import { stoppingPoints } from '../constants';
 
 	const margin = {
 		top: 25,

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Article from './Article/Article.svelte';
-	import type { StoppingPoint } from '../constants';
+	import type { StoppingPoint } from '../../constants';
 
 	export let stoppingPoint: StoppingPoint;
 </script>
