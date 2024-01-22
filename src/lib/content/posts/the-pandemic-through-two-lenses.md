@@ -3,10 +3,10 @@ title: "The Pandemic Through Two Lenses"
 description: "Supposedly \"following the science\" has given science a bad name. Science is slower and more methodical than has been apparent in recent years. Let's take a retrospective journey through the pandemic from two perspectives."
 categories: [ "covid-19" ]
 authors: [ "Gregory Kirchoff" ]
-coverImage: "default-background-4.jpg"
+coverImage: "saxophone-illusion.jpg"
 date: '2024-01-06'
 published: true
-updated: '2024-01-20'
+updated: '2024-01-22'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
