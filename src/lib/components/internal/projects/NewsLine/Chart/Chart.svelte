@@ -36,6 +36,11 @@
 		.domain(extent(data, yAccessor) as [number, number])
 		.range([innerHeight, 0]);
 
+	$: console.log('data', data);
+	$: console.log('curveNatural', curveNatural);
+	$: console.log('xScale(xAccessor(d))', xScale(xAccessor(data[5])));
+	$: console.log('yScale(yAccessor(data[5]))', yScale(yAccessor(data[5])));
+
 	$: path = line<WastewaterReport>()
 		.x((d) => xScale(xAccessor(d)))
 		.y((d) => yScale(yAccessor(d)))
