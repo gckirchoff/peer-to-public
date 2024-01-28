@@ -69,7 +69,7 @@
 {/each}
 <g class="label-container" transform="translate({coinRadius} {coinRadius})">
 	{#each splitSentenceDownMiddle(d.item) as words, index}
-		<text x={0} y={0} dy={`${index * 1.5}rem`} text-anchor="start">
+		<text x={0} y={`${index * 1.5}rem`} text-anchor="start">
 			{words}
 		</text>
 	{/each}
