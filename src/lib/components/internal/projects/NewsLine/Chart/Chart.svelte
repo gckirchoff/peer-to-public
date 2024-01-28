@@ -20,7 +20,7 @@
 
 	const xAccessor = (d: WastewaterReport) => {
 		const [month, day, year] = d.date.split('-');
-		const formattedDate = `${year}, ${month}, ${day}`;
+		const formattedDate = `${year}/${month}/${day}`;
 		return new Date(formattedDate);
 	};
 	const yAccessor = (d: WastewaterReport) => d.value;
