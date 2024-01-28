@@ -56,7 +56,7 @@
 			<AxisY {yScale} {width} />
 			{#each usedData as d, columnIndex (`${d.item}-${outcome}`)}
 				<g
-					transform="translate({xScale(d.item)} {innerHeight})"
+					style="transform: translate({xScale(d.item)}px, {innerHeight}px);"
 					animate:flip={{ duration: 800 }}
 					on:mouseover={() => (hoveredBar = d)}
 					on:focus={() => (hoveredBar = d)}
