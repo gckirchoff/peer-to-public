@@ -18,7 +18,11 @@
 	export let data: WastewaterReport[];
 	export let currentStep: number | undefined;
 
-	const xAccessor = (d: WastewaterReport) => new Date(d.date);
+	const xAccessor = (d: WastewaterReport) => {
+		const [month, day, year] = d.date.split('-');
+		const formattedDate = `${year}, ${month}, ${day}`;
+		return new Date(formattedDate);
+	};
 	const yAccessor = (d: WastewaterReport) => d.value;
 	const dateFormatter = utcFormat('%b %Y');
 
@@ -35,14 +39,6 @@
 	$: yScale = scaleLinear()
 		.domain(extent(data, yAccessor) as [number, number])
 		.range([innerHeight, 0]);
-
-	$: console.log('width', width);
-	$: console.log('height', height);
-	$: console.log('innerWidth', innerWidth);
-	$: console.log('innerHeight', innerHeight);
-	$: console.log('xAccessor(data[5])', xAccessor(data[5]));
-	$: console.log('xScale(xAccessor(d))', xScale(xAccessor(data[5])));
-	$: console.log('yScale(yAccessor(data[5]))', yScale(yAccessor(data[5])));
 
 	$: path = line<WastewaterReport>()
 		.x((d) => xScale(xAccessor(d)))
