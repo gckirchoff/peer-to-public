@@ -64,7 +64,16 @@
 					role="tab"
 					aria-roledescription="bar"
 				>
-					<Bar {d} {xScale} {yScale} {columnIndex} {innerHeight} {outcome} {barsSwappedPlaces} />
+					<Bar
+						{d}
+						{xScale}
+						{yScale}
+						{columnIndex}
+						{innerHeight}
+						{outcome}
+						{barsSwappedPlaces}
+						innerChartWidth={innerWidth}
+					/>
 				</g>
 			{/each}
 			<text class="axis-title" x={innerWidth} y={0} dy={-10} text-anchor="end"

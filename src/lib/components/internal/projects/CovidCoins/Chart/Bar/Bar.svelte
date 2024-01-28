@@ -8,6 +8,7 @@
 	import InjuryCoin from '../../icons/InjuryCoin.svelte';
 	import Bad from '../../icons/Bad.svelte';
 	import type { Outcome, RiskItem } from '../../constants';
+	import { smallInnerWidth } from '../../constants';
 	import { getCoins, splitSentenceDownMiddle } from './logic';
 
 	export let d: RiskItem;
@@ -17,6 +18,7 @@
 	export let innerHeight: number;
 	export let outcome: Outcome;
 	export let barsSwappedPlaces: boolean;
+	export let innerChartWidth: number;
 
 	$: coinDiameter = Math.min(xScale.bandwidth(), 100);
 	$: coinRadius = coinDiameter / 2;
@@ -69,7 +71,12 @@
 {/each}
 <g class="label-container" transform="translate({coinRadius} {coinRadius})">
 	{#each splitSentenceDownMiddle(d.item) as words, index}
-		<text x={0} y={`${index * 1.5}rem`} text-anchor="start">
+		<text
+			x={0}
+			y={index * 15 * Math.min(innerChartWidth * 0.002, 1)}
+			text-anchor="start"
+			style="font-size: {innerChartWidth < smallInnerWidth ? 1 : 1.4}rem"
+		>
 			{words}
 		</text>
 	{/each}

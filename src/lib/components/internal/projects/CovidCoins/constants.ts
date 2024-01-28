@@ -47,3 +47,5 @@ export type Mode = 'auto' | 'instance' | 'outlook';
 export type View = 'instance' | 'outlook';
 
 export type Outcome = 'mortality' | 'disability';
+
+export const smallInnerWidth = 475;
