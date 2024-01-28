@@ -42,7 +42,7 @@
 /> -->
 {#each coins as coin}
 	<g
-		transform="translate({0} {coin.yPosition})"
+		style="transform: translate(0px, {coin.yPosition}px);"
 		in:fly|global={{
 			delay: coin.inDelay,
 			y: -200,
