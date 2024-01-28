@@ -36,8 +36,11 @@
 		.domain(extent(data, yAccessor) as [number, number])
 		.range([innerHeight, 0]);
 
-	$: console.log('data', data);
-	$: console.log('curveNatural', curveNatural);
+	$: console.log('width', width);
+	$: console.log('height', height);
+	$: console.log('innerWidth', innerWidth);
+	$: console.log('innerHeight', innerHeight);
+	$: console.log('xAccessor(data[5])', xAccessor(data[5]));
 	$: console.log('xScale(xAccessor(d))', xScale(xAccessor(data[5])));
 	$: console.log('yScale(yAccessor(data[5]))', yScale(yAccessor(data[5])));
 
