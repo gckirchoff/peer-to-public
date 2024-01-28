@@ -12,7 +12,8 @@
 	export let outcome: Outcome;
 	export let view: View;
 
-	$: usedData = data.toSorted((a, b) => a.probability - b.probability);
+	$: increasingProbability = (a: RiskItem, b: RiskItem) => a.probability - b.probability;
+	$: usedData = data.toSorted?.(increasingProbability) ?? [...data].sort(increasingProbability);
 	let prevUsedData: RiskItem[] = [];
 	let barsSwappedPlaces: boolean;
 
