@@ -1,16 +1,15 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { fly } from 'svelte/transition';
 
 	import { siteConfig } from '$lib/config';
 	import MultiSelect from '$lib/components/internal/MultiSelect/MultiSelect.svelte';
-	import { H4 } from '$lib/components/internal/typography';
 	import MarkdownEditor from '$lib/components/internal/MarkdownEditor/MarkdownEditor.svelte';
 	import UsablesModal from '../../subcomponents/UsablesModal/UsablesModal.svelte';
 	import type { Usable } from '../../subcomponents/UsablesModal/constants';
 	import Button from '$lib/components/internal/Button/Button.svelte';
 	import type { PostEditorBody } from './constants';
 	import Switch from '$lib/components/internal/Switch.svelte';
+	import ErrorText from '$lib/components/internal/ErrorText/ErrorText.svelte';
 	import type { PostEditorMetaData } from '$lib/types/post';
 	import Body1 from '$lib/components/internal/typography/Body1.svelte';
 
@@ -29,7 +28,7 @@
 	};
 
 	export let mdValue =
-		'# Hi Everybody!\r## Hi Doctor Nik!\r> "You\'ve tried the best, now try the rest!"\r>\r>-Dr Nik\r\rDr Nik Riviera is a quack';
+		'# Example Header\r## Example Subtitle\r> "Block quote example"\r>\r>-Anonymous\r\rContent goes here...';
 
 	let formTitle = postMetaData.title;
 	let formDescription = postMetaData.description;
@@ -184,11 +183,7 @@
 	handleSubmit={addUsable}
 />
 
-{#if errorText}
-	<span class="error-text" transition:fly={{ duration: 200, y: 5 }}>
-		<H4>{errorText}</H4>
-	</span>
-{/if}
+<ErrorText bind:value={errorText}/>
 
 <style lang="scss">
 	.post-meta-data-container {
@@ -203,16 +198,4 @@
 		}
 	}
 
-	.error-text {
-		position: absolute;
-		top: 10%;
-		left: 50%;
-		translate: -50% 0;
-		display: inline-block;
-		background-color: var(--clr-error-500);
-		padding: var(--spacing-8) var(--spacing-16);
-		:global(h4) {
-			color: var(--clr-txt-neg);
-		}
-	}
 </style>
