@@ -2,6 +2,7 @@
 	import { dev } from '$app/environment';
 
 	import { siteConfig } from '$lib/config.js';
+	import { prettyDate } from '$lib/utils/logic';
 	import Button from '$lib/components/internal/Button/Button.svelte';
 	import CategoryTag from '$lib/components/internal/CategoryTag/CategoryTag.svelte';
 	import CategoryTagsList from '$lib/components/internal/CategoryTagsList/CategoryTagsList.svelte';
@@ -58,9 +59,9 @@
 			{/each}
 		</CategoryTagsList>
 		<div class="dates">
-			<Body2>Published: {date}</Body2>
+			<Body2>Published: {prettyDate(new Date(date))}</Body2>
 			{#if updated}
-				<Body2>Updated: {updated}</Body2>
+				<Body2>Updated: {prettyDate(new Date(updated))}</Body2>
 			{/if}
 			<Body2>By: {authors?.join(', ') ?? siteConfig.author}</Body2>
 		</div>
