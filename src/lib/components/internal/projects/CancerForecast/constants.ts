@@ -14,4 +14,4 @@ export interface Distribution {
 	predictedCases: PredictedCases[];
 }
 
-export type Mode = 'aggregate' | 'separate' | 'both';
+export type Mode = 'summed' | 'separate' | 'both';

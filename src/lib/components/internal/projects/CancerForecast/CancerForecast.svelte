@@ -5,14 +5,15 @@
 	import { baselineCancer, beginningOfPandemic } from './constants';
 	import { getExtraCases, addYearsToDate, timeBetween, getCasesOnDate } from './logic';
 
+	let yearsFromNowToStartPrevention = 0;
 	let hazardRatio = 1.5;
 	let delay = 20;
-	let dateOfPrevention = new Date('2025/05/12');
 	let mode: Mode = 'both';
 
 	let distributions: Distribution[] = [];
 	let summedDistributions: PredictedCases[] = [];
 
+	$: dateOfPrevention = addYearsToDate(beginningOfPandemic, yearsFromNowToStartPrevention);
 	$: standardDeviation = delay / 3;
 	$: finalDateToMeasureTo = addYearsToDate(dateOfPrevention, delay + standardDeviation * 3);
 
@@ -72,8 +73,6 @@
 			newSummedDistributions.push({ date: currentDate, cases: totalCases });
 		}
 		summedDistributions = newSummedDistributions;
-
-		console.log('distributions', distributions);
 	}
 
 	const xAccessor = (d: PredictedCases) => d.date;
@@ -97,10 +96,16 @@
 		.range([0, innerChartWidth])
 		.nice();
 
+	// $: domain = (
+	// 	mode === 'separate'
+	// 		? [0, max(distributions[0].predictedCases, yAccessor)]
+	// 		: [0, max(summedDistributions, yAccessor)]
+	// ) as [number, number];
+
 	$: domain = (
 		mode === 'separate'
 			? [0, max(distributions[0].predictedCases, yAccessor)]
-			: [0, max(summedDistributions, yAccessor)]
+			: [0, Math.max(1400000, max(summedDistributions, yAccessor) as number)]
 	) as [number, number];
 
 	$: yScale = scaleLinear().domain(domain).range([innerChartHeight, 0]).nice();
@@ -111,6 +116,23 @@
 		.curve(curveNatural);
 </script>
 
+<div>
+	<label>
+		Hazard Ratio: <input bind:value={hazardRatio} type="range" min={1} max={3} step={0.1} />
+	</label>
+	<label>
+		Delay: <input bind:value={delay} type="range" min={5} max={50} step={1} />
+	</label>
+	<label>
+		When to prevent: <input
+			bind:value={yearsFromNowToStartPrevention}
+			type="range"
+			min={0}
+			max={15}
+			step={1}
+		/>
+	</label>
+</div>
 <div class="chart-container" bind:clientWidth={width}>
 	<svg {width} {height}>
 		<g style:transform="translate({margin.left}px, {margin.top}px)">
@@ -124,7 +146,7 @@
 					/>
 				{/each}
 			{/if}
-			{#if mode === 'aggregate' || mode === 'both'}
+			{#if mode === 'summed' || mode === 'both'}
 				<path
 					d={lineGenerator(summedDistributions)}
 					stroke-width="2"
@@ -132,6 +154,14 @@
 					stroke="blue"
 				/>
 			{/if}
+			<line
+				x1={xScale(dateOfPrevention)}
+				y1={0}
+				x2={xScale(dateOfPrevention)}
+				y2={innerChartHeight}
+				stroke-width={2}
+				stroke="red"
+			/>
 		</g>
 	</svg>
 </div>
