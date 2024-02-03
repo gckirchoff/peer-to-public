@@ -23,13 +23,28 @@ export const escapeComponents = (str: string): string =>
 export const unescapeComponents = (str: string): string =>
 	str.replace(/\$-[^>]+\/>/gm, (match) => match.replace(/^\$-/, '<'));
 
-export const prettyDate = (date?: Date) => {
+const formatDate = (date: Date | undefined, options: Intl.DateTimeFormatOptions) => {
 	const myDate = date ?? new Date();
-	const offset = myDate.getTimezoneOffset();
-	const adjustedDate = new Date(myDate.getTime() - offset * 60 * 1000);
-	const finalDate = adjustedDate.toISOString().split('T')[0];
-	return finalDate;
+	const formattedDate = myDate.toLocaleString('en-US', options);
+	return formattedDate;
 };
+
+export const prettyDate = (date?: Date): string =>
+	formatDate(date, {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+		hour: 'numeric',
+		minute: '2-digit',
+		hour12: true,
+	});
+
+export const simpleDate = (date?: Date): string =>
+	formatDate(date, {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+	});
 
 export const getRandomInt = (min: number, max: number): number => {
 	min = Math.ceil(min);

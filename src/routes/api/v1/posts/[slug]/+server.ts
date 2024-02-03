@@ -1,4 +1,4 @@
-import { writeFile } from 'node:fs/promises';
+import { writeFile, unlink, rm } from 'node:fs/promises';
 import { error, json } from '@sveltejs/kit';
 import { UsablesFactory, getPostTemplate } from '../logic.js';
 import { escapeRegExp, unescapeComponents } from '$lib/utils/logic.js';
@@ -66,6 +66,25 @@ export const PATCH = async ({ request, params }) => {
 			status: 'success',
 		});
 	} catch (err) {
+		throw error(500, 'Internal server error');
+	}
+};
+export const DELETE = async ({ params }) => {
+	try {
+		const { slug } = params;
+
+		const filePath = `src/lib/content/posts/${slug}.md`;
+		await unlink(filePath);
+
+		const rootImageFolderPath = `static/images/postImages/${slug}`
+
+		await rm(rootImageFolderPath, { recursive: true });
+
+		return json({
+			status: 'success',
+		});
+	} catch (err) {
+		console.log('err', err);
 		throw error(500, 'Internal server error');
 	}
 };

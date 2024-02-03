@@ -1,4 +1,4 @@
-import { escapeString, prettyDate } from '$lib/utils/logic';
+import { escapeString } from '$lib/utils/logic';
 import { UsableType } from '../../../(site)/dev/admin/post/subcomponents/UsablesModal/constants';
 import type {
 	Usable,
@@ -97,8 +97,8 @@ export const getPostTemplate = ({
 	publishDate,
 	update = false,
 }: GetPostTemplateParams) => {
-	const publishedDate = publishDate ?? prettyDate();
-	const updateDate = update ? prettyDate() : null;
+	const publishedDate = publishDate ?? new Date().toString();
+	const updateDate = update ? new Date().toString() : null;
 	const parsedContent = parseScripts(content);
 
 	const postTemplate = `---

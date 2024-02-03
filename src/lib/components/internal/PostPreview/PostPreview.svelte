@@ -2,6 +2,7 @@
 	import { dev } from '$app/environment';
 
 	import type Post from '$lib/types/post';
+	import { simpleDate } from '$lib/utils/logic';
 	import { Body1, H4, SubTitle2 } from '$lib/components/internal/typography';
 	import CategoryTag from '../CategoryTag/CategoryTag.svelte';
 	import CategoryTagsList from '../CategoryTagsList/CategoryTagsList.svelte';
@@ -19,7 +20,7 @@
 				<H4>
 					{post.title}
 				</H4>
-				<SubTitle2>{post.date}</SubTitle2>
+				<SubTitle2>{simpleDate(new Date(post.date))}</SubTitle2>
 				<Body1>{post.description}</Body1>
 				<CategoryTagsList>
 					{#each post.categories as category}
@@ -57,14 +58,12 @@
 			position: relative;
 
 			.image-container {
-				display: block;
-				width: 100%;
-				aspect-ratio: 16 / 9;
+				height: 28rem;
 			}
 
 			img {
 				width: 100%;
-				max-height: 30rem;
+				height: 100%;
 				object-fit: cover;
 			}
 
@@ -87,7 +86,6 @@
 					background-color: var(--clr-warning-500);
 				}
 			}
-
 			@include respond('mobile') {
 				grid-template-columns: 1fr;
 			}
