@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { extent, scaleLinear, scaleTime, line, max, curveNatural } from 'd3';
 
+	import AxisX from './AxisX/AxisX.svelte';
+	import AxisY from './AxisY/AxisY.svelte';
 	import type { Distribution, PredictedCases, Mode } from './constants';
 	import { baselineCancer, beginningOfPandemic } from './constants';
 	import { getExtraCases, addYearsToDate, timeBetween, getCasesOnDate } from './logic';
 
-	let yearsFromNowToStartPrevention = 0;
+	let yearsFromNowToStartPrevention = 5;
 	let hazardRatio = 1.5;
 	let delay = 20;
 	let mode: Mode = 'both';
@@ -76,7 +78,7 @@
 	}
 
 	const xAccessor = (d: PredictedCases) => d.date;
-	const yAccessor = (d: PredictedCases) => d.cases;
+	const yAccessor = (d: PredictedCases) => d.cases + baselineCancer;
 
 	let width = 400;
 	let height = 550;
@@ -105,7 +107,7 @@
 	$: domain = (
 		mode === 'separate'
 			? [0, max(distributions[0].predictedCases, yAccessor)]
-			: [0, Math.max(1400000, max(summedDistributions, yAccessor) as number)]
+			: [0, Math.max(6000000, max(summedDistributions, yAccessor) as number)]
 	) as [number, number];
 
 	$: yScale = scaleLinear().domain(domain).range([innerChartHeight, 0]).nice();
@@ -118,24 +120,22 @@
 
 <div>
 	<label>
-		Hazard Ratio: <input bind:value={hazardRatio} type="range" min={1} max={3} step={0.1} />
+		{hazardRatio} Hazard Ratio:
+		<input bind:value={hazardRatio} type="range" min={1} max={3} step={0.1} />
 	</label>
 	<label>
-		Delay: <input bind:value={delay} type="range" min={5} max={50} step={1} />
+		{delay} year delay: <input bind:value={delay} type="range" min={5} max={50} step={1} />
 	</label>
 	<label>
-		When to prevent: <input
-			bind:value={yearsFromNowToStartPrevention}
-			type="range"
-			min={0}
-			max={15}
-			step={1}
-		/>
+		Start prevention on {dateOfPrevention.toLocaleDateString()}:
+		<input bind:value={yearsFromNowToStartPrevention} type="range" min={0} max={15} step={1} />
 	</label>
 </div>
 <div class="chart-container" bind:clientWidth={width}>
 	<svg {width} {height}>
 		<g style:transform="translate({margin.left}px, {margin.top}px)">
+			<AxisX {xScale} height={innerChartHeight} />
+			<AxisY {yScale} />
 			{#if mode === 'separate' || mode === 'both'}
 				{#each distributions as distribution}
 					<path
@@ -156,7 +156,7 @@
 			{/if}
 			<line
 				x1={xScale(dateOfPrevention)}
-				y1={0}
+				y1={15}
 				x2={xScale(dateOfPrevention)}
 				y2={innerChartHeight}
 				stroke-width={2}
@@ -165,3 +165,11 @@
 		</g>
 	</svg>
 </div>
+
+<style lang="scss">
+	:global(.tick text) {
+		font-weight: 500;
+		font-size: 15px;
+		fill: #565656;
+	}
+</style>
