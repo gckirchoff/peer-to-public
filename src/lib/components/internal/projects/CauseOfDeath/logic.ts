@@ -20,7 +20,7 @@ export const getBarData = (
 		let x = 0;
 		let y = 0;
 		y =
-			(yScale(stage === 'flattened' ? disease.subType || disease.type : disease.type) as number) -
+			(yScale(stage === 'flattened' ? disease.category || disease.type : disease.type) as number) -
 			yScale.bandwidth() * 0.5;
 
 		if (stage === 'initial' || stage === 'differentiated') {
@@ -33,10 +33,10 @@ export const getBarData = (
 		}
 
 		const height = yScale.bandwidth();
-		const width = xScale(disease.year2020);
+		const width = xScale(disease.value);
 
-		const color = colorScale(stage === 'initial' ? disease.type : disease.subType || disease.type);
-		const name = getName(disease.type, disease.subType);
+		const color = colorScale(stage === 'initial' ? disease.type : disease.category || disease.type);
+		const name = getName(disease.type, disease.category);
 
 		bars.push({
 			x,
@@ -64,7 +64,7 @@ export const getMaxDeathForEachCategory = (mortalityData: MortalityData[]): numb
 		if (!acc[cur.type]) {
 			acc[cur.type] = 0;
 		}
-		acc[cur.type] += cur.year2020;
+		acc[cur.type] += cur.value;
 
 		return acc;
 	}, {});
@@ -74,19 +74,19 @@ export const getMaxDeathForEachCategory = (mortalityData: MortalityData[]): numb
 	return values;
 };
 
-const getName = (type: string, subType: string | undefined): string => {
+const getName = (type: string, category: string | undefined): string => {
 	if (type === 'Cancer') {
-		return `${subType} ${type}`;
+		return `${category} ${type}`;
 	}
-	return subType || type;
+	return category || type;
 };
 
 export const getYValuesBySubType = (mortalityData: MortalityData[]): string[] =>
 	mortalityData
 		.reduce((acc: { name: string; quantity: number }[], cur) => {
 			acc.push({
-				name: cur.subType || cur.type,
-				quantity: cur.year2020,
+				name: cur.category || cur.type,
+				quantity: cur.value,
 			});
 			return acc;
 		}, [])
@@ -96,7 +96,7 @@ export const getYValuesBySubType = (mortalityData: MortalityData[]): string[] =>
 export const getMaxValue = (data: MortalityDataHierarchical[]): number => {
 	return max(data, (d) => {
 		if (d.type !== 'All Deaths') {
-			return d.subTypes[0].year2020;
+			return d.categorys[0].value;
 		}
 		return 0;
 	}) as number;
@@ -106,17 +106,16 @@ export const parseMortalityData = (d: UnprocessedMortalityData): MortalityData =
 	return {
 		...d,
 		percent: +d.percent,
-		rank: +d.rank,
-		year2020: +Math.round(+d.year2020),
+		value: +Math.round(+d.value),
 		year2021: +Math.round(+d.year2021),
 	};
 };
 
 export const getDomainValuesForColorScale = (mortalityData: MortalityData[]): string[] =>
 	mortalityData.map((d) => {
-		if (d.subType === 'Total') {
+		if (d.category === 'Total') {
 			return d.type;
 		} else {
-			return d.subType;
+			return d.category;
 		}
 	});

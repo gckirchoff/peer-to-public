@@ -72,7 +72,7 @@
 		<g class="inner-chart" transform="translate({margin.left}, {margin.top})">
 			<AxisX width={innerWidth} height={innerHeight} {xScale} />
 			<AxisY {yScale} {bars} {stage} />
-			{#each bars as data (data.data.year2020)}
+			{#each bars as data (data.data.value)}
 				<Bar {data} {stage} {hoveredData} {updateHoveredData} {innerHeight} />
 			{/each}
 		</g>
@@ -80,7 +80,7 @@
 
 	<InfoBox {currentStep} />
 
-	{#if hoveredData && (stage === 'differentiated' || (stage === 'flattened' && smallScreen))}
+	{#if hoveredData && stage === 'differentiated'}
 		<Tooltip data={hoveredData} {width} />
 	{/if}
 </div>

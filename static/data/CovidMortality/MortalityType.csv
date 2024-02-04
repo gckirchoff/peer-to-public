@@ -1,27 +1,27 @@
-rank,type,subType,percent,year2020,year2021,source
-1,Heart disease,Coronary Heart Disease,41.20,382629.756,,
-1,Heart disease,High Blood Pressure,12.90,119803.977,,
-1,Heart disease,Heart Failure,9.20,85441.596,,
-1,Heart disease,Diseases of the Arteries,2.60,24146.538,,
-1,Heart disease,Other Heart Disease,16.80,227537.784,,
-2,Cancer,Colon and Rectum,,51869,604553,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
-2,Cancer,Pancreas,,46774,,
-2,Cancer,Female Breast,,42273,,
-2,Cancer,Prostate,,32707,,
-2,Cancer,Liver and Intrahepatic Bile Duct,,28227,,
-2,Cancer,Leukemias,,23583,,
-2,Cancer,Non-Hodgkin Lymphoma,,20170,,
-2,Cancer,Lung and Bronchus,,136084,,
-2,Cancer,Ovary,,13438,,
-2,Cancer,Corpus and Uterus NOS,,11995,,
-3,COVID-19,Deaths from COVID-19,,350831,,https://www.cdc.gov/nchs/pressroom/podcasts/2022/20220107/20220107.htm
-3,COVID-19,Deaths Involving COVID-19,,34000,,
-4,Unintentional injuries,,100.00,200955,219487,
-5,Stroke,Ischemic,62.40,100004.736,,
-5,Stroke,Intracerebral Hemorrhage,27.90,44713.656,,
-5,Stroke,Subarachnoid Hemorrhage,9.70,15545.608,,
-6,Chronic lower respiratory diseases,,100.00,152657,142047,
-7,Alzheimer disease,,,134242,119314,
-8,Diabetes,,,102188,103004,
-9,Influenza and pneumonia,,,53544,56408,
-10,Kidney disease,,,52547,54236,
+type,category,percent,value,source
+Heart disease,Coronary Heart Disease,41.20,382629.756,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#F14-4
+Heart disease,High Blood Pressure,12.90,119803.977,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#F14-5
+Heart disease,Heart Failure,9.20,85441.596,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#F14-6
+Heart disease,Diseases of the Arteries,2.60,24146.538,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#F14-7
+Heart disease,Other Heart Disease,16.80,156023.784,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#F14-8
+Cancer,Colon and Rectum,,51869,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
+Cancer,Pancreas,,46774,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
+Cancer,Female Breast,,42273,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
+Cancer,Prostate,,32707,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
+Cancer,Liver and Intrahepatic Bile Duct,,28227,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
+Cancer,Leukemias,,23583,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
+Cancer,Non-Hodgkin Lymphoma,,20170,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
+Cancer,Lung and Bronchus,,136084,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
+Cancer,Ovary,,13438,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
+Cancer,Corpus and Uterus NOS,,11995,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
+COVID-19,Deaths from COVID-19,,350831,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
+COVID-19,Deaths Involving COVID-19,,34000,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
+Unintentional injuries,,,200955,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
+Stroke,Ischemic,62.40,100004.736,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#T14-2
+Stroke,Intracerebral Hemorrhage,27.90,44713.656,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#T14-3
+Stroke,Subarachnoid Hemorrhage,9.70,15545.608,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#T14-4
+Chronic lower respiratory diseases,,,152657,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
+Alzheimer disease,,,134242,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
+Diabetes,,,102188,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
+Influenza and pneumonia,,,53544,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
+Kidney disease,,,52547,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
