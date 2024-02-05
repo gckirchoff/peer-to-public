@@ -8,8 +8,16 @@
 	import Gradient from './Gradient/Gradient.svelte';
 	import type { Distribution, PredictedCases, Mode } from './constants';
 	import { baselineCancer, beginningOfPandemic } from './constants';
-	import { getExtraCases, addYearsToDate, timeBetween, getCasesOnDate } from './logic';
+	import {
+		getExtraCases,
+		addYearsToDate,
+		timeBetween,
+		getCasesOnDate,
+		getCasesUpToDate,
+		getCumulativeCasesUpToDate,
+	} from './logic';
 
+	const numberFormatter = format('.2s');
 	const extraCasesGradientId = 'extra-cases-gradient';
 	const gradientColors = ['#72ade8', 'rgb(236, 232, 253)'];
 
@@ -24,6 +32,9 @@
 	$: dateOfPrevention = addYearsToDate(beginningOfPandemic, yearsFromNowToStartPrevention);
 	$: standardDeviation = delay / 3;
 	$: finalDateToMeasureTo = addYearsToDate(dateOfPrevention, delay + standardDeviation * 3);
+	$: totalExtraCases = Math.floor(summedDistributions.reduce((acc, { cases }) => acc + cases, 0));
+	$: casesThatHaveOccuredSoFar = getCumulativeCasesUpToDate(dateOfPrevention, summedDistributions);
+	$: casesYetToCome = totalExtraCases - casesThatHaveOccuredSoFar;
 
 	$: {
 		const extraCancer = getExtraCases(hazardRatio, baselineCancer);
@@ -149,10 +160,17 @@
 			<input bind:value={yearsFromNowToStartPrevention} type="range" min={0} max={15} step={1} />
 		</label>
 	</div>
-	<Body1>
-		{format('.2s')(Math.floor(summedDistributions.reduce((acc, { cases }) => acc + cases, 0)))} extra
-		cases
-	</Body1>
+	<div class="results-container">
+		<Body1>
+			{numberFormatter(casesThatHaveOccuredSoFar)} extra cases have occured
+		</Body1>
+		<Body1>
+			{numberFormatter(casesYetToCome)} cases yet to come
+		</Body1>
+		<Body1>
+			{numberFormatter(totalExtraCases)} total extra cases
+		</Body1>
+	</div>
 	<div class="chart-container" bind:clientWidth={width}>
 		<svg {width} {height}>
 			<g style:transform="translate({margin.left}px, {margin.top}px)">
@@ -237,5 +255,10 @@
 			flex-direction: column;
 			align-items: center;
 		}
+	}
+
+	.results-container {
+		display: flex;
+		justify-content: space-between;
 	}
 </style>
