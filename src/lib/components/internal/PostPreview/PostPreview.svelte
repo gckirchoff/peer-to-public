@@ -43,44 +43,52 @@
 
 <style lang="scss">
 	@import '/src/styles/mixins.scss';
-	.card {
-		display: grid;
-		grid-template-columns: 2fr 3fr;
-		gap: var(--spacing-32);
-		position: relative;
-
-		.image-container {
-			height: 28rem;
-		}
-
-		img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
-
-		.info {
-			display: flex;
-			flex-direction: column;
-			gap: var(--spacing-8);
-		}
-
-		.published-state {
-			position: absolute;
-			right: 0;
-			padding: var(--spacing-4) var(--spacing-8);
-
-			&.published {
-				background-color: var(--clr-success-500);
-			}
-
-			&.draft {
-				background-color: var(--clr-warning-500);
-			}
-		}
-
+	li {
 		@include respond('mobile') {
-			grid-template-columns: 1fr;
+			&:not(:last-child) {
+				padding-bottom: var(--spacing-32);
+				border-bottom: 1px solid var(--clr-surface-700);
+			}
+		}
+
+		.card {
+			display: grid;
+			grid-template-columns: 2fr 3fr;
+			gap: var(--spacing-32);
+			position: relative;
+
+			.image-container {
+				height: 28rem;
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			.info {
+				display: flex;
+				flex-direction: column;
+				gap: var(--spacing-8);
+			}
+
+			.published-state {
+				position: absolute;
+				right: 0;
+				padding: var(--spacing-4) var(--spacing-8);
+
+				&.published {
+					background-color: var(--clr-success-500);
+				}
+
+				&.draft {
+					background-color: var(--clr-warning-500);
+				}
+			}
+			@include respond('mobile') {
+				grid-template-columns: 1fr;
+			}
 		}
 	}
 </style>
