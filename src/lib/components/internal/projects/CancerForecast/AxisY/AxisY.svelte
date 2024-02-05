@@ -12,7 +12,7 @@
 	{#each yTicks as tick, index}
 		<g class="tick" transform="translate(0, {yScale(tick)})">
 			<!-- <line x1={0} y1={0} y2={0} x2={width} stroke="#b1b1b1" /> -->
-			<text x={-30} y={0} dominant-baseline="middle">
+			<text x={-45} y={0} dominant-baseline="middle">
 				{tickFormatter(tick)}{index === yTicks.length - 1 ? ' Cases' : ''}
 			</text>
 		</g>
