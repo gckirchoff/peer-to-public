@@ -1,16 +1,21 @@
 <script lang="ts">
-	import { extent, scaleLinear, scaleTime, line, max, curveNatural } from 'd3';
+	import { extent, scaleLinear, scaleTime, line, max, curveNatural, format } from 'd3';
 
 	import AxisX from './AxisX/AxisX.svelte';
 	import AxisY from './AxisY/AxisY.svelte';
+	import Line from './Line/Line.svelte';
+	import Gradient from './Gradient/Gradient.svelte';
 	import type { Distribution, PredictedCases, Mode } from './constants';
 	import { baselineCancer, beginningOfPandemic } from './constants';
 	import { getExtraCases, addYearsToDate, timeBetween, getCasesOnDate } from './logic';
 
+	const extraCasesGradientId = 'extra-cases-gradient';
+	const gradientColors = ['#72ade8', 'rgb(236, 232, 253)'];
+
 	let yearsFromNowToStartPrevention = 5;
 	let hazardRatio = 1.5;
 	let delay = 20;
-	let mode: Mode = 'both';
+	let mode: Mode = 'summed';
 
 	let distributions: Distribution[] = [];
 	let summedDistributions: PredictedCases[] = [];
@@ -85,7 +90,7 @@
 
 	const margin = {
 		top: 60,
-		left: 30,
+		left: 45,
 		bottom: 50,
 		right: 30,
 	};
@@ -112,6 +117,10 @@
 
 	$: yScale = scaleLinear().domain(domain).range([innerChartHeight, 0]).nice();
 
+	$: xAccessorScaled = (d: PredictedCases) => xScale(xAccessor(d));
+	$: yAccessorScaled = (d: PredictedCases) => yScale(yAccessor(d));
+	$: y0AccessorScaled = yScale(yScale.domain()[0]);
+
 	$: lineGenerator = line<PredictedCases>()
 		.x((d) => xScale(xAccessor(d)))
 		.y((d) => yScale(yAccessor(d)))
@@ -130,12 +139,55 @@
 		Start prevention on {dateOfPrevention.toLocaleDateString()}:
 		<input bind:value={yearsFromNowToStartPrevention} type="range" min={0} max={15} step={1} />
 	</label>
+	<p>
+		{format('.2s')(Math.floor(summedDistributions.reduce((acc, { cases }) => acc + cases, 0)))} extra
+		cases
+	</p>
 </div>
 <div class="chart-container" bind:clientWidth={width}>
 	<svg {width} {height}>
 		<g style:transform="translate({margin.left}px, {margin.top}px)">
+			<defs>
+				<Gradient id={extraCasesGradientId} colors={gradientColors} x2="0" y2="100%" />
+			</defs>
 			<AxisX {xScale} height={innerChartHeight} />
 			<AxisY {yScale} />
+			<rect
+				x={0}
+				y={yScale(baselineCancer)}
+				width={innerChartWidth}
+				height={innerChartHeight - yScale(baselineCancer)}
+				fill="rgba(232, 219, 12, 0.30)"
+			/>
+			<line
+				x2={innerChartWidth}
+				y1={yScale(baselineCancer)}
+				y2={yScale(baselineCancer)}
+				stroke="#FFA500"
+				stroke-width={1}
+			/>
+			{#if mode === 'summed' || mode === 'both'}
+				<!-- <path
+					d={lineGenerator(summedDistributions)}
+					stroke-width="2"
+					fill="transparent"
+					stroke="blue"
+				/> -->
+				<Line
+					type="area"
+					data={summedDistributions}
+					{xAccessorScaled}
+					{yAccessorScaled}
+					y0AccessorScaled={yScale(baselineCancer)}
+					style="fill: url(#{extraCasesGradientId})"
+				/>
+				<Line
+					data={summedDistributions}
+					{xAccessorScaled}
+					{yAccessorScaled}
+					style="stroke: #67a4e0;"
+				/>
+			{/if}
 			{#if mode === 'separate' || mode === 'both'}
 				{#each distributions as distribution}
 					<path
@@ -146,19 +198,11 @@
 					/>
 				{/each}
 			{/if}
-			{#if mode === 'summed' || mode === 'both'}
-				<path
-					d={lineGenerator(summedDistributions)}
-					stroke-width="2"
-					fill="transparent"
-					stroke="blue"
-				/>
-			{/if}
 			<line
 				x1={xScale(dateOfPrevention)}
 				y1={15}
 				x2={xScale(dateOfPrevention)}
-				y2={innerChartHeight}
+				y2={yScale(baselineCancer)}
 				stroke-width={2}
 				stroke="red"
 			/>
