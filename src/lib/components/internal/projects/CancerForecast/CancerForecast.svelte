@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { extent, scaleLinear, scaleTime, line, max, curveNatural, format } from 'd3';
 
+	import { Body1, Body2 } from '../../typography';
 	import AxisX from './AxisX/AxisX.svelte';
 	import AxisY from './AxisY/AxisY.svelte';
 	import Line from './Line/Line.svelte';
@@ -128,86 +129,95 @@
 </script>
 
 <div>
-	<label>
-		{hazardRatio} Hazard Ratio:
-		<input bind:value={hazardRatio} type="range" min={1} max={3} step={0.1} />
-	</label>
-	<label>
-		{delay} year delay: <input bind:value={delay} type="range" min={5} max={50} step={1} />
-	</label>
-	<label>
-		Start prevention on {dateOfPrevention.toLocaleDateString()}:
-		<input bind:value={yearsFromNowToStartPrevention} type="range" min={0} max={15} step={1} />
-	</label>
-	<p>
+	<div class="inputs-container">
+		<label>
+			<Body2>
+				{hazardRatio} Hazard Ratio:
+			</Body2>
+			<input bind:value={hazardRatio} type="range" min={1} max={3} step={0.1} />
+		</label>
+		<label>
+			<Body2>
+				{delay} year delay:
+			</Body2>
+			<input bind:value={delay} type="range" min={5} max={50} step={1} />
+		</label>
+		<label>
+			<Body2>
+				Start prevention on {dateOfPrevention.toLocaleDateString()}:
+			</Body2>
+			<input bind:value={yearsFromNowToStartPrevention} type="range" min={0} max={15} step={1} />
+		</label>
+	</div>
+	<Body1>
 		{format('.2s')(Math.floor(summedDistributions.reduce((acc, { cases }) => acc + cases, 0)))} extra
 		cases
-	</p>
-</div>
-<div class="chart-container" bind:clientWidth={width}>
-	<svg {width} {height}>
-		<g style:transform="translate({margin.left}px, {margin.top}px)">
-			<defs>
-				<Gradient id={extraCasesGradientId} colors={gradientColors} x2="0" y2="100%" />
-			</defs>
-			<AxisX {xScale} height={innerChartHeight} />
-			<AxisY {yScale} />
-			<rect
-				x={0}
-				y={yScale(baselineCancer)}
-				width={innerChartWidth}
-				height={innerChartHeight - yScale(baselineCancer)}
-				fill="rgba(232, 219, 12, 0.30)"
-			/>
-			<line
-				x2={innerChartWidth}
-				y1={yScale(baselineCancer)}
-				y2={yScale(baselineCancer)}
-				stroke="#FFA500"
-				stroke-width={1}
-			/>
-			{#if mode === 'summed' || mode === 'both'}
-				<!-- <path
+	</Body1>
+	<div class="chart-container" bind:clientWidth={width}>
+		<svg {width} {height}>
+			<g style:transform="translate({margin.left}px, {margin.top}px)">
+				<defs>
+					<Gradient id={extraCasesGradientId} colors={gradientColors} x2="0" y2="100%" />
+				</defs>
+				<AxisX {xScale} height={innerChartHeight} />
+				<AxisY {yScale} />
+				<rect
+					x={0}
+					y={yScale(baselineCancer)}
+					width={innerChartWidth}
+					height={innerChartHeight - yScale(baselineCancer)}
+					fill="rgba(232, 219, 12, 0.30)"
+				/>
+				<line
+					x2={innerChartWidth}
+					y1={yScale(baselineCancer)}
+					y2={yScale(baselineCancer)}
+					stroke="#FFA500"
+					stroke-width={1}
+				/>
+				{#if mode === 'summed' || mode === 'both'}
+					<!-- <path
 					d={lineGenerator(summedDistributions)}
 					stroke-width="2"
 					fill="transparent"
 					stroke="blue"
 				/> -->
-				<Line
-					type="area"
-					data={summedDistributions}
-					{xAccessorScaled}
-					{yAccessorScaled}
-					y0AccessorScaled={yScale(baselineCancer)}
-					style="fill: url(#{extraCasesGradientId})"
-				/>
-				<Line
-					data={summedDistributions}
-					{xAccessorScaled}
-					{yAccessorScaled}
-					style="stroke: #67a4e0;"
-				/>
-			{/if}
-			{#if mode === 'separate' || mode === 'both'}
-				{#each distributions as distribution}
-					<path
-						d={lineGenerator(distribution.predictedCases)}
-						stroke-width="2"
-						fill="transparent"
-						stroke="blue"
+					<Line
+						type="area"
+						data={summedDistributions}
+						{xAccessorScaled}
+						{yAccessorScaled}
+						y0AccessorScaled={yScale(baselineCancer)}
+						style="fill: url(#{extraCasesGradientId})"
 					/>
-				{/each}
-			{/if}
-			<line
-				x1={xScale(dateOfPrevention)}
-				y1={15}
-				x2={xScale(dateOfPrevention)}
-				y2={yScale(baselineCancer)}
-				stroke-width={2}
-				stroke="red"
-			/>
-		</g>
-	</svg>
+					<Line
+						data={summedDistributions}
+						{xAccessorScaled}
+						{yAccessorScaled}
+						style="stroke: #67a4e0;"
+					/>
+				{/if}
+				{#if mode === 'separate' || mode === 'both'}
+					{#each distributions as distribution}
+						<path
+							d={lineGenerator(distribution.predictedCases)}
+							stroke-width="2"
+							fill="transparent"
+							stroke="blue"
+						/>
+					{/each}
+				{/if}
+				<line
+					x1={xScale(dateOfPrevention)}
+					y1={15}
+					x2={xScale(dateOfPrevention)}
+					y2={yScale(baselineCancer)}
+					stroke-width={2}
+					stroke="red"
+				/>
+			</g>
+		</svg>
+	</div>
 </div>
 
 <style lang="scss">
@@ -215,5 +225,17 @@
 		font-weight: 500;
 		font-size: 15px;
 		fill: #565656;
+	}
+
+	.inputs-container {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: var(--spacing-8);
+
+		label {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
 	}
 </style>
