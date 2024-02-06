@@ -124,7 +124,7 @@
 	$: domain = (
 		mode === 'separate'
 			? [0, max(distributions[0].predictedCases, yAccessor)]
-			: [0, Math.max(6000000, max(summedDistributions, yAccessor) as number)]
+			: [0, Math.max(54000000, max(summedDistributions, yAccessor) as number)]
 	) as [number, number];
 
 	$: yScale = scaleLinear().domain(domain).range([innerChartHeight, 0]).nice();
@@ -150,7 +150,7 @@
 			<Body2>
 				{hazardRatio} Hazard Ratio:
 			</Body2>
-			<input bind:value={hazardRatio} type="range" min={1} max={3} step={0.1} />
+			<input bind:value={hazardRatio} type="range" min={1} max={10} step={0.1} />
 		</label>
 		<label>
 			<Body2>

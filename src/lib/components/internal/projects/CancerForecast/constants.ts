@@ -1,4 +1,4 @@
-export const baselineCancer = 2000000;
+export const baselineCancer = 18000000;
 
 export const beginningOfPandemic = new Date('2020/12/31');
 
