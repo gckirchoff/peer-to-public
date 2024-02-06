@@ -14,20 +14,16 @@ export type UnprocessedMortalityData = Modify<
 	MortalityData,
 	{
 		percent: string;
-		rank: string;
-		year2020: string;
-		year2021: string;
+		value: string;
 	}
 >;
 
 export interface MortalityData {
 	percent: number;
-	rank: number;
 	source: string;
-	subType: string;
+	category: string;
 	type: string;
-	year2020: number;
-	year2021: number;
+	value: number;
 }
 
 export type Stage = 'initial' | 'differentiated' | 'flattened';

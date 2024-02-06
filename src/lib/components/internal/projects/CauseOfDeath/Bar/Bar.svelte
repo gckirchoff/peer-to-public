@@ -24,7 +24,7 @@
 	stroke={data.color}
 />
 
-{#if hoveredData?.data.year2020 === data?.data.year2020 && stage === 'flattened'}
+{#if hoveredData?.data.value === data?.data.value && stage === 'flattened'}
 	<g transition:fade={{ duration: 200 }}>
 		<line
 			x1={data.x + data.width}
@@ -41,7 +41,7 @@
 			dy={data.height / 2 + 5}
 			dominant-baseline="middle"
 		>
-			{data.data.year2020.toLocaleString()} deaths
+			{data.data.value.toLocaleString()} deaths
 		</text>
 	</g>
 {/if}

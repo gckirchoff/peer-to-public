@@ -24,8 +24,8 @@
 	out:fly={{ y: 10 }}
 	bind:clientWidth={tooltipWidth}
 >
-	<h1>{data.data.subType || data.data.type}</h1>
-	<h2><span>{data.data.year2020.toLocaleString()} deaths</span></h2>
+	<h1>{data.data.category || data.data.type}</h1>
+	<h2><span>{data.data.value.toLocaleString()} deaths</span></h2>
 </div>
 
 <style lang="scss">
