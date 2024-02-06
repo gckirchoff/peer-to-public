@@ -256,9 +256,4 @@
 			align-items: center;
 		}
 	}
-
-	.results-container {
-		display: flex;
-		justify-content: space-between;
-	}
 </style>
