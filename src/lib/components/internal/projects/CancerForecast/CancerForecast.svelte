@@ -171,7 +171,7 @@
 				<defs>
 					<Gradient id={extraCasesGradientId} colors={gradientColors} x2="0" y2="100%" />
 				</defs>
-				<AxisX {xScale} height={innerChartHeight} />
+				<AxisX {xScale} width={innerChartWidth} height={innerChartHeight} />
 				<AxisY {yScale} />
 				<rect
 					x={0}

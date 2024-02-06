@@ -5,9 +5,11 @@
 	import { dateFormatter } from './constants';
 
 	export let xScale: ScaleTime<number, number, never>;
+	export let width: number;
 	export let height: number;
 
-	let xTicks = xScale.ticks();
+	$: ticksCount = width < 600 ? 4 : 8;
+	$: xTicks = xScale.ticks(ticksCount);
 </script>
 
 <g class="axis x" transform="translate(0, {height})">
