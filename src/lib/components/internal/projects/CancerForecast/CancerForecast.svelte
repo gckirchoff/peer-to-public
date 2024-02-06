@@ -180,6 +180,14 @@
 					height={innerChartHeight - yScale(baselineCancer)}
 					fill="rgba(232, 219, 12, 0.30)"
 				/>
+				<text
+					x={innerChartWidth - 10}
+					y={yScale(baselineCancer) + 20}
+					text-anchor="end"
+					class="baseline-text"
+				>
+					Baseline Cancer
+				</text>
 				<line
 					x2={innerChartWidth}
 					y1={yScale(baselineCancer)}
@@ -260,5 +268,10 @@
 			flex-direction: column;
 			align-items: center;
 		}
+	}
+
+	.baseline-text {
+		font-size: 1.2rem;
+		fill: #464646;
 	}
 </style>
