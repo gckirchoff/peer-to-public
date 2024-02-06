@@ -160,17 +160,6 @@
 			<input bind:value={yearsFromNowToStartPrevention} type="range" min={0} max={55} step={1} />
 		</label>
 	</div>
-	<div class="results-container">
-		<Body1>
-			{numberFormatter(casesThatHaveOccuredSoFar)} extra cases have occured
-		</Body1>
-		<Body1>
-			{numberFormatter(casesYetToCome)} cases to come
-		</Body1>
-		<Body1>
-			{numberFormatter(totalExtraCases)} total extra cases
-		</Body1>
-	</div>
 	<div class="chart-container" bind:clientWidth={width}>
 		<svg {width} {height}>
 			<g style:transform="translate({margin.left}px, {margin.top}px)">
@@ -233,6 +222,17 @@
 					stroke-width={2}
 					stroke="red"
 				/>
+				<g style:transform="translate({xScale(dateOfPrevention)}px, 25px)">
+					<text x={10} y={0} dominant-baseline="middle">
+						{numberFormatter(casesThatHaveOccuredSoFar)} extra cases so far
+					</text>
+					<text x={10} y={25} dominant-baseline="middle">
+						{numberFormatter(casesYetToCome)} extra cases to come
+					</text>
+					<text x={10} y={50} dominant-baseline="middle">
+						{numberFormatter(totalExtraCases)} total extra cases
+					</text>
+				</g>
 			</g>
 		</svg>
 	</div>
@@ -246,8 +246,8 @@
 	}
 
 	.inputs-container {
-		display: flex;
-		justify-content: space-between;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
 		margin-bottom: var(--spacing-8);
 
 		label {
