@@ -157,7 +157,7 @@
 			<Body2>
 				Start prevention on {dateOfPrevention.toLocaleDateString()}:
 			</Body2>
-			<input bind:value={yearsFromNowToStartPrevention} type="range" min={0} max={15} step={1} />
+			<input bind:value={yearsFromNowToStartPrevention} type="range" min={0} max={55} step={1} />
 		</label>
 	</div>
 	<div class="results-container">
@@ -165,7 +165,7 @@
 			{numberFormatter(casesThatHaveOccuredSoFar)} extra cases have occured
 		</Body1>
 		<Body1>
-			{numberFormatter(casesYetToCome)} cases yet to come
+			{numberFormatter(casesYetToCome)} cases to come
 		</Body1>
 		<Body1>
 			{numberFormatter(totalExtraCases)} total extra cases
