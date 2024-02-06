@@ -111,7 +111,7 @@
 	$: innerChartHeight = height - margin.top - margin.bottom;
 
 	$: xScale = scaleTime()
-		.domain([beginningOfPandemic, new Date('2100/05/12')] as [Date, Date])
+		.domain([beginningOfPandemic, new Date('2090/05/12')] as [Date, Date])
 		.range([0, innerChartWidth])
 		.nice();
 
@@ -137,6 +137,11 @@
 		.x((d) => xScale(xAccessor(d)))
 		.y((d) => yScale(yAccessor(d)))
 		.curve(curveNatural);
+
+	$: indexOfLastPointToRender = summedDistributions.findIndex(
+		({ date }) => date >= xScale.domain()[1],
+	);
+	$: renderedSummedCases = summedDistributions.slice(0, indexOfLastPointToRender);
 </script>
 
 <div>
@@ -157,7 +162,7 @@
 			<Body2>
 				Start prevention on {dateOfPrevention.toLocaleDateString()}:
 			</Body2>
-			<input bind:value={yearsFromNowToStartPrevention} type="range" min={0} max={55} step={1} />
+			<input bind:value={yearsFromNowToStartPrevention} type="range" min={0} max={30} step={1} />
 		</label>
 	</div>
 	<div class="chart-container" bind:clientWidth={width}>
@@ -191,14 +196,14 @@
 				/> -->
 					<Line
 						type="area"
-						data={summedDistributions}
+						data={renderedSummedCases}
 						{xAccessorScaled}
 						{yAccessorScaled}
 						y0AccessorScaled={yScale(baselineCancer)}
 						style="fill: url(#{extraCasesGradientId})"
 					/>
 					<Line
-						data={summedDistributions}
+						data={renderedSummedCases}
 						{xAccessorScaled}
 						{yAccessorScaled}
 						style="stroke: #67a4e0;"
