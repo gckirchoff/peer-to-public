@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "forecast-chart.png"
 date: 'Tue Feb 06 2024 14:30:13 GMT-0500 (Eastern Standard Time)'
 published: true
-updated: 'Tue Feb 06 2024 16:50:21 GMT-0500 (Eastern Standard Time)'
+updated: 'Wed Feb 07 2024 12:42:35 GMT-0500 (Eastern Standard Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -23,7 +23,7 @@ There are two things to be aware of with this. If someone says they got a mild c
 
 SARS-CoV-2 spread across the globe at the beginning of 2020. 4 years feels like a long time, but is a relatively short period for certain issues to arise. In addition, we are seeing signs that Covid-19 can cause considerable long-term damage and is even capable of viral persistence. One long-term problem with delayed onset of particular concern is cancer.
 
-SARS-CoV-2 is capable of affecting many mechanisms that play crucial roles in the onset of cancer. It can affect cell cycle regulation. An example of this is the affect of SARS-CoV-2's nsp1 protein inteteracting with our Alpha-DNA polymerase complexes, which are necesary for initiating DNA replication. It can affect our inflamation/proliferation signaling pathways. The N protein interacts with several host factors such as LARP1, which is particularly dysregulated in cancers related to viral infections. These studies are mechanistic and do not state that cancer *will* happen. However, we may need to rely on this type of data more than usual because if we don't, *we* will be the data.
+SARS-CoV-2 is capable of affecting [many mechanisms](https://www.sciencedirect.com/science/article/pii/S0300908423001360?fbclid=IwAR2SrX8vKYxZf0_-Ia83L3TEu_1EIbVjJLpTv4Sahn93U5PGmX6i6TCKlbc#sec4) that play crucial roles in the onset of cancer. It can affect cell cycle regulation. An example of this is the affect of SARS-CoV-2's nsp1 protein inteteracting with our Alpha-DNA polymerase complexes, which are necesary for initiating DNA replication. It can affect our inflamation/proliferation signaling pathways. The N protein interacts with several host factors such as LARP1, which is particularly dysregulated in cancers related to viral infections. These studies are mechanistic and do not state that cancer *will* happen. However, we may need to rely on this type of data more than usual because if we don't, *we* will be the data.
 
 A final point to express how poor a decision it is to wait for observational data to tell how much of a problem this is is that once we have visible data to prove that Covid-19 leads to cancer more often than we would like, it is far too late for far too many. We may only be just starting at that point.
 
