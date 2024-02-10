@@ -1,4 +1,4 @@
-import type { PredictedCases } from './constants';
+import type { Distribution, PredictedCases } from './constants';
 
 export const getExtraCases = (hazardRatio: number, baseline: number): number =>
 	baseline * (hazardRatio - 1);
@@ -128,4 +128,49 @@ export const createPredictedCases = ({
 		casesOnDates.push({ date: delayedOnsetBin, cases: cancerCasesOnDate });
 	}
 	return casesOnDates;
+};
+
+interface GetDistributionsArgs {
+	beginningOfPandemic: Date;
+	dateOfPrevention: Date;
+	finalDateToMeasureTo: Date;
+	extraCases: number;
+	delay: number;
+	stdDeviation: number;
+}
+
+export const getDistributions = ({
+	beginningOfPandemic,
+	dateOfPrevention,
+	finalDateToMeasureTo,
+	extraCases,
+	delay,
+	stdDeviation,
+}: GetDistributionsArgs): Distribution[] => {
+	const yearsDifference = dateOfPrevention.getFullYear() - beginningOfPandemic.getFullYear();
+	const newDistributions: Distribution[] = [];
+	for (let i = 0; i <= yearsDifference; i++) {
+		const yearOfInfections = beginningOfPandemic.getFullYear() + i;
+		const infectionsBinDate =
+			i === yearsDifference ? dateOfPrevention : new Date(yearOfInfections, 11, 31);
+		const futureMeanIncidenceDate = addYearsToDate(infectionsBinDate, delay);
+
+		const casesOnDates = createPredictedCases({
+			infectionsBinDate,
+			futureMeanIncidenceDate,
+			finalDateToMeasureTo,
+			extraCases,
+			stdDeviation,
+		});
+
+		const distribution: Distribution = {
+			start: infectionsBinDate,
+			mean: futureMeanIncidenceDate,
+			predictedCases: casesOnDates,
+			standardDeviation: stdDeviation,
+		};
+
+		newDistributions.push(distribution);
+	}
+	return newDistributions;
 };

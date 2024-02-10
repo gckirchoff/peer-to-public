@@ -6,8 +6,8 @@
 	import AxisY from './AxisY/AxisY.svelte';
 	import Line from './Line/Line.svelte';
 	import Gradient from './Gradient/Gradient.svelte';
-	import type { Distribution, PredictedCases, Mode } from './constants';
-	import { baselineCancer, beginningOfPandemic } from './constants';
+	import type { Distribution, PredictedCases, Mode, PreventionDeterminant } from './constants';
+	import { baselineCancer, beginningOfPandemic, endOfChart } from './constants';
 	import {
 		getExtraCases,
 		addYearsToDate,
@@ -16,12 +16,14 @@
 		getCasesUpToDate,
 		getCumulativeCasesUpToDate,
 		createPredictedCases,
+		getDistributions,
 	} from './logic';
 
 	const numberFormatter = format('.2s');
 	const extraCasesGradientId = 'extra-cases-gradient';
 	const gradientColors = ['#72ade8', 'rgb(236, 232, 253)'];
 
+	let preventionDeterminant: PreventionDeterminant = 'date';
 	let yearsFromNowToStartPrevention = 5;
 	let panicThreshold = 0.05;
 	let hazardRatio = 1.5;
@@ -40,52 +42,39 @@
 
 	$: {
 		const extraCancer = getExtraCases(hazardRatio, baselineCancer);
-		const yearsDifference = dateOfPrevention.getFullYear() - beginningOfPandemic.getFullYear();
-		const newDistributions: Distribution[] = [];
-		for (let i = 0; i <= yearsDifference; i++) {
-			const yearOfInfections = beginningOfPandemic.getFullYear() + i;
-			const infectionsBinDate =
-				i === yearsDifference ? dateOfPrevention : new Date(yearOfInfections, 11, 31);
-			const futureMeanIncidenceDate = addYearsToDate(infectionsBinDate, delay);
 
-			const casesOnDates = createPredictedCases({
-				infectionsBinDate,
-				futureMeanIncidenceDate,
+		if (preventionDeterminant === 'date') {
+			const newDistributions = getDistributions({
+				beginningOfPandemic,
+				dateOfPrevention,
 				finalDateToMeasureTo,
 				extraCases: extraCancer,
+				delay,
 				stdDeviation: standardDeviation,
 			});
+			distributions = newDistributions;
 
-			const distribution: Distribution = {
-				start: infectionsBinDate,
-				mean: futureMeanIncidenceDate,
-				predictedCases: casesOnDates,
-				standardDeviation,
-			};
+			const newSummedDistributions: PredictedCases[] = [];
+			const yearsOfEntireChart =
+				finalDateToMeasureTo.getFullYear() - beginningOfPandemic.getFullYear();
+			for (let i = 0; i <= yearsOfEntireChart; i++) {
+				const yearOfCurrentDate = beginningOfPandemic.getFullYear() + i;
+				const currentDate =
+					i === yearsOfEntireChart ? finalDateToMeasureTo : new Date(yearOfCurrentDate, 11, 31);
 
-			newDistributions.push(distribution);
+				const totalCases = newDistributions.reduce((acc: number, distribution) => {
+					const predictedCases = distribution.predictedCases.find(
+						({ date }) => date.getTime() === currentDate.getTime(),
+					);
+					acc += predictedCases?.cases ?? 0;
+					return acc;
+				}, 0);
+
+				newSummedDistributions.push({ date: currentDate, cases: totalCases });
+			}
+			summedDistributions = newSummedDistributions;
+		} else {
 		}
-		distributions = newDistributions;
-
-		const newSummedDistributions: PredictedCases[] = [];
-		const yearsOfEntireChart =
-			finalDateToMeasureTo.getFullYear() - beginningOfPandemic.getFullYear();
-		for (let i = 0; i <= yearsOfEntireChart; i++) {
-			const yearOfCurrentDate = beginningOfPandemic.getFullYear() + i;
-			const currentDate =
-				i === yearsOfEntireChart ? finalDateToMeasureTo : new Date(yearOfCurrentDate, 11, 31);
-
-			const totalCases = newDistributions.reduce((acc: number, distribution) => {
-				const predictedCases = distribution.predictedCases.find(
-					({ date }) => date.getTime() === currentDate.getTime(),
-				);
-				acc += predictedCases?.cases ?? 0;
-				return acc;
-			}, 0);
-
-			newSummedDistributions.push({ date: currentDate, cases: totalCases });
-		}
-		summedDistributions = newSummedDistributions;
 	}
 
 	const xAccessor = (d: PredictedCases) => d.date;
@@ -105,7 +94,7 @@
 	$: innerChartHeight = height - margin.top - margin.bottom;
 
 	$: xScale = scaleTime()
-		.domain([beginningOfPandemic, new Date('2090/05/12')] as [Date, Date])
+		.domain([beginningOfPandemic, endOfChart])
 		.range([0, innerChartWidth])
 		.nice();
 
@@ -154,9 +143,9 @@
 		</label>
 		<label class="prevention-determinant">
 			<Body2>Effective prevention date determined by</Body2>
-			<select>
-				<option>Date</option>
-				<option>Panic Threshold</option>
+			<select bind:value={preventionDeterminant}>
+				<option value="date">Date</option>
+				<option value="panic">Panic Threshold</option>
 			</select>
 		</label>
 		<label class="range-input">
