@@ -195,7 +195,7 @@
 				{/if}
 				<select bind:value={preventionDeterminant}>
 					<option value="date">date of prevention</option>
-					<option value="panic">cases above baseline</option>
+					<option value="panic">extra cases panic threshold</option>
 				</select>
 			</div>
 			{#if preventionDeterminant === 'date'}
