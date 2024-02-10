@@ -210,7 +210,7 @@
 			{#if preventionDeterminant === 'date'}
 				<input bind:value={yearsFromNowToStartPrevention} type="range" min={0} max={30} step={1} />
 			{:else}
-				<input bind:value={panicThreshold} type="range" min={0} max={0.5} step={0.01} />
+				<input bind:value={panicThreshold} type="range" min={0} max={3} step={0.01} />
 			{/if}
 		</label>
 		<label class="range-input">
@@ -315,8 +315,7 @@
 						x2={innerChartWidth}
 						y2={yScale(baselineCancer * (1 + panicThreshold))}
 						stroke-width={2}
-						stroke-dasharray="20,15"
-						stroke="#a759f0"
+						stroke="red"
 					/>
 					{#if panicPredictionPoint}
 						<line
@@ -325,7 +324,7 @@
 							x2={xScale(panicPredictionPoint.date)}
 							y2={yScale(baselineCancer)}
 							stroke-width={2}
-							stroke="red"
+							stroke="grey"
 						/>
 						<g
 							style:transform="translate({preventionStartInfoBoxXPosition}px, 135px)"
