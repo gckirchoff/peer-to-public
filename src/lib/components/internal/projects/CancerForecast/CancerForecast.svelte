@@ -15,6 +15,7 @@
 		getCasesOnDate,
 		getCasesUpToDate,
 		getCumulativeCasesUpToDate,
+		createPredictedCases,
 	} from './logic';
 
 	const numberFormatter = format('.2s');
@@ -22,6 +23,7 @@
 	const gradientColors = ['#72ade8', 'rgb(236, 232, 253)'];
 
 	let yearsFromNowToStartPrevention = 5;
+	let panicThreshold = 0.05;
 	let hazardRatio = 1.5;
 	let delay = 20;
 	let mode: Mode = 'summed';
@@ -46,21 +48,13 @@
 				i === yearsDifference ? dateOfPrevention : new Date(yearOfInfections, 11, 31);
 			const futureMeanIncidenceDate = addYearsToDate(infectionsBinDate, delay);
 
-			const casesOnDates: PredictedCases[] = [];
-			const yearsUntilEndOfMeasuring =
-				finalDateToMeasureTo.getFullYear() - infectionsBinDate.getFullYear();
-			for (let i = 0; i <= yearsUntilEndOfMeasuring; i++) {
-				const yearOfCaseOnset = infectionsBinDate.getFullYear() + i;
-				const delayedOnsetBin =
-					i === yearsUntilEndOfMeasuring ? finalDateToMeasureTo : new Date(yearOfCaseOnset, 11, 31);
-				const cancerCasesOnDate = getCasesOnDate(
-					delayedOnsetBin,
-					futureMeanIncidenceDate,
-					standardDeviation,
-					extraCancer,
-				);
-				casesOnDates.push({ date: delayedOnsetBin, cases: cancerCasesOnDate });
-			}
+			const casesOnDates = createPredictedCases({
+				infectionsBinDate,
+				futureMeanIncidenceDate,
+				finalDateToMeasureTo,
+				extraCases: extraCancer,
+				stdDeviation: standardDeviation,
+			});
 
 			const distribution: Distribution = {
 				start: infectionsBinDate,
@@ -146,19 +140,26 @@
 
 <div>
 	<div class="inputs-container">
-		<label>
+		<label class="range-input">
 			<Body2>
 				{hazardRatio} Hazard Ratio:
 			</Body2>
 			<input bind:value={hazardRatio} type="range" min={1} max={10} step={0.1} />
 		</label>
-		<label>
+		<label class="range-input">
 			<Body2>
 				{delay} year delay:
 			</Body2>
 			<input bind:value={delay} type="range" min={5} max={50} step={1} />
 		</label>
-		<label>
+		<label class="prevention-determinant">
+			<Body2>Effective prevention date determined by</Body2>
+			<select>
+				<option>Date</option>
+				<option>Panic Threshold</option>
+			</select>
+		</label>
+		<label class="range-input">
 			<Body2>
 				Start prevention on {dateOfPrevention.toLocaleDateString()}:
 			</Body2>
@@ -263,7 +264,7 @@
 		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 		margin-bottom: var(--spacing-8);
 
-		label {
+		.range-input {
 			display: flex;
 			flex-direction: column;
 			align-items: center;

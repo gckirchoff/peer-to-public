@@ -96,3 +96,36 @@ export const addYearsToDate = (date: Date, years: number): Date => {
 	futureDate.setFullYear(futureDate.getFullYear() + years);
 	return futureDate;
 };
+
+interface CreatePredictedCasesArgs {
+	infectionsBinDate: Date;
+	futureMeanIncidenceDate: Date;
+	finalDateToMeasureTo: Date;
+	extraCases: number;
+	stdDeviation: number;
+}
+
+export const createPredictedCases = ({
+	infectionsBinDate,
+	futureMeanIncidenceDate,
+	finalDateToMeasureTo,
+	extraCases,
+	stdDeviation,
+}: CreatePredictedCasesArgs): PredictedCases[] => {
+	const casesOnDates: PredictedCases[] = [];
+	const yearsUntilEndOfMeasuring =
+		finalDateToMeasureTo.getFullYear() - infectionsBinDate.getFullYear();
+	for (let i = 0; i <= yearsUntilEndOfMeasuring; i++) {
+		const yearOfCaseOnset = infectionsBinDate.getFullYear() + i;
+		const delayedOnsetBin =
+			i === yearsUntilEndOfMeasuring ? finalDateToMeasureTo : new Date(yearOfCaseOnset, 11, 31);
+		const cancerCasesOnDate = getCasesOnDate(
+			delayedOnsetBin,
+			futureMeanIncidenceDate,
+			stdDeviation,
+			extraCases,
+		);
+		casesOnDates.push({ date: delayedOnsetBin, cases: cancerCasesOnDate });
+	}
+	return casesOnDates;
+};
