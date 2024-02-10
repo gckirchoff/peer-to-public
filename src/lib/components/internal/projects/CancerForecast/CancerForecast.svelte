@@ -127,7 +127,7 @@
 	let height = 550;
 
 	const margin = {
-		top: 60,
+		top: 0,
 		left: 45,
 		bottom: 50,
 		right: 30,
@@ -184,21 +184,23 @@
 			</Body2>
 			<input bind:value={delay} type="range" min={5} max={50} step={1} />
 		</label>
-		<label class="prevention-determinant">
-			<Body2>Effective prevention date determined by</Body2>
-			<select bind:value={preventionDeterminant}>
-				<option value="date">Date</option>
-				<option value="panic">Panic Threshold</option>
-			</select>
-		</label>
 		<label class="range-input">
+			<div class="determinant-selector">
+				{#if preventionDeterminant === 'date'}
+					<Body2>
+						{dateOfPrevention.toLocaleDateString()}
+					</Body2>
+				{:else}
+					<Body2>{Math.round(panicThreshold * 100)}%</Body2>
+				{/if}
+				<select bind:value={preventionDeterminant}>
+					<option value="date">date of prevention</option>
+					<option value="panic">cases above baseline</option>
+				</select>
+			</div>
 			{#if preventionDeterminant === 'date'}
-				<Body2>
-					Start prevention on {dateOfPrevention.toLocaleDateString()}:
-				</Body2>
 				<input bind:value={yearsFromNowToStartPrevention} type="range" min={0} max={30} step={1} />
 			{:else}
-				<Body2>{Math.round(panicThreshold * 100)}% Extra Cases above baseline:</Body2>
 				<input bind:value={panicThreshold} type="range" min={0} max={0.5} step={0.01} />
 			{/if}
 		</label>
@@ -313,11 +315,18 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 		margin-bottom: var(--spacing-8);
+		row-gap: var(--spacing-8);
 
 		.range-input {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			row-gap: var(--spacing-4);
+
+			.determinant-selector {
+				display: flex;
+				gap: var(--spacing-8);
+			}
 		}
 	}
 
