@@ -189,8 +189,8 @@
 					<Body2>{Math.round(panicThreshold * 100)}%</Body2>
 				{/if}
 				<select bind:value={preventionDeterminant}>
-					<option value="date">date of prevention</option>
 					<option value="panic">extra cases panic threshold</option>
+					<option value="date">date of prevention</option>
 				</select>
 			</div>
 			{#if preventionDeterminant === 'date'}
@@ -298,25 +298,36 @@
 					<line
 						x1={0}
 						y1={yScale(baselineCancer * (1 + panicThreshold))}
-						x2={panicPredictionPoint?.date
-							? Math.min(xScale(panicPredictionPoint.date), innerChartWidth)
-							: innerChartWidth}
+						x2={innerChartWidth}
 						y2={yScale(baselineCancer * (1 + panicThreshold))}
 						stroke-width={2}
-						stroke="red"
+						stroke-dasharray="20,15"
+						stroke="#a759f0"
 					/>
+					{#if panicPredictionPoint}
+						<line
+							x1={xScale(panicPredictionPoint.date)}
+							y1={125}
+							x2={xScale(panicPredictionPoint.date)}
+							y2={yScale(baselineCancer)}
+							stroke-width={2}
+							stroke="red"
+						/>
+						<g style:transform="translate({xScale(panicPredictionPoint.date)}px, 135px)">
+							<text x={10} y={0} dominant-baseline="middle">
+								Prevention starts {panicPredictionPoint.date.toLocaleDateString()}
+							</text>
+						</g>
+					{/if}
 					<g style:transform="translate(50px, 25px)">
 						{#if panicPredictionPoint}
 							<text x={10} y={0} dominant-baseline="middle">
-								If panic leads to perfect prevention on {panicPredictionPoint.date.toLocaleDateString()}:
-							</text>
-							<text x={10} y={25} dominant-baseline="middle">
 								• {numberFormatter(casesThatHaveOccuredSoFar)} extra cases so far
 							</text>
-							<text x={10} y={50} dominant-baseline="middle">
+							<text x={10} y={25} dominant-baseline="middle">
 								• {numberFormatter(casesYetToCome)} extra cases to come
 							</text>
-							<text x={10} y={75} dominant-baseline="middle">
+							<text x={10} y={50} dominant-baseline="middle">
 								• {numberFormatter(totalExtraCases)} total extra cases
 							</text>
 						{:else}
@@ -330,6 +341,16 @@
 							{/if}
 						{/if}
 					</g>
+				{/if}
+				{#if preventionDeterminant === 'panic'}
+					<text
+						x={innerChartWidth - 10}
+						y={yScale(baselineCancer * (1 + panicThreshold)) - 10}
+						text-anchor="end"
+						class="baseline-text"
+					>
+						Panic Threshold
+					</text>
 				{/if}
 			</g>
 		</svg>
