@@ -20,7 +20,7 @@
 		createSummedDistribution,
 	} from './logic';
 
-	const numberFormatter = format('.2s');
+	const numberFormatter = (num: number): string => format('.2s')(num).replace('G', 'B');
 	const extraCasesGradientId = 'extra-cases-gradient';
 	const gradientColors = ['#72ade8', 'rgb(236, 232, 253)'];
 
@@ -40,7 +40,14 @@
 	$: standardDeviation = delay / 3;
 	$: finalDateToMeasureTo = addYearsToDate(dateOfPrevention, delay + standardDeviation * 3);
 	$: totalExtraCases = Math.floor(summedDistributions.reduce((acc, { cases }) => acc + cases, 0));
-	$: casesThatHaveOccuredSoFar = getCumulativeCasesUpToDate(dateOfPrevention, summedDistributions);
+	$: casesThatHaveOccuredSoFar = getCumulativeCasesUpToDate(
+		preventionDeterminant === 'date'
+			? dateOfPrevention
+			: panicPredictionPoint
+			? panicPredictionPoint.date
+			: endOfChart,
+		summedDistributions,
+	);
 	$: casesYetToCome = totalExtraCases - casesThatHaveOccuredSoFar;
 
 	$: {
@@ -127,7 +134,7 @@
 	let height = 550;
 
 	const margin = {
-		top: 0,
+		top: 10,
 		left: 45,
 		bottom: 50,
 		right: 30,
@@ -298,6 +305,29 @@
 						stroke-width={2}
 						stroke="red"
 					/>
+					<g style:transform="translate(50px, 25px)">
+						{#if panicPredictionPoint}
+							<text x={10} y={0} dominant-baseline="middle">
+								If panic leads to perfect prevention on {panicPredictionPoint.date.toLocaleDateString()}:
+							</text>
+							<text x={10} y={25} dominant-baseline="middle">
+								• {numberFormatter(casesThatHaveOccuredSoFar)} extra cases so far
+							</text>
+							<text x={10} y={50} dominant-baseline="middle">
+								• {numberFormatter(casesYetToCome)} extra cases to come
+							</text>
+							<text x={10} y={75} dominant-baseline="middle">
+								• {numberFormatter(totalExtraCases)} total extra cases
+							</text>
+						{:else}
+							<text x={10} y={0} dominant-baseline="middle">
+								We will have {numberFormatter(
+									Math.floor(renderedSummedCases.reduce((acc, { cases }) => acc + cases, 0)),
+								)} extra cases by {renderedSummedCases.at(-1)?.date.toLocaleDateString()}
+							</text>
+							<text x={10} y={25}>This is the new normal</text>
+						{/if}
+					</g>
 				{/if}
 			</g>
 		</svg>
