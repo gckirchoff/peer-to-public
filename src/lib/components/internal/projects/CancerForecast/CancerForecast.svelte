@@ -349,13 +349,13 @@
 								• {numberFormatter(totalExtraCases)} total extra cases
 							</text>
 						{:else}
-							<text x={10} y={0} dominant-baseline="middle">
+							<text x={0} y={0} dominant-baseline="middle">
 								We will have {numberFormatter(
 									Math.floor(renderedSummedCases.reduce((acc, { cases }) => acc + cases, 0)),
 								)} extra cases by {renderedSummedCases.at(-1)?.date.toLocaleDateString()}
 							</text>
 							{#if hazardRatio > 1}
-								<text x={10} y={25}>This is the new normal</text>
+								<text x={0} y={25}>This is the new normal</text>
 							{/if}
 						{/if}
 					</g>
