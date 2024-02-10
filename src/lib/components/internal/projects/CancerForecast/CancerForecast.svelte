@@ -189,6 +189,8 @@
 				: xPosition;
 		}
 	}
+
+	$: panicThresholdYPosition = yScale(baselineCancer * (1 + panicThreshold));
 </script>
 
 <div>
@@ -311,16 +313,16 @@
 				{:else}
 					<line
 						x1={0}
-						y1={yScale(baselineCancer * (1 + panicThreshold))}
+						y1={panicThresholdYPosition}
 						x2={innerChartWidth}
-						y2={yScale(baselineCancer * (1 + panicThreshold))}
+						y2={panicThresholdYPosition}
 						stroke-width={2}
 						stroke="red"
 					/>
 					{#if panicPredictionPoint}
 						<line
 							x1={xScale(panicPredictionPoint.date)}
-							y1={125}
+							y1={Math.min(panicThresholdYPosition, 125)}
 							x2={xScale(panicPredictionPoint.date)}
 							y2={yScale(baselineCancer)}
 							stroke-width={2}
