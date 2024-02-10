@@ -26,10 +26,12 @@
 
 	let preventionDeterminant: PreventionDeterminant = 'panic';
 	let yearsFromNowToStartPrevention = 5;
-	let panicThreshold = 0.05;
 	let hazardRatio = 1.5;
 	let delay = 20;
 	let mode: Mode = 'summed';
+
+	let panicThreshold = 0.05;
+	let panicPredictionPoint: PredictedCases | null = null;
 
 	let distributions: Distribution[] = [];
 	let summedDistributions: PredictedCases[] = [];
@@ -84,20 +86,21 @@
 				({ cases }) => cases + baselineCancer > panicExtraCasesAmount,
 			);
 
-			const panicDateOfPrevention = worstCaseSum[panicIndex]?.date;
+			const pointOfPanic = worstCaseSum[panicIndex];
 
-			if (!panicDateOfPrevention) {
+			if (!pointOfPanic) {
+				panicPredictionPoint = null;
 				distributions = allDistributions;
 				summedDistributions = worstCaseSum;
 			} else {
 				const panicDateToMeasureTo = addYearsToDate(
-					panicDateOfPrevention,
+					pointOfPanic.date,
 					delay + standardDeviation * 3,
 				);
 
 				const distributionsUntilPanic = getDistributions({
 					beginningOfPandemic,
-					dateOfPrevention: panicDateOfPrevention,
+					dateOfPrevention: pointOfPanic.date,
 					finalDateToMeasureTo: panicDateToMeasureTo,
 					extraCases: extraCancer,
 					delay,
@@ -110,6 +113,7 @@
 					distributions: distributionsUntilPanic,
 				});
 
+				panicPredictionPoint = pointOfPanic;
 				distributions = distributionsUntilPanic;
 				summedDistributions = panicSummedDistributions;
 			}
@@ -188,10 +192,15 @@
 			</select>
 		</label>
 		<label class="range-input">
-			<Body2>
-				Start prevention on {dateOfPrevention.toLocaleDateString()}:
-			</Body2>
-			<input bind:value={yearsFromNowToStartPrevention} type="range" min={0} max={30} step={1} />
+			{#if preventionDeterminant === 'date'}
+				<Body2>
+					Start prevention on {dateOfPrevention.toLocaleDateString()}:
+				</Body2>
+				<input bind:value={yearsFromNowToStartPrevention} type="range" min={0} max={30} step={1} />
+			{:else}
+				<Body2>{Math.round(panicThreshold * 100)}% Extra Cases above baseline:</Body2>
+				<input bind:value={panicThreshold} type="range" min={0} max={0.5} step={0.01} />
+			{/if}
 		</label>
 	</div>
 	<div class="chart-container" bind:clientWidth={width}>
@@ -256,25 +265,38 @@
 						/>
 					{/each}
 				{/if}
-				<line
-					x1={xScale(dateOfPrevention)}
-					y1={15}
-					x2={xScale(dateOfPrevention)}
-					y2={yScale(baselineCancer)}
-					stroke-width={2}
-					stroke="red"
-				/>
-				<g style:transform="translate({xScale(dateOfPrevention)}px, 25px)">
-					<text x={10} y={0} dominant-baseline="middle">
-						{numberFormatter(casesThatHaveOccuredSoFar)} extra cases so far
-					</text>
-					<text x={10} y={25} dominant-baseline="middle">
-						{numberFormatter(casesYetToCome)} extra cases to come
-					</text>
-					<text x={10} y={50} dominant-baseline="middle">
-						{numberFormatter(totalExtraCases)} total extra cases
-					</text>
-				</g>
+				{#if preventionDeterminant === 'date'}
+					<line
+						x1={xScale(dateOfPrevention)}
+						y1={15}
+						x2={xScale(dateOfPrevention)}
+						y2={yScale(baselineCancer)}
+						stroke-width={2}
+						stroke="red"
+					/>
+					<g style:transform="translate({xScale(dateOfPrevention)}px, 25px)">
+						<text x={10} y={0} dominant-baseline="middle">
+							{numberFormatter(casesThatHaveOccuredSoFar)} extra cases so far
+						</text>
+						<text x={10} y={25} dominant-baseline="middle">
+							{numberFormatter(casesYetToCome)} extra cases to come
+						</text>
+						<text x={10} y={50} dominant-baseline="middle">
+							{numberFormatter(totalExtraCases)} total extra cases
+						</text>
+					</g>
+				{:else}
+					<line
+						x1={0}
+						y1={yScale(baselineCancer * (1 + panicThreshold))}
+						x2={panicPredictionPoint?.date
+							? Math.min(xScale(panicPredictionPoint.date), innerChartWidth)
+							: innerChartWidth}
+						y2={yScale(baselineCancer * (1 + panicThreshold))}
+						stroke-width={2}
+						stroke="red"
+					/>
+				{/if}
 			</g>
 		</svg>
 	</div>
