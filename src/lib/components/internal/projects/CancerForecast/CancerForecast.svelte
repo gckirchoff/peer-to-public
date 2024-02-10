@@ -314,8 +314,9 @@
 							stroke="red"
 						/>
 						<g style:transform="translate({xScale(panicPredictionPoint.date)}px, 135px)">
-							<text x={10} y={0} dominant-baseline="middle">
-								Prevention starts {panicPredictionPoint.date.toLocaleDateString()}
+							<text x={10} y={0} dominant-baseline="middle">Prevention starts:</text>
+							<text x={10} y={18} dominant-baseline="middle">
+								{panicPredictionPoint.date.toLocaleDateString()}
 							</text>
 						</g>
 					{/if}
