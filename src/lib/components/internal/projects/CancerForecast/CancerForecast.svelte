@@ -325,7 +325,9 @@
 									Math.floor(renderedSummedCases.reduce((acc, { cases }) => acc + cases, 0)),
 								)} extra cases by {renderedSummedCases.at(-1)?.date.toLocaleDateString()}
 							</text>
-							<text x={10} y={25}>This is the new normal</text>
+							{#if hazardRatio > 1}
+								<text x={10} y={25}>This is the new normal</text>
+							{/if}
 						{/if}
 					</g>
 				{/if}
