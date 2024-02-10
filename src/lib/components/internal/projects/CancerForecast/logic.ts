@@ -174,3 +174,33 @@ export const getDistributions = ({
 	}
 	return newDistributions;
 };
+
+interface CreateSummedDistributionArgs {
+	beginningOfPandemic: Date;
+	finalDateToMeasureTo: Date;
+	distributions: Distribution[];
+}
+
+export const createSummedDistribution = ({
+	beginningOfPandemic,
+	finalDateToMeasureTo,
+	distributions,
+}: CreateSummedDistributionArgs): PredictedCases[] => {
+	const newSummedDistributions: PredictedCases[] = [];
+	const yearsOfEntireChart = finalDateToMeasureTo.getFullYear() - beginningOfPandemic.getFullYear();
+	for (let i = 0; i <= yearsOfEntireChart; i++) {
+		const yearOfCurrentDate = beginningOfPandemic.getFullYear() + i;
+		const currentDate =
+			i === yearsOfEntireChart ? finalDateToMeasureTo : new Date(yearOfCurrentDate, 11, 31);
+
+		const totalCases = distributions.reduce((acc: number, distribution) => {
+			const predictedCases = distribution.predictedCases.find(
+				({ date }) => date.getTime() === currentDate.getTime(),
+			);
+			acc += predictedCases?.cases ?? 0;
+			return acc;
+		}, 0);
+		newSummedDistributions.push({ date: currentDate, cases: totalCases });
+	}
+	return newSummedDistributions;
+};
