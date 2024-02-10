@@ -180,18 +180,6 @@
 <div>
 	<div class="inputs-container">
 		<label class="range-input">
-			<Body2>
-				{hazardRatio} Hazard Ratio:
-			</Body2>
-			<input bind:value={hazardRatio} type="range" min={1} max={10} step={0.1} />
-		</label>
-		<label class="range-input">
-			<Body2>
-				{delay} year delay:
-			</Body2>
-			<input bind:value={delay} type="range" min={5} max={50} step={1} />
-		</label>
-		<label class="range-input">
 			<div class="determinant-selector">
 				{#if preventionDeterminant === 'date'}
 					<Body2>
@@ -210,6 +198,18 @@
 			{:else}
 				<input bind:value={panicThreshold} type="range" min={0} max={0.5} step={0.01} />
 			{/if}
+		</label>
+		<label class="range-input">
+			<Body2>
+				{hazardRatio} Hazard Ratio:
+			</Body2>
+			<input bind:value={hazardRatio} type="range" min={1} max={10} step={0.1} />
+		</label>
+		<label class="range-input">
+			<Body2>
+				{delay} year delay:
+			</Body2>
+			<input bind:value={delay} type="range" min={5} max={50} step={1} />
 		</label>
 	</div>
 	<div class="chart-container" bind:clientWidth={width}>
