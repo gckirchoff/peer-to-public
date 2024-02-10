@@ -24,7 +24,7 @@
 	const extraCasesGradientId = 'extra-cases-gradient';
 	const gradientColors = ['#72ade8', 'rgb(236, 232, 253)'];
 
-	let preventionDeterminant: PreventionDeterminant = 'date';
+	let preventionDeterminant: PreventionDeterminant = 'panic';
 	let yearsFromNowToStartPrevention = 5;
 	let panicThreshold = 0.05;
 	let hazardRatio = 1.5;
@@ -62,6 +62,57 @@
 			});
 			summedDistributions = newSummedDistributions;
 		} else {
+			const fullScopeDate = addYearsToDate(endOfChart, 10);
+
+			const allDistributions = getDistributions({
+				beginningOfPandemic,
+				dateOfPrevention: fullScopeDate,
+				finalDateToMeasureTo: fullScopeDate,
+				extraCases: extraCancer,
+				delay,
+				stdDeviation: standardDeviation,
+			});
+
+			const worstCaseSum = createSummedDistribution({
+				beginningOfPandemic,
+				finalDateToMeasureTo: fullScopeDate,
+				distributions: allDistributions,
+			});
+
+			const panicExtraCasesAmount = baselineCancer * (1 + panicThreshold);
+			const panicIndex = worstCaseSum.findIndex(
+				({ cases }) => cases + baselineCancer > panicExtraCasesAmount,
+			);
+
+			const panicDateOfPrevention = worstCaseSum[panicIndex]?.date;
+
+			if (!panicDateOfPrevention) {
+				distributions = allDistributions;
+				summedDistributions = worstCaseSum;
+			} else {
+				const panicDateToMeasureTo = addYearsToDate(
+					panicDateOfPrevention,
+					delay + standardDeviation * 3,
+				);
+
+				const distributionsUntilPanic = getDistributions({
+					beginningOfPandemic,
+					dateOfPrevention: panicDateOfPrevention,
+					finalDateToMeasureTo: panicDateToMeasureTo,
+					extraCases: extraCancer,
+					delay,
+					stdDeviation: standardDeviation,
+				});
+
+				const panicSummedDistributions = createSummedDistribution({
+					beginningOfPandemic,
+					finalDateToMeasureTo: panicDateToMeasureTo,
+					distributions: distributionsUntilPanic,
+				});
+
+				distributions = distributionsUntilPanic;
+				summedDistributions = panicSummedDistributions;
+			}
 		}
 	}
 
