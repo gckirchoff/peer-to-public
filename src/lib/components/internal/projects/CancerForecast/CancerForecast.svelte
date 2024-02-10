@@ -175,6 +175,20 @@
 		({ date }) => date >= xScale.domain()[1],
 	);
 	$: renderedSummedCases = summedDistributions.slice(0, indexOfLastPointToRender);
+
+	let preventionStartInfoBox: SVGGElement | null = null;
+	let preventionStartInfoBoxXPosition = 0;
+
+	$: {
+		if (preventionDeterminant === 'panic' && preventionStartInfoBox && panicPredictionPoint) {
+			const { width: boxWidth } = preventionStartInfoBox.getBoundingClientRect();
+			const xPosition = xScale(panicPredictionPoint.date);
+			const isOverflowingRightBoundary = xPosition + boxWidth > innerChartWidth;
+			preventionStartInfoBoxXPosition = isOverflowingRightBoundary
+				? xPosition - boxWidth - 20
+				: xPosition;
+		}
+	}
 </script>
 
 <div>
@@ -313,7 +327,10 @@
 							stroke-width={2}
 							stroke="red"
 						/>
-						<g style:transform="translate({xScale(panicPredictionPoint.date)}px, 135px)">
+						<g
+							style:transform="translate({preventionStartInfoBoxXPosition}px, 135px)"
+							bind:this={preventionStartInfoBox}
+						>
 							<text x={10} y={0} dominant-baseline="middle">Prevention starts:</text>
 							<text x={10} y={18} dominant-baseline="middle">
 								{panicPredictionPoint.date.toLocaleDateString()}
