@@ -30,7 +30,7 @@
 		grid-column: content-start;
 		--image-dimension: 25rem;
 		border: 1px solid var(--clr-primary-500);
-		background-color: var(--clr-surface-300);
+		background-color: var(--clr-surface-100);
 		border-radius: var(--rounded-4);
 		margin-top: calc((var(--image-dimension) * 0.5) + 3rem);
 		margin-bottom: var(--spacing-24);

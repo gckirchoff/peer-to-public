@@ -28,7 +28,7 @@
 	header {
 		min-height: var(--height);
 		padding: var(--spacing-16) var(--spacing-24);
-		background-color: var(--clr-surface-300);
+		background-color: var(--clr-surface-100);
 
 		--flex-gap: var(--spacing-24);
 		--row-gap: var(--spacing-8);
