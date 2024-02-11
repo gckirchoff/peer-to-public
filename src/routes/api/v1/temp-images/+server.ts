@@ -29,6 +29,6 @@ export const POST = async ({ request }) => {
 			fileName: fileName.split('.')[0],
 		});
 	} catch (err) {
-		throw error(400, 'Error uploading file');
+		error(400, 'Error uploading file');
 	}
 };

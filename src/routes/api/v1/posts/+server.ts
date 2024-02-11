@@ -50,6 +50,6 @@ export const POST = async ({ request }) => {
 		});
 	} catch (err) {
 		console.warn(err);
-		throw error(500, 'Internal server error');
+		error(500, 'Internal server error');
 	}
 };
