@@ -1,8 +1,8 @@
 <script>
 	import { siteConfig } from '$lib/config';
-	import { H3, H4, Body1 } from '$lib/components/internal/typography';
-	import { Github, Twitter, Youtube } from '$lib/icons';
+	import { H3, Body1 } from '$lib/components/internal/typography';
 	import ContactForm from '$lib/components/internal/ContactForm/ContactForm.svelte';
+	import MediaIcon from './MediaIcon/MediaIcon.svelte';
 
 	export let form;
 </script>
@@ -11,27 +11,16 @@
 	<H3>Contacts</H3>
 
 	<ul>
-		<li>
-			<Body1>
-				<a href="/contact" target="_blank" rel="noopener noreferrer">
-					<Youtube /> Youtube
-				</a>
-			</Body1>
-		</li>
-		<li>
-			<Body1>
-				<a href="/contact" target="_blank" rel="noopener noreferrer">
-					<Twitter /> Twitter
-				</a>
-			</Body1>
-		</li>
-		<li>
-			<Body1>
-				<a href="/contact" target="_blank" rel="noopener noreferrer">
-					<Github /> Github
-				</a>
-			</Body1>
-		</li>
+		{#each siteConfig.pages.contact.links as { href, type }}
+			<li>
+				<Body1>
+					<a {href} target="_blank" rel="noopener noreferrer">
+						<MediaIcon {type} />
+						{type}
+					</a>
+				</Body1>
+			</li>
+		{/each}
 	</ul>
 
 	<ContactForm {form} />

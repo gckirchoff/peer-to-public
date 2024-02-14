@@ -1,7 +1,9 @@
 import { dev } from '$app/environment';
 
+import type { SiteConfig } from './types/config';
+
 // Main config for entire website
-export const siteConfig = {
+export const siteConfig: SiteConfig = {
 	title: 'Site Template',
 	description: 'An Easy to Use Site Template',
 	url: 'https://your-blog-template.vercel.app',
@@ -44,6 +46,20 @@ export const siteConfig = {
 		},
 		contact: {
 			formAccessKey: 'df313bb6-814b-48fc-a917-a40b8f839417', // go to https://www.staticforms.xyz/ to get this. It's free!
+			links: [
+				{
+					type: 'Twitter',
+					href: '',
+				},
+				{
+					type: 'Github',
+					href: '',
+				},
+				{
+					type: 'Youtube',
+					href: '',
+				},
+			],
 		},
 	},
 };
