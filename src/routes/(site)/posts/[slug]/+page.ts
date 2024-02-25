@@ -7,7 +7,7 @@ export const prerender = true;
 export const load = async ({ params }) => {
 	// /posts/page will be covered by another route
 	if (params.slug == 'page') {
-		throw redirect(301, '/posts');
+		redirect(301, '/posts');
 	}
 	try {
 		const post = await import(`../../../../lib/content/posts/${params.slug}.md`);
@@ -17,6 +17,6 @@ export const load = async ({ params }) => {
 			meta: { ...(post.metadata as Post), slug: params.slug },
 		};
 	} catch (err) {
-		throw error(404, `Could not find ${params.slug}`);
+		error(404, `Could not find ${params.slug}`);
 	}
 };
