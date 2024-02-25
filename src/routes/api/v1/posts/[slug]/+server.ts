@@ -14,7 +14,7 @@ export const PATCH = async ({ request, params }) => {
 		const { slug } = params;
 
 		if (!Object.hasOwn(body, 'date')) {
-			throw error(500, 'Internal Server Error');
+			error(500, 'Internal Server Error');
 		}
 
 		const {
@@ -66,7 +66,7 @@ export const PATCH = async ({ request, params }) => {
 			status: 'success',
 		});
 	} catch (err) {
-		throw error(500, 'Internal server error');
+		error(500, 'Internal server error');
 	}
 };
 export const DELETE = async ({ params }) => {
@@ -85,6 +85,6 @@ export const DELETE = async ({ params }) => {
 		});
 	} catch (err) {
 		console.log('err', err);
-		throw error(500, 'Internal server error');
+		error(500, 'Internal server error');
 	}
 };
