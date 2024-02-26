@@ -44,8 +44,8 @@
 		preventionDeterminant === 'date'
 			? dateOfPrevention
 			: panicPredictionPoint
-			? panicPredictionPoint.date
-			: endOfChart,
+				? panicPredictionPoint.date
+				: endOfChart,
 		summedDistributions,
 	);
 	$: casesYetToCome = totalExtraCases - casesThatHaveOccuredSoFar;
@@ -143,8 +143,15 @@
 	$: innerChartWidth = width - margin.left - margin.right;
 	$: innerChartHeight = height - margin.top - margin.bottom;
 
+	$: xDomainEnd =
+		preventionDeterminant === 'date'
+			? finalDateToMeasureTo
+			: panicPredictionPoint
+				? addYearsToDate(panicPredictionPoint.date, delay + standardDeviation * 3)
+				: endOfChart;
+
 	$: xScale = scaleTime()
-		.domain([beginningOfPandemic, endOfChart])
+		.domain([beginningOfPandemic, xDomainEnd])
 		.range([0, innerChartWidth])
 		.nice();
 
