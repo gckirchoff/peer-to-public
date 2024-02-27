@@ -148,7 +148,7 @@
 		preventionDeterminant === 'date'
 			? endOfChart
 			: panicPredictionPoint
-				? addYearsToDate(panicPredictionPoint.date, delay + standardDeviation * 4)
+				? addYearsToDate(panicPredictionPoint.date, delay + standardDeviation * 3.5)
 				: endOfChart;
 
 	$: xScale = scaleTime()
