@@ -7,7 +7,7 @@
 	import Line from './Line/Line.svelte';
 	import Gradient from './Gradient/Gradient.svelte';
 	import type { Distribution, PredictedCases, Mode, PreventionDeterminant } from './constants';
-	import { baselineCancer, beginningOfPandemic, endOfChart } from './constants';
+	import { beginningOfPandemic, endOfChart } from './constants';
 	import {
 		getExtraCases,
 		addYearsToDate,
@@ -28,6 +28,7 @@
 	let yearsFromNowToStartPrevention = 5;
 	let hazardRatio = 1.5;
 	let delay = 20;
+	let baselineCancer = 18000000;
 	let mode: Mode = 'summed';
 
 	let panicThreshold = 0.05;
@@ -145,9 +146,9 @@
 
 	$: xDomainEnd =
 		preventionDeterminant === 'date'
-			? finalDateToMeasureTo
+			? endOfChart
 			: panicPredictionPoint
-				? addYearsToDate(panicPredictionPoint.date, delay + standardDeviation * 3)
+				? addYearsToDate(panicPredictionPoint.date, delay + standardDeviation * 4)
 				: endOfChart;
 
 	$: xScale = scaleTime()
@@ -233,6 +234,12 @@
 				{delay} year delay:
 			</Body2>
 			<input bind:value={delay} type="range" min={5} max={50} step={1} />
+		</label>
+		<label class="range-input">
+			<Body2>
+				{numberFormatter(baselineCancer)} baseline cancer:
+			</Body2>
+			<input bind:value={baselineCancer} type="range" min={15000000} max={25000000} step={100000} />
 		</label>
 	</div>
 	<div class="chart-container" bind:clientWidth={width}>
