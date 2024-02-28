@@ -6,7 +6,13 @@
 	import AxisY from './AxisY/AxisY.svelte';
 	import Line from './Line/Line.svelte';
 	import Gradient from './Gradient/Gradient.svelte';
-	import type { Distribution, PredictedCases, Mode, PreventionDeterminant } from './constants';
+	import type {
+		Distribution,
+		PredictedCases,
+		Mode,
+		PreventionDeterminant,
+		Audience,
+	} from './constants';
 	import { beginningOfPandemic, endOfChart } from './constants';
 	import {
 		getExtraCases,
@@ -19,6 +25,8 @@
 		getDistributions,
 		createSummedDistribution,
 	} from './logic';
+
+	export let audience: Audience = 'science';
 
 	const numberFormatter = (num: number): string => format('.2s')(num).replace('G', 'B');
 	const extraCasesGradientId = 'extra-cases-gradient';
@@ -138,14 +146,14 @@
 		top: 10,
 		left: 45,
 		bottom: 50,
-		right: 30,
+		right: 35,
 	};
 
 	$: innerChartWidth = width - margin.left - margin.right;
 	$: innerChartHeight = height - margin.top - margin.bottom;
 
 	$: xDomainEnd =
-		preventionDeterminant === 'date'
+		audience === 'general' || preventionDeterminant === 'date'
 			? endOfChart
 			: panicPredictionPoint
 				? addYearsToDate(panicPredictionPoint.date, delay + standardDeviation * 3.5)
@@ -237,7 +245,7 @@
 		</label>
 		<label class="range-input">
 			<Body2>
-				{numberFormatter(baselineCancer)} baseline cancer:
+				{numberFormatter(baselineCancer)} baseline incidence:
 			</Body2>
 			<input bind:value={baselineCancer} type="range" min={15000000} max={25000000} step={100000} />
 		</label>
@@ -263,7 +271,7 @@
 					text-anchor="end"
 					class="baseline-text"
 				>
-					Baseline Cancer
+					Baseline Incidence
 				</text>
 				<line
 					x2={innerChartWidth}
@@ -369,7 +377,7 @@
 									Math.floor(renderedSummedCases.reduce((acc, { cases }) => acc + cases, 0)),
 								)} extra cases by {renderedSummedCases.at(-1)?.date.toLocaleDateString()}
 							</text>
-							{#if hazardRatio > 1}
+							{#if hazardRatio > 1 && audience === 'general'}
 								<text x={0} y={25}>This is the new normal</text>
 							{/if}
 						{/if}
