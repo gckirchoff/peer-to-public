@@ -241,13 +241,19 @@
 			<Body2>
 				{delay} year delay:
 			</Body2>
-			<input bind:value={delay} type="range" min={5} max={50} step={1} />
+			<input bind:value={delay} type="range" min={1} max={30} step={1} />
 		</label>
 		<label class="range-input">
 			<Body2>
 				{numberFormatter(baselineCancer)} baseline incidence:
 			</Body2>
-			<input bind:value={baselineCancer} type="range" min={15000000} max={25000000} step={100000} />
+			<input
+				bind:value={baselineCancer}
+				type="range"
+				min={1000000}
+				max={100000000}
+				step={1000000}
+			/>
 		</label>
 	</div>
 	<div class="chart-container" bind:clientWidth={width}>
