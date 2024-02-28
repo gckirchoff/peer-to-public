@@ -26,7 +26,7 @@
 		createSummedDistribution,
 	} from './logic';
 
-	export let audience: Audience = 'science';
+	export let audience: Audience = 'general';
 
 	const numberFormatter = (num: number): string => format('.2s')(num).replace('G', 'B');
 	const extraCasesGradientId = 'extra-cases-gradient';
@@ -399,6 +399,8 @@
 </div>
 
 <style lang="scss">
+	@import '/src/styles/mixins.scss';
+
 	:global(.tick text) {
 		font-weight: 500;
 		font-size: 15px;
@@ -410,6 +412,12 @@
 		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 		margin-bottom: var(--spacing-8);
 		row-gap: var(--spacing-8);
+		margin-top: var(--spacing-8);
+		margin-bottom: var(--spacing-32);
+
+		@include respond('mobile') {
+			margin-bottom: 0;
+		}
 
 		.range-input {
 			display: flex;
