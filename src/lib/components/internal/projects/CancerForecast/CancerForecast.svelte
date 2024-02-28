@@ -47,7 +47,7 @@
 
 	$: dateOfPrevention = addYearsToDate(beginningOfPandemic, yearsFromNowToStartPrevention);
 	$: standardDeviation = delay / 3;
-	$: finalDateToMeasureTo = addYearsToDate(dateOfPrevention, delay + standardDeviation * 3);
+	$: finalDateToMeasureTo = addYearsToDate(dateOfPrevention, delay + 1 + standardDeviation * 3);
 	$: totalExtraCases = Math.floor(summedDistributions.reduce((acc, { cases }) => acc + cases, 0));
 	$: casesThatHaveOccuredSoFar = getCumulativeCasesUpToDate(
 		preventionDeterminant === 'date'
@@ -111,7 +111,7 @@
 			} else {
 				const panicDateToMeasureTo = addYearsToDate(
 					pointOfPanic.date,
-					delay + standardDeviation * 3,
+					delay + 1 + standardDeviation * 3,
 				);
 
 				const distributionsUntilPanic = getDistributions({
@@ -170,13 +170,13 @@
 	// 		: [0, max(summedDistributions, yAccessor)]
 	// ) as [number, number];
 
-	$: domain = (
+	$: yDomain = (
 		mode === 'separate'
 			? [0, max(distributions[0].predictedCases, yAccessor)]
-			: [0, Math.max(54000000, max(summedDistributions, yAccessor) as number)]
+			: [0, Math.max(baselineCancer * 3, max(summedDistributions, yAccessor) as number)]
 	) as [number, number];
 
-	$: yScale = scaleLinear().domain(domain).range([innerChartHeight, 0]).nice();
+	$: yScale = scaleLinear().domain(yDomain).range([innerChartHeight, 0]).nice();
 
 	$: xAccessorScaled = (d: PredictedCases) => xScale(xAccessor(d));
 	$: yAccessorScaled = (d: PredictedCases) => yScale(yAccessor(d));
@@ -316,6 +316,14 @@
 							fill="transparent"
 							stroke="blue"
 						/>
+						{#each distribution.predictedCases as predictionPoint}
+							<circle
+								cx={xScale(xAccessor(predictionPoint))}
+								cy={yScale(yAccessor(predictionPoint))}
+								r="4"
+								fill="blue"
+							/>
+						{/each}
 					{/each}
 				{/if}
 				{#if preventionDeterminant === 'date'}
