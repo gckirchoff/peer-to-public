@@ -1,8 +1,8 @@
 <script lang="ts">
 	import ClientMounter from './subcomponents/ClientMounter/ClientMounter.svelte';
-	import Chart from './subcomponents/Chart/Chart.svelte';
+	import Widget from './subcomponents/Widget/Widget.svelte';
 </script>
 
 <ClientMounter>
-	<Chart />
+	<Widget />
 </ClientMounter>
