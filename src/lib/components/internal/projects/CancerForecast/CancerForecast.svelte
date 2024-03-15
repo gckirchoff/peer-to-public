@@ -30,7 +30,6 @@
 
 	const numberFormatter = (num: number): string => format('.2s')(num).replace('G', 'B');
 	const extraCasesGradientId = 'extra-cases-gradient';
-	const casesSoFarGradientId = 'cases-so-far-gradient';
 	const gradientColors = ['#72ade8', 'rgb(236, 232, 253)'];
 
 	let preventionDeterminant: PreventionDeterminant = 'panic';
@@ -193,6 +192,18 @@
 	);
 	$: renderedSummedCases = summedDistributions.slice(0, indexOfLastPointToRender);
 
+	$: indexOfCancerSoFarEnd =
+		renderedSummedCases.findIndex(({ date }) => {
+			if (preventionDeterminant === 'date') {
+				return dateOfPrevention.getFullYear() <= date.getFullYear();
+			}
+			if (!panicPredictionPoint) {
+				return false;
+			}
+			return panicPredictionPoint.date.getFullYear() <= date.getFullYear();
+		}) + 1;
+	$: console.log('indexOfCancerSoFarEnd', indexOfCancerSoFarEnd);
+
 	let preventionStartInfoBox: SVGGElement | null = null;
 	let preventionStartInfoBoxXPosition = 0;
 
@@ -206,19 +217,6 @@
 				: xPosition;
 		}
 	}
-
-	$: casesSoFarHorizontalGradientPercent = `${
-		preventionDeterminant === 'panic'
-			? (panicPredictionPoint
-					? (panicPredictionPoint.date.getTime() - summedDistributions[0].date.getTime()) /
-						((renderedSummedCases.at(-1)?.date ?? endOfChart).getTime() -
-							summedDistributions[0].date.getTime())
-					: 0) * 100
-			: ((dateOfPrevention.getTime() - summedDistributions[0].date.getTime()) /
-					((renderedSummedCases.at(-1)?.date ?? endOfChart).getTime() -
-						summedDistributions[0].date.getTime())) *
-				100
-	}%`;
 
 	$: panicThresholdYPosition = yScale(baselineCancer * (1 + panicThreshold));
 </script>
@@ -275,12 +273,6 @@
 			<g style:transform="translate({margin.left}px, {margin.top}px)">
 				<defs>
 					<Gradient id={extraCasesGradientId} colors={gradientColors} x2="0" y2="100%" />
-					<linearGradient id={casesSoFarGradientId}>
-						<stop offset="0%" stop-color="red" />
-						<stop offset={casesSoFarHorizontalGradientPercent} stop-color="red" />
-						<stop offset={casesSoFarHorizontalGradientPercent} stop-color="transparent" />
-						<stop offset="100%" stop-color="transparent" />
-					</linearGradient>
 				</defs>
 				<AxisX {xScale} width={innerChartWidth} height={innerChartHeight} />
 				<AxisY {yScale} />
@@ -319,21 +311,21 @@
 						{xAccessorScaled}
 						{yAccessorScaled}
 						y0AccessorScaled={yScale(baselineCancer)}
-						style="fill: url(#{extraCasesGradientId})"
+						style="fill: url(#{extraCasesGradientId}); transition: none;"
 					/>
 					<Line
 						type="area"
-						data={renderedSummedCases}
+						data={renderedSummedCases.slice(0, indexOfCancerSoFarEnd)}
 						{xAccessorScaled}
 						{yAccessorScaled}
 						y0AccessorScaled={yScale(baselineCancer)}
-						style="fill: url(#{casesSoFarGradientId})"
+						style="fill: red; transition: none;"
 					/>
 					<Line
 						data={renderedSummedCases}
 						{xAccessorScaled}
 						{yAccessorScaled}
-						style="stroke: #67a4e0;"
+						style="stroke: #67a4e0; transition: none;"
 					/>
 				{/if}
 				{#if mode === 'separate' || mode === 'both'}
