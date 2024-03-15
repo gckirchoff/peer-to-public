@@ -325,7 +325,7 @@
 						{xAccessorScaled}
 						{yAccessorScaled}
 						y0AccessorScaled={yScale(baselineCancer)}
-						style="fill: {hoveredExtraCasesSoFar ? '#ff7a7a' : 'red'}; transition: none;"
+						style="fill: {hoveredExtraCasesSoFar ? '#ffabab' : '#ff7a7a'}; transition: none;"
 						on:mouseover={() => (hoveredExtraCasesSoFar = true)}
 						on:mouseleave={() => (hoveredExtraCasesSoFar = false)}
 					/>
