@@ -22,11 +22,22 @@
 	$: line = lineGenerator(data);
 </script>
 
-<path class={`Line Line--type-${type}`} d={line} {style} />
+<path
+	class={`Line Line--type-${type}`}
+	d={line}
+	{style}
+	on:mouseover
+	on:mouseleave
+	on:focus
+	on:blur
+	role="figure"
+	aria-roledescription="area"
+/>
 
 <style>
 	.Line {
 		transition: all 0.3s ease-out;
+		outline: none;
 	}
 
 	.Line--type-line {

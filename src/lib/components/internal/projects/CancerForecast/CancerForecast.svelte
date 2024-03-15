@@ -202,7 +202,6 @@
 			}
 			return panicPredictionPoint.date.getFullYear() <= date.getFullYear();
 		}) + 1;
-	$: console.log('indexOfCancerSoFarEnd', indexOfCancerSoFarEnd);
 
 	let preventionStartInfoBox: SVGGElement | null = null;
 	let preventionStartInfoBoxXPosition = 0;
@@ -219,6 +218,9 @@
 	}
 
 	$: panicThresholdYPosition = yScale(baselineCancer * (1 + panicThreshold));
+
+	let hoveredExtraCasesSoFar = false;
+	let hoveredExtraCasesToCome = false;
 </script>
 
 <div>
@@ -311,7 +313,11 @@
 						{xAccessorScaled}
 						{yAccessorScaled}
 						y0AccessorScaled={yScale(baselineCancer)}
-						style="fill: url(#{extraCasesGradientId}); transition: none;"
+						style="fill: url(#{extraCasesGradientId}); transition: none; filter: brightness({hoveredExtraCasesToCome
+							? 1.08
+							: 1});"
+						on:mouseover={() => (hoveredExtraCasesToCome = true)}
+						on:mouseleave={() => (hoveredExtraCasesToCome = false)}
 					/>
 					<Line
 						type="area"
@@ -319,7 +325,9 @@
 						{xAccessorScaled}
 						{yAccessorScaled}
 						y0AccessorScaled={yScale(baselineCancer)}
-						style="fill: red; transition: none;"
+						style="fill: {hoveredExtraCasesSoFar ? '#ff7a7a' : 'red'}; transition: none;"
+						on:mouseover={() => (hoveredExtraCasesSoFar = true)}
+						on:mouseleave={() => (hoveredExtraCasesSoFar = false)}
 					/>
 					<Line
 						data={renderedSummedCases}
@@ -374,6 +382,7 @@
 						y2={panicThresholdYPosition}
 						stroke-width={2}
 						stroke="red"
+						style="pointer-events: none;"
 					/>
 					{#if panicPredictionPoint}
 						<line
@@ -388,18 +397,40 @@
 							style:transform="translate({preventionStartInfoBoxXPosition}px, 135px)"
 							bind:this={preventionStartInfoBox}
 						>
-							<text x={10} y={0} dominant-baseline="middle">Prevention starts:</text>
-							<text x={10} y={18} dominant-baseline="middle">
+							<text x={10} y={0} dominant-baseline="middle" style="pointer-events: none;"
+								>Prevention starts:</text
+							>
+							<text x={10} y={18} dominant-baseline="middle" style="pointer-events: none;">
 								{panicPredictionPoint.date.toLocaleDateString()}
 							</text>
 						</g>
 					{/if}
 					<g style:transform="translate(50px, 25px)">
 						{#if panicPredictionPoint}
-							<text x={10} y={0} dominant-baseline="middle">
+							<text
+								x={10}
+								y={0}
+								dominant-baseline="middle"
+								style="text-decoration: {hoveredExtraCasesSoFar ? 'underline' : 'none'};"
+								on:mouseover={() => (hoveredExtraCasesSoFar = true)}
+								on:mouseleave={() => (hoveredExtraCasesSoFar = false)}
+								on:focus={() => (hoveredExtraCasesSoFar = true)}
+								on:blur={() => (hoveredExtraCasesSoFar = false)}
+								role="figure"
+							>
 								• {numberFormatter(casesThatHaveOccuredSoFar)} extra cases so far
 							</text>
-							<text x={10} y={25} dominant-baseline="middle">
+							<text
+								x={10}
+								y={25}
+								dominant-baseline="middle"
+								style="text-decoration: {hoveredExtraCasesToCome ? 'underline' : 'none'};"
+								on:mouseover={() => (hoveredExtraCasesToCome = true)}
+								on:mouseleave={() => (hoveredExtraCasesToCome = false)}
+								on:focus={() => (hoveredExtraCasesToCome = true)}
+								on:blur={() => (hoveredExtraCasesToCome = false)}
+								role="figure"
+							>
 								• {numberFormatter(casesYetToCome)} extra cases to come
 							</text>
 							<text x={10} y={50} dominant-baseline="middle">
@@ -469,5 +500,11 @@
 	.baseline-text {
 		font-size: 1.2rem;
 		fill: #464646;
+	}
+
+	text {
+		outline: none;
+		cursor: default;
+		user-select: none;
 	}
 </style>
