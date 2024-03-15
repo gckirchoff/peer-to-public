@@ -3,10 +3,10 @@ title: "The Danger of Underestimating Delayed Onset Diseases"
 description: "Evidence shows that the effects of SARS-CoV-2 can cause major problems well into the future. This is why we need to act now."
 categories: [ "covid-19", "statistics" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
-coverImage: "forecast-chart.png"
+coverImage: "wave-unsplash-matt-paul-catalano.jpg"
 date: 'Tue Feb 06 2024 14:30:13 GMT-0500 (Eastern Standard Time)'
 published: true
-updated: 'Wed Feb 07 2024 12:42:35 GMT-0500 (Eastern Standard Time)'
+updated: 'Thu Mar 14 2024 22:05:48 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
