@@ -55,8 +55,14 @@
 			<NumberInput bind:value={cigarettesPerDay} label="Cigarettes per day" />
 			<NumberInput bind:value={drinkingSessionsPerWeek} label="Drinking sessions per week" />
 			<NumberInput bind:value={drinksPerSession} label="drinks per session" />
-			<Body2>Receives yearly Covid-19 vaccination</Body2>
-			<Body2>Actively prevents Covid-19 infection</Body2>
+			<label>
+				<input type="checkbox" bind:value={receivesYearlyCovidVaccine} />
+				receives yearly COVID-19 vaccine
+			</label>
+			<label>
+				<input type="checkbox" bind:value={preventsCovidInfection} />
+				actively prevents COVID-19 infection
+			</label>
 		</InputsContainer>
 	</section>
 	<section class="right">
@@ -80,6 +86,15 @@
 			display: flex;
 			align-items: center;
 			gap: var(--spacing-16);
+		}
+
+		label {
+			cursor: pointer;
+			user-select: none;
+
+			input {
+				cursor: pointer;
+			}
 		}
 	}
 	.right {
