@@ -14,13 +14,14 @@
 		align-items: center;
 		gap: var(--spacing-8);
 		cursor: pointer;
+		user-select: none;
 
 		input {
 			border: 2px solid black;
 			line-height: 1.5;
 			text-align: center;
 			width: 6rem;
-			padding-left: 1.2rem;
+			padding-left: 1.4rem;
 
 			&:focus {
 				outline: none;
