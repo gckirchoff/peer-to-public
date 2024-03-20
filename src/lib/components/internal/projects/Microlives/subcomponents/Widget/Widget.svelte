@@ -1,28 +1,63 @@
 <script lang="ts">
-	import { Body2, H6 } from '$lib/components/internal/typography';
+	import { Body2, SubTitle2 } from '$lib/components/internal/typography';
+	import InputsContainer from './InputsContainer/InputsContainer.svelte';
+	import NumberInput from './NumberInput/NumberInput.svelte';
+	import Select from './Select/Select.svelte';
+
+	const sectionStyles = 'text-decoration: underline;';
+
+	let bmi = 0;
+	let sex: 'male' | 'female';
+
+	let hoursSedentaryPerDay = 0;
+	let exerciseSessionsPerWeek = 0;
+	let minutesPerExerciseSession = 0;
+
+	let servingsRedMeat = 0;
+	let servingsVeg = 0;
+
+	let cigarettesPerDay = 0;
+	let drinkingSessionsPerWeek = 0;
+	let drinksPerSession = 0;
+	let receivesYearlyCovidVaccine = false;
+	let preventsCovidInfection = false;
 </script>
 
 <div class="viz">
 	<section class="left">
-		<H6>Basic Information:</H6>
-		<Body2>BMI</Body2>
-		<Body2>Sex</Body2>
+		<SubTitle2 style={sectionStyles}>Basic Information:</SubTitle2>
+		<InputsContainer>
+			<label class="sex-select" for="sex-select">
+				<Select bind:value={sex} id="sex-select">
+					<option value="male">Male</option>
+					<option value="female">Female</option>
+				</Select>
+				<Body2>Sex</Body2>
+			</label>
+			<NumberInput bind:value={bmi} label="BMI" />
+		</InputsContainer>
 
-		<H6>Activity Level:</H6>
-		<Body2>hours sedentary per day</Body2>
-		<Body2>exercise sessions per week</Body2>
-		<Body2>minutes per exercise session</Body2>
+		<SubTitle2 style={sectionStyles}>Activity Level:</SubTitle2>
+		<InputsContainer>
+			<NumberInput bind:value={hoursSedentaryPerDay} label="hours sedentary per day" />
+			<NumberInput bind:value={exerciseSessionsPerWeek} label="exercise sessions per week" />
+			<NumberInput bind:value={minutesPerExerciseSession} label="minutes per exercise session" />
+		</InputsContainer>
 
-		<H6>Diet:</H6>
-		<Body2>Servings red meat per week</Body2>
-		<Body2>Servings fruits/vegetables per week</Body2>
+		<SubTitle2 style={sectionStyles}>Diet:</SubTitle2>
+		<InputsContainer>
+			<NumberInput bind:value={servingsRedMeat} label="Servings red meat per week" />
+			<NumberInput bind:value={servingsVeg} label="Servings fruits/vegetables per week" />
+		</InputsContainer>
 
-		<H6>Risky behavior:</H6>
-		<Body2>Cigarettes per day</Body2>
-		<Body2>Drinking sessions per week</Body2>
-		<Body2>drinks per session</Body2>
-		<Body2>Receives yearly Covid-19 vaccination</Body2>
-		<Body2>Actively prevents Covid-19 infection</Body2>
+		<SubTitle2 style={sectionStyles}>Risky behavior:</SubTitle2>
+		<InputsContainer>
+			<NumberInput bind:value={cigarettesPerDay} label="Cigarettes per day" />
+			<NumberInput bind:value={drinkingSessionsPerWeek} label="Drinking sessions per week" />
+			<NumberInput bind:value={drinksPerSession} label="drinks per session" />
+			<Body2>Receives yearly Covid-19 vaccination</Body2>
+			<Body2>Actively prevents Covid-19 infection</Body2>
+		</InputsContainer>
 	</section>
 	<section class="right">
 		<div class="life-delta-chart"></div>
@@ -39,7 +74,13 @@
 		}
 	}
 	.left {
-		background-color: red;
+		padding: var(--spacing-16);
+
+		.sex-select {
+			display: flex;
+			align-items: center;
+			gap: var(--spacing-16);
+		}
 	}
 	.right {
 		background-color: green;
