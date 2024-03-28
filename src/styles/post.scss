@@ -107,7 +107,6 @@
 
 .prose > table {
 	border-collapse: collapse;
-	border: 1px solid #ccc;
 	margin-bottom: var(--spacing-24);
 	font-size: 2rem;
 	font-weight: var(--font-weight-regular);
@@ -117,28 +116,28 @@
 	th,
 	td {
 		padding: var(--spacing-16);
-		border: 1px solid #ccc;
+		border: 1px solid var(--clr-surface-400);
 	}
 
 	/* Table Header Styles */
 	th {
-		background-color: var(--clr-surface-300);
+		background-color: var(--clr-surface-100);
 		font-weight: bold;
 	}
 
 	tr {
 		/* Alternating Row Colors */
 		&:nth-child(even) {
-			background-color: var(--clr-surface-300);
+			background-color: var(--clr-surface-100);
 		}
 
 		&:nth-child(odd) {
-			background-color: var(--clr-surface-400);
+			background-color: var(--clr-surface-50);
 		}
 
 		/* Hover Effect */
 		&:hover {
-			background-color: var(--clr-surface-500);
+			background-color: var(--clr-surface-200);
 		}
 	}
 
