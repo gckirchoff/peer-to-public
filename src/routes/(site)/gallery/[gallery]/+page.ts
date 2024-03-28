@@ -7,7 +7,7 @@ export const load = async ({ params, fetch }) => {
 	const gallery = (await res.json()) as Gallery;
 
 	if (!gallery) {
-		throw error(404, `Could not find ${params.gallery}`);
+		error(404, `Could not find ${params.gallery}`);
 	}
 
 	return {

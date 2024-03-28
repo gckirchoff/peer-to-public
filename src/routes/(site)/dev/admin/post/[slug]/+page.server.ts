@@ -12,7 +12,8 @@ export const load = async ({ params, fetch }) => {
 		const post = await import(`../../../../../../lib/content/posts/${slug}.md`);
 		const contentString = await readFile(`src/lib/content/posts/${slug}.md`, 'utf-8');
 
-		const contentAfterFrontMatter = contentString.split('---')?.[2] ?? contentString;
+		const contentAfterFrontMatter =
+			contentString.split('---')?.slice(2).join('---').trim() ?? contentString;
 		const postContent = escapeComponents(contentAfterFrontMatter);
 
 		const allPostsRes = await fetch('/api/v1/posts/all');
@@ -28,6 +29,6 @@ export const load = async ({ params, fetch }) => {
 			allAuthors,
 		};
 	} catch (err) {
-		throw redirect(301, '/posts');
+		redirect(301, '/posts');
 	}
 };
