@@ -3,11 +3,13 @@
 	import InputsContainer from './InputsContainer/InputsContainer.svelte';
 	import NumberInput from './NumberInput/NumberInput.svelte';
 	import Select from './Select/Select.svelte';
+	import type { Microlife, Sex } from './constants';
+	import { microlivesFromExercise } from './logic';
 
 	const sectionStyles = 'text-decoration: underline;';
 
 	let bmi = 0;
-	let sex: 'male' | 'female';
+	let sex: Sex = 'male';
 
 	let hoursSedentaryPerDay = 0;
 	let exerciseSessionsPerWeek = 0;
@@ -21,6 +23,32 @@
 	let drinksPerSession = 0;
 	let receivesYearlyCovidVaccine = false;
 	let preventsCovidInfection = false;
+
+	let microlives: Microlife[] = [];
+	$: microlives = [
+		{
+			name: 'Being Sedentary',
+			value: (hoursSedentaryPerDay / 2) * -1,
+		},
+		{
+			name: 'Exercise',
+			value: microlivesFromExercise(exerciseSessionsPerWeek, minutesPerExerciseSession, sex),
+		},
+		{
+			name: 'Meat Consumption',
+			value: servingsRedMeat * -1,
+		},
+		{
+			name: 'Fruit/Vegetable Consumption',
+			value: (servingsVeg / 5) * (sex === 'male' ? 4 : 3),
+		},
+		{
+			name: 'Cigarettes',
+			value: (cigarettesPerDay / 2) * -1, // https://understandinguncertainty.org/microlives doll and peto
+		},
+	];
+
+	$: console.log('microlives', microlives);
 </script>
 
 <div class="viz">
