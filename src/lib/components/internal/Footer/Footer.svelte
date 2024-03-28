@@ -23,7 +23,7 @@
 	footer {
 		min-height: var(--height);
 		padding: var(--spacing-16) var(--spacing-24);
-		background-color: var(--clr-surface-300);
+		background-color: var(--clr-surface-100);
 		display: flex;
 		justify-content: space-between;
 

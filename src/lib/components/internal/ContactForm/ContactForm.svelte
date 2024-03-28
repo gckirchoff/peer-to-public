@@ -33,6 +33,7 @@
 	form {
 		border-radius: 5px;
 		background-color: var(--clr-surface-200);
+		border: 1px solid var(--clr-primary-500);
 		padding: var(--spacing-24);
 		width: min(100%, 80rem);
 

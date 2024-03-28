@@ -59,7 +59,7 @@
 
 			.modal {
 				max-width: 60rem;
-				background-color: var(--clr-surface-500);
+				background-color: var(--clr-surface-200);
 				border-radius: var(--rounded-4);
 				padding: var(--spacing-24);
 				box-shadow: var(--shadow-md);
