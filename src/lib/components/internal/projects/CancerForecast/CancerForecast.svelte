@@ -222,11 +222,17 @@
 
 	let hoveredExtraCasesSoFar = false;
 	let hoveredExtraCasesToCome = false;
+
+	const handleShowDistributions = ({
+		target,
+	}: Event & {
+		currentTarget: EventTarget & HTMLLabelElement;
+	}) => (internalMode = (target as HTMLInputElement)?.checked ? 'both' : 'summed');
 </script>
 
 <div>
 	<div class="distributions-toggle">
-		<label on:change={({ target }) => (internalMode = target?.checked ? 'both' : 'summed')}>
+		<label on:change={handleShowDistributions}>
 			Show Latency Distributions
 			<input type="checkbox" />
 		</label>
