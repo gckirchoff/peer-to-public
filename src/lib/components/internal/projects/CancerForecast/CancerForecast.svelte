@@ -45,6 +45,8 @@
 	let distributions: Distribution[] = [];
 	let summedDistributions: PredictedCases[] = [];
 
+	$: internalMode = mode;
+
 	$: dateOfPrevention = addYearsToDate(beginningOfPandemic, yearsFromNowToStartPrevention);
 	$: standardDeviation = delay / 3;
 	$: finalDateToMeasureTo = addYearsToDate(dateOfPrevention, delay + 1 + standardDeviation * 3);
@@ -165,13 +167,13 @@
 		.nice();
 
 	// $: domain = (
-	// 	mode === 'separate'
+	// 	internalMode === 'separate'
 	// 		? [0, max(distributions[0].predictedCases, yAccessor)]
 	// 		: [0, max(summedDistributions, yAccessor)]
 	// ) as [number, number];
 
 	$: yDomain = (
-		mode === 'separate'
+		internalMode === 'separate'
 			? [0, max(distributions[0].predictedCases, yAccessor)]
 			: [0, Math.max(baselineCancer * 3, max(summedDistributions, yAccessor) as number)]
 	) as [number, number];
@@ -184,8 +186,7 @@
 
 	$: lineGenerator = line<PredictedCases>()
 		.x((d) => xScale(xAccessor(d)))
-		.y((d) => yScale(yAccessor(d)))
-		.curve(curveNatural);
+		.y((d) => yScale(yAccessor(d)));
 
 	$: indexOfLastPointToRender = summedDistributions.findIndex(
 		({ date }) => date >= xScale.domain()[1],
@@ -224,6 +225,12 @@
 </script>
 
 <div>
+	<div class="distributions-toggle">
+		<label on:change={({ target }) => (internalMode = target?.checked ? 'both' : 'summed')}>
+			Show Latency Distributions
+			<input type="checkbox" />
+		</label>
+	</div>
 	<div class="inputs-container">
 		<label class="range-input">
 			<div class="determinant-selector">
@@ -300,7 +307,7 @@
 					stroke="#FFA500"
 					stroke-width={1}
 				/>
-				{#if mode === 'summed' || mode === 'both'}
+				{#if internalMode === 'summed' || internalMode === 'both'}
 					<!-- <path
 					d={lineGenerator(summedDistributions)}
 					stroke-width="2"
@@ -336,22 +343,22 @@
 						style="stroke: #67a4e0; transition: none;"
 					/>
 				{/if}
-				{#if mode === 'separate' || mode === 'both'}
+				{#if internalMode === 'separate' || internalMode === 'both'}
 					{#each distributions as distribution}
 						<path
 							d={lineGenerator(distribution.predictedCases)}
 							stroke-width="2"
 							fill="transparent"
-							stroke="blue"
+							stroke="#005CC8"
 						/>
-						{#each distribution.predictedCases as predictionPoint}
+						<!-- {#each distribution.predictedCases as predictionPoint}
 							<circle
 								cx={xScale(xAccessor(predictionPoint))}
 								cy={yScale(yAccessor(predictionPoint))}
 								r="4"
 								fill="blue"
 							/>
-						{/each}
+						{/each} -->
 					{/each}
 				{/if}
 				{#if preventionDeterminant === 'date'}
@@ -472,10 +479,28 @@
 		fill: #565656;
 	}
 
+	label {
+		cursor: pointer;
+		user-select: none;
+		input {
+			cursor: pointer;
+		}
+	}
+
+	.distributions-toggle {
+		display: flex;
+		justify-content: flex-end;
+		margin-bottom: var(--spacing-32);
+
+		label {
+			display: flex;
+			gap: var(--spacing-4);
+		}
+	}
+
 	.inputs-container {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		margin-bottom: var(--spacing-8);
 		row-gap: var(--spacing-8);
 		margin-top: var(--spacing-8);
 		margin-bottom: var(--spacing-32);
