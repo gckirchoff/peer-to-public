@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "wave-unsplash-matt-paul-catalano.jpg"
 date: 'Tue Feb 06 2024 14:30:13 GMT-0500 (Eastern Standard Time)'
 published: true
-updated: 'Thu Mar 14 2024 22:05:48 GMT-0400 (Eastern Daylight Time)'
+updated: 'Fri Mar 29 2024 22:04:48 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -28,3 +28,11 @@ SARS-CoV-2 is capable of affecting [many mechanisms](https://www.sciencedirect.c
 A final point to express how poor a decision it is to wait for observational data to tell how much of a problem this is is that once we have visible data to prove that Covid-19 leads to cancer more often than we would like, it is far too late for far too many. We may only be just starting at that point.
 
 <CancerForecast />
+
+## Methodology
+
+This model forecasts how the incidence and prevalence of a hypothetical syndrome could increase over time due to yearly exposure to a hypothetical infectious agent (IA), which imposes varying levels of risk of developing the aforementioned syndrome, normally distributed around a configurable delayed onset time.
+
+For the purpose of illustration, a default of 18M was chosen for the baseline incidence of the syndrome based on data from the [World Cancer Research Fund International](https://www.wcrf.org/cancer-trends/worldwide-cancer-data/). All individuals within the population - everyone on Earth in this case - are assumed to be infected with the IA exactly once per year, with all infections binned to the last day of the year. The extra cases of the syndrome due to the infections that occured within a given year are calculated based on the formula baseline_*incidence X (1 - hazard_ratio)*. This total sum is normally distributed around a date in the future determined by the configurable year delay input. Each of these latency distributions is summed with each other to produce the aggregate curve of increased incidence of the syndrome.
+
+The model has two different methods for halting the creation of latency distributions that simulate different reasons of enacting complete eradication of the IA. The first method is based on a configurable panic threshold in which the population stops transmission of the IA based on a response to the heightened level of the syndrome. The second method is simpler and allows for a date to be selected for when instantaneous eradication of the IA occurs.
