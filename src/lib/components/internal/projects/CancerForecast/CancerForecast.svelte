@@ -230,7 +230,7 @@
 	}) => (internalMode = (target as HTMLInputElement)?.checked ? 'both' : 'summed');
 </script>
 
-<div>
+<div class="widget-container">
 	<div class="distributions-toggle">
 		<label on:change={handleShowDistributions}>
 			Show Latency Distributions
@@ -483,6 +483,7 @@
 		font-weight: 500;
 		font-size: 15px;
 		fill: #565656;
+		user-select: none;
 	}
 
 	label {
@@ -492,50 +493,54 @@
 			cursor: pointer;
 		}
 	}
-
-	.distributions-toggle {
-		display: flex;
-		justify-content: flex-end;
+	.widget-container {
+		margin-top: var(--spacing-16);
 		margin-bottom: var(--spacing-32);
 
-		label {
+		.distributions-toggle {
 			display: flex;
-			gap: var(--spacing-4);
-		}
-	}
+			justify-content: flex-end;
+			margin-bottom: var(--spacing-32);
 
-	.inputs-container {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		row-gap: var(--spacing-8);
-		margin-top: var(--spacing-8);
-		margin-bottom: var(--spacing-32);
-
-		@include respond('mobile') {
-			margin-bottom: 0;
-		}
-
-		.range-input {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			row-gap: var(--spacing-4);
-
-			.determinant-selector {
+			label {
 				display: flex;
-				gap: var(--spacing-8);
+				gap: var(--spacing-4);
 			}
 		}
-	}
 
-	.baseline-text {
-		font-size: 1.2rem;
-		fill: #464646;
-	}
+		.inputs-container {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			row-gap: var(--spacing-8);
+			margin-top: var(--spacing-8);
+			margin-bottom: var(--spacing-32);
 
-	text {
-		outline: none;
-		cursor: default;
-		user-select: none;
+			@include respond('mobile') {
+				margin-bottom: 0;
+			}
+
+			.range-input {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				row-gap: var(--spacing-4);
+
+				.determinant-selector {
+					display: flex;
+					gap: var(--spacing-8);
+				}
+			}
+		}
+
+		.baseline-text {
+			font-size: 1.2rem;
+			fill: #464646;
+		}
+
+		text {
+			outline: none;
+			cursor: default;
+			user-select: none;
+		}
 	}
 </style>
