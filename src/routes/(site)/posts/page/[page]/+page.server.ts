@@ -8,7 +8,7 @@ export const load = async ({ params, url, fetch }) => {
 	const page = params.page ? Number(params.page) : 1;
 
 	if (!page || page <= 1) {
-		redirect(301, '/posts');
+		redirect(302, '/posts');
 	}
 
 	const offset = page * postsPerPage - postsPerPage;
