@@ -7,7 +7,7 @@ export const prerender = true;
 export const load = async ({ params }) => {
 	// /posts/page will be covered by another route
 	if (params.slug == 'page') {
-		redirect(301, '/posts');
+		redirect(302, '/posts');
 	}
 	try {
 		const post = await import(`../../../../lib/content/posts/${params.slug}.md`);
