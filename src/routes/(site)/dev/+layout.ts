@@ -3,6 +3,6 @@ import { dev } from '$app/environment';
 
 export const load = async () => {
 	if (!dev) {
-		redirect(301, '/');
+		redirect(302, '/');
 	}
 };

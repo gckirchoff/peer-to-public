@@ -29,6 +29,6 @@ export const load = async ({ params, fetch }) => {
 			allAuthors,
 		};
 	} catch (err) {
-		redirect(301, '/posts');
+		redirect(302, '/posts');
 	}
 };
