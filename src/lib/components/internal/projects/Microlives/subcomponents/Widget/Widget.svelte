@@ -1,12 +1,16 @@
 <script lang="ts">
 	import { Body2, SubTitle2 } from '$lib/components/internal/typography';
 	import InputsContainer from './InputsContainer/InputsContainer.svelte';
+	import MicrolifeDeltas from './MicrolifeDeltas/MicrolifeDeltas.svelte';
 	import NumberInput from './NumberInput/NumberInput.svelte';
 	import Select from './Select/Select.svelte';
 	import type { Microlife, Sex } from './constants';
-	import { microlivesFromExercise } from './logic';
+	import { getMicrolifeChanges } from './logic';
 
 	const sectionStyles = 'text-decoration: underline;';
+
+	const xAccessor = (d: Microlife): number => d.value;
+	const yAccessor = (d: Microlife): string => d.name;
 
 	let bmi = 0;
 	let sex: Sex = 'male';
@@ -24,31 +28,18 @@
 	let receivesYearlyCovidVaccine = false;
 	let preventsCovidInfection = false;
 
-	let microlives: Microlife[] = [];
-	$: microlives = [
-		{
-			name: 'Being Sedentary',
-			value: (hoursSedentaryPerDay / 2) * -1,
-		},
-		{
-			name: 'Exercise',
-			value: microlivesFromExercise(exerciseSessionsPerWeek, minutesPerExerciseSession, sex),
-		},
-		{
-			name: 'Meat Consumption',
-			value: servingsRedMeat * -1,
-		},
-		{
-			name: 'Fruit/Vegetable Consumption',
-			value: (servingsVeg / 5) * (sex === 'male' ? 4 : 3),
-		},
-		{
-			name: 'Cigarettes',
-			value: (cigarettesPerDay / 2) * -1, // https://understandinguncertainty.org/microlives doll and peto
-		},
-	];
-
-	$: console.log('microlives', microlives);
+	$: microlives = getMicrolifeChanges({
+		hoursSedentaryPerDay,
+		exerciseSessionsPerWeek,
+		minutesPerExerciseSession,
+		sex,
+		servingsRedMeat,
+		servingsVeg,
+		cigarettesPerDay,
+		bmi,
+		drinksPerSession,
+		drinkingSessionsPerWeek,
+	});
 </script>
 
 <div class="viz">
@@ -67,9 +58,9 @@
 
 		<SubTitle2 style={sectionStyles}>Activity Level:</SubTitle2>
 		<InputsContainer>
-			<NumberInput bind:value={hoursSedentaryPerDay} label="hours sedentary per day" />
-			<NumberInput bind:value={exerciseSessionsPerWeek} label="exercise sessions per week" />
-			<NumberInput bind:value={minutesPerExerciseSession} label="minutes per exercise session" />
+			<NumberInput bind:value={hoursSedentaryPerDay} label="Hours sedentary per day" />
+			<NumberInput bind:value={exerciseSessionsPerWeek} label="Days exercise per week" />
+			<NumberInput bind:value={minutesPerExerciseSession} label="Minutes exercised each day exercise occurs" />
 		</InputsContainer>
 
 		<SubTitle2 style={sectionStyles}>Diet:</SubTitle2>
@@ -81,8 +72,8 @@
 		<SubTitle2 style={sectionStyles}>Risky behavior:</SubTitle2>
 		<InputsContainer>
 			<NumberInput bind:value={cigarettesPerDay} label="Cigarettes per day" />
-			<NumberInput bind:value={drinkingSessionsPerWeek} label="Drinking sessions per week" />
-			<NumberInput bind:value={drinksPerSession} label="drinks per session" />
+			<NumberInput bind:value={drinkingSessionsPerWeek} label="Days per week alcohol is consumed" />
+			<NumberInput bind:value={drinksPerSession} label="Drinks consumed each day drinking occurs" />
 			<label>
 				<input type="checkbox" bind:value={receivesYearlyCovidVaccine} />
 				receives yearly COVID-19 vaccine
@@ -95,7 +86,9 @@
 	</section>
 	<section class="right">
 		<div class="life-delta-chart"></div>
-		<div class="microlives-chart"></div>
+		<div class="microlives-chart">
+			<MicrolifeDeltas {microlives} {xAccessor} {yAccessor} />
+		</div>
 	</section>
 </div>
 
