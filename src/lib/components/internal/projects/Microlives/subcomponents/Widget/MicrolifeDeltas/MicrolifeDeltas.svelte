@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { scaleLinear, scaleBand, extent, max } from 'd3';
+	import { scaleLinear, scaleBand, max } from 'd3';
 
 	import type { Microlife } from '../constants';
+	import Bar from './Bar/Bar.svelte';
 	import { margin } from './constants';
 
 	export let microlives: Microlife[];
@@ -20,41 +21,25 @@
 		.range([0, innerChartWidth])
 		.nice();
 
-	$: yScale = scaleBand().domain(microlives.map(yAccessor)).range([innerChartHeight, 0]);
-
-	$: positiveDeltas = microlives.filter((d) => xAccessor(d) >= 0);
-	$: negativeDeltas = microlives.filter((d) => xAccessor(d) < 0);
+	$: yScale = scaleBand()
+		.domain(microlives.map(yAccessor))
+		.range([innerChartHeight, 0])
+		.padding(0.2);
 </script>
 
 <div class="chart-container" bind:clientWidth={width}>
 	<svg {width} {height}>
 		<g style="transform: translate({margin.left}px, {margin.top}px)">
-			{#each negativeDeltas as bar}
-				<rect
-					x={xScale(xAccessor(bar))}
-					y={yScale(yAccessor(bar))}
-					width={xScale(0) - xScale(xAccessor(bar))}
-					height={yScale.bandwidth()}
-					fill="red"
+			{#each microlives as microlifeDelta}
+				<Bar
+					data={microlifeDelta}
+					{xScale}
+					{yScale}
+					{xAccessor}
+					{yAccessor}
+					label={microlifeDelta.name}
 				/>
-				<text x={xScale(xAccessor(bar))} y={yScale(yAccessor(bar))} fill="white">{bar.name}</text>
-			{/each}
-			{#each positiveDeltas as bar}
-				<rect
-					x={xScale(0)}
-					y={yScale(yAccessor(bar))}
-					width={xScale(xAccessor(bar)) - xScale(0)}
-					height={yScale.bandwidth()}
-					fill="blue"
-				/>
-				<text x={xScale(0)} y={yScale(yAccessor(bar))} fill="white">{bar.name}</text>
 			{/each}
 		</g>
 	</svg>
 </div>
-
-<style lang="scss">
-	rect {
-		transition: all 500ms ease;
-	}
-</style>
