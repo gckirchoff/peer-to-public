@@ -2,6 +2,7 @@
 	import { scaleLinear, scaleBand, max } from 'd3';
 
 	import type { Microlife } from '../constants';
+	import AxisX from './AxisX/AxisX.svelte';
 	import Bar from './Bar/Bar.svelte';
 	import { margin } from './constants';
 
@@ -30,6 +31,7 @@
 <div class="chart-container" bind:clientWidth={width}>
 	<svg {width} {height}>
 		<g style="transform: translate({margin.left}px, {margin.top}px)">
+			<AxisX {xScale} {innerChartHeight} />
 			{#each microlives as microlifeDelta}
 				<Bar
 					data={microlifeDelta}
