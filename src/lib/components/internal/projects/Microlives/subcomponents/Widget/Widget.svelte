@@ -26,7 +26,7 @@
 	let drinkingSessionsPerWeek = 0;
 	let drinksPerSession = 0;
 	let receivesYearlyCovidVaccine = false;
-	let preventsCovidInfection = false;
+	let preventsCovidInfection = true;
 
 	$: microlives = getMicrolifeChanges({
 		hoursSedentaryPerDay,
@@ -39,6 +39,8 @@
 		bmi,
 		drinksPerSession,
 		drinkingSessionsPerWeek,
+		receivesYearlyCovidVaccine,
+		preventsCovidInfection,
 	});
 </script>
 
@@ -60,7 +62,10 @@
 		<InputsContainer>
 			<NumberInput bind:value={hoursSedentaryPerDay} label="Hours sedentary per day" />
 			<NumberInput bind:value={exerciseSessionsPerWeek} label="Days exercise per week" />
-			<NumberInput bind:value={minutesPerExerciseSession} label="Minutes exercised each day exercise occurs" />
+			<NumberInput
+				bind:value={minutesPerExerciseSession}
+				label="Minutes exercised each day exercise occurs"
+			/>
 		</InputsContainer>
 
 		<SubTitle2 style={sectionStyles}>Diet:</SubTitle2>
@@ -75,12 +80,16 @@
 			<NumberInput bind:value={drinkingSessionsPerWeek} label="Days per week alcohol is consumed" />
 			<NumberInput bind:value={drinksPerSession} label="Drinks consumed each day drinking occurs" />
 			<label>
-				<input type="checkbox" bind:value={receivesYearlyCovidVaccine} />
-				receives yearly COVID-19 vaccine
+				<input
+					type="checkbox"
+					on:change={() => (preventsCovidInfection = !preventsCovidInfection)}
+					checked={!preventsCovidInfection}
+				/>
+				Does not mask in public spaces
 			</label>
 			<label>
-				<input type="checkbox" bind:value={preventsCovidInfection} />
-				actively prevents COVID-19 infection
+				<input type="checkbox" bind:checked={receivesYearlyCovidVaccine} />
+				Receives yearly COVID-19 vaccine
 			</label>
 		</InputsContainer>
 	</section>

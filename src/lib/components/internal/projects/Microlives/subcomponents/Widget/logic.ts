@@ -52,6 +52,8 @@ type GetMicroLifeChangesArgs = {
 	bmi: number;
 	drinksPerSession: number;
 	drinkingSessionsPerWeek: number;
+	receivesYearlyCovidVaccine: boolean;
+	preventsCovidInfection: boolean;
 };
 
 export const getMicrolifeChanges = ({
@@ -65,6 +67,8 @@ export const getMicrolifeChanges = ({
 	bmi,
 	drinksPerSession,
 	drinkingSessionsPerWeek,
+	receivesYearlyCovidVaccine,
+	preventsCovidInfection,
 }: GetMicroLifeChangesArgs): Microlife[] => [
 	{
 		name: 'Obesity',
@@ -83,7 +87,7 @@ export const getMicrolifeChanges = ({
 		value: (servingsRedMeat * -1) / 7,
 	},
 	{
-		name: 'Fruit/Vegetable Consumption',
+		name: 'Fruit/Veg Consumption',
 		value: (servingsVeg / 5) * (sex === 'male' ? 4 : 3),
 	},
 	{
@@ -93,5 +97,9 @@ export const getMicrolifeChanges = ({
 	{
 		name: 'Alcohol',
 		value: microlivesFromAlcohol(drinksPerSession, drinkingSessionsPerWeek),
+	},
+	{
+		name: 'Covid',
+		value: preventsCovidInfection ? 0 : receivesYearlyCovidVaccine ? -10 : -14,
 	},
 ];
