@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Body2, SubTitle2 } from '$lib/components/internal/typography';
 	import InputsContainer from './InputsContainer/InputsContainer.svelte';
+	import LifeDeltaChart from './LifeDeltaChart/LifeDeltaChart.svelte';
 	import MicrolifeDeltas from './MicrolifeDeltas/MicrolifeDeltas.svelte';
 	import NumberInput from './NumberInput/NumberInput.svelte';
 	import Select from './Select/Select.svelte';
@@ -112,7 +113,9 @@
 		</InputsContainer>
 	</section>
 	<section class="right">
-		<div class="life-delta-chart"></div>
+		<div class="life-delta-chart">
+			<LifeDeltaChart {microlives} />
+		</div>
 		<div class="microlives-chart">
 			<MicrolifeDeltas {microlives} {xAccessor} {yAccessor} />
 		</div>
