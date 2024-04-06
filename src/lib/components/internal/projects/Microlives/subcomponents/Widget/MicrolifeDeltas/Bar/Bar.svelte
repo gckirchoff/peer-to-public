@@ -15,7 +15,7 @@
 	$: width = isPositive ? xScale(xAccessor(data)) - xScale(0) : xScale(0) - xScale(xAccessor(data));
 </script>
 
-<rect {x} y={yScale(yAccessor(data))} {width} height={yScale.bandwidth()} fill="red" />
+<rect {x} y={yScale(yAccessor(data))} {width} height={yScale.bandwidth()} />
 <text
 	x={xScale(0)}
 	dx={5 * (isPositive ? -1 : 1)}
@@ -28,5 +28,9 @@
 <style lang="scss">
 	rect {
 		transition: all 400ms ease;
+	}
+
+	text {
+		fill: black;
 	}
 </style>
