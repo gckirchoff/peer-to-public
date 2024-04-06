@@ -1,10 +1,13 @@
 <script lang="ts">
 	export let value: number;
 	export let label = '';
+	export let min: number | undefined = undefined;
+	export let max: number | undefined = undefined;
+	export let step: string | undefined = undefined;
 </script>
 
 <label>
-	<input type="number" bind:value />
+	<input bind:value type="number" {min} {max} {step} />
 	{label}
 </label>
 
