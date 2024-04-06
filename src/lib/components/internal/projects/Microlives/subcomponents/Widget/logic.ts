@@ -106,6 +106,6 @@ export const getMicrolifeChanges = ({
 	},
 	{
 		name: 'Covid',
-		value: preventsCovidInfection ? 0 : receivesYearlyCovidVaccine ? -10 : -14,
+		value: preventsCovidInfection ? 0 : receivesYearlyCovidVaccine ? -10 : -12.0638,
 	},
 ];

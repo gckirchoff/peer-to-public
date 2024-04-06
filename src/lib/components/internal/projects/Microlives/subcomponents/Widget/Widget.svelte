@@ -63,7 +63,7 @@
 		<InputsContainer>
 			<NumberInput
 				bind:value={hoursSedentaryPerDay}
-				label="Hours sedentary screen time per days"
+				label="Hours of entertainment screen time"
 				min={0}
 				max={24}
 				step="0.5"
@@ -123,6 +123,10 @@
 </div>
 
 <style lang="scss">
+	:global(text) {
+		user-select: none;
+	}
+
 	.viz {
 		display: flex;
 		flex-wrap: wrap;
