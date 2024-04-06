@@ -47,14 +47,7 @@
 					style="transform: translate(0, {yScale(yAccessor(microlifeDelta))}px)"
 					animate:flip={{ duration: 800 }}
 				>
-					<Bar
-						data={microlifeDelta}
-						{xScale}
-						{yScale}
-						{xAccessor}
-						{yAccessor}
-						label={microlifeDelta.name}
-					/>
+					<Bar data={microlifeDelta} label={microlifeDelta.name} {xScale} {yScale} {xAccessor} />
 				</g>
 			{/each}
 		</g>

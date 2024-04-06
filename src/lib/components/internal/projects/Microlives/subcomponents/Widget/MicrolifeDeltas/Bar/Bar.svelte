@@ -8,7 +8,6 @@
 	export let xScale: ScaleLinear<number, number, never>;
 	export let yScale: ScaleBand<string>;
 	export let xAccessor: (d: T) => number;
-	export let yAccessor: (d: T) => string;
 	export let label = '';
 
 	$: isPositive = xAccessor(data) >= 0;
