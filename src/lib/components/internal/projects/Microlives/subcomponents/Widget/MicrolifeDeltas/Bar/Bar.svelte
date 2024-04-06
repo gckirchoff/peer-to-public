@@ -16,10 +16,17 @@
 </script>
 
 <rect {x} y={yScale(yAccessor(data))} {width} height={yScale.bandwidth()} fill="red" />
-<text x={xScale(xAccessor(data))} y={yScale(yAccessor(data))} fill="white">{label}</text>
+<text
+	x={xScale(0)}
+	dx={5 * (isPositive ? -1 : 1)}
+	y={(yScale(yAccessor(data)) ?? 0) + yScale.bandwidth() / 2}
+	text-anchor={isPositive ? 'end' : 'start'}
+	dominant-baseline="middle"
+	fill="white">{label}</text
+>
 
 <style lang="scss">
 	rect {
-		transition: all 500ms ease;
+		transition: all 400ms ease;
 	}
 </style>
