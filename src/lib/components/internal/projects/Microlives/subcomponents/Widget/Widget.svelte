@@ -51,8 +51,8 @@
 		<InputsContainer>
 			<label class="sex-select" for="sex-select">
 				<Select bind:value={sex} id="sex-select">
-					<option value="male">Male</option>
 					<option value="female">Female</option>
+					<option value="male">Male</option>
 				</Select>
 				<Body2>Sex</Body2>
 			</label>
@@ -63,10 +63,10 @@
 		<InputsContainer>
 			<NumberInput
 				bind:value={hoursSedentaryPerDay}
-				label="Hours sedentary per day"
+				label="Hours sedentary screen time per days"
 				min={0}
 				max={24}
-				step="0.1"
+				step="0.5"
 			/>
 			<NumberInput
 				bind:value={exerciseSessionsPerWeek}
@@ -125,9 +125,14 @@
 <style lang="scss">
 	.viz {
 		display: flex;
+		flex-wrap: wrap;
 
 		section {
 			flex: 1;
+		}
+
+		.right {
+			min-width: 35rem;
 		}
 	}
 	.left {
