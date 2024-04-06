@@ -55,27 +55,48 @@
 				</Select>
 				<Body2>Sex</Body2>
 			</label>
-			<NumberInput bind:value={bmi} label="BMI" />
+			<NumberInput bind:value={bmi} label="BMI" min={0} max={50} step="0.1" />
 		</InputsContainer>
 
 		<SubTitle2 style={sectionStyles}>Activity Level:</SubTitle2>
 		<InputsContainer>
-			<NumberInput bind:value={hoursSedentaryPerDay} label="Hours sedentary per day" />
-			<NumberInput bind:value={exerciseSessionsPerWeek} label="Days exercised per week" />
-			<NumberInput bind:value={minutesPerExerciseSession} label="Minutes exercised per day" />
+			<NumberInput
+				bind:value={hoursSedentaryPerDay}
+				label="Hours sedentary per day"
+				min={0}
+				max={24}
+				step="0.1"
+			/>
+			<NumberInput
+				bind:value={exerciseSessionsPerWeek}
+				label="Days exercised per week"
+				min={0}
+				max={7}
+			/>
+			<NumberInput
+				bind:value={minutesPerExerciseSession}
+				label="Minutes exercised per day"
+				min={0}
+				max={60}
+			/>
 		</InputsContainer>
 
 		<SubTitle2 style={sectionStyles}>Diet:</SubTitle2>
 		<InputsContainer>
-			<NumberInput bind:value={servingsRedMeat} label="Servings red meat per week" />
-			<NumberInput bind:value={servingsVeg} label="Servings fruits/vegetables per week" />
+			<NumberInput bind:value={servingsRedMeat} label="Servings red meat per week" min={0} />
+			<NumberInput bind:value={servingsVeg} label="Servings fruits/vegetables per week" min={0} />
 		</InputsContainer>
 
 		<SubTitle2 style={sectionStyles}>Risky behavior:</SubTitle2>
 		<InputsContainer>
-			<NumberInput bind:value={cigarettesPerDay} label="Cigarettes per day" />
-			<NumberInput bind:value={drinkingSessionsPerWeek} label="Days per week alcohol is consumed" />
-			<NumberInput bind:value={drinksPerSession} label="Drinks consumed per day" />
+			<NumberInput bind:value={cigarettesPerDay} label="Cigarettes per day" min={0} />
+			<NumberInput
+				bind:value={drinkingSessionsPerWeek}
+				label="Days per week alcohol is consumed"
+				min={0}
+				max={7}
+			/>
+			<NumberInput bind:value={drinksPerSession} label="Drinks consumed per day" min={0} />
 			<label>
 				<input
 					type="checkbox"
