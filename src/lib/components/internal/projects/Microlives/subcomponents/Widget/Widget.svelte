@@ -85,7 +85,7 @@
 					on:change={() => (preventsCovidInfection = !preventsCovidInfection)}
 					checked={!preventsCovidInfection}
 				/>
-				Does not mask in public spaces
+				Does not actively avoid SARS-CoV-2 infection
 			</label>
 			<label>
 				<input type="checkbox" bind:checked={receivesYearlyCovidVaccine} />
@@ -126,8 +126,5 @@
 				cursor: pointer;
 			}
 		}
-	}
-	.right {
-		background-color: green;
 	}
 </style>
