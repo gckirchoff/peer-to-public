@@ -31,13 +31,15 @@ export const microlivesFromExercise = (
 const microlivesFromAlcohol = (
 	drinksPerSession: number,
 	drinkingSessionsPerWeek: number,
+	sex: Sex,
 ): number => {
 	if (drinkingSessionsPerWeek === 0 || drinksPerSession === 0) {
 		return 0;
 	}
 	const drinksAfterFirst = Math.min(drinksPerSession - 1, 6);
 	const microlivesPerDay =
-		((1 + drinksAfterFirst * 0.5 * -1) * drinkingSessionsPerWeek) / daysPerWeek;
+		((1 + drinksAfterFirst * (sex === 'male' ? 0.5 : 1) * -1) * drinkingSessionsPerWeek) /
+		daysPerWeek;
 	return microlivesPerDay;
 };
 
@@ -71,6 +73,10 @@ export const getMicrolifeChanges = ({
 	preventsCovidInfection,
 }: GetMicroLifeChangesArgs): Microlife[] => [
 	{
+		name: 'Sex',
+		value: sex === 'male' ? -4 : 0,
+	},
+	{
 		name: 'Obesity',
 		value: bmi - 22.5 > 0 ? ((bmi - 22.5) / 5) * -1 : 0,
 	},
@@ -96,7 +102,7 @@ export const getMicrolifeChanges = ({
 	},
 	{
 		name: 'Alcohol',
-		value: microlivesFromAlcohol(drinksPerSession, drinkingSessionsPerWeek),
+		value: microlivesFromAlcohol(drinksPerSession, drinkingSessionsPerWeek, sex),
 	},
 	{
 		name: 'Covid',

@@ -13,7 +13,7 @@
 	const yAccessor = (d: Microlife): string => d.name;
 
 	let bmi = 0;
-	let sex: Sex = 'male';
+	let sex: Sex = 'female';
 
 	let hoursSedentaryPerDay = 0;
 	let exerciseSessionsPerWeek = 0;
