@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { flip } from 'svelte/animate';
 	import { scaleLinear, scaleBand, max } from 'd3';
 
 	import type { Microlife } from '../constants';
@@ -22,8 +23,17 @@
 		.range([0, innerChartWidth])
 		.nice();
 
+	$: sortedMicrolives = [...microlives].sort((a, b) => {
+		const absA = Math.abs(a.value);
+		const absB = Math.abs(b.value);
+		if (absA === absB) {
+			return b.name > a.name ? 1 : -1;
+		}
+		return absA - absB;
+	});
+
 	$: yScale = scaleBand()
-		.domain(microlives.map(yAccessor))
+		.domain(sortedMicrolives.map(yAccessor))
 		.range([innerChartHeight, 0])
 		.padding(0.2);
 </script>
@@ -32,15 +42,20 @@
 	<svg {width} {height}>
 		<g style="transform: translate({margin.left}px, {margin.top}px)">
 			<AxisX {xScale} {innerChartHeight} />
-			{#each microlives as microlifeDelta}
-				<Bar
-					data={microlifeDelta}
-					{xScale}
-					{yScale}
-					{xAccessor}
-					{yAccessor}
-					label={microlifeDelta.name}
-				/>
+			{#each microlives as microlifeDelta (microlifeDelta.name)}
+				<g
+					style="transform: translate(0, {yScale(yAccessor(microlifeDelta))}px)"
+					animate:flip={{ duration: 800 }}
+				>
+					<Bar
+						data={microlifeDelta}
+						{xScale}
+						{yScale}
+						{xAccessor}
+						{yAccessor}
+						label={microlifeDelta.name}
+					/>
+				</g>
 			{/each}
 		</g>
 	</svg>
