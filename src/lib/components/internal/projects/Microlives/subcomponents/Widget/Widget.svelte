@@ -61,11 +61,8 @@
 		<SubTitle2 style={sectionStyles}>Activity Level:</SubTitle2>
 		<InputsContainer>
 			<NumberInput bind:value={hoursSedentaryPerDay} label="Hours sedentary per day" />
-			<NumberInput bind:value={exerciseSessionsPerWeek} label="Days exercise per week" />
-			<NumberInput
-				bind:value={minutesPerExerciseSession}
-				label="Minutes exercised each day exercise occurs"
-			/>
+			<NumberInput bind:value={exerciseSessionsPerWeek} label="Days exercised per week" />
+			<NumberInput bind:value={minutesPerExerciseSession} label="Minutes exercised per day" />
 		</InputsContainer>
 
 		<SubTitle2 style={sectionStyles}>Diet:</SubTitle2>
@@ -78,7 +75,7 @@
 		<InputsContainer>
 			<NumberInput bind:value={cigarettesPerDay} label="Cigarettes per day" />
 			<NumberInput bind:value={drinkingSessionsPerWeek} label="Days per week alcohol is consumed" />
-			<NumberInput bind:value={drinksPerSession} label="Drinks consumed each day drinking occurs" />
+			<NumberInput bind:value={drinksPerSession} label="Drinks consumed per day" />
 			<label>
 				<input
 					type="checkbox"
