@@ -28,8 +28,6 @@
 	$: yearsLeft = averageMicrolivesLeft / (dayInMicrolives + microlifeChangePerDay) / daysPerYear;
 	$: totalLifeExpectancy = baseAge + yearsLeft;
 
-	$: xScale = scaleLinear().domain([0, 100]).range([0, innerChartWidth]);
-
 	$: middleHeight = innerChartHeight / 2 - barHeight / 2;
 
 	$: shorterThanAverage = totalLifeExpectancy < unitedStatesLifeExpectancy;
@@ -41,6 +39,10 @@
 	$: lifeExpectancyDelta = numberFormatter(
 		Math.abs(totalLifeExpectancy - unitedStatesLifeExpectancy),
 	);
+
+	$: xScale = scaleLinear()
+		.domain([0, Math.max(100, totalLifeExpectancy)])
+		.range([0, innerChartWidth]);
 </script>
 
 <div class="chart-container" bind:clientWidth={width}>
