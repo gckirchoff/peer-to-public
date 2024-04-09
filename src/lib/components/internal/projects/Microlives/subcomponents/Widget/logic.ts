@@ -90,7 +90,7 @@ export const getMicrolifeChanges = ({
 	},
 	{
 		name: 'Meat Consumption',
-		value: (servingsRedMeat * -1) / 7,
+		value: (servingsRedMeat * -1),
 	},
 	{
 		name: 'Fruit/Veg Consumption',
