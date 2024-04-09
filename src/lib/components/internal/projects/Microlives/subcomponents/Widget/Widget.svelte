@@ -84,8 +84,8 @@
 
 		<SubTitle2 style={sectionStyles}>Diet:</SubTitle2>
 		<InputsContainer>
-			<NumberInput bind:value={servingsRedMeat} label="Servings red meat per week" min={0} />
-			<NumberInput bind:value={servingsVeg} label="Servings fruits/vegetables per week" min={0} />
+			<NumberInput bind:value={servingsRedMeat} label="Servings red meat per day" min={0} />
+			<NumberInput bind:value={servingsVeg} label="Servings fruits/vegetables per day" min={0} />
 		</InputsContainer>
 
 		<SubTitle2 style={sectionStyles}>Risky behavior:</SubTitle2>
