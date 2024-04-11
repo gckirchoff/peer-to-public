@@ -25,11 +25,11 @@
 
 <p>
 	To understand that, we need to understand cumulative risk. This concept is simple to understand,
-	but is often misinterpreted. According to StatsCan, the risk of developing symptomatic Long Covid
-	is 15% per infection. This makes perfect sense when looking at one infection. Your chance of
-	developing symptomatic Long Covid is 15%. What about 3 infections? Does the overall chance
-	continue to stay 15% because each infection has a 15% chance, or is the overall chance 45% from
-	adding them all up? The answer is about 38.6%.
+	but is often misinterpreted. According to data gathered by Statistics Canada, the risk of
+	developing symptomatic Long Covid is around 15% per infection. This makes perfect sense when
+	looking at one infection. Your chance of developing symptomatic Long Covid is 15%. What about 3
+	infections? Does the overall chance continue to stay 15% because each infection has a 15% chance,
+	or is the overall chance 45% from adding them all up? The answer is about 38.6%.
 </p>
 
 <p>
@@ -142,6 +142,9 @@
 <Chart {longCovidChance} />
 
 <style lang="scss">
+	img {
+		margin-bottom: var(--spacing-24);
+	}
 	input[type='number'] {
 		width: 6rem;
 		border: 1px solid black;

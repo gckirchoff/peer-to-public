@@ -46,14 +46,21 @@
 				<circle
 					cx={xAccessorScaled(d)}
 					cy={yAccessorScaled(d)}
-					fill="#ED1C24"
-					r={4}
+					fill="transparent"
+					r={20}
 					on:mouseover={() => {
 						updateHoveredData(d);
 					}}
 					on:focus={() => updateHoveredData(d)}
 					on:mouseleave={() => updateHoveredData(null)}
 					role="tooltip"
+				/>
+				<circle
+					class="filled-circle"
+					cx={xAccessorScaled(d)}
+					cy={yAccessorScaled(d)}
+					fill="#ED1C24"
+					r={4}
 				/>
 			{/each}
 			<Line data={cumulativeRisks} {xAccessorScaled} {yAccessorScaled} />
@@ -61,8 +68,8 @@
 				<circle
 					cx={xAccessorScaled(d)}
 					cy={yAccessorScaled(d)}
-					fill="#8990d0"
-					r={4}
+					fill="transparent"
+					r={20}
 					on:mouseover={() => {
 						updateHoveredData(d);
 					}}
@@ -70,13 +77,20 @@
 					on:mouseleave={() => updateHoveredData(null)}
 					role="tooltip"
 				/>
+				<circle
+					class="filled-circle"
+					cx={xAccessorScaled(d)}
+					cy={yAccessorScaled(d)}
+					fill="#8990d0"
+					r={4}
+				/>
 			{/each}
 			<g
 				style="transform: translate({xAccessorScaled(
 					statsCanadaData.at(-1) ?? { infectionCount: maxInfectionCount, risk: 0.8 },
 				) + 15}px, {yAccessorScaled(
 					statsCanadaData.at(-1) ?? { infectionCount: maxInfectionCount, risk: 0.8 },
-				) + 85}px);"
+				) + 82}px);"
 			>
 				<text text-anchor="end" fill="#ED1C24">Forecast derived from</text>
 				<text text-anchor="end" dy={16} fill="#ED1C24">Statistics Canada</text>
@@ -89,6 +103,11 @@
 </div>
 
 <style lang="scss">
+	:global(text) {
+		pointer-events: none;
+		user-select: none;
+	}
+
 	:global(.tick text) {
 		font-weight: 500;
 		font-size: 15px;
@@ -96,7 +115,15 @@
 		user-select: none;
 	}
 
+	.chart-container {
+		margin-top: var(--spacing-16);
+	}
+
 	circle {
 		transition: all 0.3s ease-out;
+	}
+
+	.filled-circle {
+		pointer-events: none;
 	}
 </style>
