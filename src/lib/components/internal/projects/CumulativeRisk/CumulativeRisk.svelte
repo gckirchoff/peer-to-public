@@ -37,16 +37,16 @@
 
 <p>For the rest of the article:</p>
 
-<label>
+<p>
 	The chance of getting symptomatic Long Covid is
-	<input bind:value={inputLongCovidPercent} type="number" />
-</label>
+	<input bind:value={inputLongCovidPercent} type="number" />%
+</p>
 
-<label>
+<p>
 	We want to know the probability of having contracted Long Covid after
 	<input bind:value={infectionCount} type="number" />
 	infections
-</label>
+</p>
 
 <p>
 	What we want to find out is, “What is the overall chance I get long covid if I get infected <Highlight
@@ -131,3 +131,11 @@
 	To get a more birds-eye view of the cumulative risk based on the number of infections, please use
 	the following interactive simulation.
 </p>
+
+<style lang="scss">
+	input {
+		width: 6rem;
+		border: 1px solid black;
+		border-radius: var(--rounded-4);
+	}
+</style>
