@@ -39,8 +39,8 @@
 <div class="chart-container" bind:clientWidth={width} role="application">
 	<svg {width} {height}>
 		<g style="transform: translate({margin.left}px, {margin.top}px)">
-			<AxisX {xScale} {innerChartHeight} />
-			<AxisY {yScale} />
+			<AxisX {xScale} {innerChartWidth} {innerChartHeight} />
+			<AxisY {yScale} {innerChartWidth} />
 			<Line data={statsCanadaData} {xAccessorScaled} {yAccessorScaled} style="stroke: #ED1C24;" />
 			{#each statsCanadaData.slice(0, 4) as d}
 				<circle
@@ -61,7 +61,7 @@
 				<circle
 					cx={xAccessorScaled(d)}
 					cy={yAccessorScaled(d)}
-					fill="purple"
+					fill="#8990d0"
 					r={4}
 					on:mouseover={() => {
 						updateHoveredData(d);
@@ -89,6 +89,13 @@
 </div>
 
 <style lang="scss">
+	:global(.tick text) {
+		font-weight: 500;
+		font-size: 15px;
+		fill: #565656;
+		user-select: none;
+	}
+
 	circle {
 		transition: all 0.3s ease-out;
 	}
