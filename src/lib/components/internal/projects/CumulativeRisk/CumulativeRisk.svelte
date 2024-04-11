@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Body2 from '../../typography/Body2.svelte';
+	import Chart from './Chart/Chart.svelte';
 	import Highlight from './Highlight/Highlight.svelte';
 	import { roundTo } from './logic';
 
@@ -132,10 +134,28 @@
 	the following interactive simulation.
 </p>
 
+<label class="range-input">
+	<Body2>{inputLongCovidPercent}% Long Covid risk per infection:</Body2>
+	<input bind:value={inputLongCovidPercent} type="range" min={0} max={100} step={1} />
+</label>
+
+<Chart {longCovidChance} />
+
 <style lang="scss">
-	input {
+	input[type='number'] {
 		width: 6rem;
 		border: 1px solid black;
 		border-radius: var(--rounded-4);
+	}
+
+	.range-input {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		row-gap: var(--spacing-4);
+
+		input {
+			cursor: pointer;
+		}
 	}
 </style>
