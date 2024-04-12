@@ -19,17 +19,16 @@
 <p>
 	It has become apparent that without decisive mitigation becoming established through government
 	and societal action, most of us will continue to get infected with SARS-CoV-2. For the best
-	decisions to be made, a deep understanding of the matter at hand is necessary. How are things
-	going to go?
+	decisions to be made, a deep understanding of the matter at hand is necessary.
 </p>
 
 <p>
 	To understand that, we need to understand cumulative risk. This concept is simple to understand,
 	but is often misinterpreted. According to data gathered by Statistics Canada, the risk of
 	developing symptomatic Long Covid is around 15% per infection. This makes perfect sense when
-	looking at one infection. Your chance of developing symptomatic Long Covid is 15%. What about 3
-	infections? Does the overall chance continue to stay 15% because each infection has a 15% chance,
-	or is the overall chance 45% from adding them all up? The answer is about 38.6%.
+	looking at one infection. Your chance of developing symptomatic Long Covid is 15%. However, what
+	is the chance from 3 infections? Does the overall chance remain 15% because each infection has a
+	15% chance, or is the overall chance 45% from adding them all up? The answer is about 38.6%.
 </p>
 
 <p>
@@ -51,11 +50,9 @@
 </p>
 
 <p>
-	What we want to find out is, “What is the overall chance I get long covid if I get infected <Highlight
-		>{infectionCount}</Highlight
-	>. times. A simpler way to think of this at first is that we are asking, “If I flip a coin <Highlight
-		>{infectionCount}</Highlight
-	>
+	The final question we want answered is, “What is the overall chance I get long covid if I get
+	infected <Highlight>{infectionCount}</Highlight>. times?" A simpler way to think of this at first
+	is , “If I flip a coin <Highlight>{infectionCount}</Highlight>
 	times, what is the chance that at least 1 of them lands heads up?” It could be 1 or 2 {infectionCount >
 	2
 		? `or ${infectionCount}`
@@ -70,8 +67,10 @@
 	resulting in Long Covid. Let's find that.
 </p>
 
+<p>The chance of NOT getting symptomatic Long Covid from an infection is:</p>
+
 <p>
-	The chance of NOT getting Long Covid is 1 -<Highlight>{roundTo(longCovidChance, 4)}</Highlight> = <Highlight
+	1 -<Highlight>{roundTo(longCovidChance, 4)}</Highlight> = <Highlight
 		>{roundTo(chanceOfNotGettingLongCovid, 4)}</Highlight
 	> Which is <Highlight>{roundTo(chanceOfNotGettingLongCovid * 100, 2)}</Highlight>%.
 </p>
@@ -83,7 +82,7 @@
 
 <p>
 	So, the chance that someone gets infected with Covid <Highlight>{infectionCount}</Highlight> times
-	and doesn't get Long Covid is:
+	and hasn't gotten symptomatic Long Covid from any of them is:
 </p>
 
 <p>
@@ -97,8 +96,9 @@
 <p>
 	There is a <Highlight>{roundTo(chanceOfNotGettingLongCovidAfterNInfections * 100, 2)}</Highlight>%
 	chance that someone doesn't get Long Covid after having been infected
-	<Highlight>{infectionCount}</Highlight> times. To get the chance that we get Long Covid at least once
-	from any of these infections is the chance that this DOESN'T happen. This is simply
+	<Highlight>{infectionCount}</Highlight> times. In order to know the chance of getting Long Covid from
+	at least one of these infections, we want to know the chance that this DOESN'T happen. For that, you
+	simply subtract this from 1:
 </p>
 
 <p>
@@ -108,10 +108,10 @@
 </p>
 
 <p>
-	So there, we have it. Assuming getting Covid comes with a <Highlight
+	So there, we have it. Assuming Covid infections come with a <Highlight
 		>{roundTo(inputLongCovidPercent, 2)}</Highlight
 	>% chance of getting Long Covid each time, getting Covid <Highlight>{infectionCount}</Highlight> times
-	results in the cumulative chance of getting Long Covid being <Highlight
+	results in a cumulative risk of getting Long Covid of <Highlight
 		>{roundTo(cumulativeRiskOfLongCovid * 100, 2)}</Highlight
 	>%.
 </p>
