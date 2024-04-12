@@ -44,18 +44,6 @@
 			<Line data={statsCanadaData} {xAccessorScaled} {yAccessorScaled} style="stroke: #ED1C24;" />
 			{#each statsCanadaData.slice(0, 4) as d}
 				<circle
-					cx={xAccessorScaled(d)}
-					cy={yAccessorScaled(d)}
-					fill="transparent"
-					r={20}
-					on:mouseover={() => {
-						updateHoveredData(d);
-					}}
-					on:focus={() => updateHoveredData(d)}
-					on:mouseleave={() => updateHoveredData(null)}
-					role="tooltip"
-				/>
-				<circle
 					class="filled-circle"
 					cx={xAccessorScaled(d)}
 					cy={yAccessorScaled(d)}
