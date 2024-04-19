@@ -78,7 +78,7 @@ export const getMicrolifeChanges = ({
 	// },
 	{
 		name: 'Being Overweight',
-		value: bmi - 22.5 > 0 ? ((bmi - 22.5) / 5) * -1 : 0,
+		value: bmi - 22.5 > 0 ? ((bmi - 22.5) / 5) * -3 : 0,
 	},
 	{
 		name: 'Being Sedentary',
