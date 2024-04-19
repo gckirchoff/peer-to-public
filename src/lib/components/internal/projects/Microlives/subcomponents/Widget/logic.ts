@@ -36,7 +36,7 @@ const microlivesFromAlcohol = (
 	if (drinkingSessionsPerWeek === 0 || drinksPerSession === 0) {
 		return 0;
 	}
-	const drinksAfterFirst = Math.min(drinksPerSession - 1, 6);
+	const drinksAfterFirst = drinksPerSession - 1;
 	const microlivesPerDay =
 		((1 + drinksAfterFirst * (sex === 'male' ? 0.5 : 1) * -1) * drinkingSessionsPerWeek) /
 		daysPerWeek;
@@ -90,7 +90,7 @@ export const getMicrolifeChanges = ({
 	},
 	{
 		name: 'Meat Consumption',
-		value: (servingsRedMeat * -1),
+		value: servingsRedMeat * -1,
 	},
 	{
 		name: 'Fruit/Veg Consumption',
