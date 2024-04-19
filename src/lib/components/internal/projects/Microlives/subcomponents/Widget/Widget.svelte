@@ -104,7 +104,7 @@
 					on:change={() => (preventsCovidInfection = !preventsCovidInfection)}
 					checked={!preventsCovidInfection}
 				/>
-				Lives in SARS-CoV-2 pandemic without preventing infections
+				Lives in SARS-CoV-2 pandemic without taking precautions to prevent infection
 			</label>
 			<label>
 				<input type="checkbox" bind:checked={receivesYearlyCovidVaccine} />
