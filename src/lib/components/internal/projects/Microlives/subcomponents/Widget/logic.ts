@@ -72,10 +72,10 @@ export const getMicrolifeChanges = ({
 	receivesYearlyCovidVaccine,
 	preventsCovidInfection,
 }: GetMicroLifeChangesArgs): Microlife[] => [
-	{
-		name: 'Sex',
-		value: sex === 'male' ? -4 : 0,
-	},
+	// {
+	// 	name: 'Sex',
+	// 	value: sex === 'male' ? -4 : 0,
+	// },
 	{
 		name: 'Being Overweight',
 		value: bmi - 22.5 > 0 ? ((bmi - 22.5) / 5) * -1 : 0,
@@ -94,7 +94,7 @@ export const getMicrolifeChanges = ({
 	},
 	{
 		name: 'Consuming Fruit/Veg',
-		value: (servingsVeg / 5) * (sex === 'male' ? 4 : 3),
+		value: servingsVeg >= 5 ? (sex === 'male' ? 4 : 3) : 0,
 	},
 	{
 		name: 'Smoking',

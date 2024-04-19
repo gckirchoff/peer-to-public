@@ -119,7 +119,7 @@
 	</section>
 	<section class="right">
 		<div class="life-delta-chart">
-			<LifeDeltaChart {microlives} />
+			<LifeDeltaChart {microlives} {sex} />
 		</div>
 		<div class="microlives-chart">
 			<MicrolifeDeltas {microlives} {xAccessor} {yAccessor} />
