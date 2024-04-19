@@ -77,7 +77,7 @@ export const getMicrolifeChanges = ({
 		value: sex === 'male' ? -4 : 0,
 	},
 	{
-		name: 'Obesity',
+		name: 'Being Overweight',
 		value: bmi - 22.5 > 0 ? ((bmi - 22.5) / 5) * -1 : 0,
 	},
 	{
@@ -85,27 +85,27 @@ export const getMicrolifeChanges = ({
 		value: (hoursSedentaryPerDay / 2) * -1,
 	},
 	{
-		name: 'Exercise',
+		name: 'Exercising',
 		value: microlivesFromExercise(exerciseSessionsPerWeek, minutesPerExerciseSession, sex),
 	},
 	{
-		name: 'Meat Consumption',
+		name: 'Consuming Meat',
 		value: servingsRedMeat * -1,
 	},
 	{
-		name: 'Fruit/Veg Consumption',
+		name: 'Consuming Fruit/Veg',
 		value: (servingsVeg / 5) * (sex === 'male' ? 4 : 3),
 	},
 	{
-		name: 'Cigarettes',
+		name: 'Smoking',
 		value: (cigarettesPerDay / 2) * -1, // https://understandinguncertainty.org/microlives doll and peto
 	},
 	{
-		name: 'Alcohol',
+		name: 'Drinking Alcohol',
 		value: microlivesFromAlcohol(drinksPerSession, drinkingSessionsPerWeek, sex),
 	},
 	{
-		name: 'Covid',
+		name: 'Getting Covid',
 		value: preventsCovidInfection ? 0 : receivesYearlyCovidVaccine ? -3.66 : -5.98,
 	},
 ];
