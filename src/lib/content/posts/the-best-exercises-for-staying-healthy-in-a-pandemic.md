@@ -5,8 +5,8 @@ categories: [ "covid-19", "statistics" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "default-background-1.jpg"
 date: 'Sun Feb 25 2024 13:02:10 GMT-0500 (Eastern Standard Time)'
-published: false
-updated: 'Sun Feb 25 2024 13:02:27 GMT-0500 (Eastern Standard Time)'
+published: true
+updated: 'Sat Apr 20 2024 13:36:22 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
