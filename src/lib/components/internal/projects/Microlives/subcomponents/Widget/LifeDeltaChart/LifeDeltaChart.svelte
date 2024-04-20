@@ -21,7 +21,7 @@
 	$: innerChartHeight = height - margin.top - margin.bottom;
 
 	const baseAge = 35;
-	const baseMicrolivesLeft = 481000 * 2;
+	const baseMicrolivesLeft = 500000 * 2;
 	const dayInMicrolives = 48;
 	const daysPerYear = 365;
 	$: averageMicrolivesLeft =
