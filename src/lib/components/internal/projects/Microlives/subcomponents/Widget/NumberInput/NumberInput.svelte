@@ -4,12 +4,39 @@
 	export let min: number | undefined = undefined;
 	export let max: number | undefined = undefined;
 	export let step: string | undefined = undefined;
+
+	let errorMessage = '';
+
+	$: handleChange = (
+		event: Event & {
+			currentTarget: HTMLInputElement;
+		},
+	) => {
+		errorMessage = '';
+		const newVal = Number((event.target as HTMLInputElement).value);
+		if (isNaN(newVal)) {
+			return;
+		}
+
+		if (min !== undefined && newVal < min) {
+			errorMessage = `min: ${min}`;
+			return;
+		}
+		if (max !== undefined && newVal > max) {
+			errorMessage = `max: ${max}`;
+			return;
+		}
+		value = newVal;
+	};
 </script>
 
 <label>
-	<input bind:value type="number" {min} {max} {step} />
+	<input {value} on:input={handleChange} type="number" {min} {max} {step} />
 	{label}
 </label>
+{#if errorMessage}
+	<p class="error-message">{errorMessage}</p>
+{/if}
 
 <style lang="scss">
 	label {
@@ -30,5 +57,8 @@
 				outline: none;
 			}
 		}
+	}
+	.error-message {
+		color: var(--clr-error-500);
 	}
 </style>

@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { scaleLinear, format } from 'd3';
 
-	import type { Microlife } from '../constants';
+	import type { Microlife, Sex } from '../constants';
 	import { margin } from './constants';
 	import DeltaLine from './DeltaLine/DeltaLine.svelte';
 
 	export let microlives: Microlife[];
+	export let sex: Sex;
 
 	const numberFormatter = (num: number) => format('.1f')(num).toString().replace('.0', '');
 	const red = '#D41C1C';
@@ -20,15 +21,16 @@
 	$: innerChartHeight = height - margin.top - margin.bottom;
 
 	const baseAge = 35;
-	const unitedStatesLifeExpectancy = 78.54;
-	const averageMicrolivesLeft = 1000000;
+	const baseMicrolivesLeft = 1000000;
 	const dayInMicrolives = 48;
 	const daysPerYear = 365;
+	$: averageMicrolivesLeft =
+		sex === 'female' ? baseMicrolivesLeft : (baseMicrolivesLeft / (dayInMicrolives + 4)) * 48;
+	$: unitedStatesLifeExpectancy = baseAge + averageMicrolivesLeft / dayInMicrolives / daysPerYear;
 	$: microlifeChangePerDay = microlives.reduce<number>((acc, { value }) => (acc += value * -1), 0);
 	$: yearsLeft = averageMicrolivesLeft / (dayInMicrolives + microlifeChangePerDay) / daysPerYear;
-	$: totalLifeExpectancy = baseAge + yearsLeft;
 
-	$: middleHeight = innerChartHeight / 2 - barHeight / 2;
+	$: totalLifeExpectancy = baseAge + yearsLeft;
 
 	$: shorterThanAverage = totalLifeExpectancy < unitedStatesLifeExpectancy;
 	$: x = shorterThanAverage ? xScale(totalLifeExpectancy) : xScale(unitedStatesLifeExpectancy);
@@ -43,6 +45,8 @@
 	$: xScale = scaleLinear()
 		.domain([0, Math.max(100, totalLifeExpectancy)])
 		.range([0, innerChartWidth]);
+
+	$: middleHeight = innerChartHeight / 2 - barHeight / 2;
 </script>
 
 <div class="chart-container" bind:clientWidth={width}>

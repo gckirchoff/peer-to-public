@@ -36,7 +36,7 @@ const microlivesFromAlcohol = (
 	if (drinkingSessionsPerWeek === 0 || drinksPerSession === 0) {
 		return 0;
 	}
-	const drinksAfterFirst = Math.min(drinksPerSession - 1, 6);
+	const drinksAfterFirst = drinksPerSession - 1;
 	const microlivesPerDay =
 		((1 + drinksAfterFirst * (sex === 'male' ? 0.5 : 1) * -1) * drinkingSessionsPerWeek) /
 		daysPerWeek;
@@ -72,40 +72,40 @@ export const getMicrolifeChanges = ({
 	receivesYearlyCovidVaccine,
 	preventsCovidInfection,
 }: GetMicroLifeChangesArgs): Microlife[] => [
+	// {
+	// 	name: 'Sex',
+	// 	value: sex === 'male' ? -4 : 0,
+	// },
 	{
-		name: 'Sex',
-		value: sex === 'male' ? -4 : 0,
-	},
-	{
-		name: 'Obesity',
-		value: bmi - 22.5 > 0 ? ((bmi - 22.5) / 5) * -1 : 0,
+		name: 'Being Overweight',
+		value: bmi - 22.5 > 0 ? ((bmi - 22.5) / 5) * -3 : 0,
 	},
 	{
 		name: 'Being Sedentary',
 		value: (hoursSedentaryPerDay / 2) * -1,
 	},
 	{
-		name: 'Exercise',
+		name: 'Exercising',
 		value: microlivesFromExercise(exerciseSessionsPerWeek, minutesPerExerciseSession, sex),
 	},
 	{
-		name: 'Meat Consumption',
-		value: (servingsRedMeat * -1),
+		name: 'Consuming Meat',
+		value: servingsRedMeat * -1,
 	},
 	{
-		name: 'Fruit/Veg Consumption',
-		value: (servingsVeg / 5) * (sex === 'male' ? 4 : 3),
+		name: 'Consuming Fruit/Veg',
+		value: servingsVeg >= 5 ? (sex === 'male' ? 4 : 3) : 0,
 	},
 	{
-		name: 'Cigarettes',
+		name: 'Smoking',
 		value: (cigarettesPerDay / 2) * -1, // https://understandinguncertainty.org/microlives doll and peto
 	},
 	{
-		name: 'Alcohol',
+		name: 'Drinking Alcohol',
 		value: microlivesFromAlcohol(drinksPerSession, drinkingSessionsPerWeek, sex),
 	},
 	{
-		name: 'Covid',
+		name: 'Getting Covid',
 		value: preventsCovidInfection ? 0 : receivesYearlyCovidVaccine ? -3.66 : -5.98,
 	},
 ];

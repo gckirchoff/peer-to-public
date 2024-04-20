@@ -56,7 +56,7 @@
 				</Select>
 				<Body2>Sex</Body2>
 			</label>
-			<NumberInput bind:value={bmi} label="BMI" min={0} max={50} step="0.1" />
+			<NumberInput bind:value={bmi} label="BMI" min={18} max={50} step="0.1" />
 		</InputsContainer>
 
 		<SubTitle2 style={sectionStyles}>Activity Level:</SubTitle2>
@@ -84,8 +84,13 @@
 
 		<SubTitle2 style={sectionStyles}>Diet:</SubTitle2>
 		<InputsContainer>
-			<NumberInput bind:value={servingsRedMeat} label="Servings red meat per day" min={0} />
-			<NumberInput bind:value={servingsVeg} label="Servings fruits/vegetables per day" min={0} />
+			<NumberInput bind:value={servingsRedMeat} label="Servings red meat per day" min={0} max={8} />
+			<NumberInput
+				bind:value={servingsVeg}
+				label="Servings fruits/vegetables per day"
+				min={0}
+				max={8}
+			/>
 		</InputsContainer>
 
 		<SubTitle2 style={sectionStyles}>Risky behavior:</SubTitle2>
@@ -104,7 +109,7 @@
 					on:change={() => (preventsCovidInfection = !preventsCovidInfection)}
 					checked={!preventsCovidInfection}
 				/>
-				Lives in SARS-CoV-2 pandemic without preventing infections
+				Lives in SARS-CoV-2 pandemic without taking precautions to prevent infection
 			</label>
 			<label>
 				<input type="checkbox" bind:checked={receivesYearlyCovidVaccine} />
@@ -114,7 +119,7 @@
 	</section>
 	<section class="right">
 		<div class="life-delta-chart">
-			<LifeDeltaChart {microlives} />
+			<LifeDeltaChart {microlives} {sex} />
 		</div>
 		<div class="microlives-chart">
 			<MicrolifeDeltas {microlives} {xAccessor} {yAccessor} />
