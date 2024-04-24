@@ -135,7 +135,7 @@
 </p>
 
 <label class="range-input">
-	<Body2>{inputLongCovidPercent}% Long Covid risk per infection:</Body2>
+	<Body2><Highlight>{inputLongCovidPercent}%</Highlight> Long Covid risk per infection:</Body2>
 	<input bind:value={inputLongCovidPercent} type="range" min={0} max={100} step={1} />
 </label>
 

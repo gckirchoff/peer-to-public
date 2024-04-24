@@ -41,11 +41,11 @@
 		<g style="transform: translate({margin.left}px, {margin.top}px)">
 			<AxisX {xScale} {innerChartWidth} {innerChartHeight} />
 			<AxisY {yScale} {innerChartWidth} />
-			<Line data={statsCanadaData} {xAccessorScaled} {yAccessorScaled} style="stroke: #ED1C24;" />
+			<Line data={statsCanadaData} {xAccessorScaled} {yAccessorScaled} />
 			{#each [0, 15.1, 26.2333, 36.76666] as d, i}
-				<circle class="filled-circle" cx={xScale(i)} cy={yScale(d)} fill="#ED1C24" r={4} />
+				<circle class="filled-circle" cx={xScale(i)} cy={yScale(d)} fill="#8990d0" r={4} />
 			{/each}
-			<Line data={cumulativeRisks} {xAccessorScaled} {yAccessorScaled} />
+			<Line data={cumulativeRisks} {xAccessorScaled} {yAccessorScaled} style="stroke: #ED1C24;" />
 			{#each cumulativeRisks as d}
 				<circle
 					cx={xAccessorScaled(d)}
@@ -63,17 +63,17 @@
 					class="filled-circle"
 					cx={xAccessorScaled(d)}
 					cy={yAccessorScaled(d)}
-					fill="#8990d0"
+					fill="#ED1C24"
 					r={4}
 				/>
 			{/each}
 			<g style="transform: translate({width - 154}px, 20px);">
 				<g style="transform: translate(0, 0);">
-					<circle cx={-1} fill="#ED1C24" r={4} />
+					<circle cx={-1} fill="#8990d0" r={4} />
 					<text dx={7} fill="#6e6e6e" dominant-baseline="middle">Observed risk</text>
 				</g>
 				<g style="transform: translate(0, 25px)">
-					<line x1={-6} x2={4} stroke="#ED1C24" stroke-width="2" />
+					<line x1={-6} x2={4} stroke="#8990d0" stroke-width="2" />
 					<text dx={7} fill="#6e6e6e" dominant-baseline="middle">Predicted risk</text>
 				</g>
 			</g>
