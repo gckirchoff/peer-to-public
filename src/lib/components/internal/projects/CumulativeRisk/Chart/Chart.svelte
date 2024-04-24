@@ -67,15 +67,15 @@
 					r={4}
 				/>
 			{/each}
-			<g
-				style="transform: translate({xAccessorScaled(
-					statsCanadaData.at(-1) ?? { infectionCount: maxInfectionCount, risk: 0.8 },
-				) + 15}px, {yAccessorScaled(
-					statsCanadaData.at(-1) ?? { infectionCount: maxInfectionCount, risk: 0.8 },
-				) + 82}px);"
-			>
-				<text text-anchor="end" fill="#ED1C24">Forecast derived from</text>
-				<text text-anchor="end" dy={16} fill="#ED1C24">Statistics Canada</text>
+			<g style="transform: translate({width - 154}px, 20px);">
+				<g style="transform: translate(0, 0);">
+					<circle cx={-1} fill="#ED1C24" r={4} />
+					<text dx={7} fill="#6e6e6e" dominant-baseline="middle">Observed risk</text>
+				</g>
+				<g style="transform: translate(0, 25px)">
+					<line x1={-6} x2={4} stroke="#ED1C24" stroke-width="2" />
+					<text dx={7} fill="#6e6e6e" dominant-baseline="middle">Predicted risk</text>
+				</g>
 			</g>
 		</g>
 	</svg>
