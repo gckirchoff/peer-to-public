@@ -16,7 +16,7 @@
 	let width = 400;
 	let height = 400;
 
-	const statsCanadaData = getCumulativeRisks(0.146);
+	const statsCanadaData = getCumulativeRisks(0.14);
 
 	$: innerChartWidth = width - margin.left - margin.right;
 	$: innerChartHeight = height - margin.top - margin.bottom;
@@ -42,14 +42,8 @@
 			<AxisX {xScale} {innerChartWidth} {innerChartHeight} />
 			<AxisY {yScale} {innerChartWidth} />
 			<Line data={statsCanadaData} {xAccessorScaled} {yAccessorScaled} style="stroke: #ED1C24;" />
-			{#each statsCanadaData.slice(0, 4) as d}
-				<circle
-					class="filled-circle"
-					cx={xAccessorScaled(d)}
-					cy={yAccessorScaled(d)}
-					fill="#ED1C24"
-					r={4}
-				/>
+			{#each [0, 15.1, 26.2333, 36.76666] as d, i}
+				<circle class="filled-circle" cx={xScale(i)} cy={yScale(d)} fill="#ED1C24" r={4} />
 			{/each}
 			<Line data={cumulativeRisks} {xAccessorScaled} {yAccessorScaled} />
 			{#each cumulativeRisks as d}
