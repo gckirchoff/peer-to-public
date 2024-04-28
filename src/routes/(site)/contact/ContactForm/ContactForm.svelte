@@ -1,10 +1,16 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 
-	import Button from '../Button/Button.svelte';
-	import { Body1 } from '../typography';
+	import Button from '$lib/components/internal/Button/Button.svelte';
+	import { Body1 } from '$lib/components/internal/typography';
+	import { getChallenge } from './logic';
 
 	export let form: { status?: 'success' | 'fail' } | null;
+
+	const challenge = getChallenge();
+
+	let currentAnswer: number | undefined = undefined;
+	$: passedCaptcha = currentAnswer === challenge.answer;
 </script>
 
 <form method="post" use:enhance>
@@ -20,13 +26,19 @@
 	<!-- If we receive data in this field submission will be ignored -->
 	<input type="text" name="honeypot" style="display: none;" />
 
+	<!-- Challenge user input -->
+	<input type="number" name="answer" style="display: none;" bind:value={challenge.answer} />
+	<!-- Challenge answer -->
+	<label for="challenge">Challenge {challenge.question}</label>
+	<input bind:value={currentAnswer} type="number" name="challenge" />
+
 	{#if form?.status === 'success'}
 		<Body1 style="color: var(--clr-success-500);">Sent!</Body1>
 	{:else if form?.status === 'fail'}
 		<Body1 style="color: var(--clr-error-500);">Error sending request</Body1>
 	{/if}
 
-	<Button type="submit">Submit</Button>
+	<Button type="submit" disabled={!passedCaptcha}>Submit</Button>
 </form>
 
 <style lang="scss">
