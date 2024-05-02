@@ -10,11 +10,20 @@ export const actions = {
 			const email = formData.get('email');
 			const subject = formData.get('subject');
 			const message = formData.get('message');
+
 			const honeypot = formData.get('honeypot');
+			const challenge = formData.get('challenge');
+			const answer = formData.get('answer');
 
 			if (honeypot) {
 				return {
 					status: 'success' as const,
+				};
+			}
+
+			if (challenge !== answer) {
+				return {
+					status: 'fail' as const,
 				};
 			}
 

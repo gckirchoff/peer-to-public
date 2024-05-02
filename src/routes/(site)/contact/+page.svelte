@@ -1,7 +1,7 @@
 <script>
 	import { siteConfig } from '$lib/config';
 	import { H3, Body1 } from '$lib/components/internal/typography';
-	import ContactForm from '$lib/components/internal/ContactForm/ContactForm.svelte';
+	import ContactForm from './ContactForm/ContactForm.svelte';
 	import MediaIcon from './MediaIcon/MediaIcon.svelte';
 
 	export let form;
