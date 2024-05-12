@@ -117,7 +117,7 @@
 </p>
 
 <p>
-	Note that if you made the chance of getting Long Covid 15% per infection, the result of 1, 2, and
+	Note that if you made the chance of getting Long Covid 14% per infection, the result of 1, 2, and
 	3 infections tracks remarkably close with the population data gathered by <a
 		href="https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00015-eng.htm"
 		target="_blank">Statistics Canada</a
@@ -135,7 +135,7 @@
 </p>
 
 <label class="range-input">
-	<Body2>{inputLongCovidPercent}% Long Covid risk per infection:</Body2>
+	<Body2><Highlight>{inputLongCovidPercent}%</Highlight> Long Covid risk per infection:</Body2>
 	<input bind:value={inputLongCovidPercent} type="range" min={0} max={100} step={1} />
 </label>
 

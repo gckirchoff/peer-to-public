@@ -16,7 +16,7 @@
 	let width = 400;
 	let height = 400;
 
-	const statsCanadaData = getCumulativeRisks(0.146);
+	const statsCanadaData = getCumulativeRisks(0.14);
 
 	$: innerChartWidth = width - margin.left - margin.right;
 	$: innerChartHeight = height - margin.top - margin.bottom;
@@ -41,17 +41,11 @@
 		<g style="transform: translate({margin.left}px, {margin.top}px)">
 			<AxisX {xScale} {innerChartWidth} {innerChartHeight} />
 			<AxisY {yScale} {innerChartWidth} />
-			<Line data={statsCanadaData} {xAccessorScaled} {yAccessorScaled} style="stroke: #ED1C24;" />
-			{#each statsCanadaData.slice(0, 4) as d}
-				<circle
-					class="filled-circle"
-					cx={xAccessorScaled(d)}
-					cy={yAccessorScaled(d)}
-					fill="#ED1C24"
-					r={4}
-				/>
+			<Line data={statsCanadaData} {xAccessorScaled} {yAccessorScaled} />
+			{#each [0, 15.1, 26.2333, 36.76666] as d, i}
+				<circle class="filled-circle" cx={xScale(i)} cy={yScale(d)} fill="#8990d0" r={4} />
 			{/each}
-			<Line data={cumulativeRisks} {xAccessorScaled} {yAccessorScaled} />
+			<Line data={cumulativeRisks} {xAccessorScaled} {yAccessorScaled} style="stroke: #ED1C24;" />
 			{#each cumulativeRisks as d}
 				<circle
 					cx={xAccessorScaled(d)}
@@ -69,19 +63,19 @@
 					class="filled-circle"
 					cx={xAccessorScaled(d)}
 					cy={yAccessorScaled(d)}
-					fill="#8990d0"
+					fill="#ED1C24"
 					r={4}
 				/>
 			{/each}
-			<g
-				style="transform: translate({xAccessorScaled(
-					statsCanadaData.at(-1) ?? { infectionCount: maxInfectionCount, risk: 0.8 },
-				) + 15}px, {yAccessorScaled(
-					statsCanadaData.at(-1) ?? { infectionCount: maxInfectionCount, risk: 0.8 },
-				) + 82}px);"
-			>
-				<text text-anchor="end" fill="#ED1C24">Forecast derived from</text>
-				<text text-anchor="end" dy={16} fill="#ED1C24">Statistics Canada</text>
+			<g style="transform: translate({width - 154}px, 20px);">
+				<g style="transform: translate(0, 0);">
+					<circle cx={-1} fill="#8990d0" r={4} />
+					<text dx={7} fill="#6e6e6e" dominant-baseline="middle">Observed risk</text>
+				</g>
+				<g style="transform: translate(0, 25px)">
+					<line x1={-6} x2={4} stroke="#8990d0" stroke-width="2" />
+					<text dx={7} fill="#6e6e6e" dominant-baseline="middle">Predicted risk</text>
+				</g>
 			</g>
 		</g>
 	</svg>
