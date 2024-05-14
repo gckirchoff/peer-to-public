@@ -1,8 +1,26 @@
+import type { SvelteComponent } from 'svelte';
 import { dev } from '$app/environment';
 
 import { postsPerPage } from '$lib/config';
 import type PostsEndpointOptions from '../types/PostsEndpointOptions';
 import type Post from '../types/post';
+
+export const fetchPost = async (
+	slug: string,
+): Promise<{ PostContent: SvelteComponent; meta: Post } | null> => {
+	try {
+		const post = await import(`../content/posts/${slug}.md`);
+
+		return {
+			PostContent: post.default as SvelteComponent,
+			meta: { ...(post.metadata as Post), slug },
+		};
+	} catch (err) {
+		// error(404, `Could not find ${slug}`);
+		console.warn(`Could not find ${slug}`);
+		return null;
+	}
+};
 
 const fetchPosts = async ({
 	offset = 0,
@@ -16,7 +34,7 @@ const fetchPosts = async ({
 			const { metadata } = (await page()) as { metadata: any };
 			const slug = path.split('/').pop()?.split('.').shift();
 			return { ...metadata, slug };
-		})
+		}),
 	);
 
 	if (!dev) posts = posts.filter((post) => post.published === true);

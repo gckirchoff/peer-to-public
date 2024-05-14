@@ -1,3 +1,4 @@
+import type Post from '$lib/types/post';
 import { escapeString } from '$lib/utils/logic';
 import { UsableType } from '../../../(site)/dev/admin/post/subcomponents/UsablesModal/constants';
 import type {
@@ -86,6 +87,39 @@ ${contentAfterOriginalScript}`;
 const frontMatterArray = (arr: string[]): string =>
 	`[ ${arr.map((item) => `"${item}"`).join(', ')} ]`;
 
+interface DeriveDatesArgs {
+	currentPostMeta: Post | null | undefined;
+	published: boolean;
+}
+
+interface DeriveDatesRet {
+	publishedDate: string | undefined;
+	updateDate: string | null;
+}
+
+const deriveDates = ({ currentPostMeta, published }: DeriveDatesArgs): DeriveDatesRet => {
+	const now = new Date().toString();
+	const freshPostDates = {
+		publishedDate: now,
+		updateDate: null,
+	};
+
+	const creatingNewPost = !currentPostMeta;
+	if (creatingNewPost) {
+		return freshPostDates;
+	}
+
+	const republishing = published && !currentPostMeta.published;
+	if (republishing) {
+		return freshPostDates;
+	}
+
+	return {
+		publishedDate: currentPostMeta.date,
+		updateDate: now,
+	};
+};
+
 export const getPostTemplate = ({
 	title,
 	description,
@@ -94,11 +128,9 @@ export const getPostTemplate = ({
 	coverImage,
 	published,
 	content,
-	publishDate,
-	update = false,
+	currentPostMeta,
 }: GetPostTemplateParams) => {
-	const publishedDate = publishDate ?? new Date().toString();
-	const updateDate = update ? new Date().toString() : null;
+	const { publishedDate, updateDate } = deriveDates({ currentPostMeta, published });
 	const parsedContent = parseScripts(content);
 
 	const postTemplate = `---
@@ -109,7 +141,7 @@ authors: ${frontMatterArray(authors)}
 coverImage: "${coverImage}"
 date: '${publishedDate}'
 published: ${published}
-${update ? `updated: '${updateDate}'` : ''}
+${updateDate ? `updated: '${updateDate}'` : ''}
 ---
 ${parsedContent}`;
 

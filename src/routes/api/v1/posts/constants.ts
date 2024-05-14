@@ -1,3 +1,4 @@
+import type Post from '$lib/types/post';
 import { UsableType } from '../../../(site)/dev/admin/post/subcomponents/UsablesModal/constants';
 import type { Usable } from '../../../(site)/dev/admin/post/subcomponents/UsablesModal/constants';
 
@@ -29,8 +30,7 @@ export interface GetPostTemplateParams {
 	coverImage: string;
 	published: boolean;
 	content: string;
-	publishDate?: string;
-	update?: boolean;
+	currentPostMeta?: Post | null;
 }
 
 export interface ComponentBuilder {
