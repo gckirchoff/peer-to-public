@@ -6,7 +6,12 @@ import type {
 	RecipeCard,
 	PhotoGallery,
 } from '../../../(site)/dev/admin/post/subcomponents/UsablesModal/constants';
-import type { ComponentBuilder, GetPostTemplateParams } from './constants';
+import type {
+	ComponentBuilder,
+	DeriveDatesArgs,
+	DeriveDatesRet,
+	GetPostTemplateParams,
+} from './constants';
 import { defaultScript, scriptContentMatcher, hasDefaultScriptMatcher } from './constants';
 
 export class UsablesFactory {
@@ -86,16 +91,6 @@ ${contentAfterOriginalScript}`;
 
 const frontMatterArray = (arr: string[]): string =>
 	`[ ${arr.map((item) => `"${item}"`).join(', ')} ]`;
-
-interface DeriveDatesArgs {
-	currentPostMeta: Post | null | undefined;
-	published: boolean;
-}
-
-interface DeriveDatesRet {
-	publishedDate: string | undefined;
-	updateDate: string | null;
-}
 
 const deriveDates = ({ currentPostMeta, published }: DeriveDatesArgs): DeriveDatesRet => {
 	const now = new Date().toString();

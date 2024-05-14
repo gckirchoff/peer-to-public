@@ -22,6 +22,16 @@ export type PostReqResponse = {
 	status: 'success';
 };
 
+export interface DeriveDatesArgs {
+	currentPostMeta: Post | null | undefined;
+	published: boolean;
+}
+
+export interface DeriveDatesRet {
+	publishedDate: string | undefined;
+	updateDate: string | null;
+}
+
 export interface GetPostTemplateParams {
 	title: string;
 	description: string;
