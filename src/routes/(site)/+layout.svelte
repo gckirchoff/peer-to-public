@@ -14,8 +14,7 @@
 	export let data;
 
 	onMount(() => {
-		const navRoutes = navItems.map((item) => item.route);
-		preloadCode(...navRoutes);
+		document.body.style.visibility = 'visible';
 	});
 
 	inject({ mode: dev ? 'development' : 'production' });
