@@ -51,8 +51,6 @@
 				gap: var(--spacing-8);
 
 				.logo {
-					// height: 6rem;
-
 					:global(svg) {
 						height: 8rem;
 						width: auto;
