@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 	import type { SvelteComponent } from 'svelte';
 	import { particlesInit } from '@tsparticles/svelte';
@@ -6,9 +7,10 @@
 
 	import { theme } from '$lib/store';
 	import { siteConfig } from '$lib/config';
-	import { Body1, H2, H4, H5 } from '$lib/components/internal/typography';
+	import { Body1, H2, H4 } from '$lib/components/internal/typography';
 	import PostsList from '$lib/components/internal/PostsList/PostsList.svelte';
 	import Sidebar from '$lib/components/internal/Sidebar/Sidebar.svelte';
+	import Logo from '$lib/components/internal/icons/Logo/Logo.svelte';
 
 	export let data;
 
@@ -24,6 +26,13 @@
 
 	$: particlesConfig = {
 		fullScreen: { enable: false },
+		background: {
+			color: {
+				value: browser
+					? getComputedStyle?.(document.body)?.getPropertyValue('--clr-surface-200')
+					: '#fff',
+			},
+		},
 		particles: {
 			color: {
 				value: ['#6EFFD1', '#9E95F1'],
@@ -97,14 +106,10 @@
 </script>
 
 <main>
-	<div class="profile" bind:this={particlesContainerDiv}>
-		<H5>Welcome!</H5>
-		<Body1>{siteConfig.pages.landing.miniAboutMe.quickDescription}</Body1>
-	</div>
-
-	<div class="welcome">
+	<div class="banner">
 		{#if ParticlesComponent}
-			<ParticlesComponent
+			<svelte:component
+				this={ParticlesComponent}
 				id="tsparticles"
 				class="put your classes here"
 				style="position: absolute; top: 0; left: 0; bottom: 0; right: 0; z-index: -1;"
@@ -112,20 +117,29 @@
 				on:particlesLoaded={onParticlesLoaded}
 			/>
 		{/if}
-		<H2>{siteConfig.pages.landing.welcome.header}</H2>
+		<div class="title">
+			<Logo />
+			<H2 style="margin-bottom: var(--spacing-16);">{siteConfig.pages.landing.welcome.header}</H2>
+		</div>
 		<H4 style="font-weight: var(--font-weight-light); padding-left: var(--spacing-2); z-index: 2;">
 			{siteConfig.pages.landing.welcome.description}
 		</H4>
 	</div>
 
-	<div />
+	<div class="site-description" bind:this={particlesContainerDiv}>
+		<Body1>{siteConfig.pages.landing.miniAboutMe.quickDescription}</Body1>
+	</div>
 
-	<H4>Recent Posts</H4>
+	<div class="site-content">
+		<div />
 
-	<Sidebar {featuredPosts} {allCategories} />
+		<H4>Recent Posts</H4>
 
-	<div>
-		<PostsList posts={recentPosts} />
+		<Sidebar {featuredPosts} {allCategories} />
+
+		<div>
+			<PostsList posts={recentPosts} />
+		</div>
 	</div>
 </main>
 
@@ -133,22 +147,43 @@
 	@import '/src/styles/mixins.scss';
 
 	main {
-		@include base-layout;
 		row-gap: var(--spacing-16);
+		margin: calc(var(--spacing-64) * -1);
 
-		.profile {
-			flex: 1 0 30rem;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			gap: var(--spacing-24);
+		@include respond(mobile) {
+			padding: calc(var(--spacing-32) * -1) calc(var(--spacing-4) * -1);
 		}
 
-		.welcome {
+		.banner {
 			height: 100%;
 			align-content: center;
+			text-align: center;
 			position: relative;
+			padding: var(--spacing-64) 0;
+			user-select: none;
+
+			.title {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-wrap: wrap;
+
+				:global(svg) {
+					height: 12rem;
+					width: auto;
+				}
+			}
+		}
+
+		.site-description {
+			padding: var(--spacing-64);
+			max-width: 80ch;
+			margin: 0 auto;
+		}
+
+		.site-content {
+			@include base-layout;
+			padding: 0 var(--spacing-64) var(--spacing-64);
 		}
 	}
 </style>
