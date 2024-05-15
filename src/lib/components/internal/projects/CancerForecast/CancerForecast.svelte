@@ -296,7 +296,7 @@
 					y={yScale(baselineCancer)}
 					width={innerChartWidth}
 					height={innerChartHeight - yScale(baselineCancer)}
-					fill="rgba(232, 219, 12, 0.30)"
+					fill="#E2DFA5"
 				/>
 				<text
 					x={innerChartWidth - 10}
@@ -541,6 +541,7 @@
 			outline: none;
 			cursor: default;
 			user-select: none;
+			fill: var(--clr-txt);
 		}
 	}
 </style>
