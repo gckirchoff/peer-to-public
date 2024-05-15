@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import type { SvelteComponent } from 'svelte';
 	import { particlesInit } from '@tsparticles/svelte';
-	import { loadSlim } from '@tsparticles/slim'; // if you are going to use `loadSlim`, install the "@tsparticles/slim" package too.
+	import { loadSlim } from '@tsparticles/slim';
 
 	import { theme } from '$lib/store';
 	import { siteConfig } from '$lib/config';
