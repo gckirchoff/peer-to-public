@@ -142,10 +142,11 @@
 	}
 
 	a {
-		color: var(--clr-primary-600);
+		color: var(--clr-link-txt);
+		transition: filter 200ms ease;
 
 		&:hover {
-			color: var(--clr-primary-400);
+			filter: brightness(0.8);
 		}
 	}
 }
