@@ -1,21 +1,24 @@
 <script>
 	import { siteConfig } from '$lib/config';
 	import { Body1, H4 } from '$lib/components/internal/typography';
+	import PageWrapper from '$lib/components/internal/PageWrapper/PageWrapper.svelte';
 	import Logo from '$lib/components/internal/icons/Logo/Logo.svelte';
 </script>
 
-<div class="about">
-	<div class="image-container">
-		<Logo />
-	</div>
-	<div class="description">
-		<H4>About</H4>
+<PageWrapper>
+	<div class="about">
+		<div class="image-container">
+			<Logo />
+		</div>
+		<div class="description">
+			<H4>About</H4>
 
-		{#each siteConfig.pages.about.content as paragraph}
-			<Body1>{paragraph}</Body1>
-		{/each}
+			{#each siteConfig.pages.about.content as paragraph}
+				<Body1>{paragraph}</Body1>
+			{/each}
+		</div>
 	</div>
-</div>
+</PageWrapper>
 
 <style lang="scss">
 	@import '/src/styles/mixins.scss';

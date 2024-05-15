@@ -33,10 +33,5 @@
 	@import '/src/styles/mixins.scss';
 	.content {
 		min-height: calc(100vh - var(--headerHeight) - var(--footerHeight));
-		padding: var(--spacing-64);
-
-		@include respond(mobile) {
-			padding: var(--spacing-32) var(--spacing-4);
-		}
 	}
 </style>

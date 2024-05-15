@@ -133,7 +133,7 @@
 	<div class="site-content">
 		<div />
 
-		<H4>Recent Posts</H4>
+		<H4 style="margin-bottom: var(--spacing-24);">Recent Articles</H4>
 
 		<Sidebar {featuredPosts} {allCategories} />
 
@@ -148,11 +148,6 @@
 
 	main {
 		row-gap: var(--spacing-16);
-		margin: calc(var(--spacing-64) * -1);
-
-		@include respond(mobile) {
-			padding: calc(var(--spacing-32) * -1) calc(var(--spacing-4) * -1);
-		}
 
 		.banner {
 			height: 100%;
