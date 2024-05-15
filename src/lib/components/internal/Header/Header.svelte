@@ -4,11 +4,15 @@
 	import { H4 } from '../typography';
 	import NavItem from '../NavItem/NavItem.svelte';
 	import { headerHeight } from '../constants';
+	import Logo from '../icons/Logo/Logo.svelte';
 </script>
 
 <header style="--height: {headerHeight}">
 	<nav>
 		<a href="/" class="site-name">
+			<div class="logo">
+				<Logo />
+			</div>
 			<H4 style="font-family: var(--font-base);">
 				{siteConfig.title}
 			</H4>
@@ -27,7 +31,7 @@
 <style lang="scss">
 	header {
 		min-height: var(--height);
-		padding: var(--spacing-16) var(--spacing-24);
+		padding: var(--spacing-8) var(--spacing-16);
 		background-color: var(--clr-surface-100);
 
 		--flex-gap: var(--spacing-24);
@@ -40,6 +44,21 @@
 			flex-wrap: wrap;
 			gap: var(--flex-gap);
 			row-gap: var(--row-gap);
+
+			.site-name {
+				display: flex;
+				align-items: center;
+				gap: var(--spacing-8);
+
+				.logo {
+					// height: 6rem;
+
+					:global(svg) {
+						height: 8rem;
+						width: auto;
+					}
+				}
+			}
 
 			ul {
 				display: flex;
