@@ -31,7 +31,7 @@
 <style lang="scss">
 	header {
 		min-height: var(--height);
-		padding: var(--spacing-8) var(--spacing-16);
+		padding: 0 var(--spacing-16);
 		background-color: var(--clr-surface-500);
 
 		--flex-gap: var(--spacing-24);
