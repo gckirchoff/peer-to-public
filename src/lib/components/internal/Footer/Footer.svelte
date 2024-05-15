@@ -16,14 +16,14 @@
 			<NavItem href="/rss.xml">RSS</NavItem>
 		</ul>
 	</nav>
-	<Body2>©{new Date().getFullYear()} {siteConfig.author}</Body2>
+	<Body2 style="color: hsl(0 0% 98%);">©{new Date().getFullYear()} {siteConfig.author}</Body2>
 </footer>
 
 <style lang="scss">
 	footer {
 		min-height: var(--height);
 		padding: var(--spacing-16) var(--spacing-24);
-		background-color: var(--clr-surface-100);
+		background-color: var(--clr-surface-500);
 		display: flex;
 		justify-content: space-between;
 

@@ -1,30 +1,33 @@
 <script>
 	import { siteConfig } from '$lib/config';
 	import { H3, Body1 } from '$lib/components/internal/typography';
+	import PageWrapper from '$lib/components/internal/PageWrapper/PageWrapper.svelte';
 	import ContactForm from './ContactForm/ContactForm.svelte';
 	import MediaIcon from './MediaIcon/MediaIcon.svelte';
 
 	export let form;
 </script>
 
-<div class="contact">
-	<H3>Contacts</H3>
+<PageWrapper>
+	<div class="contact">
+		<H3>Contact</H3>
 
-	<ul>
-		{#each siteConfig.pages.contact.links as { href, type }}
-			<li>
-				<Body1>
-					<a {href} target="_blank" rel="noopener noreferrer">
-						<MediaIcon {type} />
-						{type}
-					</a>
-				</Body1>
-			</li>
-		{/each}
-	</ul>
+		<ul>
+			{#each siteConfig.pages.contact.links as { href, type }}
+				<li>
+					<Body1>
+						<a {href} target="_blank" rel="noopener noreferrer">
+							<MediaIcon {type} />
+							{type}
+						</a>
+					</Body1>
+				</li>
+			{/each}
+		</ul>
 
-	<ContactForm {form} />
-</div>
+		<ContactForm {form} />
+	</div>
+</PageWrapper>
 
 <style lang="scss">
 	@import '/src/styles/mixins.scss';

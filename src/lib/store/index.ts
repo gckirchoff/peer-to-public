@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
-type Theme = 'light' | 'dark';
+export type Theme = 'light' | 'dark';
 
 const defaultTheme: Theme = 'light';
 

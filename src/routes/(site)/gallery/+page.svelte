@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PageWrapper from '$lib/components/internal/PageWrapper/PageWrapper.svelte';
 	import H3 from '$lib/components/internal/typography/H3.svelte';
 	import SubTitle1 from '$lib/components/internal/typography/SubTitle1.svelte';
 
@@ -7,7 +8,7 @@
 	const { galleries } = data;
 </script>
 
-<main>
+<PageWrapper>
 	<ul>
 		{#each galleries as gallery (gallery.title)}
 			<li>
@@ -18,7 +19,7 @@
 			</li>
 		{/each}
 	</ul>
-</main>
+</PageWrapper>
 
 <style>
 	ul {

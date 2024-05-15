@@ -38,6 +38,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@tsparticles/slim": "^3.4.0",
+		"@tsparticles/svelte": "^3.0.0",
 		"@vercel/analytics": "^1.2.2",
 		"d3": "^7.8.5",
 		"nanoid": "^5.0.6",
