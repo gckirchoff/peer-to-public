@@ -11,9 +11,9 @@
 	<nav>
 		<a href="/" class="site-name">
 			<div class="logo">
-				<Logo />
+				<Logo mode="dark" />
 			</div>
-			<H4 style="font-family: var(--font-base);">
+			<H4 style="font-family: var(--font-base); color: hsl(0 0% 98%);">
 				{siteConfig.title}
 			</H4>
 		</a>
@@ -32,7 +32,7 @@
 	header {
 		min-height: var(--height);
 		padding: var(--spacing-8) var(--spacing-16);
-		background-color: var(--clr-surface-100);
+		background-color: var(--clr-surface-500);
 
 		--flex-gap: var(--spacing-24);
 		--row-gap: var(--spacing-8);
