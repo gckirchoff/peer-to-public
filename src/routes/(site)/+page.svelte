@@ -4,6 +4,7 @@
 	import { particlesInit } from '@tsparticles/svelte';
 	import { loadSlim } from '@tsparticles/slim'; // if you are going to use `loadSlim`, install the "@tsparticles/slim" package too.
 
+	import { theme } from '$lib/store';
 	import { siteConfig } from '$lib/config';
 	import { Body1, H2, H4, H5 } from '$lib/components/internal/typography';
 	import PostsList from '$lib/components/internal/PostsList/PostsList.svelte';
@@ -35,7 +36,7 @@
 			},
 			links: {
 				enable: true,
-				color: '#000',
+				color: $theme === 'light' ? '#000' : '#fff',
 				// distance: 150,
 				// opacity: 0.4,
 				// width: 1,
@@ -45,7 +46,7 @@
 				speed: 1.5,
 			},
 			number: {
-				value: 5,
+				value: 4,
 				density: {
 					enable: true,
 					width: particlesContainerDiv?.clientWidth,
