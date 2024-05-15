@@ -1,9 +1,13 @@
 <script>
 	import { siteConfig } from '$lib/config';
 	import { Body1, H4 } from '$lib/components/internal/typography';
+	import Logo from '$lib/components/internal/icons/Logo/Logo.svelte';
 </script>
 
 <div class="about">
+	<div class="image-container">
+		<Logo />
+	</div>
 	<div class="description">
 		<H4>About</H4>
 
@@ -11,22 +15,14 @@
 			<Body1>{paragraph}</Body1>
 		{/each}
 	</div>
-	<div class="image-container">
-		<img src="/images/config/{siteConfig.pages.about.img}" alt="me" />
-	</div>
 </div>
 
 <style lang="scss">
 	@import '/src/styles/mixins.scss';
 
 	.about {
-		max-width: 100rem;
+		max-width: 80rem;
 		margin: 0 auto;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-wrap: wrap-reverse;
-		gap: var(--spacing-16);
 
 		@include respond('mobile') {
 			padding: var(--spacing-24);
@@ -41,8 +37,10 @@
 
 		.image-container {
 			flex: 0 1 36rem;
-			img {
-				border-radius: 50%;
+			display: flex;
+			justify-content: center;
+
+			:global(svg) {
 				aspect-ratio: 1/1;
 				float: right;
 				object-fit: cover;
