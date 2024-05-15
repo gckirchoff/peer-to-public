@@ -30,6 +30,7 @@
 		box-shadow: none;
 		overflow: hidden;
 		width: 3rem;
+		color: hsl(0 0% 98%);
 	}
 	button > * {
 		display: flex;
