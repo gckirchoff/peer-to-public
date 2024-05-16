@@ -96,3 +96,9 @@ You should now see the new updates. To get these updates into your published web
 ```bash
 git push origin master
 ```
+
+## Custom Domain
+
+The final touch to make your site official is to get a custom domain. This means changing your site domain from something like "www.your-site.vercel.app" to "www.your-site.com" or .org or whatever you'd like.
+
+For information on this, I recommend [Buying A Domain Name From Porkbun And Using It For Your Vercel Project](https://igcaleb.hashnode.dev/buying-a-domain-name-from-porkbun-and-using-it-for-your-vercel-project)
