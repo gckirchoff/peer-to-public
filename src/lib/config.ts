@@ -4,33 +4,33 @@ import type { SiteConfig } from './types/config';
 
 // Main config for entire website
 export const siteConfig: SiteConfig = {
-	title: 'PROTOTYPE Data Quill',
+	title: 'Peer to Public',
 	description: 'Simple, visual explanations about SARS-CoV-2',
-	url: 'https://www.thedataquill.com/',
+	url: 'https://www.peertopublic.com/',
 	link: 'https://github.com/gckirchoff/data-quill',
-	author: 'Data Quill',
+	author: 'Peer to Public',
 	pages: {
 		landing: {
 			miniAboutMe: {
-				img: 'me.png',
+				img: 'me.svg',
 				quickDescription:
-					'Explore key insights into the ongoing SARS-CoV-2 pandemic through interactive, visual articles. We are scientists and data vizualization experts, with an aim to inform both the public and government officials by contributing to a deeper understanding of the current health landscape.',
+					'Explore key insights into the ongoing SARS-CoV-2 pandemic through interactive, visual articles. We are scientists and data vizualization experts with an aim to inform both the public and government officials by contributing to a deeper understanding of the current health landscape.',
 			},
 			welcome: {
-				header: 'Data Quill',
+				header: 'Peer to Public',
 				description: 'Simple, visual explanations',
 			},
 		},
 		about: {
-			img: 'me.png',
+			img: 'me.svg',
 			content: [
-				`Data Quill is the result of the collaborative efforts of scientists and data visualization developers.`,
+				`Peer to Public is the result of the collaborative efforts of scientists and data visualization developers.`,
 				`The purpose of this site is to make difficult-to-understand yet important issues feel intuitive
 				through the use of engaging, interactive articles.`,
 				`Our primary goal is to educate the public and government about the importance of stopping SARS-CoV-2 infections.`,
 				`SARS-CoV-2 is not the common cold and never will be. It is a SARS coronavirus. The implications of this
-				are major and require the prevention of infection.`,
-				`To reach out for further information or collaboration, please use the contact form to get in touch!`,
+				are major and require prevention measures to be taken.`,
+				`To reach out for further information or collaboration, please use the contact form to get in touch.`,
 			],
 		},
 		contact: {
@@ -55,7 +55,7 @@ export const postsPerPage = 10;
 // Edit this to alter the main nav menu. (Also used by the footer).
 export const navItems = [
 	{
-		title: 'Posts',
+		title: 'Articles',
 		route: '/posts',
 	},
 	// {

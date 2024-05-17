@@ -30,6 +30,7 @@
 		box-shadow: none;
 		overflow: hidden;
 		width: 3rem;
+		color: var(--clr-text-on-surface);
 	}
 	button > * {
 		display: flex;

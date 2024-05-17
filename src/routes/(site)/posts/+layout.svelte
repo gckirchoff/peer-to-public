@@ -2,6 +2,7 @@
 	import type { LayoutData } from './$types';
 	import Sidebar from '$lib/components/internal/Sidebar/Sidebar.svelte';
 	import Transition from '$lib/components/internal/Transition/Transition.svelte';
+	import PageWrapper from '$lib/components/internal/PageWrapper/PageWrapper.svelte';
 
 	export let data: LayoutData;
 	let featuredPosts: LayoutData['featuredPosts'];
@@ -16,14 +17,16 @@
 	// });
 </script>
 
-<div class="layout">
-	<Sidebar {featuredPosts} {allCategories} />
-	<main>
-		<Transition url={data.currentUrl}>
-			<slot />
-		</Transition>
-	</main>
-</div>
+<PageWrapper>
+	<div class="layout">
+		<Sidebar {featuredPosts} {allCategories} />
+		<div>
+			<Transition url={data.currentUrl}>
+				<slot />
+			</Transition>
+		</div>
+	</div>
+</PageWrapper>
 
 <style lang="scss">
 	@import '/src/styles/mixins.scss';

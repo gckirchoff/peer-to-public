@@ -12,7 +12,7 @@
 	{#if featuredPosts.length}
 		<div>
 			<H5>
-				<a href="/posts/category/featured" class="sidebar-header">Featured posts</a>
+				<a href="/posts/category/featured" class="sidebar-header">Featured Articles</a>
 			</H5>
 			<ul>
 				{#each featuredPosts as post}

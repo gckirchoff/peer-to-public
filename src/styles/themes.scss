@@ -2,13 +2,13 @@
 
 html[color-theme='dark'] {
 	/* Palette ---------------------------------- */
-	$clr-primary: #077a9a;
-	$clr-secondary: hsl(97, 82%, 52%);
+	$clr-primary: #6effd1;
+	$clr-secondary: #9e95f1;
 	$clr-tertiary: hsl(206, 47%, 43%);
 	$clr-success: #5cb85c;
 	$clr-warning: #eab308;
 	$clr-error: #d41976;
-	$clr-surface: #363636;
+	$clr-surface: #083d77;
 
 	@include color-palette(primary, $clr-primary, true);
 	@include color-palette(secondary, $clr-secondary, true);
@@ -20,7 +20,7 @@ html[color-theme='dark'] {
 
 	--clr-txt: hsl(0 0% 98%);
 	--clr-txt-neg: hsl(220 10% 10%);
-	--clr-text-on-primary: var(--clr-txt);
+	--clr-text-on-primary: var(--clr-txt-neg);
 	--clr-text-on-secondary: var(--clr-txt);
 	--clr-text-on-tertiary: var(--clr-txt);
 	--clr-text-on-success: var(--clr-txt);
@@ -54,13 +54,15 @@ html[color-theme='dark'] {
 
 html[color-theme='light'] {
 	/* Palette ---------------------------------- */
-	$clr-primary: #022b36;
-	$clr-secondary: #8b1010;
+	$clr-primary: #9e95f1;
+	$clr-secondary: #6effd1;
 	$clr-tertiary: rgb(237, 237, 180);
 	$clr-success: #5cb85c;
 	$clr-warning: #eab308;
 	$clr-error: #d41976;
-	$clr-surface: rgb(73 90 143);
+	$clr-surface: #083d77;
+	//084B83
+	// yale 083D77
 
 	@include color-palette(primary, $clr-primary);
 	@include color-palette(secondary, $clr-secondary);
@@ -72,14 +74,14 @@ html[color-theme='light'] {
 
 	--clr-txt: hsl(220 10% 10%);
 	--clr-txt-neg: hsl(0 0% 98%);
-	--clr-text-on-primary: var(--clr-txt-neg);
+	--clr-text-on-primary: var(--clr-txt);
 	--clr-text-on-secondary: var(--clr-txt);
 	--clr-text-on-tertiary: var(--clr-txt);
 	--clr-text-on-success: var(--clr-txt);
 	--clr-text-on-warning: var(--clr-txt);
 	--clr-text-on-error: var(--clr-txt);
-	--clr-text-on-surface: var(--clr-txt);
-	--clr-link-txt: var(--clr-primary-400);
+	--clr-text-on-surface: var(--clr-txt-neg);
+	--clr-link-txt: var(--clr-secondary-900);
 	/* ------------------------------------------ */
 
 	/* Post */
