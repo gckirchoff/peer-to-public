@@ -162,6 +162,11 @@
 				align-items: center;
 				justify-content: center;
 				flex-wrap: wrap;
+				gap: var(--spacing-8);
+
+				@include respond(mobile) {
+					gap: 0;
+				}
 
 				:global(svg) {
 					height: 12rem;
