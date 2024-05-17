@@ -29,10 +29,16 @@
 </header>
 
 <style lang="scss">
+	@import '/src/styles/mixins.scss';
+
 	header {
 		min-height: var(--height);
 		padding: 0 var(--spacing-16);
 		background-color: var(--clr-surface-500);
+
+		@include respond(mobile) {
+			padding: 0 var(--spacing-16) var(--spacing-16);
+		}
 
 		--flex-gap: var(--spacing-24);
 		--row-gap: var(--spacing-8);
@@ -44,6 +50,10 @@
 			flex-wrap: wrap;
 			gap: var(--flex-gap);
 			row-gap: var(--row-gap);
+
+			@include respond(mobile) {
+				justify-content: center;
+			}
 
 			.site-name {
 				display: flex;
