@@ -119,7 +119,7 @@
 		{/if}
 		<div class="title">
 			<Logo />
-			<H2 style="margin-bottom: var(--spacing-16);">{siteConfig.pages.landing.welcome.header}</H2>
+			<H2>{siteConfig.pages.landing.welcome.header}</H2>
 		</div>
 		<H4 style="font-weight: var(--font-weight-light); padding-left: var(--spacing-2); z-index: 2;">
 			{siteConfig.pages.landing.welcome.description}
