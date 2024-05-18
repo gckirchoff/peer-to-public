@@ -114,13 +114,13 @@
 	}
 
 	.legend-header {
-		font-size: 1.7rem;
+		font-size: 17px;
 		text-decoration: underline;
 		fill: #363636;
 	}
 
 	.legend-text {
-		font-size: 1.6rem;
+		font-size: 16px;
 		fill: #363636;
 	}
 </style>
