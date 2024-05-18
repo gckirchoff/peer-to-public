@@ -1,6 +1,6 @@
 export const margin = {
 	top: 15,
-	left: 50,
+	left: 73,
 	bottom: 45,
 	right: 180,
 };
