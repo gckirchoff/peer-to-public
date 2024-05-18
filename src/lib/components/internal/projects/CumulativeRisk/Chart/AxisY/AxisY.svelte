@@ -16,10 +16,23 @@
 			</text>
 		</g>
 	{/each}
+	<text
+		style="transform: translate(-60px, {yScale.range()[0] * 0.5}px) rotate(-90deg);"
+		text-anchor="middle"
+	>
+		Cumulative Long Covid Chance (%)
+	</text>
 </g>
 
 <style lang="scss">
 	.tick {
 		transition: all 500ms ease;
+	}
+
+	text {
+		font-size: 1.4rem;
+		font-family: var(--font-base);
+		user-select: none;
+		fill: #464646;
 	}
 </style>

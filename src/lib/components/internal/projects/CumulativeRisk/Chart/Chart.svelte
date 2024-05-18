@@ -16,7 +16,8 @@
 	let width = 400;
 	let height = 400;
 
-	const statsCanadaData = getCumulativeRisks(0.14);
+	const statsCanadaPredictedRisk = 0.14;
+	const statsCanadaData = getCumulativeRisks(statsCanadaPredictedRisk);
 
 	$: innerChartWidth = width - margin.left - margin.right;
 	$: innerChartHeight = height - margin.top - margin.bottom;
@@ -67,14 +68,17 @@
 					r={4}
 				/>
 			{/each}
-			<g style="transform: translate({width - 154}px, 20px);">
-				<g style="transform: translate(0, 0);">
+			<g style="transform: translate({width - 232}px, 20px);">
+				<text class="legend-header">Stats Canada Data</text>
+				<g style="transform: translate(0, 20px);">
 					<circle cx={-1} fill="#8990d0" r={4} />
-					<text dx={7} fill="#6e6e6e" dominant-baseline="middle">Observed risk</text>
+					<text dx={7} dominant-baseline="middle" class="legend-text"> Observed Risk </text>
 				</g>
-				<g style="transform: translate(0, 25px)">
+				<g style="transform: translate(0, 40px)">
 					<line x1={-6} x2={4} stroke="#8990d0" stroke-width="2" />
-					<text dx={7} fill="#6e6e6e" dominant-baseline="middle">Predicted risk</text>
+					<text dx={7} dominant-baseline="middle" class="legend-text">
+						predicted risk ({statsCanadaPredictedRisk}%)
+					</text>
 				</g>
 			</g>
 		</g>
@@ -107,5 +111,16 @@
 
 	.filled-circle {
 		pointer-events: none;
+	}
+
+	.legend-header {
+		font-size: 1.7rem;
+		text-decoration: underline;
+		fill: #363636;
+	}
+
+	.legend-text {
+		font-size: 1.6rem;
+		fill: #363636;
 	}
 </style>
