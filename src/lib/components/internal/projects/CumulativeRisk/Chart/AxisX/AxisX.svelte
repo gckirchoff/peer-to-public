@@ -5,10 +5,12 @@
 	export let xScale: ScaleLinear<number, number, never>;
 	export let innerChartWidth: number;
 	export let innerChartHeight: number;
+
+	$: ticks = xScale.ticks().filter((tick) => Number.isInteger(tick));
 </script>
 
 <g class="axis x" transform="translate(0, {innerChartHeight})">
-	{#each xScale.ticks() as tick, i (tick)}
+	{#each ticks as tick, i (tick)}
 		<g class="tick" transform="translate({xScale(tick)} 0)" animate:flip={{ duration: 200 }}>
 			<line x1={0} x2={0} y1={0} y2={6} stroke="hsla(212, 10%, 53%, 1)" />
 			<text x={0} y={10} dy={10} text-anchor="middle">
