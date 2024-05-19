@@ -21,10 +21,8 @@
 	and societal action, most of us will continue to get infected with SARS-CoV-2. Because the stakes
 	are <a
 		href="https://finance.yahoo.com/news/surviving-pandemic-only-half-battle-100000219.html?guccounter=1&guce_referrer=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8&guce_referrer_sig=AQAAAK8oN5Ok9gW-aBGtmLCxIdj2s0RsR5N0FbEw59qkNO8agXlEcXS2gJolOD6Q-9tGI6ILc9KnNulKEuYMljOdy8HJhRBUwqTx3fa3OkL-Q3t8Mi0TC_zvZ-4S85Cu3Nj7L_N1kCzxAjQo62pAjAHgQhDjOJxHr8QYD6lfpiWhW74c"
-		target="_blank"
-	>
-		so high
-	</a>, a deep understanding of the matter at hand is necessary for the best decisions to be made.
+		target="_blank">so high</a
+	>, a deep understanding of the matter at hand is necessary for the best decisions to be made.
 </p>
 
 <p>
