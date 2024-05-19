@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "dice-edge2edge-media-uKlneQRwaxY-unsplash.jpg"
 date: 'Thu Apr 11 2024 11:51:45 GMT-0400 (Eastern Daylight Time)'
 published: true
-updated: 'Wed Apr 24 2024 19:10:32 GMT-0400 (Eastern Daylight Time)'
+updated: 'Sun May 19 2024 10:56:19 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';

@@ -8,7 +8,7 @@
 <div class="links-container">
 	<Body1><a href={externalLink}>Back to origin</a></Body1>
 	{#if internalLink}
-		<Body1><a href="/posts/{internalLink}">Full Post on Data Quill</a></Body1>
+		<Body1><a href="/posts/{internalLink}">Full Post on Peer to Public</a></Body1>
 	{/if}
 </div>
 

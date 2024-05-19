@@ -2,7 +2,7 @@
 title: "Covid 19 Resources"
 description: "A collection of Scientific publications, news articles, and other resources that describe the nature of the ongoing SARS-CoV-2 pandemic"
 categories: [ "covid-19", "featured" ]
-authors: [ "Data Quill" ]
+authors: [ "Gregory Kirchoff" ]
 coverImage: "cdc-long-covid.jpg"
 date: '2023-09-19'
 published: true
