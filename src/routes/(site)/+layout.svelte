@@ -5,7 +5,6 @@
 	import { inject } from '@vercel/analytics';
 
 	import '../../styles/styles.scss';
-	import { navItems } from '$lib/config';
 	import Header from '$lib/components/internal/Header/Header.svelte';
 	import Footer from '$lib/components/internal/Footer/Footer.svelte';
 	import Transition from '$lib/components/internal/Transition/Transition.svelte';
@@ -14,8 +13,7 @@
 	export let data;
 
 	onMount(() => {
-		const navRoutes = navItems.map((item) => item.route);
-		preloadCode(...navRoutes);
+		document.body.style.visibility = 'visible';
 	});
 
 	inject({ mode: dev ? 'development' : 'production' });
