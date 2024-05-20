@@ -7,7 +7,7 @@ export const siteConfig: SiteConfig = {
 	title: 'Peer to Public',
 	description: 'Simple, visual explanations about SARS-CoV-2',
 	url: 'https://www.peertopublic.com/',
-	link: 'https://github.com/gckirchoff/data-quill',
+	link: 'https://github.com/gckirchoff/peer-to-public',
 	author: 'Peer to Public',
 	pages: {
 		landing: {
