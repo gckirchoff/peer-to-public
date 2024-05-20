@@ -1,3 +1,4 @@
+import type Post from '$lib/types/post';
 import { UsableType } from '../../../(site)/dev/admin/post/subcomponents/UsablesModal/constants';
 import type { Usable } from '../../../(site)/dev/admin/post/subcomponents/UsablesModal/constants';
 
@@ -21,6 +22,16 @@ export type PostReqResponse = {
 	status: 'success';
 };
 
+export interface DeriveDatesArgs {
+	currentPostMeta: Post | null | undefined;
+	published: boolean;
+}
+
+export interface DeriveDatesRet {
+	publishedDate: string | undefined;
+	updateDate: string | null;
+}
+
 export interface GetPostTemplateParams {
 	title: string;
 	description: string;
@@ -29,8 +40,7 @@ export interface GetPostTemplateParams {
 	coverImage: string;
 	published: boolean;
 	content: string;
-	publishDate?: string;
-	update?: boolean;
+	currentPostMeta?: Post | null;
 }
 
 export interface ComponentBuilder {
