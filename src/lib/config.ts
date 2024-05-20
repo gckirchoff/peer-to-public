@@ -42,7 +42,7 @@ export const siteConfig: SiteConfig = {
 				},
 				{
 					type: 'Github',
-					href: 'https://github.com/gckirchoff/data-quill',
+					href: 'https://github.com/gckirchoff/peer-to-public',
 				},
 			],
 		},
