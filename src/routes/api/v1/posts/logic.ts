@@ -104,8 +104,8 @@ const deriveDates = ({ currentPostMeta, published }: DeriveDatesArgs): DeriveDat
 		return freshPostDates;
 	}
 
-	const republishing = published && !currentPostMeta.published;
-	if (republishing) {
+	const switchingToPublished = published && !currentPostMeta.published;
+	if (switchingToPublished) {
 		return freshPostDates;
 	}
 
