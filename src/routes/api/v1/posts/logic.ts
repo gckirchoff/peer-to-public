@@ -92,7 +92,7 @@ ${contentAfterOriginalScript}`;
 const frontMatterArray = (arr: string[]): string =>
 	`[ ${arr.map((item) => `"${item}"`).join(', ')} ]`;
 
-const deriveDates = ({ currentPostMeta, published }: DeriveDatesArgs): DeriveDatesRet => {
+export const deriveDates = ({ currentPostMeta, published }: DeriveDatesArgs): DeriveDatesRet => {
 	const now = new Date().toString();
 	const freshPostDates = {
 		publishedDate: now,
