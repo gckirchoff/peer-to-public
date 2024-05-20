@@ -7,13 +7,15 @@ import {
 	processContentImages,
 	type PostEditorUploadRet,
 } from '../../../utils.js';
+import { fetchPost } from '$lib/utils/fetchPosts.js';
 
 export const PATCH = async ({ request, params }) => {
 	try {
 		const body = await getPostEditorUploadAndHandleImageUpload(request);
 		const { slug } = params;
+		const currentPost = await fetchPost(slug);
 
-		if (!Object.hasOwn(body, 'date')) {
+		if (!Object.hasOwn(body, 'date') || !currentPost) {
 			error(500, 'Internal Server Error');
 		}
 
@@ -26,7 +28,6 @@ export const PATCH = async ({ request, params }) => {
 			coverImage,
 			content: preprocessedContent,
 			usables,
-			date,
 		} = body as PostEditorUploadRet & { date: string };
 
 		const content = unescapeComponents(preprocessedContent).trimStart();
@@ -39,8 +40,7 @@ export const PATCH = async ({ request, params }) => {
 			coverImage,
 			published,
 			content,
-			publishDate: date,
-			update: true,
+			currentPostMeta: currentPost.meta,
 		});
 
 		const usablesFactory = new UsablesFactory();
@@ -76,7 +76,7 @@ export const DELETE = async ({ params }) => {
 		const filePath = `src/lib/content/posts/${slug}.md`;
 		await unlink(filePath);
 
-		const rootImageFolderPath = `static/images/postImages/${slug}`
+		const rootImageFolderPath = `static/images/postImages/${slug}`;
 
 		await rm(rootImageFolderPath, { recursive: true });
 
