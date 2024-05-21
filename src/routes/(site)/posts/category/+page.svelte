@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { H2, H5 } from '$lib/components/internal/typography';
+	import { H3, H5 } from '$lib/components/internal/typography';
 	import { capitalize } from '$lib/utils/logic.js';
 
 	export let data;
@@ -7,7 +7,7 @@
 	const { categoriesWithCounts } = data;
 </script>
 
-<H2><div class="heading">Categories</div></H2>
+<H3><div class="heading">Categories</div></H3>
 
 <ul class="card">
 	{#each categoriesWithCounts as category}
@@ -44,11 +44,13 @@
 	.image-container {
 		display: block;
 		width: 100%;
-		aspect-ratio: 16 / 9;
+		height: 26rem;
+		margin-bottom: var(--spacing-8)
 	}
 
 	img {
 		width: 100%;
+		height: 100%;
 		object-fit: cover;
 	}
 </style>
