@@ -50,6 +50,11 @@
 	const postContentLocalStorage = `markdown${postMetaData.slug ? `-${postMetaData.slug}` : ''}`;
 	const usablesLocalStorage = `usables${postMetaData.slug ? `-${postMetaData.slug}` : ''}`;
 
+	const clearLocalStorage = () => {
+		window.localStorage.removeItem(postContentLocalStorage);
+		window.localStorage.removeItem(usablesLocalStorage);
+	};
+
 	let discardChangesModelOpen = false;
 
 	const handleResetChangesButtonClick = () => {
@@ -61,8 +66,7 @@
 	};
 
 	const confirmResetChanges = () => {
-		window.localStorage.removeItem(postContentLocalStorage);
-		window.localStorage.removeItem(usablesLocalStorage);
+		clearLocalStorage();
 		formMdValue = mdValue;
 	};
 
@@ -128,8 +132,7 @@
 				errorText = 'Could not create post';
 				return;
 			}
-			window.localStorage.removeItem(postContentLocalStorage);
-			window.localStorage.removeItem(usablesLocalStorage);
+			clearLocalStorage();
 		} catch (err) {
 			errorText = 'Could not create post';
 			console.warn(err);
