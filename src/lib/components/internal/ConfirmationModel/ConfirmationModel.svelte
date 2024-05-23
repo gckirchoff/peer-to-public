@@ -6,6 +6,7 @@
 	export let open: boolean;
 	export let handleClose: () => void;
 	export let handleConfirm: () => void;
+	export let message = 'Are you sure you wish to proceed?';
 
 	$: handleConfirmButtonClick = () => {
 		handleConfirm();
@@ -14,7 +15,7 @@
 </script>
 
 <Modal {open} {handleClose}>
-	<Body1>Are you sure you want to discard changes</Body1>
+	<Body1>{message}</Body1>
 	<div class="buttons">
 		<Button on:click={handleClose}>No</Button>
 		<Button on:click={handleConfirmButtonClick} variant="warning">Yes</Button>

@@ -205,6 +205,7 @@
 />
 
 <ConfirmationModel
+	message="Are you sure you want to discard changes?"
 	open={discardChangesModelOpen}
 	handleClose={handleCloseDiscardChangesModel}
 	handleConfirm={confirmResetChanges}
