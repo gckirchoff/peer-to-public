@@ -15,8 +15,16 @@
 
 <Modal {open} {handleClose}>
 	<Body1>Are you sure you want to discard changes</Body1>
-	<div class="confirmation">
+	<div class="buttons">
 		<Button on:click={handleClose}>No</Button>
-		<Button on:click={handleConfirmButtonClick}>Yes</Button>
+		<Button on:click={handleConfirmButtonClick} variant="warning">Yes</Button>
 	</div>
 </Modal>
+
+<style lang="scss">
+	.buttons {
+		display: flex;
+		justify-content: center;
+		gap: var(--spacing-16);
+	}
+</style>
