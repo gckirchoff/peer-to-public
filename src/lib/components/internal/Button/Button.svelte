@@ -9,7 +9,6 @@
 	$: finalStyles =
 		`--background-color: var(--clr-${variant}-500); --color: var(--clr-text-on-${variant}); --hover-color: var(--clr-${variant}-400);` +
 		style;
-	$: console.log(finalStyles);
 </script>
 
 <button on:click {type} style={finalStyles} {disabled}><slot /></button>
