@@ -1,3 +1,4 @@
+import type Post from '$lib/types/post';
 import { escapeString } from '$lib/utils/logic';
 import { UsableType } from '../../../(site)/dev/admin/post/subcomponents/UsablesModal/constants';
 import type {
@@ -5,7 +6,12 @@ import type {
 	RecipeCard,
 	PhotoGallery,
 } from '../../../(site)/dev/admin/post/subcomponents/UsablesModal/constants';
-import type { ComponentBuilder, GetPostTemplateParams } from './constants';
+import type {
+	ComponentBuilder,
+	DeriveDatesArgs,
+	DeriveDatesRet,
+	GetPostTemplateParams,
+} from './constants';
 import { defaultScript, scriptContentMatcher, hasDefaultScriptMatcher } from './constants';
 
 export class UsablesFactory {
@@ -86,6 +92,29 @@ ${contentAfterOriginalScript}`;
 const frontMatterArray = (arr: string[]): string =>
 	`[ ${arr.map((item) => `"${item}"`).join(', ')} ]`;
 
+export const deriveDates = ({ currentPostMeta, published }: DeriveDatesArgs): DeriveDatesRet => {
+	const now = new Date().toString();
+	const freshPostDates = {
+		publishedDate: now,
+		updateDate: null,
+	};
+
+	const creatingNewPost = !currentPostMeta;
+	if (creatingNewPost) {
+		return freshPostDates;
+	}
+
+	const switchingToPublished = published && !currentPostMeta.published;
+	if (switchingToPublished) {
+		return freshPostDates;
+	}
+
+	return {
+		publishedDate: currentPostMeta.date,
+		updateDate: now,
+	};
+};
+
 export const getPostTemplate = ({
 	title,
 	description,
@@ -94,11 +123,9 @@ export const getPostTemplate = ({
 	coverImage,
 	published,
 	content,
-	publishDate,
-	update = false,
+	currentPostMeta,
 }: GetPostTemplateParams) => {
-	const publishedDate = publishDate ?? new Date().toString();
-	const updateDate = update ? new Date().toString() : null;
+	const { publishedDate, updateDate } = deriveDates({ currentPostMeta, published });
 	const parsedContent = parseScripts(content);
 
 	const postTemplate = `---
@@ -109,7 +136,7 @@ authors: ${frontMatterArray(authors)}
 coverImage: "${coverImage}"
 date: '${publishedDate}'
 published: ${published}
-${update ? `updated: '${updateDate}'` : ''}
+${updateDate ? `updated: '${updateDate}'` : ''}
 ---
 ${parsedContent}`;
 
