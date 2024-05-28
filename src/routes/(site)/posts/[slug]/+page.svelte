@@ -93,12 +93,12 @@
 				justify-content: center;
 				max-height: 60rem;
 				max-width: 80rem;
-				aspect-ratio: 16 / 9;
 
 				img {
 					object-fit: contain;
 					height: auto;
 					width: 100%;
+					aspect-ratio: 16 / 9;
 				}
 			}
 
