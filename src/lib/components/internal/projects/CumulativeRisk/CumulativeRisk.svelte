@@ -17,16 +17,51 @@
 </script>
 
 <p>
-	It has become apparent that without decisive mitigation becoming established through government
-	and societal action, most of us will continue to get infected with SARS-CoV-2. Because the stakes
-	are <a
-		href="https://finance.yahoo.com/news/surviving-pandemic-only-half-battle-100000219.html?guccounter=1&guce_referrer=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8&guce_referrer_sig=AQAAAK8oN5Ok9gW-aBGtmLCxIdj2s0RsR5N0FbEw59qkNO8agXlEcXS2gJolOD6Q-9tGI6ILc9KnNulKEuYMljOdy8HJhRBUwqTx3fa3OkL-Q3t8Mi0TC_zvZ-4S85Cu3Nj7L_N1kCzxAjQo62pAjAHgQhDjOJxHr8QYD6lfpiWhW74c"
-		target="_blank">so high</a
-	>, a deep understanding of the matter at hand is necessary for the best decisions to be made.
+	When people say “during Covid”, they're referring to the pandemic in the past tense, something
+	that's already over, despite the fact that the WHO still regards Covid-19 as an <a
+		href="https://www.who.int/europe/emergencies/situations/covid-19"
+		target="_blank">active pandemic</a
+	>. At this point, we have gone back to “living our (pre-pandemic) lives”, which - for most - means
+	taking no precautions at all.
 </p>
 
 <p>
-	To understand that, we need to understand cumulative risk. This concept is simple to understand,
+	It has become apparent that without decisive mitigation becoming established through government
+	and societal action, most of us will continue to get infected with SARS-CoV-2, likely <a
+		href="https://fortune.com/2022/05/25/how-often-can-you-get-covid-yearly-modeling-shows/"
+		target="_blank">once or twice</a
+	>
+	a year. Because some of the health risks of Covid are
+	<a
+		href="https://finance.yahoo.com/news/surviving-pandemic-only-half-battle-100000219.html?guccounter=1&guce_referrer=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8&guce_referrer_sig=AQAAAK8oN5Ok9gW-aBGtmLCxIdj2s0RsR5N0FbEw59qkNO8agXlEcXS2gJolOD6Q-9tGI6ILc9KnNulKEuYMljOdy8HJhRBUwqTx3fa3OkL-Q3t8Mi0TC_zvZ-4S85Cu3Nj7L_N1kCzxAjQo62pAjAHgQhDjOJxHr8QYD6lfpiWhW74c"
+		target="_blank">irreversible</a
+	>, it's worth digging a little deeper into the practical implications of that.
+</p>
+
+<p>
+	The first thing to know is that Covid is not a cold, it's a car accident. It spreads throughout
+	the body, impacting many different organ systems. Some percentage of people who get Covid end up
+	with Long Covid, a debilitating cluster of symptoms that involves fatigue and reduced cognitive
+	ability. Some percentage of people who get Covid end up harboring the virus in their bodies
+	persistently (this may or may not overlap with Long Covid). Separate from those two categories of
+	delayed harm, many individuals infected with Covid have delayed health effects (heart attacks,
+	strokes, kidney damage) that are in some cases <a
+		href="https://www.panaccindex.info/p/what-covid-19-does-to-the-body-fourth"
+		target="_blank">progressive</a
+	>. It's not unusual to get into a car accident and be just fine, but a lifestyle that involves
+	getting into a car accident once a year comes with a reduced life expectancy.
+</p>
+
+<p>
+	This makes sense if we think about it from the concept of cumulative risk. Much of the argument
+	around Covid has centered around the persistent robustness of our immune response, <a
+		href="https://torontolife.com/city/i-was-appalled-to-see-the-prime-minister-making-those-comments-a-u-of-t-epidemiologist-on-the-myth-of-immunity-debt-and-the-real-reason-everyones-getting-sick/"
+		target="_blank">neglecting</a
+	> the persistent damage that infection can cause.
+</p>
+
+<p>
+	To understand this, we need to understand cumulative risk. This concept is simple to understand,
 	but is often misinterpreted. According to data gathered by Statistics Canada, the risk of
 	developing symptomatic Long Covid is around 15% per infection. This makes perfect sense when
 	looking at one infection. Your chance of developing symptomatic Long Covid is 15%. However, what
@@ -133,8 +168,29 @@
 />
 
 <p>
-	To get a more birds-eye view of the cumulative risk based on the number of infections, please use
-	the following interactive simulation.
+	This interactive chart below makes an important practical point: should the data found by
+	Statistics Canada be indicative of a cumulative risk pattern, getting Long Covid becomes an
+	inevitability.
+</p>
+
+<p>
+	Getting Covid repeatedly is not a game we can win in the long-term. Like playing roulette, we can
+	win a game, maybe even a few, but given enough chances, the house always wins. The good news is
+	that you <a
+		href="https://typingmonkeys.substack.com/p/you-dont-need-to-catch-that-wave"
+		target="_blank">don't</a
+	>
+	have to sign up for getting Covid once a year. There are things you can do to avoid that. And if you
+	do get Covid, there are
+	<a href="https://typingmonkeys.substack.com/p/what-to-do-if-you-get-covid" target="_blank"
+		>concrete steps</a
+	> you can take to reduce the risk of long-term health outcomes.
+</p>
+
+<p>
+	“Learning to live with Covid” should mean learning to live our lives while rationally mitigating
+	the ever-present risks of an airborne disease with debilitating consequences. Not learning to live
+	while harboring the virus, or the scars it leaves, in our bodies.
 </p>
 
 <label class="range-input">
