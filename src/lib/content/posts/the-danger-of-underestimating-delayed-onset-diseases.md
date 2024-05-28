@@ -5,8 +5,8 @@ categories: [ "covid-19", "statistics" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "wave-unsplash-matt-paul-catalano.jpg"
 date: 'Tue Feb 06 2024 14:30:13 GMT-0500 (Eastern Standard Time)'
-published: true
-updated: 'Fri Mar 29 2024 22:04:48 GMT-0400 (Eastern Daylight Time)'
+published: false
+updated: 'Tue May 28 2024 16:04:10 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
