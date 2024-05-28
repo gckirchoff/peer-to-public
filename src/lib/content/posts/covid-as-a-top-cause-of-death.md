@@ -2,11 +2,11 @@
 title: "Leading  Causes of Death - An Apples to Apples Comparison"
 description: "COVID-19 was the third leading cause of death in 2020 and the fourth in 2022. Here, we analyze how the leading causes of death compare to each other when looked at with a more fine grain perspective."
 categories: [ "covid-19" ]
-authors: [ "Emma Schaale", "Gregory Kirchoff" ]
+authors: [ "Gregory Kirchoff", "Emma Schaale" ]
 coverImage: "unsplash_an_vision_apple.jpg"
 date: '2023-12-30'
-published: true
-updated: '2024-01-20'
+published: false
+updated: 'Tue May 28 2024 16:03:59 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
