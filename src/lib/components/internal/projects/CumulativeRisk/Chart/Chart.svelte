@@ -7,6 +7,7 @@
 	import { margin, maxInfectionCount, type InfectionCumulativeRisk } from './constants';
 	import { getCumulativeRisks } from './logic';
 	import Tooltip from './Tooltip/Tooltip.svelte';
+	import { roundTo } from '../logic';
 
 	export let longCovidChance: number;
 
@@ -77,7 +78,7 @@
 				<g style="transform: translate(0, 40px)">
 					<line x1={-6} x2={4} stroke="#8990d0" stroke-width="2" />
 					<text dx={7} dominant-baseline="middle" class="legend-text">
-						predicted risk ({statsCanadaPredictedRisk}%)
+						predicted risk ({roundTo(statsCanadaPredictedRisk * 100, 0)}%)
 					</text>
 				</g>
 			</g>
