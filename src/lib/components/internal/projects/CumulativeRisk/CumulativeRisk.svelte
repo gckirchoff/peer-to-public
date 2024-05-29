@@ -88,7 +88,7 @@
 </p>
 
 <p>
-	The final question we want answered is, “What is the overall chance I get long covid if I get
+	The final question we want answered is, “What is the overall chance I get Long Covid if I get
 	infected <Highlight>{infectionCount}</Highlight>. times?" A simpler way to think of this at first
 	is , “If I flip a coin <Highlight>{infectionCount}</Highlight>
 	times, what is the chance that at least 1 of them lands heads up?” It could be 1 or 2 {infectionCount >
@@ -101,7 +101,7 @@
 <p>
 	Going back to Long Covid as our primary example, our next question to ask is, “What is the chance
 	I get infected <Highlight>{infectionCount}</Highlight> times and don't get any Long Covid?” This is
-	important to ask because this is the only combination of results that doesn't include any covid cases
+	important to ask because this is the only combination of results that doesn't include any Covid cases
 	resulting in Long Covid. Let's find that.
 </p>
 
@@ -146,7 +146,7 @@
 </p>
 
 <p>
-	So there, we have it. Assuming Covid infections come with a <Highlight
+	So there we have it. Assuming Covid infections come with a <Highlight
 		>{roundTo(inputLongCovidPercent, 2)}</Highlight
 	>% chance of getting Long Covid each time, getting Covid <Highlight>{infectionCount}</Highlight> times
 	results in a cumulative risk of getting Long Covid of <Highlight
