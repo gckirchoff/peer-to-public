@@ -81,7 +81,11 @@
 					r={4}
 				/>
 			{/each}
-			<g style="transform: translate({width - 232}px, 20px);">
+			<g
+				style="transform: translate({width - 232}px, {isSmallScreen && longCovidChance > 0.21
+					? height - 145
+					: 20}px);"
+			>
 				<text class="legend-header">Stats Canada Data</text>
 				<g style="transform: translate(0, 20px);">
 					<circle cx={-1} fill="#8990d0" r={4} />
