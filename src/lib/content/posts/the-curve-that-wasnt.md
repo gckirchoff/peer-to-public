@@ -5,8 +5,8 @@ categories: [ "covid-19", "statistics" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "flatten-the-curve.png"
 date: '2023-12-30'
-published: true
-updated: '2024-01-20'
+published: false
+updated: 'Tue May 28 2024 16:03:49 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
