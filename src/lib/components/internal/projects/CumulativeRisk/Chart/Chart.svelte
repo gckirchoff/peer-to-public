@@ -4,7 +4,7 @@
 	import AxisX from './AxisX/AxisX.svelte';
 	import AxisY from './AxisY/AxisY.svelte';
 	import Line from './Line/Line.svelte';
-	import { margin, maxInfectionCount, type InfectionCumulativeRisk } from './constants';
+	import { maxInfectionCount, smallScreen, type InfectionCumulativeRisk } from './constants';
 	import { getCumulativeRisks } from './logic';
 	import Tooltip from './Tooltip/Tooltip.svelte';
 	import { roundTo } from '../logic';
@@ -14,11 +14,21 @@
 	const xAccessor = (d: InfectionCumulativeRisk) => d.infectionCount;
 	const yAccessor = (d: InfectionCumulativeRisk) => d.risk * 100;
 
+	let windowWidth = 1000;
 	let width = 400;
 	let height = 400;
 
 	const statsCanadaPredictedRisk = 0.14;
 	const statsCanadaData = getCumulativeRisks(statsCanadaPredictedRisk);
+
+	$: isSmallScreen = windowWidth < smallScreen;
+
+	$: margin = {
+		top: 15,
+		left: 73,
+		bottom: 45,
+		right: isSmallScreen ? 10 : 180,
+	};
 
 	$: innerChartWidth = width - margin.left - margin.right;
 	$: innerChartHeight = height - margin.top - margin.bottom;
@@ -37,6 +47,8 @@
 		hoveredPoint = d;
 	};
 </script>
+
+<svelte:window bind:innerWidth={windowWidth} />
 
 <div class="chart-container" bind:clientWidth={width} role="application">
 	<svg {width} {height}>
