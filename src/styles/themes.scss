@@ -27,6 +27,7 @@ html[color-theme='dark'] {
 	$clr-text-on-warning: $clr-txt-neg;
 	$clr-text-on-error: $clr-txt-neg;
 	$clr-text-on-surface: $clr-txt;
+	--clr-text-on-surface-constant: hsl(0 0% 98%);
 	$clr-link-txt: $clr-primary;
 
 	@include color-palette(txt, $clr-txt, true);
@@ -92,6 +93,7 @@ html[color-theme='light'] {
 	$clr-text-on-warning: $clr-txt;
 	$clr-text-on-error: $clr-txt;
 	$clr-text-on-surface: $clr-txt;
+	--clr-text-on-surface-constant: hsl(0 0% 98%);
 	$clr-link-txt: $clr-primary;
 
 	@include color-palette(txt, $clr-txt);
