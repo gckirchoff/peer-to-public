@@ -21,6 +21,7 @@
 		y1={middleHeight - 33}
 		x2={deltaLineEnd}
 		y2={middleHeight - 33}
+		stroke="black"
 		stroke-width="2px"
 	/>
 	<line
@@ -28,6 +29,7 @@
 		y1={middleHeight - 33}
 		x2={deltaLineStart}
 		y2={middleHeight - 25}
+		stroke="black"
 		stroke-width="2px"
 	/>
 	<line
@@ -35,6 +37,7 @@
 		y1={middleHeight - 33}
 		x2={deltaLineEnd}
 		y2={middleHeight - 25}
+		stroke="black"
 		stroke-width="2px"
 	/>
 	<text x={(deltaLineStart + deltaLineEnd) * 0.5} y={-25} text-anchor="middle">
