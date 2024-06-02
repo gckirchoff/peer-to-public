@@ -11,7 +11,7 @@
 
 {#key infoBoxText}
 	<div class="info-box" in:fade={{ delay: 700 }} out:fade>
-		<Body1 style="color: var(--clr-text-on-surface-constant);">{infoBoxContent[currentStep ?? 0]}</Body1>
+		<Body1 style="color: var(--clr-text-on-surface-500);">{infoBoxContent[currentStep ?? 0]}</Body1>
 	</div>
 {/key}
 

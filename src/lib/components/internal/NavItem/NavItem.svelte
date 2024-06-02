@@ -10,7 +10,7 @@
 <li>
 	<a {href} aria-current={isCurrentPage}>
 		<span class:active={isCurrentPage}>
-			<Body2 style="color: var(--clr-text-on-surface-constant);">
+			<Body2 style="color: var(--clr-text-on-surface-500);">
 				<slot />
 			</Body2>
 		</span>

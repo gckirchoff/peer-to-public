@@ -45,7 +45,7 @@
 		font-weight: 500;
 		margin-bottom: 6px;
 		width: 100%;
-		color: var(--clr-text-on-surface-constant);
+		color: var(--clr-text-on-surface-500);
 	}
 
 	h2 {
@@ -62,6 +62,6 @@
 		display: inline-block;
 		vertical-align: bottom;
 		border-radius: 3px;
-		color: var(--clr-text-on-surface-constant);
+		color: var(--clr-text-on-surface-500);
 	}
 </style>
