@@ -9,6 +9,6 @@
 		font-size: var(--font-60);
 		line-height: 1.167;
 		font-family: var(--font-accent);
-		color: var(--clr-txt);
+		color: var(--clr-txt-500);
 	}
 </style>
