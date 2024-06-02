@@ -114,7 +114,7 @@
 	:global(.tick text) {
 		font-weight: 500;
 		font-size: 15px;
-		fill: var(--clr-text-on-surface-400);
+		fill: var(--clr-text-on-surface-600);
 		user-select: none;
 	}
 
@@ -133,11 +133,11 @@
 	.legend-header {
 		font-size: 17px;
 		text-decoration: underline;
-		fill: var(--clr-text-on-surface-400);
+		fill: var(--clr-text-on-surface-600);
 	}
 
 	.legend-text {
 		font-size: 16px;
-		fill: var(--clr-text-on-surface-400);
+		fill:var(--clr-text-on-surface-600);
 	}
 </style>
