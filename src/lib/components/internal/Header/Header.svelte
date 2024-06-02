@@ -13,7 +13,7 @@
 			<div class="logo">
 				<Logo mode="dark" />
 			</div>
-			<H4 style="font-family: var(--font-base); color: hsl(0 0% 98%);">
+			<H4 style="font-family: var(--font-base); color: var(--clr-text-on-surface-constant);">
 				{siteConfig.title}
 			</H4>
 		</a>
