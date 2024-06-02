@@ -2,6 +2,7 @@
 	import { fade } from 'svelte/transition';
 
 	import { infoBoxContent } from './constants';
+	import Body1 from '$lib/components/internal/typography/Body1.svelte';
 
 	export let currentStep: number | undefined;
 
@@ -10,7 +11,7 @@
 
 {#key infoBoxText}
 	<div class="info-box" in:fade={{ delay: 700 }} out:fade>
-		<p>{infoBoxContent[currentStep ?? 0]}</p>
+		<Body1 style="color: var(--clr-text-on-surface-constant);">{infoBoxContent[currentStep ?? 0]}</Body1>
 	</div>
 {/key}
 
@@ -26,7 +27,7 @@
 		
 		padding: 2rem;
 		border-radius: 1rem;
-		background-color: white;
+		background-color: var(--clr-surface-500);
 
 		
 		font-size: 1.8rem;
