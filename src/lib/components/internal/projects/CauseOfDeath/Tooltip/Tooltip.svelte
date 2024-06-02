@@ -31,7 +31,7 @@
 <style lang="scss">
 	.tooltip {
 		padding: 8px 6px;
-		background: white;
+		background: var(--clr-surface-500);
 		box-shadow: rgba(0, 0, 0, 0.15) 2px 3px 8px;
 		border-radius: 3px;
 		pointer-events: none;
@@ -45,6 +45,7 @@
 		font-weight: 500;
 		margin-bottom: 6px;
 		width: 100%;
+		color: var(--clr-text-on-surface-constant);
 	}
 
 	h2 {
@@ -54,13 +55,13 @@
 	
 	span {
 		font-size: 1rem;
-		background: #dda0dd50;
+		background: var(--clr-surface-600);
 		font-size: 80%;
 		margin-left: 2px;
 		padding: 2px 4px;
 		display: inline-block;
 		vertical-align: bottom;
 		border-radius: 3px;
-		color: rgba(0, 0, 0, 0.7);
+		color: var(--clr-text-on-surface-constant);
 	}
 </style>
