@@ -65,7 +65,7 @@
 				top: 0.2rem;
 				left: 0.3rem;
 				content: '✓';
-				color: var(--clr-txt-neg);
+				color: var(--clr-txt-neg-500);
 				display: none;
 			}
 
