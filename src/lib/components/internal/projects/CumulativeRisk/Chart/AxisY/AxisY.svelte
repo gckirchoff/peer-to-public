@@ -33,6 +33,6 @@
 		font-size: 1.4rem;
 		font-family: var(--font-base);
 		user-select: none;
-		fill: #464646;
+		fill: var(--clr-text-on-surface-400);
 	}
 </style>

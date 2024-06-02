@@ -541,7 +541,7 @@
 			outline: none;
 			cursor: default;
 			user-select: none;
-			fill: var(--clr-txt);
+			fill: var(--clr-txt-500);
 		}
 	}
 </style>
