@@ -31,6 +31,6 @@
 		font-size: 1.4rem;
 		font-family: var(--font-base);
 		user-select: none;
-		fill: var(--clr-text-on-surface-500);
+		fill: var(--clr-text-on-surface-1000);
 	}
 </style>
