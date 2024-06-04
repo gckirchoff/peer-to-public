@@ -4,9 +4,9 @@ description: "Evidence shows that the effects of SARS-CoV-2 can cause major prob
 categories: [ "covid-19", "statistics" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "wave-unsplash-matt-paul-catalano.jpg"
-date: 'Tue Feb 06 2024 14:30:13 GMT-0500 (Eastern Standard Time)'
-published: false
-updated: 'Tue Jun 04 2024 10:51:56 GMT-0400 (Eastern Daylight Time)'
+date: 'Tue Jun 04 2024 11:23:15 GMT-0400 (Eastern Daylight Time)'
+published: true
+
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
