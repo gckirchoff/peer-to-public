@@ -24,11 +24,6 @@
 						</a>
 					</li>
 				{/each}
-				<li>
-					<a href="/tools">
-						<Body1 style="font-family: var(--font-base); font-size: var(--font-16);">Tools</Body1>
-					</a>
-				</li>
 			</ul>
 		</div>
 	{/if}
