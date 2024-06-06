@@ -19,7 +19,7 @@
 
 <style lang="scss">
 	line {
-		stroke: black;
+		stroke: var(--clr-text-on-surface-500);
 		stroke-width: 1;
 	}
 
@@ -27,6 +27,6 @@
 		font-size: 1.4rem;
 		font-family: var(--font-base);
 		user-select: none;
-		fill: #464646;
+		fill: var(--clr-text-on-surface-500);
 	}
 </style>

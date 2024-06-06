@@ -302,7 +302,7 @@
 					x={innerChartWidth - 10}
 					y={yScale(baselineCancer) + 20}
 					text-anchor="end"
-					class="baseline-text"
+					class="baseline-text yellow"
 				>
 					Baseline Incidence
 				</text>
@@ -482,7 +482,7 @@
 	:global(.tick text) {
 		font-weight: 500;
 		font-size: 15px;
-		fill: #565656;
+		fill: var(--clr-text-on-surface-500);
 		user-select: none;
 	}
 
@@ -534,14 +534,18 @@
 
 		.baseline-text {
 			font-size: 1.2rem;
-			fill: #464646;
+			fill: var(--clr-text-on-surface-500);
+
+			&.yellow {
+				fill: var(--clr-text-on-warning-500);
+			}
 		}
 
 		text {
 			outline: none;
 			cursor: default;
 			user-select: none;
-			fill: var(--clr-txt);
+			fill: var(--clr-txt-500);
 		}
 	}
 </style>

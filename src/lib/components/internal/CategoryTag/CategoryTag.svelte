@@ -10,7 +10,7 @@
 
 <style lang="scss">
 	a {
-		color: var(--clr-text-on-primary);
+		color: var(--clr-text-on-primary-500);
 		background-color: var(--clr-primary-500);
 		font-size: var(--font-14);
 		font-weight: var(--font-weight-regular);

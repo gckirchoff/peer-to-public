@@ -30,7 +30,7 @@
 			</div>
 			{#if dev}
 				<div class="published-state {post.published ? 'published' : 'draft'}">
-					<Body1>
+					<Body1 style="color: var(--clr-text-on-warning-500);">
 						<span>
 							{post.published ? 'Published' : 'Draft'}
 						</span>

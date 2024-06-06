@@ -89,7 +89,7 @@
 	:global(.tick text, .axis-title) {
 		font-weight: 400;
 		font-size: 2rem;
-		fill: var(--clr-txt);
+		fill: var(--clr-txt-500);
 	}
 
 	.chart-container {

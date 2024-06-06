@@ -44,3 +44,13 @@
 		{text}
 	</text>
 {/if}
+
+<style lang="scss">
+	text {
+		fill: var(--clr-text-on-surface-500);
+	}
+
+	line {
+		stroke: var(--clr-text-on-surface-500);
+	}
+</style>

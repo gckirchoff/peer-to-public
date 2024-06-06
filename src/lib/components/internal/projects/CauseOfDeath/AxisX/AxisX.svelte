@@ -9,9 +9,6 @@
 </script>
 
 <g class="axis x" transform="translate(0, {height})">
-	<text class="axis-title" y={-15} x={width} text-anchor="end"
-		>Number of deaths, hundreds of thousands →
-	</text>
 	{#each xTicks as tick}
 		<g class="tick" transform="translate( {xScale(tick)},0)">
 			<line x1="0" y1="0" x2="0" y2="10" stroke="hsla(212, 10%, 53%, 1)" />
@@ -22,6 +19,9 @@
 			>
 		</g>
 	{/each}
+	<text class="axis-title" y={-15} x={width} text-anchor="end"
+		>Number of deaths, hundreds of thousands →
+	</text>
 </g>
 
 <style lang="scss">
@@ -30,7 +30,7 @@
 	}
 	.tick {
 		.y-line {
-			stroke: var(--clr-surface-600);
+			stroke: var(--clr-surface-300);
 		}
 	}
 </style>
