@@ -51,7 +51,7 @@
 
 		&[aria-current='true'] {
 			background: var(--clr-tertiary-500);
-			color: var(--clr-txt);
+			color: var(--clr-txt-500);
 		}
 	}
 </style>

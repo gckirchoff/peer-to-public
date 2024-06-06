@@ -37,7 +37,8 @@
 <style lang="scss">
 	.tooltip {
 		position: absolute;
-		background-color: white;
+		background: var(--clr-surface-500);
+		color: var(--clr-text-on-surface-500);
 		max-width: min(50%, var(--max-width));
 		padding: 8px 6px;
 		box-shadow: rgba(0, 0, 0, 0.15) 2px 3px 8px;

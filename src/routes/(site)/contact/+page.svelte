@@ -49,7 +49,7 @@
 				gap: 1rem;
 
 				a {
-					color: var(--clr-txt);
+					color: var(--clr-txt-500);
 					display: flex;
 					align-items: center;
 					gap: var(--spacing-8);

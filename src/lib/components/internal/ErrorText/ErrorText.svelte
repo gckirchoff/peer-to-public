@@ -26,7 +26,7 @@
 		background-color: var(--clr-error-500);
 		padding: var(--spacing-8) var(--spacing-16);
 		:global(h4) {
-			color: var(--clr-txt-neg);
+			color: var(--clr-txt-neg-500);
 		}
 	}
 </style>
