@@ -16,7 +16,7 @@
 			<NavItem href="/rss.xml">RSS</NavItem>
 		</ul>
 	</nav>
-	<Body2 style="color: var(--clr-text-on-surface);">
+	<Body2 style="color: var(--clr-text-on-surface-500);">
 		©{new Date().getFullYear()}
 		{siteConfig.author}
 	</Body2>

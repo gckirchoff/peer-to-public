@@ -87,6 +87,7 @@
 				y={middleHeight}
 				dy={-8}
 				text-anchor={shorterThanAverage ? 'start' : 'end'}
+				fill={'var(--clr-text-on-surface-500)'}
 			>
 				{numberFormatter(unitedStatesLifeExpectancy)}
 			</text>
@@ -117,5 +118,8 @@
 	rect,
 	line {
 		transition: all 400ms ease;
+
+		stroke: var(--clr-text-on-surface-500);
 	}
+
 </style>
