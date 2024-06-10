@@ -45,7 +45,7 @@
 	let distributions: Distribution[] = [];
 	let summedDistributions: PredictedCases[] = [];
 
-	$: internalMode = mode;
+	$: internalMode = mode as Mode;
 
 	$: dateOfPrevention = addYearsToDate(beginningOfPandemic, yearsFromNowToStartPrevention);
 	$: standardDeviation = delay / 3;
