@@ -534,7 +534,7 @@
 
 		.baseline-text {
 			font-size: 1.2rem;
-			fill: var(--clr-text-on-surface-500);
+			fill: var(--clr-txt-500);
 
 			&.yellow {
 				fill: var(--clr-text-on-warning-500);
