@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { Body1 } from '$lib/components/internal/typography';
 
-	export let externalLink: string;
+	export let externalLink = '';
 	export let internalLink = '';
 </script>
 
 <div class="links-container">
-	<Body1><a href={externalLink}>Back to origin</a></Body1>
+	{#if externalLink}
+		<Body1><a href={externalLink}>Back to origin</a></Body1>
+	{/if}
 	{#if internalLink}
 		<Body1><a href="/posts/{internalLink}">Full Post on Peer to Public</a></Body1>
 	{/if}
