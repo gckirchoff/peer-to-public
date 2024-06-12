@@ -45,7 +45,7 @@
 	let distributions: Distribution[] = [];
 	let summedDistributions: PredictedCases[] = [];
 
-	$: internalMode = mode;
+	$: internalMode = mode as Mode;
 
 	$: dateOfPrevention = addYearsToDate(beginningOfPandemic, yearsFromNowToStartPrevention);
 	$: standardDeviation = delay / 3;
@@ -482,7 +482,7 @@
 	:global(.tick text) {
 		font-weight: 500;
 		font-size: 15px;
-		fill: var(--clr-text-on-surface-500);
+		fill: var(--clr-text-on-surface-900);
 		user-select: none;
 	}
 
