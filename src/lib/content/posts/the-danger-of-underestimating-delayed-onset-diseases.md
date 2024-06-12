@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "wave-unsplash-matt-paul-catalano.jpg"
 date: 'Wed Jun 12 2024 06:35:07 GMT-0400 (Eastern Daylight Time)'
 published: true
-updated: 'Wed Jun 12 2024 19:09:50 GMT-0400 (Eastern Daylight Time)'
+updated: 'Wed Jun 12 2024 19:13:50 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -21,7 +21,7 @@ Rabies can take longer than a year to first show symptoms. HIV is initially cont
 
 There are two things to be aware of with this. If someone says they got a mild case of HIV, Rabies, or Chagas, very few won't be alarmed. The second point is more complicated and involves hindsight. We are now well aware how dangerous these diseases are, but what about before we were aware of their long-term outcomes? The [beginning](https://www.hiv.gov/hiv-basics/overview/history/hiv-and-aids-timeline) of the HIV epidemic was [characterized](https://www.history.com/news/aids-epidemic-ronald-reagan) by doubt and stigma.
 
-Consider that a new disease has just come out. It causes asymptomatic to mild initial infections, but has a guarantee of causing a heart attack in exactly 10 years. From an observational and experiential perspective, we won't know that this is anything more than a common cold until 10 years have passed. For many it will be too late. A hope is that we could find subtle signs of invisible internal damage or persistence of pathogens, for example, through various studies, such as in vitro, pathology, or even in silico studies. Usually we would prefer data with more clinical significance, but waiting for that data to come out is too dangerous, as we would be the data. This is important because a new disease has just come out.
+Consider that a new disease has just come out. It causes asymptomatic to mild initial infections, but has a guarantee of causing a heart attack in exactly 10 years. From an observational and experiential perspective, we won't know that this is anything more than a common cold until 10 years have passed. For many it will be too late. A hope is that we could find subtle signs of invisible internal damage or persistence of pathogens, for example, through various studies, such as in vitro, pathology, or even in silico studies. Usually we would prefer data with more clinical significance, but waiting for that data to come out is too dangerous, as we would be the data.
 
 SARS-CoV-2 began spreading across the globe at the beginning of 2020. 4 years feels like a long time, but is a relatively short period for certain issues to arise. In addition, we are already seeing that Covid-19 can, and does, cause considerable long-term damage to nearly every organ system (symptomatically and asymptomatically), and may even be capable of [viral persistence](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(24)00171-3/fulltext?dgcid=raven_jbs_aip_email).
 
