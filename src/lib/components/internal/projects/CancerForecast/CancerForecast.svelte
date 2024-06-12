@@ -37,6 +37,7 @@
 	let hazardRatio = 1.5;
 	let delay = 20;
 	let baselineCancer = 18000000;
+	let baselineCancerSlope = 0;
 	let mode: Mode = 'summed';
 
 	let panicThreshold = 0.05;
@@ -69,7 +70,9 @@
 				beginningOfPandemic,
 				dateOfPrevention,
 				finalDateToMeasureTo,
-				extraCases: extraCancer,
+				baselineCancer,
+				baselineCancerSlope,
+				hazardRatio,
 				delay,
 				stdDeviation: standardDeviation,
 			});
@@ -88,7 +91,9 @@
 				beginningOfPandemic,
 				dateOfPrevention: fullScopeDate,
 				finalDateToMeasureTo: fullScopeDate,
-				extraCases: extraCancer,
+				baselineCancer,
+				baselineCancerSlope,
+				hazardRatio,
 				delay,
 				stdDeviation: standardDeviation,
 			});
@@ -120,7 +125,9 @@
 					beginningOfPandemic,
 					dateOfPrevention: pointOfPanic.date,
 					finalDateToMeasureTo: panicDateToMeasureTo,
-					extraCases: extraCancer,
+					baselineCancer,
+					baselineCancerSlope,
+					hazardRatio,
 					delay,
 					stdDeviation: standardDeviation,
 				});
@@ -228,6 +235,15 @@
 	}: Event & {
 		currentTarget: EventTarget & HTMLLabelElement;
 	}) => (internalMode = (target as HTMLInputElement)?.checked ? 'both' : 'summed');
+
+	// $: console.log(
+	// 	new Array(endOfChart.getFullYear() - beginningOfPandemic.getFullYear())
+	// 		.fill(null)
+	// 		.map((_, i) => ({
+	// 			x: new Date(beginningOfPandemic.getFullYear() + i, 11, 31),
+	// 			y: baselineCancerSlope * i + baselineCancer,
+	// 		})),
+	// );
 </script>
 
 <div class="widget-container">
@@ -281,6 +297,12 @@
 				max={100000000}
 				step={1000000}
 			/>
+		</label>
+		<label class="range-input">
+			<Body2>
+				{baselineCancerSlope} baseline increase:
+			</Body2>
+			<input bind:value={baselineCancerSlope} type="range" min={0} max={1000000} step={100000} />
 		</label>
 	</div>
 	<div class="chart-container" bind:clientWidth={width}>
@@ -471,6 +493,21 @@
 						Panic Threshold
 					</text>
 				{/if}
+				<Line
+					type="area"
+					data={new Array(xScale.domain()[1].getFullYear() - beginningOfPandemic.getFullYear())
+						.fill(null)
+						.map((_, i) => ({
+							x: new Date(beginningOfPandemic.getFullYear() + i, 11, 31),
+							y: baselineCancerSlope * i + baselineCancer,
+						}))}
+					xAccessorScaled={(d) => xScale(d.x)}
+					yAccessorScaled={(d) => yScale(d.y)}
+					y0AccessorScaled={innerChartHeight}
+					style="fill: red;"
+					on:mouseover={() => (hoveredExtraCasesToCome = true)}
+					on:mouseleave={() => (hoveredExtraCasesToCome = false)}
+				/>
 			</g>
 		</svg>
 	</div>

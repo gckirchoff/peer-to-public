@@ -134,7 +134,9 @@ interface GetDistributionsArgs {
 	beginningOfPandemic: Date;
 	dateOfPrevention: Date;
 	finalDateToMeasureTo: Date;
-	extraCases: number;
+	baselineCancer: number;
+	baselineCancerSlope: number;
+	hazardRatio: number;
 	delay: number;
 	stdDeviation: number;
 }
@@ -143,10 +145,13 @@ export const getDistributions = ({
 	beginningOfPandemic,
 	dateOfPrevention,
 	finalDateToMeasureTo,
-	extraCases,
+	baselineCancer,
+	baselineCancerSlope,
+	hazardRatio,
 	delay,
 	stdDeviation,
 }: GetDistributionsArgs): Distribution[] => {
+	const extraCases = getExtraCases(hazardRatio, baselineCancer);
 	const yearsDifference = dateOfPrevention.getFullYear() - beginningOfPandemic.getFullYear();
 	const newDistributions: Distribution[] = [];
 	for (let i = 0; i <= yearsDifference; i++) {
@@ -159,7 +164,7 @@ export const getDistributions = ({
 			infectionsBinDate,
 			futureMeanIncidenceDate,
 			finalDateToMeasureTo,
-			extraCases,
+			extraCases: extraCases + baselineCancerSlope * i,
 			stdDeviation,
 		});
 
