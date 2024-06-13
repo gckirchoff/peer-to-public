@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "wave-unsplash-matt-paul-catalano.jpg"
 date: 'Wed Jun 12 2024 06:35:07 GMT-0400 (Eastern Daylight Time)'
 published: true
-updated: 'Wed Jun 12 2024 22:23:00 GMT-0400 (Eastern Daylight Time)'
+updated: 'Wed Jun 12 2024 22:52:26 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -19,7 +19,7 @@ Viruses, parasites, and bacteria are all capable of causing acute illnesses. Thi
 
 Rabies can take longer than a year to show symptoms. HIV is initially contracted as an asymptomatic or mild flu-like illness. An infected individual may continue to look and feel fine for up to 10 years until AIDS fully develops. Chagas disease, acquired from the parasite in the kissing bug, may present chronic phase symptoms such as an irregular heartbeat, stomach pain, and heart failure [10 to 20 years](https://www.mayoclinic.org/diseases-conditions/chagas-disease/symptoms-causes/syc-20356212) after initial infection. Similarly, syphilis can remain dormant for years before manifesting neurological symptoms that can result in death.
 
-If someone says they got a mild case of HIV, Rabies, or Chagas, very few won't be alarmed. Hindsight shows us the danger of these diseases, but what about before we understood their long-term outcomes? The [beginning](https://www.hiv.gov/hiv-basics/overview/history/hiv-and-aids-timeline) of the HIV epidemic was [characterized](https://www.history.com/news/aids-epidemic-ronald-reagan) by doubt and stigma.
+If someone said they had a mild case of HIV, rabies, or Chagas disease, most people would be alarmed. Hindsight shows us the danger of these diseases, but what about before we understood their long-term outcomes? The [beginning](https://www.hiv.gov/hiv-basics/overview/history/hiv-and-aids-timeline) of the HIV epidemic was [characterized](https://www.history.com/news/aids-epidemic-ronald-reagan) by doubt and stigma.
 
 Now, imagine a new disease causing asymptomatic to mild initial infections but guaranteeing a heart attack in exactly 10 years. Initially, it would seem like just a common cold. We would probably not act to mitigate this disease until the 10 year mark comes around. However, it will be too late for those who were infected before mitigations were put in place. A hope is that we could detect subtle signs of internal damage or pathogen persistence through various studies, such as in vitro, pathology, or even in silico studies. Usually we would prefer data with more clinical significance, but waiting for that data to come out is too dangerous, as we would be the data.
 
