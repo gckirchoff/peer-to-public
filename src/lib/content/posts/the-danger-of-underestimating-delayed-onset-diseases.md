@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "wave-unsplash-matt-paul-catalano.jpg"
 date: 'Wed Jun 12 2024 06:35:07 GMT-0400 (Eastern Daylight Time)'
 published: true
-updated: 'Wed Jun 12 2024 22:04:44 GMT-0400 (Eastern Daylight Time)'
+updated: 'Wed Jun 12 2024 22:08:40 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -23,7 +23,7 @@ If someone says they got a mild case of HIV, Rabies, or Chagas, very few won't b
 
 Now, imagine a new disease causing asymptomatic to mild initial infections but guaranteeing a heart attack in exactly 10 years. Initially, it would seem like just a common cold. We would probably not act to mitigate this disease until the 10 year mark comes around. However, it will be too late for those who were infected before mitigations were put in place. A hope is that we could detect subtle signs of internal damage or pathogen persistence through various studies, such as in vitro, pathology, or even in silico studies. Usually we would prefer data with more clinical significance, but waiting for that data to come out is too dangerous, as we would be the data.
 
-SARS-CoV-2 began spreading across the globe at the beginning of 2020. 4 years feels like a long time, but is a relatively short period for certain issues to arise. We are already seeing that Covid-19 can cause significant long-term damage to nearly every organ system (symptomatically and asymptomatically), and may even be capable of [viral persistence](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(24)00171-3/fulltext?dgcid=raven_jbs_aip_email).
+SARS-CoV-2 began spreading across the globe at the beginning of 2020. 4 years feels like a long time, but is well before the time it takes for many possible latent health issues to arise after an infection. We are already seeing that Covid-19 can cause significant long-term damage to nearly every organ system (symptomatically and asymptomatically), and may even be capable of [viral persistence](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(24)00171-3/fulltext?dgcid=raven_jbs_aip_email).
 
 Heart disease, especially for [younger populations](https://www.cedars-sinai.org/newsroom/today-young-people-are-more-likely-to-die-of-heart-attacks-post-covid-study-finds-but-why/#:~:text=09%3A00%20AM-,TODAY%3A%20Young%20People%20Are%20More%20Likely%20to%20Die%20of%20Heart,of%20the%20Smidt%20Heart%20Institute.), has been on the rise since the beginning of the pandemic. The mechanisms behind this are [well established](https://www.nih.gov/news-events/nih-research-matters/how-sars-cov-2-contributes-heart-attacks-strokes#:~:text=COVID%2D19%20is%20known%20to,contributes%20to%20this%20increased%20risk.) and are known to occur after [mild](https://www.mdpi.com/2077-0383/12/6/2123?fbclid=IwAR2iJDGOH-QchYjM0j-qFIbyIt_ONASMl1Txu7I4w8Pgq5DX22VrrNnGqK0), and even [asymptomatic](https://publichealth.jhu.edu/2022/covid-and-the-heart-it-spares-no-one#:~:text=People%20who%20got%20COVID%2D19%20and%20were%20asymptomatic%2C%20or%20got,different%20things%20could%20be%20happening.), cases.
 
