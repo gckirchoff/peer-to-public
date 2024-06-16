@@ -580,8 +580,9 @@
 
 		.inputs-container {
 			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 			row-gap: var(--spacing-8);
+			column-gap: var(--spacing-16);
 			margin-top: var(--spacing-8);
 			margin-bottom: var(--spacing-32);
 
