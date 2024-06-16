@@ -413,6 +413,35 @@
 						{/each} -->
 					{/each}
 				{/if}
+				<Line
+					type="area"
+					data={baselineCancerCases}
+					{xAccessorScaled}
+					yAccessorScaled={(d) => yScale(d.cases)}
+					y0AccessorScaled={innerChartHeight}
+					style="fill: {realLifeMode ? '#7DB2E9' : '#E2DFA5'};"
+					on:mouseover={() => (hoveredExtraCasesToCome = true)}
+					on:mouseleave={() => (hoveredExtraCasesToCome = false)}
+				/>
+				{#if !realLifeMode}
+					<Line
+						data={baselineCancerCases}
+						{xAccessorScaled}
+						yAccessorScaled={(d) => yScale(d.cases)}
+						y0AccessorScaled={innerChartHeight}
+						style="stroke: #FF8C00;"
+						on:mouseover={() => (hoveredExtraCasesToCome = true)}
+						on:mouseleave={() => (hoveredExtraCasesToCome = false)}
+					/>
+					<text
+						x={innerChartWidth - 10}
+						y={yScale(baselineCancer) + 20}
+						text-anchor="end"
+						class="baseline-text yellow"
+					>
+						Baseline Incidence
+					</text>
+				{/if}
 				{#if preventionDeterminant === 'date'}
 					<line
 						x1={xScale(dateOfPrevention)}
@@ -448,7 +477,7 @@
 							x1={xScale(panicPredictionPoint.date)}
 							y1={Math.min(panicThresholdYPosition, 125)}
 							x2={xScale(panicPredictionPoint.date)}
-							y2={yScale(baselineCancer)}
+							y2={yScale(0)}
 							stroke-width={2}
 							stroke="grey"
 						/>
@@ -515,36 +544,6 @@
 						class="baseline-text"
 					>
 						Panic Threshold
-					</text>
-				{/if}
-
-				<Line
-					type="area"
-					data={baselineCancerCases}
-					{xAccessorScaled}
-					yAccessorScaled={(d) => yScale(d.cases)}
-					y0AccessorScaled={innerChartHeight}
-					style="fill: {realLifeMode ? '#7DB2E9' : '#E2DFA5'};"
-					on:mouseover={() => (hoveredExtraCasesToCome = true)}
-					on:mouseleave={() => (hoveredExtraCasesToCome = false)}
-				/>
-				{#if !realLifeMode}
-					<Line
-						data={baselineCancerCases}
-						{xAccessorScaled}
-						yAccessorScaled={(d) => yScale(d.cases)}
-						y0AccessorScaled={innerChartHeight}
-						style="stroke: #FF8C00;"
-						on:mouseover={() => (hoveredExtraCasesToCome = true)}
-						on:mouseleave={() => (hoveredExtraCasesToCome = false)}
-					/>
-					<text
-						x={innerChartWidth - 10}
-						y={yScale(baselineCancer) + 20}
-						text-anchor="end"
-						class="baseline-text yellow"
-					>
-						Baseline Incidence
 					</text>
 				{/if}
 			</g>
