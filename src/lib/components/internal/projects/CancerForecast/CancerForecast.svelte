@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { extent, scaleLinear, scaleTime, line, max, curveNatural, format } from 'd3';
+	import { extent, scaleLinear, scaleTime, line, max, curveNatural, format, randomInt } from 'd3';
 
 	import { Body1, Body2 } from '../../typography';
 	import AxisX from './AxisX/AxisX.svelte';
@@ -39,6 +39,7 @@
 	let delay = 20;
 	let baselineCancer = 18000000;
 	let baselineCancerSlope = 0;
+	let baselineNoise = 0;
 	let mode: Mode = 'summed';
 
 	let panicThreshold = 0.05;
@@ -196,28 +197,37 @@
 			return panicPredictionPoint.date.getFullYear() <= date.getFullYear();
 		}) + 1;
 
+	$: randNoiseNum = randomInt(baselineNoise);
+	$: noiseOffset = () => randNoiseNum() * (Math.random() > 0.5 ? 1 : -1);
+
 	$: baselineCancerCases = new Array(
 		xScale.domain()[1].getFullYear() - beginningOfPandemic.getFullYear(),
 	)
 		.fill(null)
 		.map<PredictedCases>((_, i) => ({
 			date: new Date(beginningOfPandemic.getFullYear() + i, 11, 31),
-			cases: baselineCancerSlope * i + baselineCancer,
+			cases: baselineCancerSlope * i + baselineCancer + noiseOffset(),
 		}));
 
-	$: plottedExtraCases = integrateBaselineCases(renderedSummedCases, baselineCancerSlope);
+	$: plottedExtraCases = integrateBaselineCases(
+		renderedSummedCases,
+		baselineCancerCases,
+		baselineCancer,
+	);
 	$: plottedExtraCasesSoFarArea = integrateBaselineCases(
 		renderedSummedCases.slice(0, indexOfCancerSoFarEnd),
-		baselineCancerSlope,
+		baselineCancerCases,
+		baselineCancer,
 	);
 
 	$: lastCancerCasesLevel = baselineCancerCases.at(-1);
-	$: levelUsedForDomain = lastCancerCasesLevel ? lastCancerCasesLevel.cases : baselineCancer;
+	$: baselineLevelForYDomain = lastCancerCasesLevel ? lastCancerCasesLevel.cases : baselineCancer;
+	$: baselineDerivedYDomainMax = baselineLevelForYDomain * 3;
 
 	$: yDomain = (
 		internalMode === 'separate'
 			? [0, max(distributions[0].predictedCases, yAccessor)]
-			: [0, Math.max(levelUsedForDomain * 3, max(summedDistributions, yAccessor) as number)]
+			: [0, Math.max(baselineDerivedYDomainMax, max(summedDistributions, yAccessor) as number)]
 	) as [number, number];
 
 	$: yScale = scaleLinear().domain(yDomain).range([innerChartHeight, 0]).nice();
@@ -314,6 +324,12 @@
 			</Body2>
 			<input bind:value={baselineCancerSlope} type="range" min={0} max={1000000} step={100000} />
 		</label>
+		<label class="range-input">
+			<Body2>
+				{baselineNoise} baseline noise:
+			</Body2>
+			<input bind:value={baselineNoise} type="range" min={0} max={5000000} step={100000} />
+		</label>
 	</div>
 	<div class="chart-container" bind:clientWidth={width}>
 		<svg {width} {height}>
@@ -385,7 +401,11 @@
 					{#each distributions as distribution}
 						<path
 							d={lineGenerator(
-								integrateBaselineCases(distribution.predictedCases, baselineCancerSlope),
+								integrateBaselineCases(
+									distribution.predictedCases,
+									baselineCancerCases,
+									baselineCancer,
+								),
 							)}
 							stroke-width="2"
 							fill="transparent"
