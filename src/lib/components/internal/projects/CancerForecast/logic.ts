@@ -164,7 +164,7 @@ export const getDistributions = ({
 			infectionsBinDate,
 			futureMeanIncidenceDate,
 			finalDateToMeasureTo,
-			extraCases: extraCases + baselineCancerSlope * i,
+			extraCases,
 			stdDeviation,
 		});
 
@@ -209,3 +209,12 @@ export const createSummedDistribution = ({
 	}
 	return newSummedDistributions;
 };
+
+export const integrateBaselineCases = (
+	casesToRender: PredictedCases[],
+	baselineCancerSlope: number,
+) =>
+	casesToRender.map((point, i) => ({
+		...point,
+		cases: point.cases + baselineCancerSlope * i,
+	}));
