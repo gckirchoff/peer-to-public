@@ -344,13 +344,6 @@
 				</defs>
 				<AxisX {xScale} width={innerChartWidth} height={innerChartHeight} />
 				<AxisY {yScale} />
-				<line
-					x2={innerChartWidth}
-					y1={yScale(baselineCancer)}
-					y2={yScale(baselineCancer)}
-					stroke="#FFA500"
-					stroke-width={1}
-				/>
 				{#if internalMode === 'summed' || internalMode === 'both'}
 					<!-- <path
 					d={lineGenerator(summedDistributions)}
