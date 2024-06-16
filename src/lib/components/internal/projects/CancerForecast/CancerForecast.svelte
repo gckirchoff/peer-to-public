@@ -24,6 +24,7 @@
 		createPredictedCases,
 		getDistributions,
 		createSummedDistribution,
+		integrateBaselineCases,
 	} from './logic';
 
 	export let audience: Audience = 'general';
@@ -179,22 +180,6 @@
 	// 		: [0, max(summedDistributions, yAccessor)]
 	// ) as [number, number];
 
-	$: yDomain = (
-		internalMode === 'separate'
-			? [0, max(distributions[0].predictedCases, yAccessor)]
-			: [0, Math.max(baselineCancer * 3, max(summedDistributions, yAccessor) as number)]
-	) as [number, number];
-
-	$: yScale = scaleLinear().domain(yDomain).range([innerChartHeight, 0]).nice();
-
-	$: xAccessorScaled = (d: PredictedCases) => xScale(xAccessor(d));
-	$: yAccessorScaled = (d: PredictedCases) => yScale(yAccessor(d));
-	$: y0AccessorScaled = yScale(yScale.domain()[0]);
-
-	$: lineGenerator = line<PredictedCases>()
-		.x((d) => xScale(xAccessor(d)))
-		.y((d) => yScale(yAccessor(d)));
-
 	$: indexOfLastPointToRender = summedDistributions.findIndex(
 		({ date }) => date >= xScale.domain()[1],
 	);
@@ -210,6 +195,40 @@
 			}
 			return panicPredictionPoint.date.getFullYear() <= date.getFullYear();
 		}) + 1;
+
+	$: baselineCancerCases = new Array(
+		xScale.domain()[1].getFullYear() - beginningOfPandemic.getFullYear(),
+	)
+		.fill(null)
+		.map<PredictedCases>((_, i) => ({
+			date: new Date(beginningOfPandemic.getFullYear() + i, 11, 31),
+			cases: baselineCancerSlope * i + baselineCancer,
+		}));
+
+	$: plottedExtraCases = integrateBaselineCases(renderedSummedCases, baselineCancerSlope);
+	$: plottedExtraCasesSoFarArea = integrateBaselineCases(
+		renderedSummedCases.slice(0, indexOfCancerSoFarEnd),
+		baselineCancerSlope,
+	);
+
+	$: lastCancerCasesLevel = baselineCancerCases.at(-1);
+	$: levelUsedForDomain = lastCancerCasesLevel ? lastCancerCasesLevel.cases : baselineCancer;
+
+	$: yDomain = (
+		internalMode === 'separate'
+			? [0, max(distributions[0].predictedCases, yAccessor)]
+			: [0, Math.max(levelUsedForDomain * 3, max(summedDistributions, yAccessor) as number)]
+	) as [number, number];
+
+	$: yScale = scaleLinear().domain(yDomain).range([innerChartHeight, 0]).nice();
+
+	$: xAccessorScaled = (d: PredictedCases) => xScale(xAccessor(d));
+	$: yAccessorScaled = (d: PredictedCases) => yScale(yAccessor(d));
+	$: y0AccessorScaled = yScale(yScale.domain()[0]);
+
+	$: lineGenerator = line<PredictedCases>()
+		.x((d) => xScale(xAccessor(d)))
+		.y((d) => yScale(yAccessor(d)));
 
 	let preventionStartInfoBox: SVGGElement | null = null;
 	let preventionStartInfoBoxXPosition = 0;
@@ -235,15 +254,6 @@
 	}: Event & {
 		currentTarget: EventTarget & HTMLLabelElement;
 	}) => (internalMode = (target as HTMLInputElement)?.checked ? 'both' : 'summed');
-
-	// $: console.log(
-	// 	new Array(endOfChart.getFullYear() - beginningOfPandemic.getFullYear())
-	// 		.fill(null)
-	// 		.map((_, i) => ({
-	// 			x: new Date(beginningOfPandemic.getFullYear() + i, 11, 31),
-	// 			y: baselineCancerSlope * i + baselineCancer,
-	// 		})),
-	// );
 </script>
 
 <div class="widget-container">
@@ -344,7 +354,7 @@
 				/> -->
 					<Line
 						type="area"
-						data={renderedSummedCases}
+						data={plottedExtraCases}
 						{xAccessorScaled}
 						{yAccessorScaled}
 						y0AccessorScaled={yScale(baselineCancer)}
@@ -356,7 +366,7 @@
 					/>
 					<Line
 						type="area"
-						data={renderedSummedCases.slice(0, indexOfCancerSoFarEnd)}
+						data={plottedExtraCasesSoFarArea}
 						{xAccessorScaled}
 						{yAccessorScaled}
 						y0AccessorScaled={yScale(baselineCancer)}
@@ -365,7 +375,7 @@
 						on:mouseleave={() => (hoveredExtraCasesSoFar = false)}
 					/>
 					<Line
-						data={renderedSummedCases}
+						data={plottedExtraCases}
 						{xAccessorScaled}
 						{yAccessorScaled}
 						style="stroke: #67a4e0; transition: none;"
@@ -374,7 +384,9 @@
 				{#if internalMode === 'separate' || internalMode === 'both'}
 					{#each distributions as distribution}
 						<path
-							d={lineGenerator(distribution.predictedCases)}
+							d={lineGenerator(
+								integrateBaselineCases(distribution.predictedCases, baselineCancerSlope),
+							)}
 							stroke-width="2"
 							fill="transparent"
 							stroke="#005CC8"
@@ -495,14 +507,9 @@
 				{/if}
 				<Line
 					type="area"
-					data={new Array(xScale.domain()[1].getFullYear() - beginningOfPandemic.getFullYear())
-						.fill(null)
-						.map((_, i) => ({
-							x: new Date(beginningOfPandemic.getFullYear() + i, 11, 31),
-							y: baselineCancerSlope * i + baselineCancer,
-						}))}
-					xAccessorScaled={(d) => xScale(d.x)}
-					yAccessorScaled={(d) => yScale(d.y)}
+					data={baselineCancerCases}
+					{xAccessorScaled}
+					yAccessorScaled={(d) => yScale(d.cases)}
 					y0AccessorScaled={innerChartHeight}
 					style="fill: red;"
 					on:mouseover={() => (hoveredExtraCasesToCome = true)}
