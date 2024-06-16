@@ -212,9 +212,10 @@ export const createSummedDistribution = ({
 
 export const integrateBaselineCases = (
 	casesToRender: PredictedCases[],
-	baselineCancerSlope: number,
+	baselineCancerCases: PredictedCases[],
+	baselineCancer: number,
 ) =>
 	casesToRender.map((point, i) => ({
 		...point,
-		cases: point.cases + baselineCancerSlope * i,
+		cases: point.cases + baselineCancerCases[i].cases - baselineCancer,
 	}));
