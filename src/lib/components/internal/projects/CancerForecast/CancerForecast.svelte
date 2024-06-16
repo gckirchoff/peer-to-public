@@ -41,6 +41,7 @@
 	let baselineCancerSlope = 0;
 	let baselineNoise = 0;
 	let mode: Mode = 'summed';
+	let realLifeMode = false;
 
 	let panicThreshold = 0.05;
 	let panicPredictionPoint: PredictedCases | null = null;
@@ -268,6 +269,10 @@
 
 <div class="widget-container">
 	<div class="distributions-toggle">
+		<label>
+			Real Life View
+			<input type="checkbox" bind:checked={realLifeMode} />
+		</label>
 		<label on:change={handleShowDistributions}>
 			Show Latency Distributions
 			<input type="checkbox" />
@@ -339,21 +344,6 @@
 				</defs>
 				<AxisX {xScale} width={innerChartWidth} height={innerChartHeight} />
 				<AxisY {yScale} />
-				<rect
-					x={0}
-					y={yScale(baselineCancer)}
-					width={innerChartWidth}
-					height={innerChartHeight - yScale(baselineCancer)}
-					fill="#E2DFA5"
-				/>
-				<text
-					x={innerChartWidth - 10}
-					y={yScale(baselineCancer) + 20}
-					text-anchor="end"
-					class="baseline-text yellow"
-				>
-					Baseline Incidence
-				</text>
 				<line
 					x2={innerChartWidth}
 					y1={yScale(baselineCancer)}
@@ -373,23 +363,25 @@
 						data={plottedExtraCases}
 						{xAccessorScaled}
 						{yAccessorScaled}
-						y0AccessorScaled={yScale(baselineCancer)}
-						style="fill: url(#{extraCasesGradientId}); transition: none; filter: brightness({hoveredExtraCasesToCome
+						y0AccessorScaled={yScale(0)}
+						style="fill: #7DB2E9; transition: none; filter: brightness({hoveredExtraCasesToCome
 							? 1.08
 							: 1});"
 						on:mouseover={() => (hoveredExtraCasesToCome = true)}
 						on:mouseleave={() => (hoveredExtraCasesToCome = false)}
 					/>
-					<Line
-						type="area"
-						data={plottedExtraCasesSoFarArea}
-						{xAccessorScaled}
-						{yAccessorScaled}
-						y0AccessorScaled={yScale(baselineCancer)}
-						style="fill: {hoveredExtraCasesSoFar ? '#ffabab' : '#ff7a7a'}; transition: none;"
-						on:mouseover={() => (hoveredExtraCasesSoFar = true)}
-						on:mouseleave={() => (hoveredExtraCasesSoFar = false)}
-					/>
+					{#if !realLifeMode}
+						<Line
+							type="area"
+							data={plottedExtraCasesSoFarArea}
+							{xAccessorScaled}
+							{yAccessorScaled}
+							y0AccessorScaled={yScale(0)}
+							style="fill: {hoveredExtraCasesSoFar ? '#ffabab' : '#ff7a7a'}; transition: none;"
+							on:mouseover={() => (hoveredExtraCasesSoFar = true)}
+							on:mouseleave={() => (hoveredExtraCasesSoFar = false)}
+						/>
+					{/if}
 					<Line
 						data={plottedExtraCases}
 						{xAccessorScaled}
@@ -426,7 +418,7 @@
 						x1={xScale(dateOfPrevention)}
 						y1={15}
 						x2={xScale(dateOfPrevention)}
-						y2={yScale(baselineCancer)}
+						y2={yScale(0)}
 						stroke-width={2}
 						stroke="red"
 					/>
@@ -525,16 +517,36 @@
 						Panic Threshold
 					</text>
 				{/if}
+
 				<Line
 					type="area"
 					data={baselineCancerCases}
 					{xAccessorScaled}
 					yAccessorScaled={(d) => yScale(d.cases)}
 					y0AccessorScaled={innerChartHeight}
-					style="fill: red;"
+					style="fill: {realLifeMode ? '#7DB2E9' : '#E2DFA5'};"
 					on:mouseover={() => (hoveredExtraCasesToCome = true)}
 					on:mouseleave={() => (hoveredExtraCasesToCome = false)}
 				/>
+				{#if !realLifeMode}
+					<Line
+						data={baselineCancerCases}
+						{xAccessorScaled}
+						yAccessorScaled={(d) => yScale(d.cases)}
+						y0AccessorScaled={innerChartHeight}
+						style="stroke: #FF8C00;"
+						on:mouseover={() => (hoveredExtraCasesToCome = true)}
+						on:mouseleave={() => (hoveredExtraCasesToCome = false)}
+					/>
+					<text
+						x={innerChartWidth - 10}
+						y={yScale(baselineCancer) + 20}
+						text-anchor="end"
+						class="baseline-text yellow"
+					>
+						Baseline Incidence
+					</text>
+				{/if}
 			</g>
 		</svg>
 	</div>
@@ -563,7 +575,9 @@
 
 		.distributions-toggle {
 			display: flex;
+			flex-wrap: wrap;
 			justify-content: flex-end;
+			gap: var(--spacing-16);
 			margin-bottom: var(--spacing-32);
 
 			label {
@@ -598,7 +612,7 @@
 
 		.baseline-text {
 			font-size: 1.2rem;
-			fill: var(--clr-text-on-surface-500);
+			fill: var(--clr-txt-500);
 
 			&.yellow {
 				fill: var(--clr-text-on-warning-500);
