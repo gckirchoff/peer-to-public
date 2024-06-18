@@ -214,8 +214,12 @@ export const integrateBaselineCases = (
 	casesToRender: PredictedCases[],
 	baselineCancerCases: PredictedCases[],
 	baselineCancer: number,
-) =>
-	casesToRender.map((point, i) => ({
-		...point,
-		cases: point.cases + baselineCancerCases[i].cases - baselineCancer,
-	}));
+) => {
+	return casesToRender.map((point, i) => {
+		const overallCancerLevel = baselineCancerCases[i]?.cases ?? baselineCancer;
+		return {
+			...point,
+			cases: point.cases + overallCancerLevel - baselineCancer,
+		};
+	});
+};
