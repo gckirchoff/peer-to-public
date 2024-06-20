@@ -16,7 +16,6 @@
 	} from './constants';
 	import { beginningOfPandemic, endOfChart } from './constants';
 	import {
-		getExtraCases,
 		addYearsToDate,
 		getCumulativeCasesUpToDate,
 		getDistributions,
@@ -68,8 +67,6 @@
 	$: casesYetToCome = totalExtraCases - casesThatHaveOccuredSoFar;
 
 	$: {
-		const extraCancer = getExtraCases(hazardRatio, baselineCancer);
-
 		if (preventionDeterminant === 'date') {
 			const newDistributions = getDistributions({
 				beginningOfPandemic,
@@ -228,7 +225,6 @@
 
 	$: xAccessorScaled = (d: PredictedCases) => xScale(xAccessor(d));
 	$: yAccessorScaled = (d: PredictedCases) => yScale(yAccessor(d));
-	$: y0AccessorScaled = yScale(yScale.domain()[0]);
 
 	$: lineGenerator = line<PredictedCases>()
 		.x((d) => xScale(xAccessor(d)))
