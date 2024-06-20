@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { extent, scaleLinear, scaleTime, line, max, curveNatural, format, randomInt } from 'd3';
+	import { scaleLinear, scaleTime, line, max, format } from 'd3';
 
-	import { Body1, Body2 } from '../../typography';
+	import { Body2 } from '../../typography';
 	import AxisX from './AxisX/AxisX.svelte';
 	import AxisY from './AxisY/AxisY.svelte';
 	import Line from './Line/Line.svelte';
@@ -178,12 +178,6 @@
 		.range([0, innerChartWidth])
 		.nice();
 
-	// $: domain = (
-	// 	internalMode === 'separate'
-	// 		? [0, max(distributions[0].predictedCases, yAccessor)]
-	// 		: [0, max(summedDistributions, yAccessor)]
-	// ) as [number, number];
-
 	$: indexOfLastPointToRender = summedDistributions.findIndex(
 		({ date }) => date >= xScale.domain()[1],
 	);
@@ -205,7 +199,6 @@
 		end: endOfChart,
 		baselineCancerSlope,
 		baselineCancer,
-		baselineNoise,
 	});
 	$: noiseValues = createNoiseValues(baseline, baselineNoise);
 	$: baselineCancerCases = noisifyBaseline(baseline, noiseValues);

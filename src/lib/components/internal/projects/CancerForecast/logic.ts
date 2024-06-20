@@ -217,7 +217,6 @@ interface CreateBaselineCasesArgs {
 	end: Date;
 	baselineCancerSlope: number;
 	baselineCancer: number;
-	baselineNoise: number;
 }
 
 export const createBaselineCases = ({
@@ -225,7 +224,6 @@ export const createBaselineCases = ({
 	end,
 	baselineCancerSlope,
 	baselineCancer,
-	baselineNoise,
 }: CreateBaselineCasesArgs) => {
 	const years = end.getFullYear() - start.getFullYear();
 	const percentModifier = 1 + baselineCancerSlope;
@@ -234,7 +232,7 @@ export const createBaselineCases = ({
 	for (let i = 0; i < years; i++) {
 		const date = new Date(start.getFullYear() + i, 11, 31);
 		const prevLevel = baselineCancerCases[i - 1]?.cases ?? baselineCancer;
-		const nextLevel = prevLevel * (1 + baselineCancerSlope);
+		const nextLevel = prevLevel * percentModifier;
 
 		baselineCancerCases.push({
 			date,
