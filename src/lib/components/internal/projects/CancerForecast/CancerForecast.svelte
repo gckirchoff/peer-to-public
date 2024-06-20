@@ -262,16 +262,17 @@
 
 <div class="widget-container">
 	<div class="distributions-toggle">
-		{#if variant === 'noisePlusSlope'}
+		{#if variant === 'standard'}
+			<label on:change={handleShowDistributions}>
+				Show Latency Distributions
+				<input type="checkbox" />
+			</label>
+		{:else}
 			<label>
 				Real Life View
 				<input type="checkbox" bind:checked={realLifeMode} />
 			</label>
 		{/if}
-		<label on:change={handleShowDistributions}>
-			Show Latency Distributions
-			<input type="checkbox" />
-		</label>
 	</div>
 	<div class="inputs-container">
 		<label class="range-input">
