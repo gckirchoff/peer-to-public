@@ -14,7 +14,7 @@ export const siteConfig: SiteConfig = {
 			miniAboutMe: {
 				img: 'me.svg',
 				quickDescription:
-					'Explore key insights into the ongoing SARS-CoV-2 pandemic through interactive, visual articles. We are scientists and data vizualization experts with an aim to inform both the public and government officials by contributing to a deeper understanding of the current health landscape.',
+					'Explore key insights into the ongoing SARS-CoV-2 pandemic through interactive, visual articles. We are scientists and data visualization experts with an aim to inform both the public and government officials by contributing to a deeper understanding of the current health landscape.',
 			},
 			welcome: {
 				header: 'Peer to Public',
