@@ -5,7 +5,6 @@
 	import AxisX from './AxisX/AxisX.svelte';
 	import AxisY from './AxisY/AxisY.svelte';
 	import Line from './Line/Line.svelte';
-	import Gradient from './Gradient/Gradient.svelte';
 	import type {
 		Distribution,
 		PredictedCases,
@@ -31,8 +30,6 @@
 	export let variant: Variant = 'standard';
 
 	const numberFormatter = (num: number): string => format('.2s')(num).replace('G', 'B');
-	const extraCasesGradientId = 'extra-cases-gradient';
-	const gradientColors = ['#72ade8', 'rgb(236, 232, 253)'];
 
 	let preventionDeterminant: PreventionDeterminant = variant === 'standard' ? 'panic' : 'date';
 	let yearsFromNowToStartPrevention = 5;
@@ -340,9 +337,6 @@
 	<div class="chart-container" bind:clientWidth={width}>
 		<svg {width} {height}>
 			<g style:transform="translate({margin.left}px, {margin.top}px)">
-				<defs>
-					<Gradient id={extraCasesGradientId} colors={gradientColors} x2="0" y2="100%" />
-				</defs>
 				<AxisX {xScale} width={innerChartWidth} height={innerChartHeight} />
 				<AxisY {yScale} />
 				{#if internalMode === 'summed' || internalMode === 'both'}
