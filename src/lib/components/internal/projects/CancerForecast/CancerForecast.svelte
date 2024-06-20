@@ -25,7 +25,11 @@
 		getDistributions,
 		createSummedDistribution,
 		integrateBaselineCases,
+		createBaselineCases,
+		createNoiseValues,
+		noisifyBaseline,
 	} from './logic';
+	import { roundTo } from '../util/math';
 
 	export let audience: Audience = 'general';
 
@@ -198,17 +202,15 @@
 			return panicPredictionPoint.date.getFullYear() <= date.getFullYear();
 		}) + 1;
 
-	$: randNoiseNum = randomInt(baselineNoise);
-	$: noiseOffset = () => randNoiseNum() * (Math.random() > 0.5 ? 1 : -1);
-
-	$: baselineCancerCases = new Array(
-		xScale.domain()[1].getFullYear() - beginningOfPandemic.getFullYear(),
-	)
-		.fill(null)
-		.map<PredictedCases>((_, i) => ({
-			date: new Date(beginningOfPandemic.getFullYear() + i, 11, 31),
-			cases: baselineCancerSlope * i + baselineCancer + noiseOffset(),
-		}));
+	$: baseline = createBaselineCases({
+		start: beginningOfPandemic,
+		end: xScale.domain()[1],
+		baselineCancerSlope,
+		baselineCancer,
+		baselineNoise,
+	});
+	$: noiseValues = createNoiseValues(baseline, baselineNoise);
+	$: baselineCancerCases = noisifyBaseline(baseline, noiseValues);
 
 	$: plottedExtraCases = integrateBaselineCases(
 		renderedSummedCases,
@@ -325,15 +327,15 @@
 		</label>
 		<label class="range-input">
 			<Body2>
-				{baselineCancerSlope} baseline increase:
+				{roundTo(baselineCancerSlope * 100, 2)}% baseline increase:
 			</Body2>
-			<input bind:value={baselineCancerSlope} type="range" min={0} max={1000000} step={100000} />
+			<input bind:value={baselineCancerSlope} type="range" min={0} max={0.02} step={0.0005} />
 		</label>
 		<label class="range-input">
 			<Body2>
-				{baselineNoise} baseline noise:
+				{Math.round(baselineNoise * 100)}% baseline noise:
 			</Body2>
-			<input bind:value={baselineNoise} type="range" min={0} max={5000000} step={100000} />
+			<input bind:value={baselineNoise} type="range" min={0} max={0.5} step={0.05} />
 		</label>
 	</div>
 	<div class="chart-container" bind:clientWidth={width}>
