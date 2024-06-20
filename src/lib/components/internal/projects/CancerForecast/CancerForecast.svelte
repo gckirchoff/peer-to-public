@@ -12,16 +12,13 @@
 		Mode,
 		PreventionDeterminant,
 		Audience,
+		Variant,
 	} from './constants';
 	import { beginningOfPandemic, endOfChart } from './constants';
 	import {
 		getExtraCases,
 		addYearsToDate,
-		timeBetween,
-		getCasesOnDate,
-		getCasesUpToDate,
 		getCumulativeCasesUpToDate,
-		createPredictedCases,
 		getDistributions,
 		createSummedDistribution,
 		integrateBaselineCases,
@@ -32,12 +29,13 @@
 	import { roundTo } from '../util/math';
 
 	export let audience: Audience = 'general';
+	export let variant: Variant = 'noisePlusSlope';
 
 	const numberFormatter = (num: number): string => format('.2s')(num).replace('G', 'B');
 	const extraCasesGradientId = 'extra-cases-gradient';
 	const gradientColors = ['#72ade8', 'rgb(236, 232, 253)'];
 
-	let preventionDeterminant: PreventionDeterminant = 'panic';
+	let preventionDeterminant: PreventionDeterminant = variant === 'standard' ? 'panic' : 'date';
 	let yearsFromNowToStartPrevention = 5;
 	let hazardRatio = 1.5;
 	let delay = 20;
@@ -274,10 +272,12 @@
 
 <div class="widget-container">
 	<div class="distributions-toggle">
-		<label>
-			Real Life View
-			<input type="checkbox" bind:checked={realLifeMode} />
-		</label>
+		{#if variant === 'noisePlusSlope'}
+			<label>
+				Real Life View
+				<input type="checkbox" bind:checked={realLifeMode} />
+			</label>
+		{/if}
 		<label on:change={handleShowDistributions}>
 			Show Latency Distributions
 			<input type="checkbox" />
@@ -289,14 +289,19 @@
 				{#if preventionDeterminant === 'date'}
 					<Body2>
 						{dateOfPrevention.toLocaleDateString()}
+						{#if variant === 'noisePlusSlope'}
+							prevention
+						{/if}
 					</Body2>
 				{:else}
 					<Body2>{Math.round(panicThreshold * 100)}%</Body2>
 				{/if}
-				<select bind:value={preventionDeterminant}>
-					<option value="panic">extra cases panic threshold</option>
-					<option value="date">date of prevention</option>
-				</select>
+				{#if variant === 'standard'}
+					<select bind:value={preventionDeterminant}>
+						<option value="panic">extra cases panic threshold</option>
+						<option value="date">date of prevention</option>
+					</select>
+				{/if}
 			</div>
 			{#if preventionDeterminant === 'date'}
 				<input bind:value={yearsFromNowToStartPrevention} type="range" min={0} max={30} step={1} />
@@ -316,30 +321,34 @@
 			</Body2>
 			<input bind:value={delay} type="range" min={1} max={30} step={1} />
 		</label>
-		<label class="range-input">
-			<Body2>
-				{numberFormatter(baselineCancer)} baseline incidence:
-			</Body2>
-			<input
-				bind:value={baselineCancer}
-				type="range"
-				min={1000000}
-				max={100000000}
-				step={1000000}
-			/>
-		</label>
-		<label class="range-input">
-			<Body2>
-				{roundTo(baselineCancerSlope * 100, 2)}% baseline increase:
-			</Body2>
-			<input bind:value={baselineCancerSlope} type="range" min={0} max={0.02} step={0.0005} />
-		</label>
-		<label class="range-input">
-			<Body2>
-				{Math.round(baselineNoise * 100)}% baseline noise:
-			</Body2>
-			<input bind:value={baselineNoise} type="range" min={0} max={0.5} step={0.05} />
-		</label>
+		{#if variant === 'standard'}
+			<label class="range-input">
+				<Body2>
+					{numberFormatter(baselineCancer)} baseline incidence:
+				</Body2>
+				<input
+					bind:value={baselineCancer}
+					type="range"
+					min={1000000}
+					max={100000000}
+					step={1000000}
+				/>
+			</label>
+		{/if}
+		{#if variant === 'noisePlusSlope'}
+			<label class="range-input">
+				<Body2>
+					{roundTo(baselineCancerSlope * 100, 2)}% baseline increase:
+				</Body2>
+				<input bind:value={baselineCancerSlope} type="range" min={0} max={0.02} step={0.0005} />
+			</label>
+			<label class="range-input">
+				<Body2>
+					{Math.round(baselineNoise * 100)}% baseline noise:
+				</Body2>
+				<input bind:value={baselineNoise} type="range" min={0} max={0.5} step={0.05} />
+			</label>
+		{/if}
 	</div>
 	<div class="chart-container" bind:clientWidth={width}>
 		<svg {width} {height}>
