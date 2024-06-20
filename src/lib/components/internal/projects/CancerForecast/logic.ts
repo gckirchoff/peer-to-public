@@ -137,7 +137,6 @@ interface GetDistributionsArgs {
 	dateOfPrevention: Date;
 	finalDateToMeasureTo: Date;
 	baselineCancer: number;
-	baselineCancerSlope: number;
 	hazardRatio: number;
 	delay: number;
 	stdDeviation: number;
@@ -148,7 +147,6 @@ export const getDistributions = ({
 	dateOfPrevention,
 	finalDateToMeasureTo,
 	baselineCancer,
-	baselineCancerSlope,
 	hazardRatio,
 	delay,
 	stdDeviation,
