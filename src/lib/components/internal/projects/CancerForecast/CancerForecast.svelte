@@ -204,7 +204,7 @@
 
 	$: baseline = createBaselineCases({
 		start: beginningOfPandemic,
-		end: xScale.domain()[1],
+		end: endOfChart,
 		baselineCancerSlope,
 		baselineCancer,
 		baselineNoise,
@@ -212,11 +212,14 @@
 	$: noiseValues = createNoiseValues(baseline, baselineNoise);
 	$: baselineCancerCases = noisifyBaseline(baseline, noiseValues);
 
+	$: cutoffAtEndOfChart = ({ date }: PredictedCases) =>
+		date.getFullYear() < endOfChart.getFullYear();
+
 	$: plottedExtraCases = integrateBaselineCases(
 		renderedSummedCases,
 		baselineCancerCases,
 		baselineCancer,
-	);
+	).filter(cutoffAtEndOfChart);
 	$: plottedExtraCasesSoFarArea = integrateBaselineCases(
 		renderedSummedCases.slice(0, indexOfCancerSoFarEnd),
 		baselineCancerCases,
@@ -392,7 +395,7 @@
 									distribution.predictedCases,
 									baselineCancerCases,
 									baselineCancer,
-								),
+								).filter(cutoffAtEndOfChart),
 							)}
 							stroke-width="2"
 							fill="transparent"
