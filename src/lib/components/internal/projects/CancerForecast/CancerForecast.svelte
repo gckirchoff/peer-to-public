@@ -226,14 +226,14 @@
 		baselineCancer,
 	);
 
-	$: lastCancerCasesLevel = baselineCancerCases.at(-1);
+	$: lastCancerCasesLevel = baselineCancerCases[Math.floor(baselineCancerCases.length / 3)];
 	$: baselineLevelForYDomain = lastCancerCasesLevel ? lastCancerCasesLevel.cases : baselineCancer;
 	$: baselineDerivedYDomainMax = baselineLevelForYDomain * 3;
 
 	$: yDomain = (
 		internalMode === 'separate'
 			? [0, max(distributions[0].predictedCases, yAccessor)]
-			: [0, Math.max(baselineDerivedYDomainMax, max(summedDistributions, yAccessor) as number)]
+			: [0, Math.max(baselineDerivedYDomainMax, max(plottedExtraCases, yAccessor) as number)]
 	) as [number, number];
 
 	$: yScale = scaleLinear().domain(yDomain).range([innerChartHeight, 0]).nice();
