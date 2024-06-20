@@ -29,7 +29,7 @@
 	import { roundTo } from '../util/math';
 
 	export let audience: Audience = 'general';
-	export let variant: Variant = 'noisePlusSlope';
+	export let variant: Variant = 'standard';
 
 	const numberFormatter = (num: number): string => format('.2s')(num).replace('G', 'B');
 	const extraCasesGradientId = 'extra-cases-gradient';
