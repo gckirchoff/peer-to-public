@@ -9,6 +9,10 @@ export const links: Link[] = [
 		href: 'delayed-onset',
 	},
 	{
+		title: 'Signal VS Noise',
+		href: 'signal-vs-noise',
+	},
+	{
 		title: 'Short-Term Risk Visualizer',
 		href: 'gambling-with-covid',
 	},
