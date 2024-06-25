@@ -103,6 +103,48 @@
 	</svg>
 </div>
 
+<pre>
+	{`function forecastPopulationWithDisability({
+		birthRate,
+		deathRate,
+		disabledDeathRate,
+		initialPopulation,
+		initialDisabledPopulation,
+		infectionRate,
+		disabilityRate,
+		year,
+	}: ForecastPopulationWithDisabilityArgs): PopulationStatus {
+		let nonDisabledPopulation = initialPopulation - initialDisabledPopulation;
+		let disabledPopulation = initialDisabledPopulation;
+	
+		const annualBirthRate = birthRate / 100;
+		const annualDeathRate = deathRate / 100;
+		const annualDisabledDeathRate = disabledDeathRate / 100;
+		const annualInfectionRate = infectionRate / 100;
+		const annualDisabilityRate = disabilityRate / 100;
+	
+		for (let i = 0; i < year; i++) {
+			// Births and deaths in non-disabled population
+			const births = nonDisabledPopulation * annualBirthRate + disabledPopulation * annualBirthRate;
+			const nonDisabledDeaths = nonDisabledPopulation * annualDeathRate;
+	
+			// New infections and resulting disabilities
+			const newInfections = nonDisabledPopulation * annualInfectionRate;
+			const newDisabilities = Math.min(newInfections * annualDisabilityRate, nonDisabledPopulation);
+	
+			// Deaths in disabled population
+			const disabledDeaths = disabledPopulation * annualDisabledDeathRate;
+	
+			// Update populations
+			nonDisabledPopulation += births - nonDisabledDeaths - newDisabilities;
+			disabledPopulation += newDisabilities - disabledDeaths;
+		}
+	
+		const totalPopulation = nonDisabledPopulation + disabledPopulation;
+		return { totalPopulation, disabledPopulation };
+	}`}
+</pre>
+
 <style lang="scss">
 	@import '/src/styles/mixins.scss';
 
