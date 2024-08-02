@@ -3,11 +3,10 @@
 	import LightModeToggle from '../LightModeToggle/LightModeToggle.svelte';
 	import { H4 } from '../typography';
 	import NavItem from '../NavItem/NavItem.svelte';
-	import { headerHeight } from '../constants';
 	import Logo from '../icons/Logo/Logo.svelte';
 </script>
 
-<header style="--height: {headerHeight}">
+<header>
 	<nav>
 		<a href="/" class="site-name">
 			<div class="logo">
@@ -32,7 +31,6 @@
 	@import '/src/styles/mixins.scss';
 
 	header {
-		min-height: var(--height);
 		padding: 0 var(--spacing-16);
 		background-color: var(--clr-surface-500);
 
