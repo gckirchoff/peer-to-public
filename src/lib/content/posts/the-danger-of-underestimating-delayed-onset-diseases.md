@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "wave-unsplash-matt-paul-catalano.jpg"
 date: 'Wed Jun 12 2024 06:35:07 GMT-0400 (Eastern Daylight Time)'
 published: true
-updated: 'Wed Jun 12 2024 22:52:26 GMT-0400 (Eastern Daylight Time)'
+updated: 'Sun Aug 11 2024 12:23:44 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -14,6 +14,8 @@ updated: 'Wed Jun 12 2024 22:52:26 GMT-0400 (Eastern Daylight Time)'
   import CancerForecast from '$lib/components/internal/projects/CancerForecast/CancerForecast.svelte';
 
 </script>
+
+<CancerForecast />
 
 Viruses, parasites, and bacteria are all capable of causing acute illnesses. This is nothing new from a scientific or personal standpoint. We are all familiar with colds and food poisoning that feel awful for a few days then get better. However, how we feel during the acute phase of a disease doesn't necessarily reflect its potential long-term impact. Many diseases feel mild or are asymptomatic at first, but can take decades to progress into something much worse.
 
@@ -27,15 +29,13 @@ SARS-CoV-2 began spreading across the globe at the beginning of 2020. 4 years fe
 
 Heart disease, especially for [younger populations](https://www.cedars-sinai.org/newsroom/today-young-people-are-more-likely-to-die-of-heart-attacks-post-covid-study-finds-but-why/#:~:text=09%3A00%20AM-,TODAY%3A%20Young%20People%20Are%20More%20Likely%20to%20Die%20of%20Heart,of%20the%20Smidt%20Heart%20Institute.), has been on the rise since the beginning of the pandemic. The mechanisms behind this are [well established](https://www.nih.gov/news-events/nih-research-matters/how-sars-cov-2-contributes-heart-attacks-strokes#:~:text=COVID%2D19%20is%20known%20to,contributes%20to%20this%20increased%20risk.) and are known to occur after [mild](https://www.mdpi.com/2077-0383/12/6/2123?fbclid=IwAR2iJDGOH-QchYjM0j-qFIbyIt_ONASMl1Txu7I4w8Pgq5DX22VrrNnGqK0), and even [asymptomatic](https://publichealth.jhu.edu/2022/covid-and-the-heart-it-spares-no-one#:~:text=People%20who%20got%20COVID%2D19%20and%20were%20asymptomatic%2C%20or%20got,different%20things%20could%20be%20happening.), cases.
 
-The brain is another organ showing [numerous](https://neurosciencenews.com/covid-neuron-fusion-23421/?fbclid=IwAR06AuIbFUR_E0lYQKH3vgRVOV5-5Te-DLk1uctS3Bqw06UzkZD4pTWTlyY) [mechanisms](https://www.nature.com/articles/s41380-024-02554-0) of adverse effects from [mild](https://www.nature.com/articles/s41598-024-52005-7) and [asymptomatic](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9863678/) SARS-CoV-2 infection that can occur after acute symptom resolution. It can be difficult to find neurological sequelae because it is easy for patients and physicians to misinterpret symptoms as mental health issues. Consider the [case study](https://www.frontiersin.org/articles/10.3389/fped.2023.1165072/full?fbclid=IwAR37S-PDl4CGlEdHT8xfiBASUZ0mnfNjV2rWHDVTBbG4eTBKXR9QlpI8qKg) of two sisters who both reported severe neurocognitive problems after infection with SARS-CoV-2. Their symptoms were initially classified as "psychologic pandemic distress", but they were later found to have profound brain hypometabolism.
+The brain is another organ showing [numerous](https://neurosciencenews.com/covid-neuron-fusion-23421/?fbclid=IwAR06AuIbFUR_E0lYQKH3vgRVOV5-5Te-DLk1uctS3Bqw06UzkZD4pTWTlyY) [mechanisms](https://www.nature.com/articles/s41380-024-02554-0) of adverse effects from [mild](https://www.nature.com/articles/s41598-024-52005-7) and [asymptomatic](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9863678/) SARS-CoV-2 infection. One such example is the development of Lewy bodies in [8 out of 8](https://www.biorxiv.org/content/10.1101/2021.02.23.432474v2.full) infected rhesus macaques. Lewy Body Dementia is a well established condition that takes years to develop. It can be difficult to find neurological sequelae because it is easy for patients and physicians to misinterpret symptoms as mental health issues. Consider the [case study](https://www.frontiersin.org/articles/10.3389/fped.2023.1165072/full?fbclid=IwAR37S-PDl4CGlEdHT8xfiBASUZ0mnfNjV2rWHDVTBbG4eTBKXR9QlpI8qKg) of two sisters who both reported severe neurocognitive problems after infection with SARS-CoV-2. Their symptoms were initially classified as "psychologic pandemic distress", but they were later found to have profound brain hypometabolism.
 
 A third long-term concern is cancer. SARS-CoV-2 can affect [many mechanisms](https://www.sciencedirect.com/science/article/pii/S0300908423001360?fbclid=IwAR2SrX8vKYxZf0_-Ia83L3TEu_1EIbVjJLpTv4Sahn93U5PGmX6i6TCKlbc#sec4) crucial to cancer onset, including cell cycle regulation and inflammation/proliferation signaling pathways. These mechanistic studies do not claim that cancer *will* happen, but they highlight the potential risk. How do we intend to find out?
 
 In conclusion, waiting for observational data to confirm the long-term impacts of COVID-19 is too dangerous. Once we have visible data proving that COVID-19 leads to delayed-onset diseases, it may be too late for many. We must act quickly to prevent transmission and mitigate the potential fallout.
 
 The chart below demonstrates various strategies to prevent the transmission of SARS-CoV-2 and the potential consequences of delayed action.
-
-<CancerForecast />
 
 ## Methodology
 

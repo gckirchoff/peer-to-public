@@ -5,6 +5,10 @@ interface Link {
 
 export const links: Link[] = [
 	{
+		title: 'Long Covid Forecaster',
+		href: 'long-covid-forecast',
+	},
+	{
 		title: 'Delayed Onset Disease Forecaster',
 		href: 'delayed-onset',
 	},
