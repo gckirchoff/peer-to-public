@@ -9,7 +9,7 @@
 	import Button from '$lib/components/internal/Button/Button.svelte';
 	import type { PostEditorBody } from './constants';
 	import Switch from '$lib/components/internal/Switch.svelte';
-	import ErrorText from '$lib/components/internal/ErrorText/ErrorText.svelte';
+	import Snackbar from '$lib/components/internal/Snackbar/Snackbar.svelte';
 	import type { PostEditorMetaData } from '$lib/types/post';
 	import Body1 from '$lib/components/internal/typography/Body1.svelte';
 	import ConfirmationModal from '$lib/components/internal/ConfirmationModal/ConfirmationModal.svelte';
@@ -46,6 +46,7 @@
 
 	let openUsablesMenu = false;
 	let errorText = '';
+	let savedToLocalStorageText = '';
 
 	const postContentLocalStorage = `markdown${postMetaData.slug ? `-${postMetaData.slug}` : ''}`;
 	const usablesLocalStorage = `usables${postMetaData.slug ? `-${postMetaData.slug}` : ''}`;
@@ -75,6 +76,7 @@
 		clearTimeout(localStorageTimer);
 		localStorageTimer = setTimeout(() => {
 			window.localStorage.setItem(postContentLocalStorage, mdValue);
+			savedToLocalStorageText = 'Changes Saved';
 		}, 2000);
 	};
 
@@ -83,23 +85,19 @@
 		try {
 			if (!formTitle) {
 				errorText = 'Must have a title';
-				setTimeout(() => (errorText = ''), 5000);
 				return;
 			}
 			if (!formDescription) {
 				errorText = 'Must have a description';
-				setTimeout(() => (errorText = ''), 5000);
 				return;
 			}
 			if (!formCategories.length) {
 				errorText = 'Must have at least one category';
-				setTimeout(() => (errorText = ''), 5000);
 				return;
 			}
 
 			if (!formAuthors.length) {
 				errorText = 'Must have at least one author';
-				setTimeout(() => (errorText = ''), 5000);
 				return;
 			}
 
@@ -137,7 +135,6 @@
 			errorText = 'Could not create post';
 			console.warn(err);
 		}
-		setTimeout(() => (errorText = ''), 5000);
 	};
 
 	const addUsable = (usable: Usable): void => {
@@ -211,7 +208,8 @@
 	handleConfirm={confirmResetChanges}
 />
 
-<ErrorText bind:value={errorText} />
+<Snackbar bind:value={errorText} variant="error" />
+<Snackbar bind:value={savedToLocalStorageText} variant="success" duration={1000} />
 
 <style lang="scss">
 	.post-meta-data-container {
