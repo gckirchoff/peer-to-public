@@ -12,7 +12,7 @@
 	import ErrorText from '$lib/components/internal/ErrorText/ErrorText.svelte';
 	import type { PostEditorMetaData } from '$lib/types/post';
 	import Body1 from '$lib/components/internal/typography/Body1.svelte';
-	import ConfirmationModel from '$lib/components/internal/ConfirmationModel/ConfirmationModel.svelte';
+	import ConfirmationModal from '$lib/components/internal/ConfirmationModal/ConfirmationModal.svelte';
 
 	export let handlePostAction: (body: FormData) => Promise<boolean>;
 	export let allCategories: string[];
@@ -55,14 +55,14 @@
 		window.localStorage.removeItem(usablesLocalStorage);
 	};
 
-	let discardChangesModelOpen = false;
+	let discardChangesModalOpen = false;
 
 	const handleResetChangesButtonClick = () => {
-		discardChangesModelOpen = true;
+		discardChangesModalOpen = true;
 	};
 
-	const handleCloseDiscardChangesModel = () => {
-		discardChangesModelOpen = false;
+	const handleCloseDiscardChangesModal = () => {
+		discardChangesModalOpen = false;
 	};
 
 	const confirmResetChanges = () => {
@@ -204,10 +204,10 @@
 	handleSubmit={addUsable}
 />
 
-<ConfirmationModel
+<ConfirmationModal
 	message="Are you sure you want to discard changes?"
-	open={discardChangesModelOpen}
-	handleClose={handleCloseDiscardChangesModel}
+	open={discardChangesModalOpen}
+	handleClose={handleCloseDiscardChangesModal}
 	handleConfirm={confirmResetChanges}
 />
 
