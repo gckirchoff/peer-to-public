@@ -2,10 +2,9 @@
 	import { navItems, siteConfig } from '$lib/config';
 	import NavItem from '../NavItem/NavItem.svelte';
 	import { Body2 } from '../typography';
-	import { footerHeight } from '../constants';
 </script>
 
-<footer style="--height: {footerHeight}">
+<footer>
 	<nav>
 		<ul>
 			{#each navItems as { route, title } (route)}
@@ -21,11 +20,11 @@
 
 <style lang="scss">
 	footer {
-		min-height: var(--height);
 		padding: var(--spacing-16) var(--spacing-24);
 		background-color: var(--clr-surface-100);
 		display: flex;
 		justify-content: space-between;
+		column-gap: var(--spacing-8);
 
 		--flex-gap: var(--spacing-24);
 		--row-gap: var(--spacing-8);
