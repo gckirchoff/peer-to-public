@@ -12,6 +12,7 @@
 	import ErrorText from '$lib/components/internal/ErrorText/ErrorText.svelte';
 	import type { PostEditorMetaData } from '$lib/types/post';
 	import Body1 from '$lib/components/internal/typography/Body1.svelte';
+	import ConfirmationModal from '$lib/components/internal/ConfirmationModal/ConfirmationModal.svelte';
 
 	export let handlePostAction: (body: FormData) => Promise<boolean>;
 	export let allCategories: string[];
@@ -49,7 +50,27 @@
 	const postContentLocalStorage = `markdown${postMetaData.slug ? `-${postMetaData.slug}` : ''}`;
 	const usablesLocalStorage = `usables${postMetaData.slug ? `-${postMetaData.slug}` : ''}`;
 
-	let localStorageTimer: NodeJS.Timeout;
+	const clearLocalStorage = () => {
+		window.localStorage.removeItem(postContentLocalStorage);
+		window.localStorage.removeItem(usablesLocalStorage);
+	};
+
+	let discardChangesModalOpen = false;
+
+	const handleResetChangesButtonClick = () => {
+		discardChangesModalOpen = true;
+	};
+
+	const handleCloseDiscardChangesModal = () => {
+		discardChangesModalOpen = false;
+	};
+
+	const confirmResetChanges = () => {
+		clearLocalStorage();
+		formMdValue = mdValue;
+	};
+
+	let localStorageTimer: number;
 	const debouncedSetLocalStorage = (mdValue: string): void => {
 		clearTimeout(localStorageTimer);
 		localStorageTimer = setTimeout(() => {
@@ -111,8 +132,7 @@
 				errorText = 'Could not create post';
 				return;
 			}
-			window.localStorage.removeItem(postContentLocalStorage);
-			window.localStorage.removeItem(usablesLocalStorage);
+			clearLocalStorage();
 		} catch (err) {
 			errorText = 'Could not create post';
 			console.warn(err);
@@ -169,9 +189,10 @@
 			{/each}
 		</MultiSelect>
 	</div>
-	<Button on:click={() => (openUsablesMenu = true)} style="align-self: flex-end;">
-		Add Component
-	</Button>
+	<div class="buttons-container">
+		<Button on:click={handleResetChangesButtonClick}>Reset Changes</Button>
+		<Button on:click={() => (openUsablesMenu = true)}>Add Component</Button>
+	</div>
 	<MarkdownEditor bind:value={formMdValue} />
 
 	<Button on:click={handleSubmit} style="align-self: flex-end;">Save</Button>
@@ -183,7 +204,14 @@
 	handleSubmit={addUsable}
 />
 
-<ErrorText bind:value={errorText}/>
+<ConfirmationModal
+	message="Are you sure you want to discard changes?"
+	open={discardChangesModalOpen}
+	handleClose={handleCloseDiscardChangesModal}
+	handleConfirm={confirmResetChanges}
+/>
+
+<ErrorText bind:value={errorText} />
 
 <style lang="scss">
 	.post-meta-data-container {
@@ -196,6 +224,11 @@
 			align-self: flex-start;
 			width: 50%;
 		}
-	}
 
+		.buttons-container {
+			display: flex;
+			justify-content: flex-end;
+			gap: var(--spacing-8);
+		}
+	}
 </style>
