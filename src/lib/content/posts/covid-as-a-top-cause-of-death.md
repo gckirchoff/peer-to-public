@@ -4,9 +4,9 @@ description: "COVID-19 was the third leading cause of death in 2020 and the four
 categories: [ "covid-19" ]
 authors: [ "Gregory Kirchoff", "Emma Schaale" ]
 coverImage: "unsplash_an_vision_apple.jpg"
-date: '2023-12-30'
-published: false
-updated: 'Tue May 28 2024 16:03:59 GMT-0400 (Eastern Daylight Time)'
+date: 'Wed Aug 14 2024 19:56:44 GMT-0400 (Eastern Daylight Time)'
+published: true
+
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';

@@ -4,9 +4,9 @@ description: "It's been said the chances of getting Long Covid is a 'roll of the
 categories: [ "covid-19", "statistics" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "coin-stack-ibrahim-rifath-unsplash.jpg"
-date: '2023-12-21'
-published: false
-updated: 'Tue May 28 2024 16:03:34 GMT-0400 (Eastern Daylight Time)'
+date: 'Wed Aug 14 2024 19:57:10 GMT-0400 (Eastern Daylight Time)'
+published: true
+
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
