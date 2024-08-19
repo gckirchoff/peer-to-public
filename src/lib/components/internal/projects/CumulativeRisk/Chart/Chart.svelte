@@ -55,10 +55,7 @@
 		<g style="transform: translate({margin.left}px, {margin.top}px)">
 			<AxisX {xScale} {innerChartWidth} {innerChartHeight} />
 			<AxisY {yScale} {innerChartWidth} />
-			<Line data={statsCanadaData} {xAccessorScaled} {yAccessorScaled} />
-			{#each [0, 15.1, 26.2333, 36.76666] as d, i}
-				<circle class="filled-circle" cx={xScale(i)} cy={yScale(d)} fill="#8990d0" r={4} />
-			{/each}
+			<!-- <Line data={statsCanadaData} {xAccessorScaled} {yAccessorScaled} /> -->
 			<Line data={cumulativeRisks} {xAccessorScaled} {yAccessorScaled} style="stroke: #ED1C24;" />
 			{#each cumulativeRisks as d}
 				<circle
@@ -73,6 +70,8 @@
 					on:mouseleave={() => updateHoveredData(null)}
 					role="tooltip"
 				/>
+			{/each}
+			{#each cumulativeRisks as d}
 				<circle
 					class="filled-circle"
 					cx={xAccessorScaled(d)}
@@ -81,6 +80,9 @@
 					r={4}
 				/>
 			{/each}
+			{#each [0, 14.6, 25.4, 37.9] as d, i}
+				<circle class="filled-circle" cx={xScale(i)} cy={yScale(d)} fill="#7a40f7" r={6} />
+			{/each}
 			<g
 				style="transform: translate({width - 232}px, {isSmallScreen && longCovidChance > 0.21
 					? height - 145
@@ -88,13 +90,13 @@
 			>
 				<text class="legend-header">Stats Canada Data</text>
 				<g style="transform: translate(0, 20px);">
-					<circle cx={-1} fill="#8990d0" r={4} />
+					<circle cx={-1} fill="#7a40f7" r={4} />
 					<text dx={7} dominant-baseline="middle" class="legend-text"> Observed Risk </text>
 				</g>
 				<g style="transform: translate(0, 40px)">
-					<line x1={-6} x2={4} stroke="#8990d0" stroke-width="2" />
+					<line x1={-6} x2={4} stroke="#ED1C24" stroke-width="2" />
 					<text dx={7} dominant-baseline="middle" class="legend-text">
-						predicted risk ({roundTo(statsCanadaPredictedRisk * 100, 0)}%)
+						predicted risk ({roundTo(longCovidChance * 100, 2)}%)
 					</text>
 				</g>
 			</g>
@@ -138,6 +140,6 @@
 
 	.legend-text {
 		font-size: 16px;
-		fill:var(--clr-text-on-surface-1000);
+		fill: var(--clr-text-on-surface-1000);
 	}
 </style>
