@@ -195,7 +195,7 @@
 
 <label class="range-input">
 	<Body2><Highlight>{inputLongCovidPercent}%</Highlight> Long Covid risk per infection:</Body2>
-	<input bind:value={inputLongCovidPercent} type="range" min={0} max={100} step={1} />
+	<input bind:value={inputLongCovidPercent} type="range" min={0} max={100} step={0.1} />
 </label>
 
 <Chart {longCovidChance} />
