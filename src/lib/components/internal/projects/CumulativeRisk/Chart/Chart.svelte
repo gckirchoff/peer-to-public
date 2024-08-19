@@ -81,7 +81,7 @@
 				/>
 			{/each}
 			{#each [0, 14.6, 25.4, 37.9] as d, i}
-				<circle class="filled-circle" cx={xScale(i)} cy={yScale(d)} fill="#7a40f7" r={6} />
+				<circle class="filled-circle" cx={xScale(i)} cy={yScale(d)} fill="#7a40f7" r={5} />
 			{/each}
 			<g
 				style="transform: translate({width - 232}px, {isSmallScreen && longCovidChance > 0.21
