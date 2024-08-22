@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "coin-stack-ibrahim-rifath-unsplash.jpg"
 date: 'Wed Aug 14 2024 19:57:10 GMT-0400 (Eastern Daylight Time)'
 published: true
-
+updated: 'Thu Aug 22 2024 15:57:08 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -39,7 +39,7 @@ I would rather run with the bulls.
 
 ## Methodology
 
-The infection fatality rate (IFR) for Covid-19 comes from [this study](https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)02867-1/fulltext#seccestitle140) published by The Lancet.The IFRs from this study were derived before vaccine availability. To account for this and the fact that [most Americans](https://www.usnews.com/news/health-news/articles/2023-07-05/more-than-three-quarters-of-americans-16-and-older-have-been-infected-with-covid-cdc#:~:text=Health%20News-,More%20Than%20Three%2DQuarters%20of%20Americans%2016%20and%20Older,Been%20Infected%20With%20COVID%3A%20CDC&text=July%205%2C%202023%2C%20at%207%3A13%20a.m.&text=WEDNESDAY%2C%20July%205%2C%202023%20(,once%2C%20new%20government%20data%20shows)) have already been infected with Covid-19, All IFRs were decreased five-fold in accordance with [this pre-print](https://www.medrxiv.org/content/10.1101/2023.02.26.23286471v2.full.pdf) to account for the fact that people experiencing a Covid-19 infection now most likely have some prior immunity against death due to prior vaccination, infection, or both.
+The infection fatality rate (IFR) for Covid-19 was sourced from [this study](https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)02867-1/fulltext#seccestitle140) published by The Lancet. Since these IFRs were derived before vaccines became widely available, and considering that most Americans have already been infected with COVID-19, we adjusted the IFRs by reducing them five-fold. This adjustment is based on [this pre-print](https://www.medrxiv.org/content/10.1101/2023.02.26.23286471v2.full.pdf) that accounts for the likely prior immunity most people now have due to vaccination, previous infection, or both.
 
 The initial symptomatic Long Covid rate was derived from [this study](https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00015-eng.htm) by Statistics Canada.
 
