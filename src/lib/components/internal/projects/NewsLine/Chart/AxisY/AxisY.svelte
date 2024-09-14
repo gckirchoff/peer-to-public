@@ -1,15 +1,31 @@
 <script lang="ts">
+	import { flip } from 'svelte/animate';
 	import type { ScaleLinear } from 'd3';
 
 	export let yScale: ScaleLinear<number, number, never>;
 	export let width: number;
+	export let height: number;
+	export let label = '';
 
-	let yTicks = yScale.ticks(6);
+	$: yTicks = yScale.ticks(6);
 </script>
 
 <g class="axis y">
-	{#each yTicks as tick, index}
-		<g class="tick" transform="translate(0, {yScale(tick)})">
+	{#if label}
+		<text
+			class="label"
+			style="transform: translate(-60px, {height / 2}px) rotate(-90deg)"
+			text-anchor="middle"
+		>
+			{label}
+		</text>
+	{/if}
+	{#each yTicks as tick, index (tick)}
+		<g
+			class="tick"
+			style="transform: translate(0px, {yScale(tick)}px);"
+			animate:flip={{ duration: 200 }}
+		>
 			<line x1={0} y1={0} y2={0} x2={width} stroke="#b1b1b1" />
 			<text x={-5} y={0} text-anchor="end" dominant-baseline="middle">
 				{tick}
@@ -17,3 +33,13 @@
 		</g>
 	{/each}
 </g>
+
+<style lang="scss">
+	.label {
+		font-size: 16px;
+	}
+
+	.tick {
+		transition: all 200ms ease;
+	}
+</style>
