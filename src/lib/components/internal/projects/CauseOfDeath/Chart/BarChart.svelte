@@ -29,7 +29,7 @@
 		top: 20,
 		right: 15,
 		bottom: 40,
-		left: windowWidth < smallScreen ? 0 : 370,
+		left: windowWidth < smallScreen ? 11 : 370,
 	};
 
 	$: innerWidth = width - margin.left - margin.right;
