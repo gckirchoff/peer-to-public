@@ -67,7 +67,7 @@
 
 <svelte:window bind:innerWidth={windowWidth} />
 
-<div bind:clientWidth={width} class="chart-container">
+<div bind:clientWidth={width} class="chart-container apples-to-apples">
 	<svg {width} {height} on:mouseleave={() => (hoveredData = null)} role="application">
 		<g class="inner-chart" transform="translate({margin.left}, {margin.top})">
 			<AxisX width={innerWidth} height={innerHeight} {xScale} />
@@ -86,7 +86,7 @@
 </div>
 
 <style lang="scss">
-	:global(.tick text, .axis-title) {
+	:global(.apples-to-apples .tick text, .axis-title) {
 		font-weight: 400;
 		font-size: 2rem;
 		fill: var(--clr-txt-500);

@@ -40,7 +40,7 @@
 			dx={10}
 			dy={data.height / 2 + 5}
 			dominant-baseline="middle"
-			fill='var(--clr-text-on-surface-500)'
+			style="fill: var(--clr-txt-500);"
 		>
 			{data.data.value.toLocaleString()} deaths
 		</text>

@@ -46,7 +46,7 @@
 </script>
 
 <div
-	class="chart-container"
+	class="chart-container covid-coins"
 	bind:clientWidth={width}
 	on:mouseleave={() => (hoveredBar = null)}
 	role="application"
@@ -91,7 +91,7 @@
 		background-color: white;
 	}
 
-	:global(.tick text) {
+	:global(.covid-coins .tick text) {
 		font-weight: 400;
 		font-size: 15px;
 		fill: #747474;
