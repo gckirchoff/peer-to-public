@@ -17,7 +17,7 @@
 	on:focus={() => updateHoveredData(data)}
 	role="tooltip"
 	height={data.height}
-	width={data.width}
+	width={Math.max(data.width, 0)}
 	x={data.x}
 	y={data.y}
 	fill={data.color}
