@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Emma Schaale" ]
 coverImage: "unsplash_an_vision_apple.jpg"
 date: '2023-12-30'
 published: false
-updated: 'Sat Sep 14 2024 10:48:42 GMT-0400 (Eastern Daylight Time)'
+updated: 'Sat Sep 14 2024 14:28:41 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -27,9 +27,9 @@ We need an apples-to-apples comparison between causes of death to properly frame
 
 As we can see from the fully laid out view, COVID-19 is relatively far higher in terms of the proportion of deaths it caused. It's important to note that we're still looking at the exact same absolute number of deaths from COVID-19. This just feels worse due to the different, and more accurate, framing of its impact.
 
-Something more to keep in mind is that prior COVID-19 infection is a major risk factor for subsequently dying of Coronary Heart Disease. This means that there is potentially a substantial proportion of those who have died from heart disease that wouldn't have had they not been infected with SARS-CoV-2. These deaths are listed as coronary heart disease, but in some sense may be better suited as Covid deaths due to the causal relationship.
+Something more to keep in mind is that prior COVID-19 infection is a major risk factor for [developing heart problems](https://my.clevelandclinic.org/health/articles/heart-problems-after-covid). This means that there is potentially a substantial proportion of those who have died from heart disease that wouldn't have had they not been infected with SARS-CoV-2. These deaths are listed as Coronary Heart Disease, but in some sense may be better suited as Covid deaths due to the causal relationship.
 
-Just as marketers exploit our reference dependence to make us believe we're getting a good deal while they profit, the deliberate framing of causes of death can lead us to feel safe continuing to work and consume, ultimately keeping stock futures high.
+Just as marketers exploit our tendency for reference dependence to make us believe we're getting a good deal while they profit, the deliberate framing of causes of death can mislead us into thinking that COVID-19 is less deadly than it truly is.
 
 ## Methodology
 

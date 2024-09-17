@@ -14,8 +14,8 @@
 		getMaxDeathForEachCategory,
 		getYValuesBySubType,
 	} from '../logic';
-	import type { BarData, MortalityData } from '../constants';
-	import { smallScreen, stages } from '../constants';
+	import type { BarData, Label, MortalityData } from '../constants';
+	import { smallScreenWidth, stages } from '../constants';
 	import InfoBox from '../InfoBox/InfoBox.svelte';
 
 	export let mortalityData: MortalityData[] = [];
@@ -25,11 +25,13 @@
 	let height = 600;
 	let windowWidth = 1000;
 
+	$: smallScreen = windowWidth < smallScreenWidth;
+
 	$: margin = {
 		top: 20,
 		right: 15,
 		bottom: 40,
-		left: windowWidth < smallScreen ? 11 : 370,
+		left: smallScreen ? 11 : 408,
 	};
 
 	$: innerWidth = width - margin.left - margin.right;
@@ -51,7 +53,13 @@
 		.domain([...getDomainValuesForColorScale(mortalityData)])
 		.range(schemeCategory10);
 
-	$: bars = getBarData(mortalityData, xScale, yScale, colorScale, stage);
+	let bars: BarData[] = [];
+	let labels: Label[] = [];
+	$: barsAndLabels = getBarData(mortalityData, xScale, yScale, colorScale, stage);
+	$: {
+		bars = barsAndLabels.bars;
+		labels = barsAndLabels.labels;
+	}
 
 	let hoveredData: BarData | null = null;
 
@@ -60,7 +68,7 @@
 	};
 
 	$: {
-		stage; // if stage changes
+		stage; // run block if stage changes
 		hoveredData = null;
 	}
 </script>
@@ -75,6 +83,20 @@
 			{#each bars as data (data.data.value)}
 				<Bar {data} {stage} {hoveredData} {updateHoveredData} {innerHeight} />
 			{/each}
+			{#if smallScreen && stage === 'initial'}
+				{#each labels as label (label.text)}
+					<text
+						style="fill: {label.textAnchor === 'start' ? 'black' : 'whitesmoke'};"
+						x={label.x}
+						y={label.y}
+						dx={(label.textAnchor === 'start' ? 1 : -1) * 8}
+						text-anchor={label.textAnchor}
+						dominant-baseline="middle"
+					>
+						{label.text}
+					</text>
+				{/each}
+			{/if}
 		</g>
 	</svg>
 

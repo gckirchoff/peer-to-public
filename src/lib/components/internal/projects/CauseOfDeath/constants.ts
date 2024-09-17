@@ -8,6 +8,13 @@ export interface BarData {
 	name: string;
 }
 
+export interface Label {
+	x: number;
+	y: number;
+	text: string;
+	textAnchor: 'start' | 'end';
+}
+
 type Modify<T, K> = Omit<T, keyof K> & K;
 
 export type UnprocessedMortalityData = Modify<
@@ -30,4 +37,4 @@ export type Stage = 'initial' | 'differentiated' | 'flattened';
 
 export const stages: Stage[] = ['initial', 'differentiated', 'flattened'];
 
-export const smallScreen = 1150;
+export const smallScreenWidth = 1150;
