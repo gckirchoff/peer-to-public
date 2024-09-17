@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "coin-stack-ibrahim-rifath-unsplash.jpg"
 date: 'Wed Aug 14 2024 19:57:10 GMT-0400 (Eastern Daylight Time)'
 published: true
-updated: 'Thu Aug 22 2024 15:57:08 GMT-0400 (Eastern Daylight Time)'
+updated: 'Tue Sep 17 2024 17:07:01 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -14,6 +14,14 @@ updated: 'Thu Aug 22 2024 15:57:08 GMT-0400 (Eastern Daylight Time)'
   import CovidCoins from '$lib/components/internal/projects/CovidCoins/CovidCoins.svelte';
   
 </script>
+
+
+
+The chart below visualizes risk by illustrating the probability of consecutive coin tosses landing heads up. Each individual coin toss has a 50% chance of landing heads, but with each additional consecutive heads, the probability decreases sharply. For example, the probability of getting heads twice in a row is 25%, while three consecutive heads drops to just 12.5%. The more consecutive heads you're aiming for, the lower the likelihood.
+
+Take skydiving as an example: there's a 0.023% chance of injury. Translating this into coin tosses, it's like flipping 12 coins and having all of them land heads up—making skydiving the least risky activity in the chart. As activities become riskier, the equivalent number of consecutive heads decreases.
+
+To make the concept more tangible, try it yourself: simulate the risk of an activity by flipping its stack of coins. How many times can you do this to get lucky—or unlucky?
 
 <CovidCoins mode="instance" />
 
