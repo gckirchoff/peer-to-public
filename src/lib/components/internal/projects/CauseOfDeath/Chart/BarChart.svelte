@@ -103,7 +103,7 @@
 	<InfoBox {currentStep} />
 
 	{#if hoveredData && stage === 'differentiated'}
-		<Tooltip data={hoveredData} {width} />
+		<Tooltip data={hoveredData} {width} {margin} />
 	{/if}
 </div>
 

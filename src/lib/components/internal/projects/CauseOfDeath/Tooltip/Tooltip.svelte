@@ -1,16 +1,17 @@
 <script lang="ts">
-	import type { BarData } from '../constants';
+	import type { BarData, Margin } from '../constants';
 	import { fly } from 'svelte/transition';
 
 	export let data: BarData;
 	export let width: number;
+	export let margin: Margin;
 
 	const xNudge = data.width * 0.5;
 	const yNudge = data.height * 1.5;
 
 	let tooltipWidth: number;
 
-	$: x = data.x;
+	$: x = data.x + margin.left;
 	$: y = data.y;
 	$: xPosition = x + tooltipWidth > width ? x - tooltipWidth - xNudge : x + xNudge;
 	$: yPosition = y + yNudge;
@@ -52,7 +53,7 @@
 		font-weight: 500;
 		text-transform: uppercase;
 	}
-	
+
 	span {
 		font-size: 1rem;
 		background: var(--clr-surface-600);

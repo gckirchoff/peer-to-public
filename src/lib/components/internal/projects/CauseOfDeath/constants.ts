@@ -33,6 +33,13 @@ export interface MortalityData {
 	value: number;
 }
 
+export interface Margin {
+	top: number;
+	left: number;
+	right: number;
+	bottom: number;
+}
+
 export type Stage = 'initial' | 'differentiated' | 'flattened';
 
 export const stages: Stage[] = ['initial', 'differentiated', 'flattened'];
