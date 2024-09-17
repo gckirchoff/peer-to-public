@@ -17,7 +17,7 @@
 	on:focus={() => updateHoveredData(data)}
 	role="tooltip"
 	height={data.height}
-	width={data.width}
+	width={Math.max(data.width, 0)}
 	x={data.x}
 	y={data.y}
 	fill={data.color}
@@ -40,7 +40,7 @@
 			dx={10}
 			dy={data.height / 2 + 5}
 			dominant-baseline="middle"
-			fill='var(--clr-text-on-surface-500)'
+			style="fill: var(--clr-txt-500);"
 		>
 			{data.data.value.toLocaleString()} deaths
 		</text>

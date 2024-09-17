@@ -64,7 +64,7 @@
 	$: flooredInnerWidth = Math.max(innerWidth, 0);
 </script>
 
-<div class="viz">
+<div class="viz news-line">
 	<div class="chart-container" bind:clientWidth={width} bind:clientHeight={height}>
 		<svg {width} {height}>
 			<g style="transform: translate({margin.left}px, {margin.top}px);">
@@ -115,7 +115,7 @@
 
 <style lang="scss">
 	@import '/src/styles/mixins.scss';
-	:global(text) {
+	:global(.news-line .tick text) {
 		font-weight: 400;
 		font-size: 15px;
 		fill: #565656;
