@@ -53,7 +53,7 @@
 	$: flooredInnerWidth = Math.max(innerWidth, 0);
 </script>
 
-<div class="viz">
+<div class="viz news-line">
 	<Articles {stoppingPoint} />
 	<Description description={stoppingPoint.description} />
 	<div class="chart-container" bind:clientWidth={width} bind:clientHeight={height}>
@@ -80,7 +80,7 @@
 
 <style lang="scss">
 	@import '/src/styles/mixins.scss';
-	:global(.tick text) {
+	:global(.news-line .tick text) {
 		font-weight: 400;
 		font-size: 15px;
 		fill: #565656;

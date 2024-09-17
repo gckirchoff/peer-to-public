@@ -50,7 +50,7 @@
 
 <svelte:window bind:innerWidth={windowWidth} />
 
-<div class="chart-container" bind:clientWidth={width} role="application">
+<div class="chart-container cumulative-risk" bind:clientWidth={width} role="application">
 	<svg {width} {height}>
 		<g style="transform: translate({margin.left}px, {margin.top}px)">
 			<AxisX {xScale} {innerChartWidth} {innerChartHeight} />
@@ -113,7 +113,7 @@
 		user-select: none;
 	}
 
-	:global(.tick text) {
+	:global(.cumulative-risk .tick text) {
 		font-weight: 500;
 		font-size: 15px;
 		fill: var(--clr-text-on-surface-900);

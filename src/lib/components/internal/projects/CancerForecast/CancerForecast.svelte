@@ -334,7 +334,7 @@
 			</label>
 		{/if}
 	</div>
-	<div class="chart-container" bind:clientWidth={width}>
+	<div class="chart-container cancer-forecast" bind:clientWidth={width}>
 		<svg {width} {height}>
 			<g style:transform="translate({margin.left}px, {margin.top}px)">
 				<AxisX {xScale} width={innerChartWidth} height={innerChartHeight} />
@@ -542,7 +542,7 @@
 <style lang="scss">
 	@import '/src/styles/mixins.scss';
 
-	:global(.tick text) {
+	:global(.cancer-forecast .tick text) {
 		font-weight: 500;
 		font-size: 15px;
 		fill: var(--clr-text-on-surface-900);
