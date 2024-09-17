@@ -34,6 +34,10 @@
 
 	let hoveredBar: RiskItem | null = null;
 
+	const removeTooltip = () => {
+		hoveredBar = null;
+	};
+
 	$: innerWidth = width - margin.left - margin.right;
 	$: innerHeight = height - margin.top - margin.bottom;
 
@@ -48,7 +52,7 @@
 <div
 	class="chart-container covid-coins"
 	bind:clientWidth={width}
-	on:mouseleave={() => (hoveredBar = null)}
+	on:mouseleave={removeTooltip}
 	role="application"
 >
 	<svg {width} {height} role="application">
@@ -82,7 +86,15 @@
 		</g>
 	</svg>
 	{#if hoveredBar}
-		<Tooltip data={hoveredBar} {xScale} {yScale} width={innerWidth} {outcome} {view} />
+		<Tooltip
+			data={hoveredBar}
+			{xScale}
+			{yScale}
+			width={innerWidth}
+			{outcome}
+			{view}
+			{removeTooltip}
+		/>
 	{/if}
 </div>
 
