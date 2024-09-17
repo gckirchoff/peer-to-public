@@ -6,7 +6,7 @@
 	export let width: number;
 	export let margin: Margin;
 
-	const xNudge = data.width * 0.5;
+	const xNudge = data.width * 0.1;
 	const yNudge = data.height * 1.5;
 
 	let tooltipWidth: number;
