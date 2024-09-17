@@ -25,9 +25,10 @@ export interface StoppingPoint {
 	science: Article;
 }
 
+// index corresponds to row index + 2 in google drive Biobot Wastewater Levels sheet
 export const stoppingPoints: StoppingPoint[] = [
 	{
-		index: 0,
+		index: 2,
 		description:
 			'The WHO declares COVID-19 to be a global pandemic. At this point, we know that SARS-CoV-2 is most closely related to SARS-CoV-1, that it infects ACE-2 receptors on the endothelial linings, and that transmission is airborne.',
 		media: {
@@ -42,9 +43,24 @@ export const stoppingPoints: StoppingPoint[] = [
 		},
 	},
 	{
-		index: 1,
+		index: 2,
 		description:
 			'It is established that SARS-CoV-1 frequently causes long term health problems. However, SARS-CoV-2 is compared to the flu and common cold, not SARS-1. Fox News describes COVID-19 as a flu-like illness that has killed "a small fraction of the number of people that the flu kills every year." This statement is particularly egregious given that COVID-19 has just begun.',
+		media: {
+			img: 'fox-covid-vs-flu.png',
+			href: 'https://www.fox5ny.com/news/flu-vs-common-cold-vs-covid-19-similar-symptoms-many-questions',
+			alt: 'Fox News comparison of flu vs common cold vs COVID-19',
+		},
+		science: {
+			img: 'sars-1-long-term.png',
+			href: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7192220/',
+			alt: 'Study describing long SARS',
+		},
+	},
+	{
+		index: 2,
+		description:
+			'',
 		media: {
 			img: 'fox-covid-vs-flu.png',
 			href: 'https://www.fox5ny.com/news/flu-vs-common-cold-vs-covid-19-similar-symptoms-many-questions',
