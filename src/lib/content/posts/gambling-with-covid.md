@@ -5,8 +5,8 @@ categories: [ "covid-19" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "coin-stack-ibrahim-rifath-unsplash.jpg"
 date: 'Wed Aug 14 2024 19:57:10 GMT-0400 (Eastern Daylight Time)'
-published: true
-updated: 'Tue Sep 17 2024 17:07:01 GMT-0400 (Eastern Daylight Time)'
+published: false
+updated: 'Wed Sep 18 2024 20:40:31 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
