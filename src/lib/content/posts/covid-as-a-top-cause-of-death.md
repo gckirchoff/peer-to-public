@@ -1,12 +1,12 @@
 ---
-title: "Leading  Causes of Death - An Apples to Apples Comparison"
-description: "COVID-19 was the third leading cause of death in 2020 and the fourth in 2022. Here, we analyze how the leading causes of death compare to each other when looked at with a more fine grain perspective."
+title: "Apples to Apples"
+description: "How Proper Framing Clarifies COVID-19’s Mortality Risk"
 categories: [ "covid-19" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty", "Emma Schaale" ]
 coverImage: "unsplash_an_vision_apple.jpg"
 date: '2023-12-30'
 published: false
-updated: 'Sat Sep 21 2024 15:02:14 GMT-0400 (Eastern Daylight Time)'
+updated: 'Sat Sep 21 2024 15:06:49 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
