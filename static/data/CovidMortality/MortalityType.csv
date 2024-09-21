@@ -14,7 +14,8 @@ Cancer,Non-Hodgkin Lymphoma,,20170,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
 Cancer,Lung and Bronchus,,136084,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
 Cancer,Ovary,,13438,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
 Cancer,Corpus and Uterus NOS,,11995,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
-COVID-19,Deaths from COVID-19,,350831,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
+Cancer,Other Cancer,,195230,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
+COVID-19,COVID-19,,350831,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
 Unintentional injuries,,,200955,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
 Stroke,Ischemic,62.40,100004.736,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#T14-2
 Stroke,Intracerebral Hemorrhage,27.90,44713.656,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#T14-3
