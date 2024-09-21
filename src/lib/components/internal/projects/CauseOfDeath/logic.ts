@@ -74,7 +74,10 @@ export const getBarData = (
 };
 
 export const getBarName = (bar: BarData): string => {
-	if (bar.data.type === 'Cancer' || bar.data.type === 'Stroke') {
+	if (
+		(bar.data.type === 'Cancer' && bar.data.category !== 'Other Cancer') ||
+		bar.data.type === 'Stroke'
+	) {
 		return bar.data.type;
 	}
 	return '';

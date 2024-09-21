@@ -17,11 +17,7 @@
 </script>
 
 {#if mortalityData.length > 0}
-	<ScrollyTelly
-		bind:currentStep
-		steps={3}
-		scrollHeight="50vh"
-	>
+	<ScrollyTelly bind:currentStep steps={3} scrollHeight="50vh">
 		<BarChart {mortalityData} {currentStep} />
 	</ScrollyTelly>
 {:else}
