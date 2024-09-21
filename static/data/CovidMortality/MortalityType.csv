@@ -1,27 +1,25 @@
-type,category,percent,value,source
-Heart disease,Coronary Heart Disease,41.20,382629.756,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#F14-4
-Heart disease,High Blood Pressure,12.90,119803.977,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#F14-5
-Heart disease,Heart Failure,9.20,85441.596,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#F14-6
-Heart disease,Diseases of the Arteries,2.60,24146.538,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#F14-7
-Heart disease,Other Heart Disease,16.80,156023.784,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#F14-8
-Cancer,Colon and Rectum,,51869,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
-Cancer,Pancreas,,46774,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
-Cancer,Female Breast,,42273,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
-Cancer,Prostate,,32707,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
-Cancer,Liver and Intrahepatic Bile Duct,,28227,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
-Cancer,Leukemias,,23583,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
-Cancer,Non-Hodgkin Lymphoma,,20170,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
-Cancer,Lung and Bronchus,,136084,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
-Cancer,Ovary,,13438,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
-Cancer,Corpus and Uterus NOS,,11995,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
-Cancer,Other Cancer,,195230,https://gis.cdc.gov/Cancer/USCS/#/AtAGlance/
-COVID-19,COVID-19,,350831,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
-Unintentional injuries,,,200955,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
-Stroke,Ischemic,62.40,100004.736,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#T14-2
-Stroke,Intracerebral Hemorrhage,27.90,44713.656,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#T14-3
-Stroke,Subarachnoid Hemorrhage,9.70,15545.608,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#T14-4
-Chronic lower respiratory diseases,,,152657,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
-Alzheimer disease,,,134242,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
-Diabetes,,,102188,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
-Influenza and pneumonia,,,53544,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
-Kidney disease,,,52547,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4
+type,category,percent,value,source,,,,
+Cardiovascular Disease,Coronary Heart Disease,41.20,382630,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#F14-4,,382629.756,,
+Cardiovascular Disease,Stroke,17.30,160262,,,,,
+Cardiovascular Disease,Other Heart Disease,16.80,156024,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#F14-8,,156023.784,,
+Cardiovascular Disease,High Blood Pressure,12.90,119804,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#F14-5,,119803.977,,
+Cardiovascular Disease,Heart Failure,9.20,85442,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#F14-6,,85441.596,,
+Cardiovascular Disease,Diseases of the Arteries,2.60,24147,https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123#F14-7,,24146.538,,
+Cancer,Lung and Bronchus,,135720,Cancer Facts & Figures 2020,,,,
+Cancer,Colon and Rectum,,53200,Cancer Facts & Figures 2020,,768045.651,,
+Cancer,Pancreas,,47050,Cancer Facts & Figures 2020,,,,
+Cancer,Breast,,42690,Cancer Facts & Figures 2020,,,,
+Cancer,Prostate,,33330,Cancer Facts & Figures 2020,,,,
+Cancer,Liver and Intrahepatic Bile Duct,,30160,Cancer Facts & Figures 2020,,135720,135720,
+Cancer,Leukemias,,23100,Cancer Facts & Figures 2020,,53200,53200,
+Cancer,Non-Hodgkin Lymphoma,,19940,Cancer Facts & Figures 2020,,47050,47050,
+Cancer,Brain and Other Nervous System,,18020,Cancer Facts & Figures 2020,,42690,42690,
+Cancer,Urinary Bladder,,17980,Cancer Facts & Figures 2020,,33330,33330,
+Cancer,Other Cancer,,185330,Cancer Facts & Figures 2020,,30160,30160,
+COVID-19,COVID-19,,350831,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4,,23100,23100,
+Unintentional Injuries,,,200955,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4,,19940,19940,
+Chronic Lower Respiratory Diseases,,,152657,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4,,18020,18020,
+Alzheimer Disease,,,134242,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4,,17980,17980,
+Diabetes,,,102188,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4,,0,421190,185330
+Influenza and Pneumonia,,,53544,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4,,,,
+Kidney Disease,,,52547,https://www.cdc.gov/nchs/data/databriefs/db427-tables.pdf#4,,,,
