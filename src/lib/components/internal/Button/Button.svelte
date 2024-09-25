@@ -1,10 +1,17 @@
 <script lang="ts">
+	import type { Variant } from '$lib/types/styles';
+
 	export let type: 'submit' | 'button' | 'reset' | null | undefined = undefined;
 	export let style: string = '';
 	export let disabled = false;
+	export let variant: Variant = 'primary';
+
+	$: finalStyles =
+		`--background-color: var(--clr-${variant}-500); --color: var(--clr-text-on-${variant}); --hover-color: var(--clr-${variant}-400);` +
+		style;
 </script>
 
-<button on:click {type} {style} {disabled}><slot /></button>
+<button on:click {type} style={finalStyles} {disabled}><slot /></button>
 
 <style lang="scss">
 	button {
@@ -15,7 +22,7 @@
 		transition: all 0.1s;
 
 		&:hover {
-			background-color: var(--clr-primary-400);
+			background-color: var(--hover-color);
 		}
 
 		&:disabled {
