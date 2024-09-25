@@ -215,6 +215,7 @@
 
 <style lang="scss">
 	.post-meta-data-container {
+		max-width: 90vw;
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-8);
