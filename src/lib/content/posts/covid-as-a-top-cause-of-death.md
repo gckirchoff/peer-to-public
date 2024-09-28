@@ -2,7 +2,7 @@
 title: "Apples to Apples"
 description: "How Proper Framing Clarifies COVID-19’s Mortality Risk"
 categories: [ "covid-19" ]
-authors: [ "Gregory Kirchoff", "Arijit Chakravarty", "Emma Schaale" ]
+authors: [ "Gregory Kirchoff", "Emma Schaale", "Arijit Chakravarty" ]
 coverImage: "unsplash_an_vision_apple.jpg"
 date: 'Wed Aug 14 2024 19:56:44 GMT-0400 (Eastern Daylight Time)'
 published: true
