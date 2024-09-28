@@ -2,9 +2,9 @@
 title: "How Framing Distorts COVID-19 Risk"
 description: "Why we misinterpret COVID-19 risk when comparing top causes of death and what it means for public health."
 categories: [ "covid-19" ]
-authors: [ "Gregory Kirchoff", "Emma Schaale" ]
+authors: [ "Gregory Kirchoff" ]
 coverImage: "picture-frame-ryul-davidson-unsplash.jpg"
-date: 'Sat Sep 28 2024 15:52:20 GMT-0400 (Eastern Daylight Time)'
+date: 'Sat Sep 28 2024 17:15:34 GMT-0400 (Eastern Daylight Time)'
 published: true
 
 ---
