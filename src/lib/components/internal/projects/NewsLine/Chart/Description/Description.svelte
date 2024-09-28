@@ -8,7 +8,7 @@
 
 <div class="description-container">
 	{#key description}
-		<div class="description" in:fly={{ y: 10, delay: 1200 }} out:fade>
+		<div class="description" in:fly={{ y: 10, delay: 700 }} out:fade>
 			<Body1>
 				{description}
 			</Body1>
@@ -18,20 +18,10 @@
 
 <style lang="scss">
 	.description-container {
-		position: relative;
+		grid-area: summary;
 
 		.description {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			padding: var(--spacing-16);
-			width: clamp(40rem, 50vw, 90rem);
-			border-top: 1px solid rgb(108, 108, 108);
-			border-bottom: 1px solid rgb(108, 108, 108);
-			border-radius: var(--rounded-4);
-			max-height: 100%;
-			overflow-y: auto;
+			padding: var(--spacing-24);
 		}
 	}
 </style>

@@ -21,7 +21,7 @@
 	let view: View = mode === 'auto' ? 'instance' : mode;
 	let outlookWindow = 1;
 	let vaccinated = false;
-	let outcome: Outcome = 'mortality';
+	let outcome: Outcome = 'disability';
 	let input: number = 40;
 	let longCovidRate = 0.146;
 

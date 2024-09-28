@@ -1,10 +1,5 @@
 import type { ScaleBand, ScaleLinear, ScaleOrdinal } from 'd3-scale';
-import type {
-	BarData,
-	MortalityData,
-	Stage,
-	UnprocessedMortalityData,
-} from './constants';
+import type { BarData, Label, MortalityData, Stage, UnprocessedMortalityData } from './constants';
 import { max } from 'd3-array';
 
 export const getBarData = (
@@ -13,12 +8,21 @@ export const getBarData = (
 	yScale: ScaleBand<string>,
 	colorScale: ScaleOrdinal<string, string, never>,
 	stage: Stage,
-): BarData[] => {
+): { bars: BarData[]; labels: Label[] } => {
 	const bars: BarData[] = [];
+	const labels: Label[] = [];
 
 	mortalityData.forEach((disease, index, array) => {
+		const height = yScale.bandwidth();
+		const width = xScale(disease.value);
+
+		const color = colorScale(stage === 'initial' ? disease.type : disease.category || disease.type);
+		const name = getName(disease.type, disease.category);
+
 		let x = 0;
 		let y = 0;
+		let labelX = 0;
+
 		y =
 			(yScale(stage === 'flattened' ? disease.category || disease.type : disease.type) as number) -
 			yScale.bandwidth() * 0.5;
@@ -30,13 +34,30 @@ export const getBarData = (
 			if (currentTypeIsSameAsPrevious && prevBar) {
 				x = prevBar.x + prevBar.width;
 			}
+
+			const nextBar = array[index + 1];
+			const isLastOfType = disease.type !== nextBar?.type;
+			if (isLastOfType) {
+				const startingXPosition = currentTypeIsSameAsPrevious
+					? (prevBar?.x ?? 0) + (prevBar?.width ?? 0)
+					: 0;
+				labelX = startingXPosition + width;
+
+				const textAnchor =
+					disease.type === 'Heart disease' ||
+					disease.type === 'Cancer' ||
+					disease.type === 'COVID-19'
+						? 'end'
+						: 'start';
+
+				labels.push({
+					x: labelX,
+					y: y + height / 2,
+					text: disease.type,
+					textAnchor,
+				});
+			}
 		}
-
-		const height = yScale.bandwidth();
-		const width = xScale(disease.value);
-
-		const color = colorScale(stage === 'initial' ? disease.type : disease.category || disease.type);
-		const name = getName(disease.type, disease.category);
 
 		bars.push({
 			x,
@@ -49,11 +70,14 @@ export const getBarData = (
 		});
 	});
 
-	return bars;
+	return { bars, labels };
 };
 
 export const getBarName = (bar: BarData): string => {
-	if (bar.data.type === 'Cancer' || bar.data.type === 'Stroke') {
+	if (
+		(bar.data.type === 'Cancer' && bar.data.category !== 'Other Cancer') ||
+		bar.data.type === 'Stroke'
+	) {
 		return bar.data.type;
 	}
 	return '';

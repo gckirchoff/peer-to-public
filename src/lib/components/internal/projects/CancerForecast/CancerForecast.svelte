@@ -2,6 +2,8 @@
 	import { scaleLinear, scaleTime, line, max, format } from 'd3';
 
 	import { Body2 } from '../../typography';
+	import { roundTo } from '../util/math';
+	import Tooltip from '../../Tooltip/Tooltip.svelte';
 	import AxisX from './AxisX/AxisX.svelte';
 	import AxisY from './AxisY/AxisY.svelte';
 	import Line from './Line/Line.svelte';
@@ -24,7 +26,6 @@
 		createNoiseValues,
 		noisifyBaseline,
 	} from './logic';
-	import { roundTo } from '../util/math';
 
 	export let audience: Audience = 'general';
 	export let variant: Variant = 'standard';
@@ -257,7 +258,10 @@
 	<div class="distributions-toggle">
 		{#if variant === 'standard'}
 			<label on:change={handleShowDistributions}>
-				Show Latency Distributions
+				Show Latency Distributions <Tooltip
+					>{internalMode === 'summed' ? 'Show' : 'Hide'} the curves that represent the onset of the new
+					syndrome from each year of infections.</Tooltip
+				>
 				<input type="checkbox" />
 			</label>
 		{:else}
@@ -285,6 +289,11 @@
 						<option value="panic">extra cases panic threshold</option>
 						<option value="date">date of prevention</option>
 					</select>
+					<Tooltip
+						>{preventionDeterminant === 'panic'
+							? 'Once the number of extra cases breaches this threshold, theoretically perfect mitigation is instantaneously established, preventing all future infections.'
+							: 'Set a date at which theoretically perfect mitigation is instantaneously established, preventing all future infections.'}</Tooltip
+					>
 				{/if}
 			</div>
 			{#if preventionDeterminant === 'date'}
@@ -295,20 +304,28 @@
 		</label>
 		<label class="range-input">
 			<Body2>
-				{hazardRatio} Hazard Ratio:
+				{hazardRatio} Hazard Ratio: <Tooltip
+					>The relative risk of developing the syndrome after being infected. Higher hazard ratio =>
+					greater risk</Tooltip
+				>
 			</Body2>
 			<input bind:value={hazardRatio} type="range" min={1} max={10} step={0.1} />
 		</label>
 		<label class="range-input">
 			<Body2>
-				{delay} year delay:
+				{delay} year delay: <Tooltip
+					>Average time between infection and the onset of the syndrome.</Tooltip
+				>
 			</Body2>
 			<input bind:value={delay} type="range" min={1} max={30} step={1} />
 		</label>
 		{#if variant === 'standard'}
 			<label class="range-input">
 				<Body2>
-					{numberFormatter(baselineCancer)} baseline incidence:
+					{numberFormatter(baselineCancer)} baseline incidence: <Tooltip>
+						The number of cases that would normally occur without the IA. Any increase in cases due
+						to the IA is added on top of this baseline
+					</Tooltip>
 				</Body2>
 				<input
 					bind:value={baselineCancer}
@@ -334,7 +351,7 @@
 			</label>
 		{/if}
 	</div>
-	<div class="chart-container" bind:clientWidth={width}>
+	<div class="chart-container cancer-forecast" bind:clientWidth={width}>
 		<svg {width} {height}>
 			<g style:transform="translate({margin.left}px, {margin.top}px)">
 				<AxisX {xScale} width={innerChartWidth} height={innerChartHeight} />
@@ -542,7 +559,7 @@
 <style lang="scss">
 	@import '/src/styles/mixins.scss';
 
-	:global(.tick text) {
+	:global(.cancer-forecast .tick text) {
 		font-weight: 500;
 		font-size: 15px;
 		fill: var(--clr-text-on-surface-900);
@@ -594,6 +611,7 @@
 				.determinant-selector {
 					display: flex;
 					gap: var(--spacing-8);
+					z-index: 2; // allows for hovering over tooltip when options overlap
 				}
 			}
 		}
