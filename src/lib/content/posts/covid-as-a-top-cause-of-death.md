@@ -27,7 +27,7 @@ Given the importance of first impressions in shaping our opinions on a topic, le
 
 <CauseOfDeathChart />
 
-From the initial view, we see that COVID-19 was the third leading cause of death in 2020. While significant, it doesn't feel as alarming when compared to the much larger death toll from Heart Disease, which accounted for nearly double the deaths. This can lead one to believe there are worse problems than COVID-19 that deserve more attention and resources, like addressing the obesity epidemic instead of focusing on measures such as improving indoor air quality, contact tracing, and masking.
+From the initial view, we see that COVID-19 was the third leading cause of death in 2020. While significant, it doesn't feel as alarming when compared to the much larger death toll from Heart Disease, which accounted for nearly double the deaths. This can lead one to believe there are worse problems than COVID-19 that deserve more attention and resources, like addressing the obesity epidemic instead of focusing on measures such as masking, contact tracing, and quarantining.
 
 But is this a fair comparison?
 

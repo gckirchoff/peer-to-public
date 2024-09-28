@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "wave-unsplash-matt-paul-catalano.jpg"
 date: 'Wed Jun 12 2024 06:35:07 GMT-0400 (Eastern Daylight Time)'
 published: true
-updated: 'Wed Sep 18 2024 20:40:17 GMT-0400 (Eastern Daylight Time)'
+updated: 'Sat Sep 28 2024 10:03:20 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -15,29 +15,11 @@ updated: 'Wed Sep 18 2024 20:40:17 GMT-0400 (Eastern Daylight Time)'
 
 </script>
 
-### Chart Interpretation Guide:
-
-This chart visualizes the impact of delayed prevention measures on the incidence of a hypothetical syndrome (such as cancer or heart disease) triggered by a recurring infectious agent (IA). The chart allows you to experiment with different variables, including the hazard ratio, delay period, baseline incidence, and a configurable panic threshold based on extra cases or mitigation date.
+This chart illustrates the impact of delaying preventive measures on the incidence of a hypothetical syndrome (such as cancer or heart disease) triggered by a recurring infectious agent (IA). By adjusting the variables, you can observe how waiting for visible signs of delayed harm from infection significantly increases the future burden of disease. The red shaded area represents the cases that are detected and measured before interventions are taken. The blue shaded area shows the additional burden of disease that becomes inevitable due to the delayed response.
 
 <CancerForecast />
 
-### Key Elements:
-
-**Hazard Ratio**: This slider adjusts the relative risk of developing the syndrome after being infected with the IA. A higher hazard ratio implies a greater risk of syndrome development for each yearly infection.
-
-**Latency Period**: The model includes a configurable delay, defaulted here to 20 years, which represents the average time between infection and the onset of the syndrome. Longer delays reflect latent health issues that could take decades to become apparent, such as those seen with diseases like HIV or Chagas.
-
-**Baseline Incidence**: This is the number of cases that would normally occur without the IA. In this model, the default incidence is 18 million, representing global rates of a syndrome like cancer. Any increase in cases due to the IA is added on top of this baseline.
-
-**Mitigation Method**: The default mitigation method, set as a panic threshold, represents the point at which the population reacts to the rising number of extra cases by eradicating the IA. The graph visualizes this moment as the red line and allows for adjustment (defaulted here at 5%). Once the number of extra cases breaches this threshold, preventive actions are triggered to halt further transmissions. The alternative method, date of prevention, allows you to simply set a date at which theoretically perfect mitigation is instantaneously established.
-
-### How to Use:
-
-* Adjust the **hazard ratio** and **delay sliders** to observe how different risks and onset times affect the syndrome's prevalence over time.
-* Use the **mitigation method** to simulate how early or late population-wide mitigation efforts may occur in response to rising case numbers, and observe the resulting syndome prevalence after the IA is eliminated.
-* The shaded regions represent projected extra cases due to the IA, and how interventions—or the lack thereof—would impact the long-term burden of the syndrome.
-
-By experimenting with these variables, the chart reveals the potentially catastrophic outcomes of delayed action and highlights the importance of early intervention in controlling the long-term impacts of infectious diseases.
+As demonstrated, delaying action until enough people are visibly affected guarantees a significantly larger disease burden. This highlights the urgency of taking preventive measures now to mitigate future harm.
 
 ### Understanding Latent Health Risks of Infectious Diseases
 
