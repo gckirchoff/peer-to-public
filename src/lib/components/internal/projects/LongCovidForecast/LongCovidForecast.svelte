@@ -17,8 +17,8 @@
 	let deathRate = 0.727272727;
 	let longCovidDeathRate = 1;
 
-	let infectionRate = 130;
-	let longCovidRate = 10;
+	let infectionRate = 1.3;
+	let longCovidRate = 0.1;
 
 	let width = 400;
 	let height = 400;
@@ -37,29 +37,27 @@
 		disabledDeathRate: deathRate * longCovidDeathRate,
 		initialPopulation,
 		initialDisabledPopulation: initialLongCovidPopulation,
-		infectionRate,
-		disabilityRate: longCovidRate,
+		averageNumOfInfectionsPerPersonPerYear: infectionRate,
+		chanceOfDisabilityPerInfection: longCovidRate,
 		years,
 	});
 
 	$: xScale = scaleLinear().domain([0, years]).range([0, innerChartWidth]);
-	$: yScale = scaleLinear()
-		.domain([0, 360e6])
-		.range([innerChartHeight, 0]);
+	$: yScale = scaleLinear().domain([0, 360e6]).range([innerChartHeight, 0]);
 </script>
 
 <div class="inputs-container">
 	<label class="range-input">
 		<Body2>
-			{infectionRate / 100} Covid infection rate:
+			{infectionRate} Covid infection rate:
 		</Body2>
-		<input bind:value={infectionRate} type="range" min={0} max={200} step={10} />
+		<input bind:value={infectionRate} type="range" min={0} max={2} step={0.1} />
 	</label>
 	<label class="range-input">
 		<Body2>
-			{longCovidRate}% Long Covid Rate:
+			{Math.round(longCovidRate * 100)}% Long Covid Rate:
 		</Body2>
-		<input bind:value={longCovidRate} type="range" min={0} max={100} step={1} />
+		<input bind:value={longCovidRate} type="range" min={0} max={1} step={0.01} />
 	</label>
 	<label class="range-input">
 		<Body2>
