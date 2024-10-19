@@ -27,13 +27,13 @@
 </div>
 
 <style lang="scss">
-	@import '/src/styles/mixins.scss';
+	@use '/src/styles/mixins.scss';
 	.contact {
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-16);
 
-		@include respond('mobile') {
+		@include mixins.respond('mobile') {
 			padding: var(--spacing-24);
 		}
 

@@ -17,7 +17,7 @@
 </div>
 
 <style lang="scss">
-	@import '/src/styles/mixins.scss';
+	@use '/src/styles/mixins.scss';
 
 	.about {
 		max-width: 100rem;
@@ -28,7 +28,7 @@
 		flex-wrap: wrap-reverse;
 		gap: var(--spacing-16);
 
-		@include respond('mobile') {
+		@include mixins.respond('mobile') {
 			padding: var(--spacing-24);
 		}
 
