@@ -122,7 +122,7 @@
 </div>
 
 <style lang="scss">
-	@import '/src/styles/mixins.scss';
+	@use '/src/styles/mixins.scss';
 
 	label {
 		cursor: pointer;
@@ -140,7 +140,7 @@
 		margin-top: var(--spacing-8);
 		margin-bottom: var(--spacing-32);
 
-		@include respond('mobile') {
+		@include mixins.respond('mobile') {
 			margin-bottom: 0;
 		}
 

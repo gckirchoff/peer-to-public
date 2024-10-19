@@ -557,7 +557,7 @@
 </div>
 
 <style lang="scss">
-	@import '/src/styles/mixins.scss';
+	@use '/src/styles/mixins.scss';
 
 	:global(.cancer-forecast .tick text) {
 		font-weight: 500;
@@ -598,7 +598,7 @@
 			margin-top: var(--spacing-8);
 			margin-bottom: var(--spacing-32);
 
-			@include respond('mobile') {
+			@include mixins.respond('mobile') {
 				margin-bottom: 0;
 			}
 

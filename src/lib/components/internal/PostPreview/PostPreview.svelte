@@ -42,9 +42,9 @@
 </li>
 
 <style lang="scss">
-	@import '/src/styles/mixins.scss';
+	@use '/src/styles/mixins.scss';
 	li {
-		@include respond('mobile') {
+		@include mixins.respond('mobile') {
 			&:not(:last-child) {
 				padding-bottom: var(--spacing-32);
 				border-bottom: 1px solid var(--clr-surface-700);
@@ -86,7 +86,7 @@
 					background-color: var(--clr-warning-500);
 				}
 			}
-			@include respond('mobile') {
+			@include mixins.respond('mobile') {
 				grid-template-columns: 1fr;
 			}
 		}

@@ -28,7 +28,7 @@
 </div>
 
 <style lang="scss">
-	@import '/src/styles/mixins.scss';
+	@use '/src/styles/mixins.scss';
 
 	.site {
 		min-height: 100vh;

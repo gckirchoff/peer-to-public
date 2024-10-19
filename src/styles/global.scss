@@ -1,4 +1,4 @@
-@import './mixins.scss';
+@use 'mixins.scss';
 
 :root {
 	/* Font */
@@ -70,17 +70,17 @@ html {
 	scroll-padding-top: var(--spacing-32);
 	scrollbar-color: var(--clr-scrollbar-thumb) transparent;
 
-	@include respond('tab-land') {
+	@include mixins.respond('tab-land') {
 		// width < 1200?
 		font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
 	}
 
-	@include respond('tab-port') {
+	@include mixins.respond('tab-port') {
 		// width < 900?
 		font-size: 50%; //1 rem = 8px, 8/16 = 50%
 	}
 
-	@include respond('big-desktop') {
+	@include mixins.respond('big-desktop') {
 		font-size: 75%; //1rem = 12, 12/16
 	}
 }

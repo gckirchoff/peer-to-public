@@ -122,6 +122,7 @@
 
 	.chart-container {
 		margin-top: var(--spacing-16);
+		position: relative;
 	}
 
 	circle {

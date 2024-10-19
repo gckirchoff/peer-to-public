@@ -14,7 +14,6 @@
 </a>
 
 <style lang="scss">
-	@import '/src/styles/mixins.scss';
 	.headline {
 		grid-area: var(--area);
 		border-radius: var(--rounded-4);
