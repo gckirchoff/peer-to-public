@@ -58,15 +58,15 @@
 	<svg {width} {height} role="application">
 		<g transform="translate({margin.left} {margin.top})">
 			<AxisY {yScale} {width} />
-			{#each usedData as d, columnIndex (`${d.item}-${outcome}`)}
+			{#each data as d, columnIndex (`${d.item}-${outcome}`)}
 				<g
 					style="transform: translate({xScale(d.item)}px, {innerHeight}px);"
-					animate:flip={{ duration: 800 }}
 					on:mouseover={() => (hoveredBar = d)}
 					on:focus={() => (hoveredBar = d)}
 					tabindex="0"
 					role="tab"
 					aria-roledescription="bar"
+					class="bar"
 				>
 					<Bar
 						{d}
@@ -86,21 +86,21 @@
 		</g>
 	</svg>
 	{#if hoveredBar}
-		<Tooltip
-			data={hoveredBar}
-			{xScale}
-			{yScale}
-			width={innerWidth}
-			{outcome}
-			{view}
-			{removeTooltip}
-		/>
+		<Tooltip data={hoveredBar} {xScale} {yScale} width={innerWidth} {outcome} {view} />
 	{/if}
 </div>
 
 <style lang="scss">
 	svg {
 		background-color: white;
+	}
+
+	.chart-container {
+		position: relative;
+	}
+
+	.bar {
+		transition: all 500ms ease;
 	}
 
 	:global(.covid-coins .tick text) {

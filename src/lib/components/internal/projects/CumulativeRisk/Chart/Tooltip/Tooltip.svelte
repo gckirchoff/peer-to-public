@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
-	import type { ScaleBand, ScaleLinear } from 'd3';
 
 	import type { InfectionCumulativeRisk } from '../constants';
 	import { roundTo } from '../../logic';

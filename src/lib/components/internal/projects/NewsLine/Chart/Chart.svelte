@@ -114,7 +114,6 @@
 </div>
 
 <style lang="scss">
-	@import '/src/styles/mixins.scss';
 	:global(.news-line .tick text) {
 		font-weight: 400;
 		font-size: 15px;

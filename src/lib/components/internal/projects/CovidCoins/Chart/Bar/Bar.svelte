@@ -40,7 +40,7 @@
 	height={innerHeight - yScale(d.coins)}
 	fill="black"
 	style="transition: all 300ms ease;"
-	opacity={0}
+	opacity={1}
 /> -->
 {#each coins as coin}
 	<g

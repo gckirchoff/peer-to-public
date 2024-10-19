@@ -41,7 +41,7 @@
 </aside>
 
 <style lang="scss">
-	@import '/src/styles/mixins.scss';
+	@use '/src/styles/mixins.scss';
 	aside {
 		flex: 0 1 15%;
 		display: flex;
@@ -52,7 +52,7 @@
 		position: sticky;
 		top: var(--spacing-24);
 
-		@include respond('tab-port') {
+		@include mixins.respond('tab-port') {
 			display: none;
 		}
 	}

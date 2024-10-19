@@ -25,8 +25,6 @@
 </ul>
 
 <style lang="scss">
-	@import '/src/styles/mixins.scss';
-
 	.heading {
 		margin-bottom: var(--spacing-32);
 	}
@@ -45,7 +43,7 @@
 		display: block;
 		width: 100%;
 		height: 26rem;
-		margin-bottom: var(--spacing-8)
+		margin-bottom: var(--spacing-8);
 	}
 
 	img {

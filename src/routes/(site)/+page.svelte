@@ -7,6 +7,7 @@
 
 	import { theme } from '$lib/store';
 	import { siteConfig } from '$lib/config';
+	import { rgbToHex, parseRgbString } from '$lib/utils/styles/styles.js';
 	import { Body1, H2, H4 } from '$lib/components/internal/typography';
 	import PostsList from '$lib/components/internal/PostsList/PostsList.svelte';
 	import Sidebar from '$lib/components/internal/Sidebar/Sidebar.svelte';
@@ -24,13 +25,21 @@
 		ParticlesComponent = module.default as unknown as SvelteComponent;
 	});
 
+	$: colorSurface200 = browser
+		? $theme === 'light'
+			? parseRgbString(getComputedStyle?.(document.body)?.getPropertyValue('--clr-surface-200'))
+			: parseRgbString(getComputedStyle?.(document.body)?.getPropertyValue('--clr-surface-200'))
+		: null;
+
+	$: bannerBackgroundColor = colorSurface200
+		? rgbToHex(colorSurface200.r, colorSurface200.g, colorSurface200.b)
+		: '#000';
+
 	$: particlesConfig = {
 		fullScreen: { enable: false },
 		background: {
 			color: {
-				value: browser
-					? getComputedStyle?.(document.body)?.getPropertyValue('--clr-surface-200')
-					: '#fff',
+				value: bannerBackgroundColor,
 			},
 		},
 		particles: {
@@ -131,7 +140,7 @@
 	</div>
 
 	<div class="site-content">
-		<div />
+		<div class="grid-placeholder"></div>
 
 		<H4 style="margin-bottom: var(--spacing-24);">Recent Articles</H4>
 
@@ -144,7 +153,7 @@
 </main>
 
 <style lang="scss">
-	@import '/src/styles/mixins.scss';
+	@use '/src/styles/mixins.scss';
 
 	main {
 		row-gap: var(--spacing-16);
@@ -164,7 +173,7 @@
 				flex-wrap: wrap;
 				gap: var(--spacing-8);
 
-				@include respond(mobile) {
+				@include mixins.respond(mobile) {
 					gap: 0;
 				}
 
@@ -182,8 +191,8 @@
 		}
 
 		.site-content {
-			@include base-layout;
 			padding: 0 var(--spacing-64) var(--spacing-64);
+			@include mixins.base-layout;
 		}
 	}
 </style>
