@@ -1,13 +1,27 @@
 <script lang="ts">
-	import { format } from 'd3';
-	import type { ScaleLinear } from 'd3';
+	import { format, timeFormat } from 'd3';
+	import type { ScaleLinear, ScaleLogarithmic, ScaleTime, ScaleBand } from 'd3';
 
-	export let yScale: ScaleLinear<number, number, never>;
+	type T = $$Generic;
+
+	export let label: string;
+	export let yScale:
+		| ScaleLinear<T, number>
+		| ScaleLogarithmic<T, number>
+		| ScaleTime<T, number>
+		| ScaleBand<string>;
 	export let innerChartWidth: number;
-
-	const numberFormatter = (num: number): string => format('.2s')(num).replace('G', 'B');
-
-	$: yTicks = yScale.ticks(6);
+	export let formatter: (tick: T) => string = (tick) => {
+		if (typeof tick === 'number') {
+			return format('')(tick);
+		} else if (tick instanceof Date) {
+			return timeFormat('%Y-%m-%d')(tick);
+		} else {
+			return String(tick);
+		}
+	};
+	let yTicks: T[];
+	$: yTicks = 'ticks' in yScale ? (yScale.ticks() as T[]) : (yScale.domain() as T[]);
 </script>
 
 <g class="axis y">
@@ -15,7 +29,7 @@
 		<g class="tick" transform="translate(0, {yScale(tick)})">
 			<line x1={0} y1={0} y2={0} x2={innerChartWidth} stroke="#b1b1b1" />
 			<text x={-45} y={0} dominant-baseline="middle">
-				{numberFormatter(tick)}
+				{formatter(tick)}
 			</text>
 		</g>
 	{/each}
@@ -23,7 +37,7 @@
 		style="transform: translate(-60px, {yScale.range()[0] * 0.5}px) rotate(-90deg);"
 		text-anchor="middle"
 	>
-		Population
+		{label}
 	</text>
 </g>
 

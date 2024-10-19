@@ -52,6 +52,7 @@ export interface ForecastPopulationWithDisabilityOverTimeArgs
 
 export interface PopulationStatus {
 	totalPopulation: number;
+	nonDisabledPopulation: number;
 	disabledPopulation: number;
 }
 
