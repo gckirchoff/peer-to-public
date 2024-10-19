@@ -40,8 +40,8 @@ export interface ForecastPopulationWithDisabilityArgs {
 	disabledDeathRate: number;
 	initialPopulation: number;
 	initialDisabledPopulation: number;
-	infectionRate: number;
-	disabilityRate: number;
+	averageNumOfInfectionsPerPersonPerYear: number;
+	chanceOfDisabilityPerInfection: number;
 	year: number;
 }
 
@@ -52,6 +52,7 @@ export interface ForecastPopulationWithDisabilityOverTimeArgs
 
 export interface PopulationStatus {
 	totalPopulation: number;
+	nonDisabledPopulation: number;
 	disabledPopulation: number;
 }
 

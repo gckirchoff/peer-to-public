@@ -44,7 +44,7 @@ export const getBarData = (
 				labelX = startingXPosition + width;
 
 				const textAnchor =
-					disease.type === 'Heart disease' ||
+					disease.type === 'Cardiovascular Disease' ||
 					disease.type === 'Cancer' ||
 					disease.type === 'COVID-19'
 						? 'end'

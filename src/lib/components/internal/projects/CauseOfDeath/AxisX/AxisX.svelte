@@ -19,14 +19,15 @@
 			>
 		</g>
 	{/each}
-	<text class="axis-title" y={-15} x={width} text-anchor="end"
-		>Number of deaths, hundreds of thousands →
+	<text class="axis-title" y={-7} x={width} text-anchor="end">
+		Number of deaths, hundreds of thousands →
 	</text>
 </g>
 
 <style lang="scss">
 	.axis-title {
 		fill: var(--clr-surface-800);
+		font-size: var(--font-18);
 	}
 	.tick {
 		.y-line {

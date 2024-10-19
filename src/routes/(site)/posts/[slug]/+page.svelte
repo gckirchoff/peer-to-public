@@ -25,6 +25,8 @@
 		published,
 	} = data.meta;
 	const { PostContent } = data;
+
+	$: metaCoverImage = `${siteConfig.url}/images/postImages/${slug}/${coverImage}`;
 </script>
 
 <svelte:head>
@@ -35,10 +37,10 @@
 	<meta name="twitter:title" content={title} />
 	<meta property="og:description" content={description} />
 	<meta name="twitter:description" content={description} />
-	<!-- <meta property="og:image" content="https://yourdomain.com/image_path" /> -->
+	<meta property="og:image" content={metaCoverImage} />
 	<!-- <meta property="og:image:width" content={coverWidth} />
 	<meta property="og:image:height" content={coverHeight} /> -->
-	<!-- <meta name="twitter:image" content="https://yourdomain.com/image_path" /> -->
+	<meta name="twitter:image" content={metaCoverImage} />
 </svelte:head>
 
 <div class="content">

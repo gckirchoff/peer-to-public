@@ -21,13 +21,13 @@
 </PageWrapper>
 
 <style lang="scss">
-	@import '/src/styles/mixins.scss';
+	@use '/src/styles/mixins.scss';
 
 	.about {
 		max-width: 80rem;
 		margin: 0 auto;
 
-		@include respond('mobile') {
+		@include mixins.respond('mobile') {
 			padding: var(--spacing-24);
 		}
 

@@ -28,18 +28,17 @@
 </header>
 
 <style lang="scss">
-	@import '/src/styles/mixins.scss';
+	@use '/src/styles/mixins.scss';
 
 	header {
+		--flex-gap: var(--spacing-24);
+		--row-gap: var(--spacing-8);
 		padding: 0 var(--spacing-16);
 		background-color: var(--clr-surface-500);
 
-		@include respond(mobile) {
+		@include mixins.respond(mobile) {
 			padding: 0 var(--spacing-16) var(--spacing-16);
 		}
-
-		--flex-gap: var(--spacing-24);
-		--row-gap: var(--spacing-8);
 
 		nav {
 			display: flex;
@@ -49,7 +48,7 @@
 			gap: var(--flex-gap);
 			row-gap: var(--row-gap);
 
-			@include respond(mobile) {
+			@include mixins.respond(mobile) {
 				justify-content: center;
 			}
 

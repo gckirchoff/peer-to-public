@@ -16,6 +16,7 @@
 <style lang="scss">
 	section {
 		position: relative;
+		margin-bottom: var(--spacing-24);
 	}
 
 	.sticky {

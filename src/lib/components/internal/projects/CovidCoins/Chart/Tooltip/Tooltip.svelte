@@ -10,7 +10,6 @@
 	export let width: number;
 	export let outcome: Outcome;
 	export let view: View;
-	export let removeTooltip: () => void;
 
 	const xNudge = 15;
 	const yNudge = 15;
@@ -40,8 +39,6 @@
 	bind:clientWidth={tooltipWidth}
 	in:fly={{ y: -20 }}
 	out:fly={{ y: 20 }}
-	on:mouseleave={removeTooltip}
-	on:blur={removeTooltip}
 >
 	<h1 class="item">{tooltipTitle}</h1>
 	{#if view === 'instance'}

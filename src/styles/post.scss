@@ -1,5 +1,3 @@
-@import '/src/styles//mixins.scss';
-
 .prose > hgroup {
 	margin: var(--spacing-128) 0;
 	text-align: center;
@@ -142,7 +140,7 @@
 	}
 
 	a {
-		color: var(--clr-link-txt-500);
+		color: var(--clr-link-txt-800);
 		transition: filter 200ms ease;
 
 		&:hover {

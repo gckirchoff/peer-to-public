@@ -5,7 +5,7 @@
 	let activateMobileOverlay = false;
 
 	let tooltipIcon: HTMLSpanElement;
-	let tooltipBox: HTMLDivElement;
+	let tooltipBox: HTMLSpanElement;
 
 	let x = 0;
 	let y = 0;
@@ -65,18 +65,18 @@
 	class="question-mark-icon"
 	role="tooltip"
 	bind:this={tooltipIcon}
-/>
+></span>
 
-<div
+<span
 	class="tooltip-box"
 	style="display: {show ? 'block' : 'none'}; top: {y}px; left: {x}px;"
 	bind:this={tooltipBox}
 >
 	<slot />
-</div>
+</span>
 
 {#if activateMobileOverlay}
-	<div class="mobile-overlay" on:touchstart={handleMobileOverlayTouch} />
+	<div class="mobile-overlay" on:touchstart={handleMobileOverlayTouch}></div>
 {/if}
 
 <style>
@@ -86,7 +86,8 @@
 	}
 
 	.tooltip-box {
-	pointer-events: none;
+		pointer-events: none;
+		display: block;
 		max-width: 50dvw;
 		word-wrap: break-word; /* Enable wrapping */
 		white-space: normal; /* Allow wrapping */

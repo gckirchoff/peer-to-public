@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { scaleLinear, scaleTime, extent, max } from 'd3';
+	import { scaleLinear, scaleTime, extent, max, format } from 'd3';
 
 	import { Body2 } from '../../typography';
 	import AxisX from '../common/components/AxisX/AxisX.svelte';
@@ -17,8 +17,10 @@
 	let deathRate = 0.727272727;
 	let longCovidDeathRate = 1;
 
-	let infectionRate = 130;
-	let longCovidRate = 10;
+	let infectionRate = 1.3;
+	let longCovidRate = 0.1;
+
+	let view: 'percent' | 'population' = 'population';
 
 	let width = 400;
 	let height = 400;
@@ -28,8 +30,13 @@
 
 	const xAccessor = (d: PopulationByYear) => d.year;
 	const yAccessorTotalPopulation = (d: PopulationByYear) => d.populationStatus.totalPopulation;
-	const yAccessorDisabledPopulation = (d: PopulationByYear) =>
-		d.populationStatus.disabledPopulation;
+	$: yAccessorDisabledPopulation = ({
+		populationStatus: { disabledPopulation, totalPopulation },
+	}: PopulationByYear) =>
+		view === 'population' ? disabledPopulation : disabledPopulation / totalPopulation;
+
+	$: yAxisFormatter = (num: number): string =>
+		view === 'population' ? format('.2s')(num).replace('G', 'B') : `${num * 100}%`;
 
 	$: populationOverTime = forecastPopulationWithDisabilityOverTime({
 		birthRate,
@@ -37,54 +44,65 @@
 		disabledDeathRate: deathRate * longCovidDeathRate,
 		initialPopulation,
 		initialDisabledPopulation: initialLongCovidPopulation,
-		infectionRate,
-		disabilityRate: longCovidRate,
+		averageNumOfInfectionsPerPersonPerYear: infectionRate,
+		chanceOfDisabilityPerInfection: longCovidRate,
 		years,
 	});
 
 	$: xScale = scaleLinear().domain([0, years]).range([0, innerChartWidth]);
-	$: yScale = scaleLinear()
-		.domain([0, 360e6])
-		.range([innerChartHeight, 0]);
+
+	$: yDomain = view === 'population' ? [0, 360e6] : [0, 1];
+	$: yScale = scaleLinear().domain(yDomain).range([innerChartHeight, 0]);
 </script>
 
 <div class="inputs-container">
 	<label class="range-input">
 		<Body2>
-			{infectionRate / 100} Covid infection rate:
+			{infectionRate} Covid infection rate:
 		</Body2>
-		<input bind:value={infectionRate} type="range" min={0} max={200} step={10} />
+		<input bind:value={infectionRate} type="range" min={0} max={2} step={0.1} />
 	</label>
 	<label class="range-input">
 		<Body2>
-			{longCovidRate}% Long Covid Rate:
+			{Math.round(longCovidRate * 100)}% Long Covid Rate:
 		</Body2>
-		<input bind:value={longCovidRate} type="range" min={0} max={100} step={1} />
+		<input bind:value={longCovidRate} type="range" min={0} max={1} step={0.01} />
 	</label>
 	<label class="range-input">
 		<Body2>
 			{longCovidDeathRate}X Long Covid Death Rate:
 		</Body2>
-		<input bind:value={longCovidDeathRate} type="range" min={1} max={30} step={0.1} />
+		<input bind:value={longCovidDeathRate} type="range" min={1} max={50} step={0.1} />
 	</label>
+	<select bind:value={view}>
+		<option value="population">Population</option>
+		<option value="percent">Percent</option>
+	</select>
 </div>
 <div class="chart-container" bind:clientWidth={width} role="application">
 	<svg {width} {height}>
 		<g style="transform: translate({margin.left}px, {margin.top}px)">
 			<AxisX {xScale} {innerChartWidth} {innerChartHeight} />
-			<AxisY {yScale} {innerChartWidth} />
-			<Line
-				type="area"
-				data={populationOverTime}
-				xAccessorScaled={(d) => xScale(xAccessor(d))}
-				yAccessorScaled={(d) => yScale(yAccessorTotalPopulation(d))}
-				y0AccessorScaled={innerChartHeight}
+			<AxisY
+				label={view === 'population' ? 'Population' : 'Percent with Long Covid'}
+				{yScale}
+				{innerChartWidth}
+				formatter={yAxisFormatter}
 			/>
-			<Line
-				data={populationOverTime}
-				xAccessorScaled={(d) => xScale(xAccessor(d))}
-				yAccessorScaled={(d) => yScale(yAccessorTotalPopulation(d))}
-			/>
+			{#if view === 'population'}
+				<Line
+					type="area"
+					data={populationOverTime}
+					xAccessorScaled={(d) => xScale(xAccessor(d))}
+					yAccessorScaled={(d) => yScale(yAccessorTotalPopulation(d))}
+					y0AccessorScaled={innerChartHeight}
+				/>
+				<Line
+					data={populationOverTime}
+					xAccessorScaled={(d) => xScale(xAccessor(d))}
+					yAccessorScaled={(d) => yScale(yAccessorTotalPopulation(d))}
+				/>
+			{/if}
 			<Line
 				type="area"
 				data={populationOverTime}
@@ -103,50 +121,8 @@
 	</svg>
 </div>
 
-<pre>
-	{`function forecastPopulationWithDisability({
-		birthRate,
-		deathRate,
-		disabledDeathRate,
-		initialPopulation,
-		initialDisabledPopulation,
-		infectionRate,
-		disabilityRate,
-		year,
-	}: ForecastPopulationWithDisabilityArgs): PopulationStatus {
-		let nonDisabledPopulation = initialPopulation - initialDisabledPopulation;
-		let disabledPopulation = initialDisabledPopulation;
-	
-		const annualBirthRate = birthRate / 100;
-		const annualDeathRate = deathRate / 100;
-		const annualDisabledDeathRate = disabledDeathRate / 100;
-		const annualInfectionRate = infectionRate / 100;
-		const annualDisabilityRate = disabilityRate / 100;
-	
-		for (let i = 0; i < year; i++) {
-			// Births and deaths in non-disabled population
-			const births = nonDisabledPopulation * annualBirthRate + disabledPopulation * annualBirthRate;
-			const nonDisabledDeaths = nonDisabledPopulation * annualDeathRate;
-	
-			// New infections and resulting disabilities
-			const newInfections = nonDisabledPopulation * annualInfectionRate;
-			const newDisabilities = Math.min(newInfections * annualDisabilityRate, nonDisabledPopulation);
-	
-			// Deaths in disabled population
-			const disabledDeaths = disabledPopulation * annualDisabledDeathRate;
-	
-			// Update populations
-			nonDisabledPopulation += births - nonDisabledDeaths - newDisabilities;
-			disabledPopulation += newDisabilities - disabledDeaths;
-		}
-	
-		const totalPopulation = nonDisabledPopulation + disabledPopulation;
-		return { totalPopulation, disabledPopulation };
-	}`}
-</pre>
-
 <style lang="scss">
-	@import '/src/styles/mixins.scss';
+	@use '/src/styles/mixins.scss';
 
 	label {
 		cursor: pointer;
@@ -164,7 +140,7 @@
 		margin-top: var(--spacing-8);
 		margin-bottom: var(--spacing-32);
 
-		@include respond('mobile') {
+		@include mixins.respond('mobile') {
 			margin-bottom: 0;
 		}
 

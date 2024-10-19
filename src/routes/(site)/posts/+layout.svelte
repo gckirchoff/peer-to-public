@@ -29,9 +29,9 @@
 </PageWrapper>
 
 <style lang="scss">
-	@import '/src/styles/mixins.scss';
+	@use '/src/styles/mixins.scss';
 
 	.layout {
-		@include base-layout;
+		@include mixins.base-layout;
 	}
 </style>

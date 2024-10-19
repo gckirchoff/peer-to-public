@@ -1,4 +1,4 @@
-@import './color-palette.scss';
+@use 'color-palette.scss';
 
 html[color-theme='dark'] {
 	/* Palette ---------------------------------- */
@@ -10,13 +10,13 @@ html[color-theme='dark'] {
 	$clr-error: #d41976;
 	$clr-surface: #083d77;
 
-	@include color-palette(primary, $clr-primary, true);
-	@include color-palette(secondary, $clr-secondary, true);
-	@include color-palette(tertiary, $clr-tertiary, true);
-	@include color-palette(success, $clr-success, true);
-	@include color-palette(warning, $clr-warning, true);
-	@include color-palette(error, $clr-error, true);
-	@include color-palette(surface, $clr-surface, true);
+	@include color-palette.color-palette(primary, $clr-primary, true);
+	@include color-palette.color-palette(secondary, $clr-secondary, true);
+	@include color-palette.color-palette(tertiary, $clr-tertiary, true);
+	@include color-palette.color-palette(success, $clr-success, true);
+	@include color-palette.color-palette(warning, $clr-warning, true);
+	@include color-palette.color-palette(error, $clr-error, true);
+	@include color-palette.color-palette(surface, $clr-surface, true);
 
 	$clr-txt: hsl(0 0% 98%);
 	$clr-txt-neg: hsl(220 10% 10%);
@@ -29,16 +29,16 @@ html[color-theme='dark'] {
 	$clr-text-on-surface: $clr-txt;
 	$clr-link-txt: $clr-primary;
 
-	@include color-palette(txt, $clr-txt, true);
-	@include color-palette(txt-neg, $clr-txt-neg, true);
-	@include color-palette(text-on-primary, $clr-text-on-primary, true);
-	@include color-palette(text-on-secondary, $clr-text-on-secondary, true);
-	@include color-palette(text-on-tertiary, $clr-text-on-tertiary, true);
-	@include color-palette(text-on-success, $clr-text-on-success, true);
-	@include color-palette(text-on-warning, $clr-text-on-warning, true);
-	@include color-palette(text-on-error, $clr-text-on-error, true);
-	@include color-palette(text-on-surface, $clr-text-on-surface, true);
-	@include color-palette(link-txt, $clr-link-txt, true);
+	@include color-palette.color-palette(txt, $clr-txt, true);
+	@include color-palette.color-palette(txt-neg, $clr-txt-neg, true);
+	@include color-palette.color-palette(text-on-primary, $clr-text-on-primary, true);
+	@include color-palette.color-palette(text-on-secondary, $clr-text-on-secondary, true);
+	@include color-palette.color-palette(text-on-tertiary, $clr-text-on-tertiary, true);
+	@include color-palette.color-palette(text-on-success, $clr-text-on-success, true);
+	@include color-palette.color-palette(text-on-warning, $clr-text-on-warning, true);
+	@include color-palette.color-palette(text-on-error, $clr-text-on-error, true);
+	@include color-palette.color-palette(text-on-surface, $clr-text-on-surface, true);
+	@include color-palette.color-palette(link-txt, $clr-link-txt, true);
 	/* ------------------------------------------ */
 
 	/* Post */
@@ -75,13 +75,13 @@ html[color-theme='light'] {
 	//084B83
 	// yale 083D77
 
-	@include color-palette(primary, $clr-primary);
-	@include color-palette(secondary, $clr-secondary);
-	@include color-palette(tertiary, $clr-tertiary);
-	@include color-palette(success, $clr-success);
-	@include color-palette(warning, $clr-warning);
-	@include color-palette(error, $clr-error);
-	@include color-palette(surface, $clr-surface);
+	@include color-palette.color-palette(primary, $clr-primary);
+	@include color-palette.color-palette(secondary, $clr-secondary);
+	@include color-palette.color-palette(tertiary, $clr-tertiary);
+	@include color-palette.color-palette(success, $clr-success);
+	@include color-palette.color-palette(warning, $clr-warning);
+	@include color-palette.color-palette(error, $clr-error);
+	@include color-palette.color-palette(surface, $clr-surface);
 
 	$clr-txt: hsl(220 10% 10%);
 	$clr-txt-neg: hsl(0 0% 98%);
@@ -94,16 +94,16 @@ html[color-theme='light'] {
 	$clr-text-on-surface: $clr-txt-neg;
 	$clr-link-txt: $clr-primary;
 
-	@include color-palette(txt, $clr-txt);
-	@include color-palette(txt-neg, $clr-txt-neg);
-	@include color-palette(text-on-primary, $clr-text-on-primary);
-	@include color-palette(text-on-secondary, $clr-text-on-secondary);
-	@include color-palette(text-on-tertiary, $clr-text-on-tertiary);
-	@include color-palette(text-on-success, $clr-text-on-success);
-	@include color-palette(text-on-warning, $clr-text-on-warning);
-	@include color-palette(text-on-error, $clr-text-on-error);
-	@include color-palette(text-on-surface, $clr-text-on-surface);
-	@include color-palette(link-txt, $clr-link-txt);
+	@include color-palette.color-palette(txt, $clr-txt);
+	@include color-palette.color-palette(txt-neg, $clr-txt-neg);
+	@include color-palette.color-palette(text-on-primary, $clr-text-on-primary);
+	@include color-palette.color-palette(text-on-secondary, $clr-text-on-secondary);
+	@include color-palette.color-palette(text-on-tertiary, $clr-text-on-tertiary);
+	@include color-palette.color-palette(text-on-success, $clr-text-on-success);
+	@include color-palette.color-palette(text-on-warning, $clr-text-on-warning);
+	@include color-palette.color-palette(text-on-error, $clr-text-on-error);
+	@include color-palette.color-palette(text-on-surface, $clr-text-on-surface);
+	@include color-palette.color-palette(link-txt, $clr-link-txt);
 	
 	/* ------------------------------------------ */
 
