@@ -92,7 +92,8 @@
 					stroke-width={1}
 					onmouseenter={() => setTooltipData(d)}
 					onfocus={() => setTooltipData(d)}
-					
+					onmouseleave={removeTooltipData}
+					onblur={removeTooltipData}
 					role="figure"
 				/>
 			{/each}
