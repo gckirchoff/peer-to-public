@@ -92,6 +92,7 @@ const collapseThreshold = 0.4;
 const probabilitiesOfExaggeratedMortality = [
 	0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1,
 ];
+
 const probabilitiesOfStabeleAttenuation = [
 	0.0025, 0.005, 0.0075, 0.01, 0.0125, 0.015, 0.0175, 0.02, 0.025, 0.025,
 ];
@@ -120,3 +121,56 @@ export const generateOverallData = () => {
 
 	return heatmapData;
 };
+
+function simulatePopulationDynamics(
+	numSimulations: number,
+	years: number,
+	wavesPerYear: number,
+	populationGrowthRate: number,
+	probOfHighMortalityWave: number,
+	probOfAttenuation: number,
+	populationDeclinePerNormalWave: number,
+	populationDeclinePerHighWave: number,
+	percentLossOfPopulationCrisisThreshold: number,
+): { crisisTimes: number[]; attenuationTimes: number[] } {
+	const crisisTimes: number[] = [];
+	const attenuationTimes: number[] = [];
+
+	for (let sim = 0; sim < numSimulations; sim++) {
+		let population = 1.0;
+		let stable_attenuation = false;
+
+		for (let year = 0; year < years; year++) {
+			population *= 1 + populationGrowthRate;
+
+			for (let wave = 0; wave < wavesPerYear; wave++) {
+				const has_attenuated = Math.random() < probOfAttenuation;
+				if (has_attenuated) {
+					stable_attenuation = true;
+					attenuationTimes.push(year);
+					break;
+				}
+
+				const is_high_mortality_wave =
+					Math.random() < probOfHighMortalityWave && !stable_attenuation;
+				if (is_high_mortality_wave) {
+					population *= 1 - populationDeclinePerHighWave;
+				} else {
+					population *= 1 - populationDeclinePerNormalWave;
+				}
+
+				const crisis_occurred = population <= percentLossOfPopulationCrisisThreshold;
+				if (crisis_occurred) {
+					crisisTimes.push(year + wave / wavesPerYear);
+					break;
+				}
+			}
+
+			if (population <= percentLossOfPopulationCrisisThreshold || stable_attenuation) {
+				break;
+			}
+		}
+	}
+
+	return { crisisTimes, attenuationTimes };
+}
