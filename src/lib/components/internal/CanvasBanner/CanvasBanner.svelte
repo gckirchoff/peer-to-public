@@ -207,7 +207,7 @@
 
 	// Resize canvas to fit the parent element
 	function resizeCanvas(): void {
-		const parent = canvas.parentElement;
+		const parent = canvas?.parentElement;
 		if (parent) {
 			const rect = parent.getBoundingClientRect();
 			width = canvas.width = rect.width;
@@ -225,7 +225,7 @@
 		animate();
 
 		// Observe parent element size changes
-		const parent = canvas.parentElement;
+		const parent = canvas?.parentElement;
 		let resizeObserver: ResizeObserver;
 
 		if (parent) {
