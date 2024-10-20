@@ -52,9 +52,6 @@
 	<div class="monte-carlo-sim">
 		<HeatMap data={overallData} colorScheme={interpolateMagma} />
 	</div>
-	<div class="year-input">
-		<input type="range" min={0} max={100} bind:value={year} />
-	</div>
 </div>
 
 <style lang="scss">
