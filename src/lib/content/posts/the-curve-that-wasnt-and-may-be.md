@@ -4,9 +4,9 @@ description: "The curve of new infections never flattened while the curve of Lon
 categories: [ "covid-19" ]
 authors: [ "Gregory Kirchoff" ]
 coverImage: "default-background-7.jpg"
-date: 'Sat Oct 19 2024 17:15:32 GMT-0400 (Eastern Daylight Time)'
-published: false
-updated: 'Sat Oct 19 2024 17:16:45 GMT-0400 (Eastern Daylight Time)'
+date: 'Sun Oct 20 2024 13:22:53 GMT-0400 (Eastern Daylight Time)'
+published: true
+
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
