@@ -1,5 +1,5 @@
-import type { Data } from './constants';
+import type { HeatmapData } from './constants';
 
-export const xAccessor = (d: Data) => d.x;
-export const yAccessor = (d: Data) => d.y;
-export const valueAccessor = (d: Data) => d.value;
+export const xAccessor = (d: HeatmapData) => d.x;
+export const yAccessor = (d: HeatmapData) => d.y;
+export const valueAccessor = (d: HeatmapData) => d.value;
