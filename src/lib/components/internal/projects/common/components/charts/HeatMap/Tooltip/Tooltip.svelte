@@ -32,6 +32,8 @@
 		padding: 4px;
 		margin-left: 15px;
 		transform: translateY(-50%);
+		transition: all 150ms ease;
+		pointer-events: none;
 
 		&::after {
 			content: '';

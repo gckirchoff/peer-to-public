@@ -11,10 +11,17 @@
 </script>
 
 <polygon
+	style="transform: translate(0, {triangleY}px);"
 	points={`
-                ${0 + xNudge},${triangleY} 
-                ${0 - triangleWidth + xNudge},${triangleY - triangleHeight / 2} 
-                ${0 - triangleWidth + xNudge},${triangleY + triangleHeight / 2}
+                ${0 + xNudge},${0} 
+                ${0 - triangleWidth + xNudge},${0 - triangleHeight / 2} 
+                ${0 - triangleWidth + xNudge},${0 + triangleHeight / 2}
               `}
 	fill="grey"
 />
+
+<style lang="scss">
+	polygon {
+		transition: all 100ms ease;
+	}
+</style>
