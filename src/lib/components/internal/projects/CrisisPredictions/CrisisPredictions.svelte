@@ -1,11 +1,14 @@
 <script lang="ts">
-	import HeatMap from '../common/components/charts/HeatMap/HeatMap.svelte';
+	import { interpolateMagma } from 'd3-scale-chromatic';
 
-	import { data } from './logic';
+	import HeatMap from '../common/components/charts/HeatMap/HeatMap.svelte';
+	import { data, generateOverallData } from './logic';
+
+	const overallData = generateOverallData();
 </script>
 
 <div class="chart-container">
-	<HeatMap {data} />
+	<HeatMap data={overallData} colorScheme={interpolateMagma} />
 </div>
 
 <style lang="scss">
