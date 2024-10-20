@@ -1,6 +1,6 @@
 import type { interpolateInferno } from 'd3-scale-chromatic';
 
-export interface Data {
+export interface HeatmapData {
 	x: string;
 	y: string;
 	value: number;
@@ -14,12 +14,14 @@ export interface Margin {
 }
 
 export interface Props {
-	data: Data[];
+	data: HeatmapData[];
 	margin?: Partial<Margin>;
 	colorScheme?: typeof interpolateInferno;
+	selectedData?: HeatmapData | null;
 }
 
 export interface TooltipData {
+	id: string;
 	xLabel: string;
 	yLabel: string;
 	xPosition: number;
@@ -28,5 +30,6 @@ export interface TooltipData {
 }
 
 export const squarePadding = 0.075;
+export const squareHoverScale = 0.2;
 
 export const defaultMargin = { top: 10, left: 70, right: 100, bottom: 30 };

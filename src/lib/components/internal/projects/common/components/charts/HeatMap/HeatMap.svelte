@@ -6,37 +6,61 @@
 	import Tooltip from './Tooltip/Tooltip.svelte';
 	import {
 		defaultMargin,
+		squareHoverScale,
 		squarePadding,
-		type Data,
+		type HeatmapData,
 		type Props,
 		type TooltipData,
 	} from './constants';
 	import { xAccessor, yAccessor, valueAccessor } from './logic';
 	import ColorLegend from './ColorLegend/ColorLegend.svelte';
 
-	let { data, margin = {}, colorScheme = interpolateInferno }: Props = $props();
+	let {
+		data,
+		margin = {},
+		colorScheme = interpolateInferno,
+		selectedData = $bindable(),
+	}: Props = $props();
 
 	let usedMargin = $derived({ ...defaultMargin, ...margin });
 
 	let width = $state(0);
 	let height = $state(0);
 
+	const extractInfoFromSelection = (data: HeatmapData): TooltipData => ({
+		id: `${xAccessor(data)}-${yAccessor(data)}`,
+		xLabel: xAccessor(data),
+		yLabel: yAccessor(data),
+		xPosition: (xScale(xAccessor(data)) ?? 0) + xScale.bandwidth() + usedMargin.left,
+		yPosition: (yScale(yAccessor(data)) ?? 0) + yScale.bandwidth() * 0.5 + usedMargin.top,
+		value: Math.round(data.value * 100) / 100,
+	});
+
 	let tooltipData: TooltipData | null = $state(null);
 
-	const setTooltipData = (data: Data) => {
-		const hoveredData: TooltipData = {
-			xLabel: xAccessor(data),
-			yLabel: yAccessor(data),
-			xPosition: (xScale(xAccessor(data)) ?? 0) + xScale.bandwidth() + usedMargin.left,
-			yPosition: (yScale(yAccessor(data)) ?? 0) + yScale.bandwidth() * 0.5 + usedMargin.top,
-			value: Math.round(data.value * 100) / 100,
-		};
+	const setTooltipData = (data: HeatmapData) => {
+		const hoveredData = extractInfoFromSelection(data);
 		tooltipData = hoveredData;
 	};
 
 	const removeTooltipData = () => {
 		tooltipData = null;
 	};
+
+	const equalsHoveredData = (d: HeatmapData): boolean =>
+		`${xAccessor(d)}-${yAccessor(d)}` === tooltipData?.id;
+
+	const setSelectedData = (data: HeatmapData) => {
+		if (selectedData === undefined) {
+			return;
+		}
+		selectedData = data;
+	};
+
+	const equalsSelectedData = (d: HeatmapData): boolean =>
+		selectedData !== null &&
+		selectedData !== undefined &&
+		`${xAccessor(d)}-${yAccessor(d)}` === extractInfoFromSelection(selectedData)?.id;
 
 	let allXGroups = $derived([...new Set(data.map(({ x }) => x))]);
 	let allYGroups = $derived([...new Set(data.map(({ y }) => y))]);
@@ -88,19 +112,53 @@
 			{/each}
 			{#each data as d}
 				<rect
-					x={xScale(xAccessor(d))}
-					y={yScale(yAccessor(d))}
-					width={xScale.bandwidth()}
-					height={yScale.bandwidth()}
+					x={(xScale(xAccessor(d)) ?? 0) -
+						(equalsHoveredData(d) || equalsSelectedData(d)
+							? xScale.bandwidth() * squareHoverScale * 0.5
+							: 0)}
+					y={(yScale(yAccessor(d)) ?? 0) -
+						(equalsHoveredData(d) || equalsSelectedData(d)
+							? yScale.bandwidth() * squareHoverScale * 0.5
+							: 0)}
+					width={xScale.bandwidth() +
+						(equalsHoveredData(d) || equalsSelectedData(d)
+							? xScale.bandwidth() * squareHoverScale
+							: 0)}
+					height={yScale.bandwidth() +
+						(equalsHoveredData(d) || equalsSelectedData(d)
+							? yScale.bandwidth() * squareHoverScale
+							: 0)}
 					fill={colorScale(valueAccessor(d))}
+					opacity={tooltipData && !equalsHoveredData(d) ? 0.7 : 1}
 					rx={3}
-					stroke="#fff"
-					stroke-width={1}
+					stroke={equalsSelectedData(d) ? '#000' : '#fff'}
+					stroke-width={equalsSelectedData(d) ? 2 : 1}
+					onclick={() => setSelectedData(d)}
+					onkeydown={(e) => {
+						if (e.key !== 'Enter') return;
+						e.preventDefault();
+						setSelectedData(d);
+					}}
 					onmouseenter={() => setTooltipData(d)}
 					onfocus={() => setTooltipData(d)}
-					role="figure"
+					role="presentation"
 				/>
 			{/each}
+			{#if selectedData}
+				<rect
+					x={(xScale(xAccessor(selectedData)) ?? 0) - xScale.bandwidth() * squareHoverScale * 0.5}
+					y={(yScale(yAccessor(selectedData)) ?? 0) - yScale.bandwidth() * squareHoverScale * 0.5}
+					width={xScale.bandwidth() + xScale.bandwidth() * squareHoverScale}
+					height={yScale.bandwidth() + yScale.bandwidth() * squareHoverScale}
+					fill={colorScale(valueAccessor(selectedData))}
+					rx={3}
+					stroke="#000"
+					stroke-width={2}
+					onmouseenter={() => setTooltipData(selectedData as HeatmapData)}
+					onfocus={() => setTooltipData(selectedData as HeatmapData)}
+					role="presentation"
+				/>
+			{/if}
 		</g>
 	</svg>
 	<ColorLegend {colorScale} {chartWidth} {chartHeight} {tooltipData} />
@@ -121,6 +179,7 @@
 
 			rect {
 				transform-origin: center;
+				cursor: pointer;
 
 				&:hover {
 					box-shadow: var(--shadow-lg);
