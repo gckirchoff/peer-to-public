@@ -58,7 +58,13 @@
 </script>
 
 <div class="chart-container heatmap" bind:clientWidth={width} bind:clientHeight={height}>
-	<svg {width} {height}>
+	<svg
+		{width}
+		{height}
+		onmouseleave={removeTooltipData}
+		onblur={removeTooltipData}
+		role="application"
+	>
 		<g style="transform: translate({usedMargin.left}px, {usedMargin.top}px);">
 			{#each allXGroups as xLabel}
 				<text
@@ -92,8 +98,6 @@
 					stroke-width={1}
 					onmouseenter={() => setTooltipData(d)}
 					onfocus={() => setTooltipData(d)}
-					onmouseleave={removeTooltipData}
-					onblur={removeTooltipData}
 					role="figure"
 				/>
 			{/each}
@@ -110,15 +114,21 @@
 		position: relative;
 		height: 100%;
 
-		rect {
-			transform-origin: center;
-
-			&:hover {
-				box-shadow: var(--shadow-lg);
-			}
-
+		svg {
 			&:focus {
 				outline: none;
+			}
+
+			rect {
+				transform-origin: center;
+
+				&:hover {
+					box-shadow: var(--shadow-lg);
+				}
+
+				&:focus {
+					outline: none;
+				}
 			}
 		}
 	}
