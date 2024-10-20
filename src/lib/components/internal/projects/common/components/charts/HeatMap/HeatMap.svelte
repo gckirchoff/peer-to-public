@@ -4,12 +4,19 @@
 	import { interpolateInferno } from 'd3-scale-chromatic';
 
 	import Tooltip from './Tooltip/Tooltip.svelte';
-	import { squarePadding, type Data, type Props, type TooltipData } from './constants';
+	import {
+		defaultMargin,
+		squarePadding,
+		type Data,
+		type Props,
+		type TooltipData,
+	} from './constants';
 	import { xAccessor, yAccessor, valueAccessor } from './logic';
+	import ColorLegend from './ColorLegend/ColorLegend.svelte';
 
 	let { data, margin = {}, colorScheme = interpolateInferno }: Props = $props();
 
-	let usedMargin = $derived({ top: 10, left: 40, right: 10, bottom: 30, ...margin });
+	let usedMargin = $derived({ ...defaultMargin, ...margin });
 
 	let width = $state(0);
 	let height = $state(0);
@@ -85,13 +92,13 @@
 					stroke-width={1}
 					onmouseenter={() => setTooltipData(d)}
 					onfocus={() => setTooltipData(d)}
-					onmouseleave={removeTooltipData}
-					onblur={removeTooltipData}
+					
 					role="figure"
 				/>
 			{/each}
 		</g>
 	</svg>
+	<ColorLegend {colorScale} {chartWidth} {chartHeight} {tooltipData} />
 	{#if tooltipData}
 		<Tooltip {tooltipData} />
 	{/if}

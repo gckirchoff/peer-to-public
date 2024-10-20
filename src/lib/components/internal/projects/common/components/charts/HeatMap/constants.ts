@@ -28,3 +28,5 @@ export interface TooltipData {
 }
 
 export const squarePadding = 0.075;
+
+export const defaultMargin = { top: 10, left: 40, right: 100, bottom: 30 };
