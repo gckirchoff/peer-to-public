@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { extent } from 'd3-array';
 	import { scaleBand, scaleSequential } from 'd3-scale';
-	import { interpolateInferno } from 'd3-scale-chromatic';
+	import { interpolateMagma } from 'd3-scale-chromatic';
 
 	import Tooltip from './Tooltip/Tooltip.svelte';
 	import {
@@ -21,7 +21,7 @@
 		xLabel,
 		yLabel,
 		margin = {},
-		colorScheme = interpolateInferno,
+		colorScheme = interpolateMagma,
 		selectedData = $bindable(),
 		valueDomain,
 	}: Props = $props();
