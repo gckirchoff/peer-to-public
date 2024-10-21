@@ -5,6 +5,7 @@
 	import AxisY from '../common/AxisY/AxisY.svelte';
 	import AnimatedRectangle from '../common/AnimatedRectangle/AnimatedRectangle.svelte';
 	import { defaultMargin, type HistogramProps, bucketPadding } from './constants';
+	import Legend from './Legend/Legend.svelte';
 
 	let { series, yLabel, bucketNumber = 15, xDomain, yDomain, margin }: HistogramProps = $props();
 
@@ -73,6 +74,7 @@
 					/>
 				{/each}
 			{/each}
+			<Legend {colorScale} {chartWidth} {chartHeight} />
 		</g>
 	</svg>
 </div>
