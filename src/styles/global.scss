@@ -98,6 +98,10 @@ body {
 	background-color: var(--clr-surface-50);
 }
 
+text {
+	fill: var(--clr-txt-500);
+}
+
 html[data-font='dyslexic'] body,
 html[data-font='dyslexic'] h1,
 html[data-font='dyslexic'] h2,
