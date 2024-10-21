@@ -4,9 +4,8 @@
 
 	import type { AnimatedRectangleProps } from './constants';
 
-	let { x, y, width, height, ...rest }: AnimatedRectangleProps = $props();
+	let { x, y, width, height, animationOptions, ...rest }: AnimatedRectangleProps = $props();
 
-	let renders = $state(0);
 	let animated = tweened(
 		{
 			x,
@@ -16,9 +15,11 @@
 		},
 		{
 			easing: easeCubicInOut,
+			...animationOptions,
 		},
 	);
 
+	let renders = $state(0);
 	$effect(() => {
 		// Hacky way to stop initial render
 		// having everything fly in from top left.
