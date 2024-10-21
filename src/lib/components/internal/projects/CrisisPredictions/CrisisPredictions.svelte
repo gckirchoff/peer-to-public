@@ -2,11 +2,13 @@
 	import { interpolateMagma } from 'd3-scale-chromatic';
 
 	import HeatMap from '../common/components/charts/HeatMap/HeatMap.svelte';
+	import Histogram from '../common/components/charts/Histogram/Histogram.svelte';
 	import type { HeatmapData } from '../common/components/charts/HeatMap/constants';
 	import {
 		generateOverallData,
 		getParamsFromSelectedData,
 		simulatePopulationDynamics,
+		simulatePopulationDynamicsV2,
 	} from './logic';
 	import { Body1, H4 } from '../../typography';
 	import {
@@ -35,7 +37,16 @@
 		}),
 	);
 
-	$inspect(simResults);
+	let simData = $derived([
+		{
+			group: 'Attenuations',
+			values: simResults.attenuationTimes,
+		},
+		{
+			group: 'Crises',
+			values: simResults.crisisTimes,
+		},
+	]);
 </script>
 
 <div class="dashboard">
@@ -50,7 +61,7 @@
 		/>
 	</div>
 	<div class="monte-carlo-sim">
-		<HeatMap data={overallData} colorScheme={interpolateMagma} />
+		<Histogram series={simData} yLabel="Frequency" xDomain={[0, 100]} yDomain={[0, 250]} />
 	</div>
 </div>
 
