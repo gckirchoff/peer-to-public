@@ -3,7 +3,7 @@
 
 	import AxisX from '../common/AxisX/AxisX.svelte';
 	import AxisY from '../common/AxisY/AxisY.svelte';
-	import Rectangle from './Rectangle/Rectangle.svelte';
+	import AnimatedRectangle from '../common/AnimatedRectangle/AnimatedRectangle.svelte';
 	import { defaultMargin, type HistogramProps, bucketPadding } from './constants';
 
 	let { series, yLabel, bucketNumber = 15, xDomain, yDomain, margin }: HistogramProps = $props();
@@ -61,7 +61,7 @@
 			<AxisY {yScale} innerChartWidth={chartWidth} label={yLabel} />
 			{#each groupBuckets as group}
 				{#each group.buckets as bucket}
-					<Rectangle
+					<AnimatedRectangle
 						x={xScale(bucket.x0 as number) + bucketPadding * 0.5}
 						y={yScale(bucket.length)}
 						width={xScale(bucket.x1 as number) - xScale(bucket.x0 as number) - bucketPadding}

@@ -1,4 +1,4 @@
-export interface RectangleProps {
+export interface AnimatedRectangleProps {
 	x?: number;
 	y?: number;
 	width?: number;

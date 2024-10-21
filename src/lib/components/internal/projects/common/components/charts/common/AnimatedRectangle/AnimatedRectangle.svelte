@@ -2,9 +2,9 @@
 	import { tweened } from 'svelte/motion';
 	import { easeCubicInOut } from 'd3';
 
-	import type { RectangleProps } from './constants';
+	import type { AnimatedRectangleProps } from './constants';
 
-	let { x, y, width, height, ...rest }: RectangleProps = $props();
+	let { x, y, width, height, ...rest }: AnimatedRectangleProps = $props();
 
 	let animated = tweened(
 		{
