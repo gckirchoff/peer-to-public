@@ -16,6 +16,7 @@ export interface Props {
 	margin?: Partial<Margin>;
 	colorScheme?: typeof interpolateInferno;
 	selectedData?: HeatmapData | null;
+	valueDomain?: [number, number];
 }
 
 export interface TooltipData {

@@ -23,6 +23,7 @@
 		margin = {},
 		colorScheme = interpolateInferno,
 		selectedData = $bindable(),
+		valueDomain,
 	}: Props = $props();
 
 	let usedMargin = $derived({ ...defaultMargin, ...margin });
@@ -80,7 +81,7 @@
 	let colorScale = $derived(
 		scaleSequential()
 			.interpolator(colorScheme)
-			.domain(extent(data, (d) => d.value) as [number, number]),
+			.domain(valueDomain ?? (extent(data, (d) => d.value) as [number, number])),
 	);
 </script>
 
