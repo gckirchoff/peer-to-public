@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { interpolateMagma } from 'd3-scale-chromatic';
-
 	import HeatMap from '../common/components/charts/HeatMap/HeatMap.svelte';
 	import Histogram from '../common/components/charts/Histogram/Histogram.svelte';
 	import type { HeatmapData } from '../common/components/charts/HeatMap/constants';
@@ -8,9 +6,7 @@
 		generateOverallData,
 		getParamsFromSelectedData,
 		simulatePopulationDynamics,
-		simulatePopulationDynamicsV2,
 	} from './logic';
-	import { Body1, H4 } from '../../typography';
 	import {
 		baselineMortality,
 		collapseThreshold,
@@ -55,7 +51,6 @@
 			title="Overall Chance of Attenuation Before Crisis"
 			xLabel="Chance of Exaggerated Mortality/Wave"
 			yLabel="Chance of Stable Attenuation"
-			colorScheme={interpolateMagma}
 			bind:selectedData={selectedOverallData}
 			valueDomain={[0, 100]}
 		/>
