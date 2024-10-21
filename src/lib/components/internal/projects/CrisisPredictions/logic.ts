@@ -181,6 +181,52 @@ export const simulatePopulationDynamics = ({
 	return { crisisTimes, attenuationTimes };
 };
 
+function simPopulationDynamics({
+	numSimulations = 1000,
+	wavesPerYear,
+	probOfHighMortalityWave,
+	probOfAttenuation,
+	populationDeclinePerNormalWave,
+	populationDeclinePerHighWave,
+	percentLossOfPopulationCrisisThreshold,
+}: SimulatePopulationDynamicsProps): [number, string] {
+	let population = 1;
+	let years = 0;
+
+	while (population > percentLossOfPopulationCrisisThreshold) {
+		years += 1 / wavesPerYear;
+
+		if (Math.random() < probOfHighMortalityWave) {
+			population *= 1 - populationDeclinePerHighWave;
+		} else {
+			population *= 1 - populationDeclinePerNormalWave;
+		}
+		if (Math.random() < probOfAttenuation) {
+			return [years, 'attenuation'];
+		}
+	}
+
+	return [years, 'extinction'];
+}
+
+export const simulatePopulationDynamicsV2 = (args: SimulatePopulationDynamicsProps) => {
+	const crisisTimes: number[] = [];
+	const attenuationTimes: number[] = [];
+
+	const sims = args.numSimulations ?? 1000;
+
+	for (let i = 0; i < sims; i++) {
+		const [years, outcome] = simPopulationDynamics(args);
+		if (outcome === 'extinction') {
+			crisisTimes.push(years);
+		} else {
+			attenuationTimes.push(years);
+		}
+	}
+
+	return { crisisTimes, attenuationTimes };
+};
+
 export const getParamsFromSelectedData = (data: HeatmapData) => ({
 	pStableAttenuation: Number(data.x.slice(0, -1)) / 100,
 	pExaggeratedMortality: Number(data.y.slice(0, -1)) / 100,
