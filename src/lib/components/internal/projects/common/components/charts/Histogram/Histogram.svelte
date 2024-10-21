@@ -7,7 +7,16 @@
 	import { defaultMargin, type HistogramProps, bucketPadding } from './constants';
 	import Legend from './Legend/Legend.svelte';
 
-	let { series, yLabel, bucketNumber = 30, xDomain, yDomain, margin }: HistogramProps = $props();
+	let {
+		series,
+		title,
+		yLabel,
+		xLabel,
+		bucketNumber = 30,
+		xDomain,
+		yDomain,
+		margin,
+	}: HistogramProps = $props();
 
 	let width = $state(0);
 	let height = $state(0);
@@ -58,7 +67,8 @@
 <div class="chart-container histogram" bind:clientWidth={width} bind:clientHeight={height}>
 	<svg {width} {height}>
 		<g style="transform: translate({usedMargin.left}px, {usedMargin.top}px);">
-			<AxisX {xScale} innerChartWidth={chartWidth} innerChartHeight={chartHeight} label="Years" />
+			<text x={chartWidth * 0.5} text-anchor="middle" dominant-baseline="middle">{title}</text>
+			<AxisX {xScale} innerChartWidth={chartWidth} innerChartHeight={chartHeight} label={xLabel} />
 			<AxisY {yScale} innerChartWidth={chartWidth} label={yLabel} />
 			{#each groupBuckets as group}
 				{#each group.buckets as bucket, i}

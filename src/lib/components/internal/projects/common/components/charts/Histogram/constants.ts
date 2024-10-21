@@ -7,6 +7,8 @@ export interface Series {
 
 export interface HistogramProps {
 	series: Series[];
+	title: string;
+	xLabel: string;
 	yLabel: string;
 	bucketNumber?: number;
 	xDomain?: [number, number];
