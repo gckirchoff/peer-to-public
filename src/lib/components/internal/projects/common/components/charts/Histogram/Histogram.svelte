@@ -7,7 +7,7 @@
 	import { defaultMargin, type HistogramProps, bucketPadding } from './constants';
 	import Legend from './Legend/Legend.svelte';
 
-	let { series, yLabel, bucketNumber = 15, xDomain, yDomain, margin }: HistogramProps = $props();
+	let { series, yLabel, bucketNumber = 30, xDomain, yDomain, margin }: HistogramProps = $props();
 
 	let width = $state(0);
 	let height = $state(0);
@@ -61,7 +61,7 @@
 			<AxisX {xScale} innerChartWidth={chartWidth} innerChartHeight={chartHeight} label="Years" />
 			<AxisY {yScale} innerChartWidth={chartWidth} label={yLabel} />
 			{#each groupBuckets as group}
-				{#each group.buckets as bucket}
+				{#each group.buckets as bucket, i}
 					<AnimatedRectangle
 						x={xScale(bucket.x0 as number) + bucketPadding * 0.5}
 						y={yScale(bucket.length)}
@@ -71,6 +71,7 @@
 						stroke={colorScale(group.group.group)}
 						stroke-width={2}
 						opacity={0.7}
+						animationOptions={{ delay: i * 10 }}
 					/>
 				{/each}
 			{/each}
