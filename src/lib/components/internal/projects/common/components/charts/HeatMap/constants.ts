@@ -1,16 +1,11 @@
 import type { interpolateInferno } from 'd3-scale-chromatic';
 
+import type { Margin } from '../constants';
+
 export interface HeatmapData {
 	x: string;
 	y: string;
 	value: number;
-}
-
-export interface Margin {
-	top: number;
-	left: number;
-	right: number;
-	bottom: number;
 }
 
 export interface Props {
