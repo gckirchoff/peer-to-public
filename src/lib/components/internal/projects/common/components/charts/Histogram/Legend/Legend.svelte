@@ -24,9 +24,9 @@
 		y={-maxTextHeight}
 		width={maxTextLength + 40}
 		height={groups.length * maxTextHeight * 1.05 + maxTextHeight}
-		fill="white"
+		fill="var(--clr-txt-neg-500)"
 		opacity="0.4"
-		stroke="black"
+		stroke="var(--clr-txt-500)"
 	/>
 	{#each groups as group, i}
 		<g style="transform: translate(0px, {maxTextHeight * 1.05 * i}px);">
