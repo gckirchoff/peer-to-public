@@ -82,7 +82,7 @@
 <div class="chart-container" bind:clientWidth={width} role="application">
 	<svg {width} {height}>
 		<g style="transform: translate({margin.left}px, {margin.top}px)">
-			<AxisX {xScale} {innerChartWidth} {innerChartHeight} />
+			<AxisX {xScale} {innerChartWidth} {innerChartHeight} label="Years" />
 			<AxisY
 				label={view === 'population' ? 'Population' : 'Percent with Long Covid'}
 				{yScale}

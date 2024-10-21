@@ -57,7 +57,7 @@
 <div class="chart-container histogram" bind:clientWidth={width} bind:clientHeight={height}>
 	<svg {width} {height}>
 		<g style="transform: translate({usedMargin.left}px, {usedMargin.top}px);">
-			<AxisX {xScale} innerChartWidth={chartWidth} innerChartHeight={chartHeight} />
+			<AxisX {xScale} innerChartWidth={chartWidth} innerChartHeight={chartHeight} label="Years" />
 			<AxisY {yScale} innerChartWidth={chartWidth} label={yLabel} />
 			{#each groupBuckets as group}
 				{#each group.buckets as bucket}
