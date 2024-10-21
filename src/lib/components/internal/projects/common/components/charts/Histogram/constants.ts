@@ -18,7 +18,7 @@ export const defaultMargin: Margin = {
 	top: 10,
 	right: 20,
 	bottom: 45,
-	left: 70,
+	left: 75,
 };
 
 export const bucketPadding = 5;
