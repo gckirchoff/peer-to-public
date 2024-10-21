@@ -2,8 +2,8 @@
 	import { scaleLinear, scaleTime, extent, max, format } from 'd3';
 
 	import { Body2 } from '../../typography';
-	import AxisX from '../common/components/AxisX/AxisX.svelte';
-	import AxisY from '../common/components/AxisY/AxisY.svelte';
+	import AxisX from '../common/components/charts/common/AxisX/AxisX.svelte';
+	import AxisY from '../common/components/charts/common/AxisY/AxisY.svelte';
 	import Line from '../common/components/Line/Line.svelte';
 	import { margin } from './constants';
 	import type { PopulationByYear } from './constants';

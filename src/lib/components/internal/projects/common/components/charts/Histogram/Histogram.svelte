@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { bin, extent, scaleLinear, scaleOrdinal, schemeCategory10 } from 'd3';
 
-	import AxisX from '../../AxisX/AxisX.svelte';
-	import AxisY from '../../AxisY/AxisY.svelte';
+	import AxisX from '../common/AxisX/AxisX.svelte';
+	import AxisY from '../common/AxisY/AxisY.svelte';
 	import Rectangle from './Rectangle/Rectangle.svelte';
 	import { defaultMargin, type HistogramProps, bucketPadding } from './constants';
 
