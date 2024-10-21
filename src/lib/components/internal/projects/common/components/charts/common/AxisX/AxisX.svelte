@@ -3,6 +3,7 @@
 	import type { ScaleLinear, ScaleTime } from 'd3';
 
 	export let xScale: ScaleLinear<number, number, never> | ScaleTime<number, number, never>;
+	export let label: string;
 	export let innerChartWidth: number;
 	export let innerChartHeight: number;
 
@@ -18,7 +19,7 @@
 			</text>
 		</g>
 	{/each}
-	<text x={innerChartWidth * 0.5} y={45} text-anchor="middle">Years</text>
+	<text x={innerChartWidth * 0.5} y={45} text-anchor="middle">{label}</text>
 </g>
 
 <style lang="scss">

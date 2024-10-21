@@ -148,8 +148,8 @@ export function forecastPopulationWithDisabilityV2({
 		// Deaths
 		const nonDisabledDeaths = nonDisabledPopulation * annualDeathRate;
 		const disabledDeaths = disabledPopulation * annualDisabledDeathRate;
-		nonDisabledPopulation -= nonDisabledDeaths;
-		disabledPopulation -= disabledDeaths;
+		nonDisabledPopulation = Math.max(nonDisabledPopulation - nonDisabledDeaths, 0);
+		disabledPopulation = Math.max(disabledPopulation - disabledDeaths, 0);
 
 		// Disabilities
 		proportionsInfectedThroughYear.forEach((proportionInfected) => {
@@ -159,7 +159,6 @@ export function forecastPopulationWithDisabilityV2({
 			disabledPopulation += newDisabilities;
 		});
 
-		i === 0 && console.log(disabledPopulation / (disabledPopulation + nonDisabledPopulation));
 		// const chanceOfDisabilityPerPerson =
 		// 	averageNumOfInfectionsPerPersonPerYear > 1
 		// 		? 1 - Math.pow(1 - chanceOfDisabilityPerInfection, averageNumOfInfectionsPerPersonPerYear)
@@ -171,7 +170,7 @@ export function forecastPopulationWithDisabilityV2({
 	}
 
 	const totalPopulation = nonDisabledPopulation + disabledPopulation;
-	return { totalPopulation, disabledPopulation };
+	return { totalPopulation, nonDisabledPopulation, disabledPopulation };
 }
 
 export const forecastPopulationWithDisabilityOverTime = ({
