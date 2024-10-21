@@ -57,6 +57,7 @@
 			yLabel="Chance of Stable Attenuation"
 			colorScheme={interpolateMagma}
 			bind:selectedData={selectedOverallData}
+			valueDomain={[0, 100]}
 		/>
 	</div>
 	<div class="chart-container monte-carlo-sim">
