@@ -16,15 +16,13 @@
 		collapseThreshold,
 		exaggeratedMortality,
 		wavesPerYear,
+		fractionInfected,
 	} from './constants';
 
 	const overallData = generateOverallData();
 
 	let selectedOverallData: HeatmapData = $state(overallData[overallData.length / 2 - 6]);
-	let year = $state(100);
-
 	let selectedParams = $derived(getParamsFromSelectedData(selectedOverallData));
-
 	let simResults = $derived(
 		simulatePopulationDynamics({
 			percentLossOfPopulationCrisisThreshold: collapseThreshold,
@@ -33,7 +31,8 @@
 			probOfAttenuation: selectedParams.pStableAttenuation,
 			probOfHighMortalityWave: selectedParams.pExaggeratedMortality,
 			wavesPerYear,
-			years: year,
+			fractionInfected,
+			years: 100,
 		}),
 	);
 
