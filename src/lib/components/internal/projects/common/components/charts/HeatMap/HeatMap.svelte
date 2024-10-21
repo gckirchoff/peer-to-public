@@ -91,17 +91,22 @@
 	>
 		<g style="transform: translate({usedMargin.left}px, {usedMargin.top}px);">
 			{#each allXGroups as xLabel}
-				<text
-					x={(xScale(xLabel) ?? 0) + xScale.bandwidth() * 0.5}
-					y={chartHeight + 20}
-					text-anchor="middle"
-					dominant-baseline="middle"
+				<g
+					style="transform: translate({(xScale(xLabel) ?? 0) +
+						xScale.bandwidth() * 0.5}px, {chartHeight + 20}px);"
 				>
-					{xLabel}
-				</text>
+					<text
+						class="tick-text x-tick-text"
+						x={-8}
+						text-anchor="start"
+					>
+						{xLabel}
+					</text>
+				</g>
 			{/each}
 			{#each allYGroups as yLabel}
 				<text
+					class="tick-text"
 					x={-20}
 					y={(yScale(yLabel) ?? 0) + yScale.bandwidth() * 0.5}
 					text-anchor="end"
@@ -187,6 +192,18 @@
 
 				&:focus {
 					outline: none;
+				}
+			}
+
+			.tick-text {
+				font-size: var(--font-14);
+				font-family: var(--font-base);
+				user-select: none;
+				fill: #464646;
+
+				&.x-tick-text {
+					transform: rotate(50deg);
+					transform-origin: top left;
 				}
 			}
 		}
