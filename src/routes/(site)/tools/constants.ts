@@ -12,6 +12,10 @@ export const links: Link[] = [
 		title: 'Delayed Onset Disease Forecaster',
 		href: 'delayed-onset',
 	},
+	{
+		title: 'Crisis Predictions',
+		href: 'crisis-predictions',
+	},
 	// {
 	// 	title: 'Short-Term Risk Visualizer',
 	// 	href: 'gambling-with-covid',
