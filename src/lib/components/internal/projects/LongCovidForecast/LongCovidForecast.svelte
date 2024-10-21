@@ -2,8 +2,8 @@
 	import { scaleLinear, scaleTime, extent, max, format } from 'd3';
 
 	import { Body2 } from '../../typography';
-	import AxisX from '../common/components/AxisX/AxisX.svelte';
-	import AxisY from '../common/components/AxisY/AxisY.svelte';
+	import AxisX from '../common/components/charts/common/AxisX/AxisX.svelte';
+	import AxisY from '../common/components/charts/common/AxisY/AxisY.svelte';
 	import Line from '../common/components/Line/Line.svelte';
 	import { margin } from './constants';
 	import type { PopulationByYear } from './constants';
@@ -82,7 +82,7 @@
 <div class="chart-container" bind:clientWidth={width} role="application">
 	<svg {width} {height}>
 		<g style="transform: translate({margin.left}px, {margin.top}px)">
-			<AxisX {xScale} {innerChartWidth} {innerChartHeight} />
+			<AxisX {xScale} {innerChartWidth} {innerChartHeight} label="Years" />
 			<AxisY
 				label={view === 'population' ? 'Population' : 'Percent with Long Covid'}
 				{yScale}

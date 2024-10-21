@@ -13,19 +13,19 @@ export const links: Link[] = [
 		href: 'delayed-onset',
 	},
 	{
-		title: 'Signal VS Noise',
-		href: 'signal-vs-noise',
+		title: 'Crisis Predictions',
+		href: 'crisis-predictions',
 	},
-	{
-		title: 'Short-Term Risk Visualizer',
-		href: 'gambling-with-covid',
-	},
-	{
-		title: 'Top Cause of Death Comparison',
-		href: 'mortality-comparison',
-	},
-	{
-		title: 'Long-Term Risk Visualizer',
-		href: 'the-curve-that-wasnt',
-	},
+	// {
+	// 	title: 'Short-Term Risk Visualizer',
+	// 	href: 'gambling-with-covid',
+	// },
+	// {
+	// 	title: 'Top Cause of Death Comparison',
+	// 	href: 'mortality-comparison',
+	// },
+	// {
+	// 	title: 'Long-Term Risk Visualizer',
+	// 	href: 'the-curve-that-wasnt',
+	// },
 ];

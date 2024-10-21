@@ -4,10 +4,10 @@
 	import type { ColorLegendProps } from './constants';
 	import HoverTriangle from './HoverTriangle/HoverTriangle.svelte';
 
-	const width = 60;
-	const height = 200;
-
 	let { colorScale, chartWidth, chartHeight, tooltipData }: ColorLegendProps = $props();
+
+	let width = $derived(chartWidth * 0.1);
+	const height = $derived(chartHeight * 0.5);
 
 	let canvas: HTMLCanvasElement;
 
@@ -32,14 +32,14 @@
 
 <div
 	class="legend-container"
-	style="top: {chartHeight * 0.5 - height * 0.5}px; left: {chartWidth + 75}px;"
+	style="top: {chartHeight * 0.5 - height * 0.5}px; left: {chartWidth + 90}px;"
 >
 	<canvas bind:this={canvas} {width} {height}></canvas>
 	<svg {width} {height}>
 		{#each ticks as tick}
 			<g style="transform: translate(0, {yScale(tick)}px);">
-				<line x1={0} x2={width + 10} y1={0} y2={0} stroke-width={1} stroke="black" />
-				<text dx={width + 12} text-anchor="start" dominant-baseline="middle">{tick}</text>
+				<line x1={0} x2={width * 1.3} y1={0} y2={0} stroke-width={1} stroke="black" />
+				<text dx={(width * 1.3) + 4} text-anchor="start" dominant-baseline="middle">{tick}</text>
 			</g>
 		{/each}
 		{#if tooltipData}

@@ -2,53 +2,94 @@
 	import { interpolateMagma } from 'd3-scale-chromatic';
 
 	import HeatMap from '../common/components/charts/HeatMap/HeatMap.svelte';
-	import { data, generateOverallData } from './logic';
+	import Histogram from '../common/components/charts/Histogram/Histogram.svelte';
+	import type { HeatmapData } from '../common/components/charts/HeatMap/constants';
+	import {
+		generateOverallData,
+		getParamsFromSelectedData,
+		simulatePopulationDynamics,
+		simulatePopulationDynamicsV2,
+	} from './logic';
 	import { Body1, H4 } from '../../typography';
+	import {
+		baselineMortality,
+		collapseThreshold,
+		exaggeratedMortality,
+		wavesPerYear,
+	} from './constants';
 
 	const overallData = generateOverallData();
+
+	let selectedOverallData: HeatmapData = $state(overallData[overallData.length / 2 - 6]);
+	let year = $state(100);
+
+	let selectedParams = $derived(getParamsFromSelectedData(selectedOverallData));
+
+	let simResults = $derived(
+		simulatePopulationDynamics({
+			percentLossOfPopulationCrisisThreshold: collapseThreshold,
+			populationDeclinePerHighWave: exaggeratedMortality,
+			populationDeclinePerNormalWave: baselineMortality,
+			probOfAttenuation: selectedParams.pStableAttenuation,
+			probOfHighMortalityWave: selectedParams.pExaggeratedMortality,
+			wavesPerYear,
+			years: year,
+		}),
+	);
+
+	let simData = $derived([
+		{
+			group: 'Attenuations',
+			values: simResults.attenuationTimes,
+		},
+		{
+			group: 'Crises',
+			values: simResults.crisisTimes,
+		},
+	]);
 </script>
 
 <div class="dashboard">
-	<div class="title">
-		<H4>Hey</H4>
+	<div class="chart-container overall-probabilities">
+		<HeatMap
+			data={overallData}
+			title="Overall Chance of Attenuation Before Crisis"
+			xLabel="Chance of Exaggerated Mortality/Wave"
+			yLabel="Chance of Stable Attenuation"
+			colorScheme={interpolateMagma}
+			bind:selectedData={selectedOverallData}
+		/>
 	</div>
-	<div class="overall-probabilities-chart-container">
-		<HeatMap data={overallData} colorScheme={interpolateMagma} />
-	</div>
-	<div class="time-window-chart-container">
-		<HeatMap data={overallData} colorScheme={interpolateMagma} />
-	</div>
-	<div class="monte-carlo-sim">
-		<HeatMap data={overallData} colorScheme={interpolateMagma} />
+	<div class="chart-container monte-carlo-sim">
+		<Histogram
+			series={simData}
+			title="Attenuation vs Crisis Times"
+			xLabel="Years"
+			yLabel="Frequency"
+			xDomain={[0, 100]}
+			yDomain={[0, 250]}
+		/>
 	</div>
 </div>
 
 <style lang="scss">
 	.dashboard {
-		display: grid;
-		grid-template-columns: repeat(5, 1fr);
-		grid-template-rows: auto 40rem 20rem 20rem;
-		grid-template-areas:
-			'. . title . .'
-			'. overall-heatmap overall-heatmap overall-heatmap .'
-			'time-heatmap time-heatmap monte-carlo monte-carlo monte-carlo'
-			'time-heatmap time-heatmap scrubber scrubber scrubber';
+		--gap: 1%;
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--gap);
 
-		.title {
-			grid-area: title;
-			text-align: center;
-		}
+		.chart-container {
+			height: 40rem;
 
-		.overall-probabilities-chart-container {
-			grid-area: overall-heatmap;
-		}
+			&.overall-probabilities {
+				flex: 1 1 calc(40% - var(--gap) * 0.5);
+				min-width: 350px;
+			}
 
-		.time-window-chart-container {
-			grid-area: time-heatmap;
-		}
-
-		.monte-carlo-sim {
-			grid-area: monte-carlo;
+			&.monte-carlo-sim {
+				flex: 1 1 calc(60% - var(--gap) * 0.5);
+			}
 		}
 	}
 </style>
