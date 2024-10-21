@@ -126,6 +126,7 @@ interface SimulatePopulationDynamicsProps {
 	populationDeclinePerNormalWave: number;
 	populationDeclinePerHighWave: number;
 	percentLossOfPopulationCrisisThreshold: number;
+	fractionInfected: number;
 }
 
 export const simulatePopulationDynamics = ({
@@ -137,6 +138,7 @@ export const simulatePopulationDynamics = ({
 	populationDeclinePerNormalWave,
 	populationDeclinePerHighWave,
 	percentLossOfPopulationCrisisThreshold,
+	fractionInfected,
 }: SimulatePopulationDynamicsProps): {
 	crisisTimes: number[];
 	attenuationTimes: number[];
@@ -160,9 +162,9 @@ export const simulatePopulationDynamics = ({
 				const is_high_mortality_wave =
 					Math.random() < probOfHighMortalityWave && !stable_attenuation;
 				if (is_high_mortality_wave) {
-					population *= 1 - populationDeclinePerHighWave;
+					population *= 1 - populationDeclinePerHighWave * fractionInfected;
 				} else {
-					population *= 1 - populationDeclinePerNormalWave;
+					population *= 1 - populationDeclinePerNormalWave * fractionInfected;
 				}
 
 				const crisis_occurred = population <= percentLossOfPopulationCrisisThreshold;
