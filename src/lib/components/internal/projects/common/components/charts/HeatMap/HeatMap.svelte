@@ -141,8 +141,8 @@
 					fill={colorScale(valueAccessor(d))}
 					opacity={tooltipData && !equalsHoveredData(d) ? 0.8 : 1}
 					rx={3}
-					stroke={equalsHoveredData(d) ? '#000000FF' : '#fff'}
-					stroke-width={equalsSelectedData(d) ? 2 : 1}
+					stroke="var(--clr-txt-300)"
+					stroke-width={1}
 					onclick={() => setSelectedData(d)}
 					onkeydown={(e) => {
 						if (e.key !== 'Enter') return;
