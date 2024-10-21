@@ -61,13 +61,20 @@
 		/>
 	</div>
 	<div class="chart-container monte-carlo-sim">
-		<Histogram series={simData} yLabel="Frequency" xDomain={[0, 100]} yDomain={[0, 250]} />
+		<Histogram
+			series={simData}
+			title="Attenuation vs Crisis Times"
+			xLabel="Years"
+			yLabel="Frequency"
+			xDomain={[0, 100]}
+			yDomain={[0, 250]}
+		/>
 	</div>
 </div>
 
 <style lang="scss">
 	.dashboard {
-		--gap: var(--spacing-8);
+		--gap: 1%;
 		display: flex;
 		flex-wrap: wrap;
 		gap: var(--gap);
