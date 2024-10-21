@@ -50,40 +50,39 @@
 </script>
 
 <div class="dashboard">
-	<div class="title">
-		<H4>Hey</H4>
-	</div>
-	<div class="overall-probabilities-chart-container">
+	<div class="chart-container overall-probabilities">
 		<HeatMap
 			data={overallData}
+			title="Overall Chance of Attenuation Before Crisis"
+			xLabel="Chance of Exaggerated Mortality/Wave"
+			yLabel="Chance of Stable Attenuation"
 			colorScheme={interpolateMagma}
 			bind:selectedData={selectedOverallData}
 		/>
 	</div>
-	<div class="monte-carlo-sim">
+	<div class="chart-container monte-carlo-sim">
 		<Histogram series={simData} yLabel="Frequency" xDomain={[0, 100]} yDomain={[0, 250]} />
 	</div>
 </div>
 
 <style lang="scss">
 	.dashboard {
-		display: grid;
-		grid-template-columns: repeat(5, 1fr);
-		grid-template-rows: auto 40rem;
-		grid-template-areas:
-			'. . title . .'
-			'overall-heatmap overall-heatmap monte-carlo monte-carlo monte-carlo';
-		.title {
-			grid-area: title;
-			text-align: center;
-		}
+		--gap: var(--spacing-8);
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--gap);
 
-		.overall-probabilities-chart-container {
-			grid-area: overall-heatmap;
-		}
+		.chart-container {
+			height: 40rem;
 
-		.monte-carlo-sim {
-			grid-area: monte-carlo;
+			&.overall-probabilities {
+				flex: 1 1 calc(40% - var(--gap) * 0.5);
+				min-width: 350px;
+			}
+
+			&.monte-carlo-sim {
+				flex: 1 1 calc(60% - var(--gap) * 0.5);
+			}
 		}
 	}
 </style>
