@@ -10,6 +10,9 @@ export interface HeatmapData {
 
 export interface Props {
 	data: HeatmapData[];
+	title: string;
+	xLabel: string;
+	yLabel: string;
 	margin?: Partial<Margin>;
 	colorScheme?: typeof interpolateInferno;
 	selectedData?: HeatmapData | null;
@@ -27,4 +30,4 @@ export interface TooltipData {
 export const squarePadding = 0.075;
 export const squareHoverScale = 0.2;
 
-export const defaultMargin = { top: 10, left: 70, right: 100, bottom: 50 };
+export const defaultMargin = { top: 25, left: 75, right: 100, bottom: 75 };

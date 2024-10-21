@@ -17,6 +17,9 @@
 
 	let {
 		data,
+		title,
+		xLabel,
+		yLabel,
 		margin = {},
 		colorScheme = interpolateInferno,
 		selectedData = $bindable(),
@@ -90,20 +93,26 @@
 		role="application"
 	>
 		<g style="transform: translate({usedMargin.left}px, {usedMargin.top}px);">
+			<text
+				class="title"
+				x={chartWidth * 0.5}
+				y={-15}
+				text-anchor="middle"
+				dominant-baseline="middle">{title}</text
+			>
 			{#each allXGroups as xLabel}
 				<g
 					style="transform: translate({(xScale(xLabel) ?? 0) +
 						xScale.bandwidth() * 0.5}px, {chartHeight + 20}px);"
 				>
-					<text
-						class="tick-text x-tick-text"
-						x={-8}
-						text-anchor="start"
-					>
+					<text class="tick-text x-tick-text" x={-8} text-anchor="start">
 						{xLabel}
 					</text>
 				</g>
 			{/each}
+			<text class="axis-label" x={chartWidth * 0.5} y={chartHeight + 70} text-anchor="middle">
+				{xLabel}
+			</text>
 			{#each allYGroups as yLabel}
 				<text
 					class="tick-text"
@@ -115,28 +124,23 @@
 					{yLabel}
 				</text>
 			{/each}
+			<text
+				class="axis-label"
+				style="transform: translate(-60px, {yScale.range()[0] * 0.5}px) rotate(-90deg);"
+				text-anchor="middle"
+			>
+				{yLabel}
+			</text>
 			{#each data as d}
 				<rect
-					x={(xScale(xAccessor(d)) ?? 0) -
-						(equalsHoveredData(d) || equalsSelectedData(d)
-							? xScale.bandwidth() * squareHoverScale * 0.5
-							: 0)}
-					y={(yScale(yAccessor(d)) ?? 0) -
-						(equalsHoveredData(d) || equalsSelectedData(d)
-							? yScale.bandwidth() * squareHoverScale * 0.5
-							: 0)}
-					width={xScale.bandwidth() +
-						(equalsHoveredData(d) || equalsSelectedData(d)
-							? xScale.bandwidth() * squareHoverScale
-							: 0)}
-					height={yScale.bandwidth() +
-						(equalsHoveredData(d) || equalsSelectedData(d)
-							? yScale.bandwidth() * squareHoverScale
-							: 0)}
+					x={xScale(xAccessor(d))}
+					y={yScale(yAccessor(d))}
+					width={xScale.bandwidth()}
+					height={yScale.bandwidth()}
 					fill={colorScale(valueAccessor(d))}
-					opacity={tooltipData && !equalsHoveredData(d) ? 0.7 : 1}
+					opacity={tooltipData && !equalsHoveredData(d) ? 0.8 : 1}
 					rx={3}
-					stroke={equalsSelectedData(d) ? '#000' : '#fff'}
+					stroke={equalsHoveredData(d) ? '#000000FF' : '#fff'}
 					stroke-width={equalsSelectedData(d) ? 2 : 1}
 					onclick={() => setSelectedData(d)}
 					onkeydown={(e) => {
@@ -195,11 +199,16 @@
 				}
 			}
 
+			.axis-label {
+				font-size: 1.5rem;
+				fill: var(--clr-text-on-surface-1000);
+			}
+
 			.tick-text {
 				font-size: var(--font-14);
 				font-family: var(--font-base);
 				user-select: none;
-				fill: #464646;
+				fill: var(--clr-text-on-surface-1000);
 
 				&.x-tick-text {
 					transform: rotate(50deg);
