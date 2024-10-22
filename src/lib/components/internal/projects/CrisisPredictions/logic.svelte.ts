@@ -1,12 +1,11 @@
 import { roundTo } from '../util/math';
 import {
-	baselineMortality,
-	collapseThreshold,
-	exaggeratedMortality,
-	fractionInfected,
+	// baselineMortality,
+	// exaggeratedMortality,
+	// fractionInfected,
 	probabilitiesOfExaggeratedMortality,
 	probabilitiesOfStabeleAttenuation,
-	wavesPerYear,
+	// wavesPerYear,
 } from './constants';
 
 const nCol = 10;
@@ -81,18 +80,34 @@ const calcProbOfAttenuationBeforeCollapse = ({
 
 	const populationToLoseToReachCollapse = 1 - collapseThreshold;
 
-	const totalWaesUntilCollapse =
-		Math.log(populationToLoseToReachCollapse) / Math.log(1 - mortalityExpected);
+	const totalWavesUntilCollapse =
+		fractionInfected === 0
+			? Infinity
+			: Math.log(populationToLoseToReachCollapse) / Math.log(1 - mortalityExpected);
 
 	const overallProbOfAttenuatingBeforeCollapse =
-		1 - Math.pow(1 - pStableAttenuation, totalWaesUntilCollapse);
+		1 - Math.pow(1 - pStableAttenuation, totalWavesUntilCollapse);
 
-	const years = totalWaesUntilCollapse / wavesPerYear;
+	const years = totalWavesUntilCollapse / wavesPerYear;
 
 	return { overallProbOfAttenuatingBeforeCollapse, years };
 };
 
-export const generateOverallData = () => {
+interface GenerateOverallDataProps {
+	collapseThreshold: number;
+	baselineMortality: number;
+	exaggeratedMortality: number;
+	fractionInfected: number;
+	wavesPerYear: number;
+}
+
+export const generateOverallData = ({
+	collapseThreshold,
+	baselineMortality,
+	exaggeratedMortality,
+	fractionInfected,
+	wavesPerYear,
+}: GenerateOverallDataProps) => {
 	const heatmapData: HeatmapData[] = [];
 	probabilitiesOfExaggeratedMortality.forEach((pExaggeratedMortality) => {
 		probabilitiesOfStabeleAttenuation.forEach((pStableAttenuation) => {
@@ -146,6 +161,8 @@ export const simulatePopulationDynamics = ({
 	const crisisTimes: number[] = [];
 	const attenuationTimes: number[] = [];
 
+	const populationThatTriggersCrisis = 1 - percentLossOfPopulationCrisisThreshold;
+
 	for (let sim = 0; sim < numSimulations; sim++) {
 		let population = 1.0;
 		let stable_attenuation = false;
@@ -167,14 +184,14 @@ export const simulatePopulationDynamics = ({
 					population *= 1 - populationDeclinePerNormalWave * fractionInfected;
 				}
 
-				const crisis_occurred = population <= percentLossOfPopulationCrisisThreshold;
+				const crisis_occurred = population <= populationThatTriggersCrisis;
 				if (crisis_occurred) {
 					crisisTimes.push(year + wave / wavesPerYear);
 					break;
 				}
 			}
 
-			if (population <= percentLossOfPopulationCrisisThreshold || stable_attenuation) {
+			if (population <= populationThatTriggersCrisis || stable_attenuation) {
 				break;
 			}
 		}
@@ -183,53 +200,63 @@ export const simulatePopulationDynamics = ({
 	return { crisisTimes, attenuationTimes };
 };
 
-function simPopulationDynamics({
-	numSimulations = 1000,
-	wavesPerYear,
-	probOfHighMortalityWave,
-	probOfAttenuation,
-	populationDeclinePerNormalWave,
-	populationDeclinePerHighWave,
-	percentLossOfPopulationCrisisThreshold,
-}: SimulatePopulationDynamicsProps): [number, string] {
-	let population = 1;
-	let years = 0;
+// function simPopulationDynamics({
+// 	numSimulations = 1000,
+// 	wavesPerYear,
+// 	probOfHighMortalityWave,
+// 	probOfAttenuation,
+// 	populationDeclinePerNormalWave,
+// 	populationDeclinePerHighWave,
+// 	percentLossOfPopulationCrisisThreshold,
+// }: SimulatePopulationDynamicsProps): [number, string] {
+// 	let population = 1;
+// 	let years = 0;
 
-	while (population > percentLossOfPopulationCrisisThreshold) {
-		years += 1 / wavesPerYear;
+// 	while (population > percentLossOfPopulationCrisisThreshold) {
+// 		years += 1 / wavesPerYear;
 
-		if (Math.random() < probOfHighMortalityWave) {
-			population *= 1 - populationDeclinePerHighWave;
-		} else {
-			population *= 1 - populationDeclinePerNormalWave;
-		}
-		if (Math.random() < probOfAttenuation) {
-			return [years, 'attenuation'];
-		}
-	}
+// 		if (Math.random() < probOfHighMortalityWave) {
+// 			population *= 1 - populationDeclinePerHighWave;
+// 		} else {
+// 			population *= 1 - populationDeclinePerNormalWave;
+// 		}
+// 		if (Math.random() < probOfAttenuation) {
+// 			return [years, 'attenuation'];
+// 		}
+// 	}
 
-	return [years, 'extinction'];
-}
+// 	return [years, 'extinction'];
+// }
 
-export const simulatePopulationDynamicsV2 = (args: SimulatePopulationDynamicsProps) => {
-	const crisisTimes: number[] = [];
-	const attenuationTimes: number[] = [];
+// export const simulatePopulationDynamicsV2 = (args: SimulatePopulationDynamicsProps) => {
+// 	const crisisTimes: number[] = [];
+// 	const attenuationTimes: number[] = [];
 
-	const sims = args.numSimulations ?? 1000;
+// 	const sims = args.numSimulations ?? 1000;
 
-	for (let i = 0; i < sims; i++) {
-		const [years, outcome] = simPopulationDynamics(args);
-		if (outcome === 'extinction') {
-			crisisTimes.push(years);
-		} else {
-			attenuationTimes.push(years);
-		}
-	}
+// 	for (let i = 0; i < sims; i++) {
+// 		const [years, outcome] = simPopulationDynamics(args);
+// 		if (outcome === 'extinction') {
+// 			crisisTimes.push(years);
+// 		} else {
+// 			attenuationTimes.push(years);
+// 		}
+// 	}
 
-	return { crisisTimes, attenuationTimes };
-};
+// 	return { crisisTimes, attenuationTimes };
+// };
 
 export const getParamsFromSelectedData = (data: HeatmapData) => ({
 	pStableAttenuation: Number(data.x.slice(0, -1)) / 100,
 	pExaggeratedMortality: Number(data.y.slice(0, -1)) / 100,
 });
+
+export class UseAdvancedConfigurables {
+	wavesPerYear = $state(1.5);
+	baselineMortality = $state(0.002);
+	exaggeratedMortality = $state(0.1);
+	fractionInfected = $state(0.7);
+	collapseThreshold = $state(0.4);
+
+	constructor() {}
+}
