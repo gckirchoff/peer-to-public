@@ -54,8 +54,8 @@
 			<HeatMap
 				data={overallData}
 				title="Overall Chance of Attenuation Before Crisis"
-				xLabel="Chance of Exaggerated Mortality/Wave"
-				yLabel="Chance of Stable Attenuation"
+				xLabel="Chance of Stable Attenuation/Wave"
+				yLabel="Chance of Exaggerated Mortality/Wave"
 				bind:selectedIndex={selectedHeatmapIndex}
 				valueDomain={[0, 100]}
 			/>
