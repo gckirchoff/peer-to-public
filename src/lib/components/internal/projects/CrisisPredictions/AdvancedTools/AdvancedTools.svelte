@@ -1,11 +1,7 @@
 <script lang="ts">
 	import Accordion from '$lib/components/internal/Accordion/Accordion.svelte';
 	import { roundTo } from '../../util/math';
-	import type { UseAdvancedConfigurables } from '../logic.svelte';
-
-	interface AdvancedToolsProps {
-		advancedConfigurables: UseAdvancedConfigurables;
-	}
+	import type { AdvancedToolsProps } from './constants';
 
 	let { advancedConfigurables }: AdvancedToolsProps = $props();
 </script>
