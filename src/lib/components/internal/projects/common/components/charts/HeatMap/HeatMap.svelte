@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { extent } from 'd3-array';
 	import { scaleBand, scaleSequential } from 'd3-scale';
-	import { interpolateInferno } from 'd3-scale-chromatic';
+	import { interpolateMagma } from 'd3-scale-chromatic';
 
 	import Tooltip from './Tooltip/Tooltip.svelte';
 	import {
@@ -21,14 +21,17 @@
 		xLabel,
 		yLabel,
 		margin = {},
-		colorScheme = interpolateInferno,
-		selectedData = $bindable(),
+		colorScheme = interpolateMagma,
+		selectedIndex = $bindable(),
+		valueDomain,
 	}: Props = $props();
-
-	let usedMargin = $derived({ ...defaultMargin, ...margin });
 
 	let width = $state(0);
 	let height = $state(0);
+
+	let selectedData = $derived(selectedIndex ? data[selectedIndex] : null);
+
+	let usedMargin = $derived({ ...defaultMargin, ...margin });
 
 	const extractInfoFromSelection = (data: HeatmapData): TooltipData => ({
 		id: `${xAccessor(data)}-${yAccessor(data)}`,
@@ -53,11 +56,11 @@
 	const equalsHoveredData = (d: HeatmapData): boolean =>
 		`${xAccessor(d)}-${yAccessor(d)}` === tooltipData?.id;
 
-	const setSelectedData = (data: HeatmapData) => {
-		if (selectedData === undefined) {
+	const setSelectedIndex = (index: number) => {
+		if (selectedIndex === undefined) {
 			return;
 		}
-		selectedData = data;
+		selectedIndex = index;
 	};
 
 	const equalsSelectedData = (d: HeatmapData): boolean =>
@@ -80,7 +83,7 @@
 	let colorScale = $derived(
 		scaleSequential()
 			.interpolator(colorScheme)
-			.domain(extent(data, (d) => d.value) as [number, number]),
+			.domain(valueDomain ?? (extent(data, (d) => d.value) as [number, number])),
 	);
 </script>
 
@@ -131,7 +134,7 @@
 			>
 				{yLabel}
 			</text>
-			{#each data as d}
+			{#each data as d, i}
 				<rect
 					x={xScale(xAccessor(d))}
 					y={yScale(yAccessor(d))}
@@ -140,13 +143,13 @@
 					fill={colorScale(valueAccessor(d))}
 					opacity={tooltipData && !equalsHoveredData(d) ? 0.8 : 1}
 					rx={3}
-					stroke={equalsHoveredData(d) ? '#000000FF' : '#fff'}
-					stroke-width={equalsSelectedData(d) ? 2 : 1}
-					onclick={() => setSelectedData(d)}
+					stroke="var(--clr-txt-300)"
+					stroke-width={1}
+					onclick={() => setSelectedIndex(i)}
 					onkeydown={(e) => {
 						if (e.key !== 'Enter') return;
 						e.preventDefault();
-						setSelectedData(d);
+						setSelectedIndex(i);
 					}}
 					onmouseenter={() => setTooltipData(d)}
 					onfocus={() => setTooltipData(d)}

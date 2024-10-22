@@ -16,3 +16,5 @@ import CrisisPredictions from '$lib/components/internal/projects/CrisisPredictio
 </script>
 
 <CrisisPredictions />
+
+When it comes to partaking in risky behavior, there are different strategies one can take that depend on the situation. Sometimes you want to stick in the game in order to flatten out the risks over time, other times you want to get in and get out while you can.
