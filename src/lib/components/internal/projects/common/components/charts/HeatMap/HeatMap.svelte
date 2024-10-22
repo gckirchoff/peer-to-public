@@ -22,14 +22,16 @@
 		yLabel,
 		margin = {},
 		colorScheme = interpolateMagma,
-		selectedData = $bindable(),
+		selectedIndex = $bindable(),
 		valueDomain,
 	}: Props = $props();
 
-	let usedMargin = $derived({ ...defaultMargin, ...margin });
-
 	let width = $state(0);
 	let height = $state(0);
+
+	let selectedData = $derived(selectedIndex ? data[selectedIndex] : null);
+
+	let usedMargin = $derived({ ...defaultMargin, ...margin });
 
 	const extractInfoFromSelection = (data: HeatmapData): TooltipData => ({
 		id: `${xAccessor(data)}-${yAccessor(data)}`,
@@ -54,11 +56,11 @@
 	const equalsHoveredData = (d: HeatmapData): boolean =>
 		`${xAccessor(d)}-${yAccessor(d)}` === tooltipData?.id;
 
-	const setSelectedData = (data: HeatmapData) => {
-		if (selectedData === undefined) {
+	const setSelectedIndex = (index: number) => {
+		if (selectedIndex === undefined) {
 			return;
 		}
-		selectedData = data;
+		selectedIndex = index;
 	};
 
 	const equalsSelectedData = (d: HeatmapData): boolean =>
@@ -132,7 +134,7 @@
 			>
 				{yLabel}
 			</text>
-			{#each data as d}
+			{#each data as d, i}
 				<rect
 					x={xScale(xAccessor(d))}
 					y={yScale(yAccessor(d))}
@@ -143,11 +145,11 @@
 					rx={3}
 					stroke="var(--clr-txt-300)"
 					stroke-width={1}
-					onclick={() => setSelectedData(d)}
+					onclick={() => setSelectedIndex(i)}
 					onkeydown={(e) => {
 						if (e.key !== 'Enter') return;
 						e.preventDefault();
-						setSelectedData(d);
+						setSelectedIndex(i);
 					}}
 					onmouseenter={() => setTooltipData(d)}
 					onfocus={() => setTooltipData(d)}

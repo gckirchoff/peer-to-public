@@ -15,7 +15,7 @@ export interface Props {
 	yLabel: string;
 	margin?: Partial<Margin>;
 	colorScheme?: typeof interpolateInferno;
-	selectedData?: HeatmapData | null;
+	selectedIndex?: number | null;
 	valueDomain?: [number, number];
 }
 
