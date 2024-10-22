@@ -69,12 +69,13 @@
 	.advanced-tools-inside {
 		padding: var(--spacing-8);
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 		gap: var(--spacing-24);
 
 		label {
 			display: flex;
 			flex-direction: column;
+			gap: var(--spacing-4);
 			cursor: pointer;
 			user-select: none;
 
