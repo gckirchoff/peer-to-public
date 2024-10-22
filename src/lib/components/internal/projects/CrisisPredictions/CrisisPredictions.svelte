@@ -1,37 +1,37 @@
 <script lang="ts">
-	import { interpolateMagma } from 'd3-scale-chromatic';
-
 	import HeatMap from '../common/components/charts/HeatMap/HeatMap.svelte';
 	import Histogram from '../common/components/charts/Histogram/Histogram.svelte';
-	import type { HeatmapData } from '../common/components/charts/HeatMap/constants';
+	import AdvancedTools from './AdvancedTools/AdvancedTools.svelte';
 	import {
 		generateOverallData,
 		getParamsFromSelectedData,
 		simulatePopulationDynamics,
-		simulatePopulationDynamicsV2,
-	} from './logic';
-	import { Body1, H4 } from '../../typography';
-	import {
-		baselineMortality,
-		collapseThreshold,
-		exaggeratedMortality,
-		wavesPerYear,
-		fractionInfected,
-	} from './constants';
+		UseAdvancedConfigurables,
+	} from './logic.svelte';
 
-	const overallData = generateOverallData();
+	const advancedConfigurables = new UseAdvancedConfigurables();
+	let selectedHeatmapIndex = $state<number>(54);
 
-	let selectedOverallData: HeatmapData = $state(overallData[overallData.length / 2 - 6]);
-	let selectedParams = $derived(getParamsFromSelectedData(selectedOverallData));
+	let overallData = $derived(
+		generateOverallData({
+			collapseThreshold: advancedConfigurables.collapseThreshold,
+			baselineMortality: advancedConfigurables.baselineMortality,
+			exaggeratedMortality: advancedConfigurables.exaggeratedMortality,
+			fractionInfected: advancedConfigurables.fractionInfected,
+			wavesPerYear: advancedConfigurables.wavesPerYear,
+		}),
+	);
+
+	let selectedParams = $derived(getParamsFromSelectedData(overallData[selectedHeatmapIndex]));
 	let simResults = $derived(
 		simulatePopulationDynamics({
-			percentLossOfPopulationCrisisThreshold: collapseThreshold,
-			populationDeclinePerHighWave: exaggeratedMortality,
-			populationDeclinePerNormalWave: baselineMortality,
+			percentLossOfPopulationCrisisThreshold: advancedConfigurables.collapseThreshold,
+			populationDeclinePerHighWave: advancedConfigurables.exaggeratedMortality,
+			populationDeclinePerNormalWave: advancedConfigurables.baselineMortality,
 			probOfAttenuation: selectedParams.pStableAttenuation,
 			probOfHighMortalityWave: selectedParams.pExaggeratedMortality,
-			wavesPerYear,
-			fractionInfected,
+			wavesPerYear: advancedConfigurables.wavesPerYear,
+			fractionInfected: advancedConfigurables.fractionInfected,
 			years: 100,
 		}),
 	);
@@ -48,28 +48,30 @@
 	]);
 </script>
 
-<div class="dashboard">
-	<div class="chart-container overall-probabilities">
-		<HeatMap
-			data={overallData}
-			title="Overall Chance of Attenuation Before Crisis"
-			xLabel="Chance of Exaggerated Mortality/Wave"
-			yLabel="Chance of Stable Attenuation"
-			colorScheme={interpolateMagma}
-			bind:selectedData={selectedOverallData}
-			valueDomain={[0, 100]}
-		/>
+<div>
+	<div class="dashboard">
+		<div class="chart-container overall-probabilities">
+			<HeatMap
+				data={overallData}
+				title="Overall Chance of Attenuation Before Crisis"
+				xLabel="Chance of Exaggerated Mortality/Wave"
+				yLabel="Chance of Stable Attenuation"
+				bind:selectedIndex={selectedHeatmapIndex}
+				valueDomain={[0, 100]}
+			/>
+		</div>
+		<div class="chart-container monte-carlo-sim">
+			<Histogram
+				series={simData}
+				title="Attenuation vs Crisis Times"
+				xLabel="Years"
+				yLabel="Frequency"
+				xDomain={[0, 100]}
+				yDomain={[0, 250]}
+			/>
+		</div>
 	</div>
-	<div class="chart-container monte-carlo-sim">
-		<Histogram
-			series={simData}
-			title="Attenuation vs Crisis Times"
-			xLabel="Years"
-			yLabel="Frequency"
-			xDomain={[0, 100]}
-			yDomain={[0, 250]}
-		/>
-	</div>
+	<AdvancedTools {advancedConfigurables} />
 </div>
 
 <style lang="scss">
