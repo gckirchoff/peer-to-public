@@ -24,6 +24,10 @@
 </text>
 
 <style lang="scss">
+	text {
+		user-select: none;
+	}
+
 	.axis-label {
 		font-size: 1.5rem;
 		fill: var(--clr-text-on-surface-1000);
@@ -32,7 +36,6 @@
 	.tick-text {
 		font-size: var(--font-14);
 		font-family: var(--font-base);
-		user-select: none;
 		fill: var(--clr-text-on-surface-1000);
 	}
 </style>

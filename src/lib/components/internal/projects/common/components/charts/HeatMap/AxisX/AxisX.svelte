@@ -19,6 +19,10 @@
 </text>
 
 <style lang="scss">
+	text {
+		user-select: none;
+	}
+
 	.tick-text {
 		font-size: var(--font-14);
 		font-family: var(--font-base);
