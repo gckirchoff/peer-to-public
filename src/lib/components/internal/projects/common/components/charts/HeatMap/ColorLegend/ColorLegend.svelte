@@ -39,7 +39,7 @@
 		{#each ticks as tick}
 			<g style="transform: translate(0, {yScale(tick)}px);">
 				<line x1={0} x2={width * 1.3} y1={0} y2={0} stroke-width={1} stroke="black" />
-				<text dx={(width * 1.3) + 4} text-anchor="start" dominant-baseline="middle">{tick}</text>
+				<text dx={width * 1.3 + 4} text-anchor="start" dominant-baseline="middle">{tick}</text>
 			</g>
 		{/each}
 		{#if tooltipData}
@@ -57,6 +57,10 @@
 			top: 0;
 			left: 0;
 			overflow: visible;
+
+			text {
+				user-select: none;
+			}
 		}
 	}
 </style>
