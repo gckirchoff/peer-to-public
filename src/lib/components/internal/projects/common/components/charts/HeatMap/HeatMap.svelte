@@ -3,7 +3,10 @@
 	import { scaleBand, scaleSequential } from 'd3-scale';
 	import { interpolateMagma } from 'd3-scale-chromatic';
 
+	import AxisX from './AxisX/AxisX.svelte';
+	import AxisY from './AxisY/AxisY.svelte';
 	import Tooltip from './Tooltip/Tooltip.svelte';
+	import ColorLegend from './ColorLegend/ColorLegend.svelte';
 	import {
 		defaultMargin,
 		squareHoverScale,
@@ -13,7 +16,6 @@
 		type TooltipData,
 	} from './constants';
 	import { xAccessor, yAccessor, valueAccessor } from './logic';
-	import ColorLegend from './ColorLegend/ColorLegend.svelte';
 
 	let {
 		data,
@@ -63,11 +65,6 @@
 		selectedIndex = index;
 	};
 
-	const equalsSelectedData = (d: HeatmapData): boolean =>
-		selectedData !== null &&
-		selectedData !== undefined &&
-		`${xAccessor(d)}-${yAccessor(d)}` === extractInfoFromSelection(selectedData)?.id;
-
 	let allXGroups = $derived([...new Set(data.map(({ x }) => x))]);
 	let allYGroups = $derived([...new Set(data.map(({ y }) => y))]);
 
@@ -103,37 +100,8 @@
 				text-anchor="middle"
 				dominant-baseline="middle">{title}</text
 			>
-			{#each allXGroups as xLabel}
-				<g
-					style="transform: translate({(xScale(xLabel) ?? 0) +
-						xScale.bandwidth() * 0.5}px, {chartHeight + 20}px);"
-				>
-					<text class="tick-text x-tick-text" x={-8} text-anchor="start">
-						{xLabel}
-					</text>
-				</g>
-			{/each}
-			<text class="axis-label" x={chartWidth * 0.5} y={chartHeight + 70} text-anchor="middle">
-				{xLabel}
-			</text>
-			{#each allYGroups as yLabel}
-				<text
-					class="tick-text"
-					x={-20}
-					y={(yScale(yLabel) ?? 0) + yScale.bandwidth() * 0.5}
-					text-anchor="end"
-					dominant-baseline="middle"
-				>
-					{yLabel}
-				</text>
-			{/each}
-			<text
-				class="axis-label"
-				style="transform: translate(-60px, {yScale.range()[0] * 0.5}px) rotate(-90deg);"
-				text-anchor="middle"
-			>
-				{yLabel}
-			</text>
+			<AxisX label={xLabel} {xScale} {chartHeight} />
+			<AxisY label={yLabel} {yScale} />
 			{#each data as d, i}
 				<rect
 					x={xScale(xAccessor(d))}
@@ -199,23 +167,6 @@
 
 				&:focus {
 					outline: none;
-				}
-			}
-
-			.axis-label {
-				font-size: 1.5rem;
-				fill: var(--clr-text-on-surface-1000);
-			}
-
-			.tick-text {
-				font-size: var(--font-14);
-				font-family: var(--font-base);
-				user-select: none;
-				fill: var(--clr-text-on-surface-1000);
-
-				&.x-tick-text {
-					transform: rotate(50deg);
-					transform-origin: top left;
 				}
 			}
 		}
