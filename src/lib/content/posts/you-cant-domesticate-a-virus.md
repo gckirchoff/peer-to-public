@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "default-background-2.jpg"
 date: 'Sat Oct 19 2024 17:48:52 GMT-0400 (Eastern Daylight Time)'
 published: false
-updated: 'Wed Oct 23 2024 16:37:11 GMT-0400 (Eastern Daylight Time)'
+updated: 'Wed Oct 23 2024 16:38:02 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
