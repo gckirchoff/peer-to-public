@@ -1,56 +1,62 @@
 ---
 title: "Gambling with Covid"
-description: "This post challenges the idea that individuals can fully understand and manage their own risk without proper information, highlighting the dangers of incomplete knowledge in pandemic decision-making."
+description: "Why gambling with a pandemic is a losing bet"
 categories: [ "covid-19" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
-coverImage: "coin-stack-ibrahim-rifath-unsplash.jpg"
-date: 'Wed Aug 14 2024 19:57:10 GMT-0400 (Eastern Daylight Time)'
+coverImage: "default-background-6.jpg"
+date: 'Wed Oct 23 2024 17:04:49 GMT-0400 (Eastern Daylight Time)'
 published: false
-updated: 'Wed Sep 18 2024 20:40:31 GMT-0400 (Eastern Daylight Time)'
+
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
 
-  import CovidCoins from '$lib/components/internal/projects/CovidCoins/CovidCoins.svelte';
-  
+import CrisisPredictions from '$lib/components/internal/projects/CrisisPredictions/CrisisPredictions.svelte';
+
 </script>
 
+In line with our current approach to the ongoing pandemic, let's go to a casino and start gambling. We know the game is rigged and that the house always wins at the end of the day, so if we win big, we should take our earnings and go home.However, suppose we're persistent and want to see things through to the end - we either win big or go broke trying. Our statistically misinformed goals have just introduced us to non-ergodic risk.
 
+## Understanding Ergodic vs. Non-Ergodic Systems
 
-The chart below visualizes risk by illustrating the probability of consecutive coin tosses landing heads up. Each individual coin toss has a 50% chance of landing heads, but with each additional consecutive heads, the probability decreases sharply. For example, the probability of getting heads twice in a row is 25%, while three consecutive heads drops to just 12.5%. The more consecutive heads you're aiming for, the lower the likelihood.
+### Ergodic Systems
 
-Take skydiving as an example: there's a 0.023% chance of injury. Translating this into coin tosses, it's like flipping 12 coins and having all of them land heads up—making skydiving the least risky activity in the chart. As activities become riskier, the equivalent number of consecutive heads decreases.
+To grasp the implications of ergodic risk in the context of pandemics, it's essential to understand what the term means. An ergodic system is one where, given enough time, the average outcome for an individual, community, or society is the same as the average outcome for the group. In other words, long-term averages converve and stabilize over time.
 
-To make the concept more tangible, try it yourself: simulate the risk of an activity by flipping its stack of coins. How many times can you do this to get lucky—or unlucky?
+Imagine we have thousands of people flipping a coin a thousand times each. You may find that your first four coins land heads up - not the 50:50 ratio we'd expect - but if you stay in the game and keep flipping that coin 1,000 times, you and everyone else will experience a 50:50 ratio at the end of the day. THis is an ergodic system.
 
-<CovidCoins mode="instance" />
+### Non-Ergodic Systems
 
-## The Illusion of "Pros and Cons"
+Non-ergodic systems, by contrast, do not guarantee this outcome. Individual trajectories can deviate significantly, leading to outcomes that are not representative of the average.
 
-"You need to weigh the pros and cons," "everything has risk associated with it," and  "you can't live your life in fear." These phrases represent common perceptions of risk, and and they reflect the CDC's officially endorsed methods for pandemic management. The CDC has stated that "understanding your risk [of contracting COVID-19] helps you make decisions." [Source](https://archive.cdc.gov/www_cdc_gov/coronavirus/2019-ncov/your-health/understanding-risk_1709314735.html).  You'll notice that they don't specify that you'll make "good decisions." There are significant, glaring flaws with this individualistic, citizen-driven approach that explain why they don't expose themselves to that liability.
+The stock market is an example of a non-ergodic system. While it has an average return, you as an investor may be unlucky and lose your investments, becoming bankrupt. If financial ruin occurs and wipes out your wealth, you can't recover to achieve the long-term average return of the market.
 
-The average citizen is neither a medical professional nor a statistician. Physicians, who are most commonly responsible for our health, undergo extensive higher education and training for good reason. Their expertise is grounded in well-established practices, many of which have been developed over decades. Expecting untrained individuals to fully understand the risks associated with a novel pathogen - especially one with long-term effects that are not yet fully researched - and to make associated "good decisions" is unrealistic.
+The irreversible long-term health consequences of COVID-19 - including symptomatic Long Covid, latent health effects, and death - make this current pandemic a non-ergodic system. There are also chances of good things happening, such as stable attenuation or extinction of the virus. As we will discuss elsewhere, these outcomes are much less likely, but should they happen, they offer one way to "exit" this pandemic.
 
-People can only make decisions based on what they know, and that knowledge is often incomplete. The problem is compounded when crucial information is not adequately communicated to the public. For example, president Joe Biden [has not](https://www.youtube.com/watch?v=RZUBLTph5uw&t=490s) openly discussed "Long Covid" to the public since taking office despite the fact that [4 million](https://www.brookings.edu/articles/new-data-shows-long-covid-is-keeping-as-many-as-4-million-people-out-of-work/) American workers are out of work due to Long Covid. The CDC reports that approximately [1 in 5](https://www.cdc.gov/mmwr/volumes/71/wr/mm7121e1.htm) adults over 18 have a health condition possibly linked to a previous covid infection, which aligns with research showing that COVID-19 can affect nearly [every organ-system](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9839201/). If the current administration truly wanted us to make informed decisions, this information would be common knowledge.
+## Outcomes
 
-## The Game of Chance: Understanding COVID-19 Risks
+Consider the following chart. The numbers are agnostic so you can interpret them how you wish. Imagine that stable attenuation is the small chance of winning big at the casino and walking out the door, money in-hand. Collapse is, of course, financial ruin; it can be interpreted as Long Covid disrupting society through labor shortages. Grey and black swan events - such as serotype formation and highly virulent strains - exist on the table due to the increasingly rapidly evolving strains our unmitigated spread is allowing for, so the simulation can be taken literally as well.
 
-Getting symptomatic Long Covid has often been described as a "roll of the dice" - a game of chance. While this phrase might elicit nods of agreement, it becomes more complex the deeper you think about it. Are these dice rolls independent of each other? Does the chance of Long Covid increase with each subsequent infection? How many times are we expecting to roll these dice? How many times can we anticipate being infected?
+The Monte Carlo Simulation on the right tracks the results of 1000 simulations of society co-existing with a pandemic disease. Society will experience non-stop waves of the disease. Most waves will be standard baseline mortality waves, but there is a chance that any given wave can be temporarily highly deadly or become permanently attenuated, resulting in an immediate, happy ending to the simulation. There are two ways that the game can end: we just need to get lucky once and experience a stable attenuation, or the deadly waves chip away at society until we reach the collapse threshold. The chance of stable attenuation and high mortality per wave can be chosen from the heat map on the left. The values of the heat map represent the overall chance of attenuation occuring before collapse.
 
-One way to conceptualize risk is through the analogy of flipping coins. The chance of a single coin landing heads-up is 50%. The probability of flipping two coins and getting heads on both is 25%. To put this in perspective, imagine being in Pamplona waiting for the rocket to go off signaling that the bulls are being released, aware of the many who get injured during the event. Now, take five coins and toss them into the air. If they all land heads-up, you get injured during the race - around a 3% chance. Say you're lucky this time - the coins don't all land heads-up, and you finish the run safely. This doesn't guarantee that your next attempt will be as fortunate. You can throw those five coins again at your next event and not be so lucky.
+<CrisisPredictions />
 
-Statistically, you can expect to run with the bulls 18 times before your cumulative risk of injury exceeds 50%. Beyond that point, the odds begin to stack against you. It takes 77 excursions before you can be 95% confident that you will get injured.
+## The Fallacy of "Things Getting Better Over Time"
 
-For such a seemingly dangerous sport, those numbers aren't that bad. The per-infection chance of developing symptomatic Long Covid is 14.6% according to [Statistics Canada](https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00015-eng.htm). With these numbers, you can get infected with SARS-Cov-2 4 times before your risk of Long Covid approaches a 50/50 chance. After 19 infections, your cumulative risk approaches near certainty at 95%.
+A concept that can be seen from this is that the chance of a happy outcome becomes worse as time goes on. This contradicts the popular belief that coexisting with a pandemic gets better over time. However, this is to be expected when gambling. The only way to "win" at gambling is to get lucky quickly and then never gamble again. A previous manager of mine had a friend who won $40,000 at a casino. He asked the friend if he's finally positive, to which the friend said, "almost."
 
-I would rather run with the bulls.
+## The Solution is to Stop Gambling
+
+What we shouldn't do is to advise people to assess their risk factors and how much money they have to decide whether or not they should gamble until they get a terminal outcome. The game is rigged, so no matter how much money and good health you have, you are still vulnerable to bankrupcy and long-term consequences from COVID-19 at the end of the day - it may just take you a little longer to get there. This is why the CDC [says](https://archive.cdc.gov/www_cdc_gov/coronavirus/2019-ncov/your-health/understanding-risk_1709314735.html) that "understanding your risk [of contracting COVID-19] helps you make decisions" without opening themselves up to the liability of suggesting that ever taking the gamble of getting COVID-19 is a *good* decision.
+
+The solution is to leave. Walk out the door. Stop gambling. Even if you think to yourself that you've already lost money and that people have already died, and you want to keep gambling to break even, you have to realize that casinos and red queens' races with viruses are rigged against us. It's not too late to wallk out the door and control this virus.
+
+Gambling is ill-advised when it comes to both casinos and pandemics.
 
 ## Methodology
 
-The infection fatality rate (IFR) for Covid-19 was sourced from [this study](https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(21)02867-1/fulltext#seccestitle140) published by The Lancet. Since these IFRs were derived before vaccines became widely available, and considering that most Americans have already been infected with COVID-19, we adjusted the IFRs by reducing them five-fold. This adjustment is based on [this pre-print](https://www.medrxiv.org/content/10.1101/2023.02.26.23286471v2.full.pdf) that accounts for the likely prior immunity most people now have due to vaccination, previous infection, or both.
+Heatmap data generation is done by calculating the probability of attenuation occuring before population collase based on several epidemiological and demographic parameters. The expected mortality is calculated as *fractionInfectedPerWave X [(1 - pExaggeratedMortality) X baselineMortality + pExaggeratedMortality X exaggeratedMortality]*. Calculating *log(populationLossCollapseThreshold)/log(1 - mortalityExpected)* results in an estimate of the total waves until collapse. The probability of attenuation occuring before collapse is *1 - (1 - pStableAttenuation)^totalWavesUntilCollapse*.
 
-The initial symptomatic Long Covid rate was derived from [this study](https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00015-eng.htm) by Statistics Canada.
+The Monte Carlo simulation tracks the amount of times that stable attenuation and collapse occurs across 1000 separate runs. For each simulation, the population is initializaed to 100%. The simulation progresses wave by wave in which each wave either reduces the population by a small or larger amount, or the virus attenuates and the sim is broken out of. If attenuation does not occur in time, the population experiences collapse.
 
-For the purpose of visual at-a-glance interpretability, probabilities are represented as the chance of getting all heads for N number of coins flipped. The equation for deriving this is Log10(p)/Log10(0.5).
 
-The probability of death for "Surviving the Day" is calculated using micromorts where the ages between 20 to 80 are Floor(age / 10)-1 micromorts per day. At the age of 80, the risk becomes 100 micromorts, and each subsequent year of life adds 50 additional micromorts to the risk experienced each day. [Source](https://nc233.com/2020/03/micromorts-how-much-risk-of-death-would-you-accept/).
