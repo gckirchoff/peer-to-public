@@ -48,7 +48,7 @@
 	]);
 </script>
 
-<div>
+<div class="crisis-predictions-container">
 	<div class="dashboard">
 		<div class="chart-container overall-probabilities">
 			<HeatMap
@@ -75,22 +75,25 @@
 </div>
 
 <style lang="scss">
-	.dashboard {
-		--gap: 1%;
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--gap);
+	.crisis-predictions-container {
+		margin: var(--spacing-24) 0;
+		.dashboard {
+			--gap: 1%;
+			display: flex;
+			flex-wrap: wrap;
+			gap: var(--gap);
 
-		.chart-container {
-			height: 40rem;
+			.chart-container {
+				height: 40rem;
 
-			&.overall-probabilities {
-				flex: 1 1 calc(40% - var(--gap) * 0.5);
-				min-width: 350px;
-			}
+				&.overall-probabilities {
+					flex: 1 1 calc(40% - var(--gap) * 0.5);
+					min-width: 350px;
+				}
 
-			&.monte-carlo-sim {
-				flex: 1 1 calc(60% - var(--gap) * 0.5);
+				&.monte-carlo-sim {
+					flex: 1 1 calc(60% - var(--gap) * 0.5);
+				}
 			}
 		}
 	}
