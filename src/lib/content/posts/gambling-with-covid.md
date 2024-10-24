@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "default-background-6.jpg"
 date: 'Wed Oct 23 2024 17:04:49 GMT-0400 (Eastern Daylight Time)'
 published: false
-updated: 'Wed Oct 23 2024 22:23:34 GMT-0400 (Eastern Daylight Time)'
+updated: 'Wed Oct 23 2024 22:26:18 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -49,7 +49,7 @@ A concept that can be seen from this is that the chance of a happy outcome becom
 
 What we shouldn't do is to advise people to assess their risk factors and how much money they have to decide whether or not they should gamble until they get a terminal outcome. The game is rigged, so no matter how much money and good health you have, you are still vulnerable to bankrupcy and long-term consequences from COVID-19 at the end of the day - it may just take you a little longer to get there. This is why the CDC [says](https://archive.cdc.gov/www_cdc_gov/coronavirus/2019-ncov/your-health/understanding-risk_1709314735.html) that "understanding your risk [of contracting COVID-19] helps you make decisions" without opening themselves up to the liability of suggesting that ever taking the gamble of getting COVID-19 is a *good* decision.
 
-The solution is to leave. Walk out the door. Stop gambling. Even if you think to yourself that you've already lost money and that people have already died, and you want to keep gambling to break even and that you just want to "move past the pandemic", you have to realize that casinos and red queens' races with viruses are rigged against us. It's not too late to wallk out the door and control this virus.
+The solution is to leave. Walk out the door. Stop gambling. Even if you think to yourself that you've already lost money and that people have already died, and you want to keep gambling to break even and "move past the pandemic", you have to realize that casinos and red queens' races with viruses are rigged against us. It's not too late to wallk out the door and control this virus.
 
 Gambling is ill-advised when it comes to both casinos and pandemics.
 
