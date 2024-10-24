@@ -49,7 +49,7 @@ A concept that can be seen from this is that the chance of a happy outcome becom
 
 What we shouldn't do is to advise people to assess their risk factors and how much money they have to decide whether or not they should gamble until they get a terminal outcome. The game is rigged, so no matter how much money and good health you have, you are still vulnerable to bankrupcy and long-term consequences from COVID-19 at the end of the day - it may just take you a little longer to get there. This is why the CDC [says](https://archive.cdc.gov/www_cdc_gov/coronavirus/2019-ncov/your-health/understanding-risk_1709314735.html) that "understanding your risk [of contracting COVID-19] helps you make decisions" without opening themselves up to the liability of suggesting that ever taking the gamble of getting COVID-19 is a *good* decision.
 
-The solution is to leave. Walk out the door. Stop gambling. Even if you think to yourself that you've already lost money and that people have already died, and you want to keep gambling to break even, you have to realize that casinos and red queens' races with viruses are rigged against us. It's not too late to wallk out the door and control this virus.
+The solution is to leave. Walk out the door. Stop gambling. Even if you think to yourself that you've already lost money and that people have already died, and you want to keep gambling to break even and "move past the pandemic", you have to realize that casinos and red queens' races with viruses are rigged against us. It's not too late to wallk out the door and control this virus.
 
 Gambling is ill-advised when it comes to both casinos and pandemics.
 
@@ -58,5 +58,3 @@ Gambling is ill-advised when it comes to both casinos and pandemics.
 Heatmap data generation is done by calculating the probability of attenuation occuring before population collase based on several epidemiological and demographic parameters. The expected mortality is calculated as *fractionInfectedPerWave X [(1 - pExaggeratedMortality) X baselineMortality + pExaggeratedMortality X exaggeratedMortality]*. Calculating *log(populationLossCollapseThreshold)/log(1 - mortalityExpected)* results in an estimate of the total waves until collapse. The probability of attenuation occuring before collapse is *1 - (1 - pStableAttenuation)^totalWavesUntilCollapse*.
 
 The Monte Carlo simulation tracks the amount of times that stable attenuation and collapse occurs across 1000 separate runs. For each simulation, the population is initializaed to 100%. The simulation progresses wave by wave in which each wave either reduces the population by a small or larger amount, or the virus attenuates and the sim is broken out of. If attenuation does not occur in time, the population experiences collapse.
-
-
