@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "default-background-6.jpg"
 date: 'Wed Oct 23 2024 17:04:49 GMT-0400 (Eastern Daylight Time)'
 published: false
-updated: 'Wed Oct 23 2024 22:26:18 GMT-0400 (Eastern Daylight Time)'
+updated: 'Thu Oct 24 2024 10:37:09 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -19,9 +19,11 @@ In line with our current approach to the ongoing pandemic, let's go to a casino 
 
 ## Understanding Ergodic vs. Non-Ergodic Systems
 
+To grasp the implications of ergodic risk in the context of pandemics, it's essential to understand what the term means.
+
 ### Ergodic Systems
 
-To grasp the implications of ergodic risk in the context of pandemics, it's essential to understand what the term means. An ergodic system is one where, given enough time, the average outcome for an individual, community, or society is the same as the average outcome for the group. In other words, long-term averages converve and stabilize over time.
+In an ergodic system, given enough time, everyone's average outcome will match the group's average outcome. In other words, long-term averages converve and stabilize over time.
 
 Imagine we have thousands of people flipping a coin a thousand times each. You may find that your first four coins land heads up - not the 50:50 ratio we'd expect - but if you stay in the game and keep flipping that coin 1,000 times, you and everyone else will experience a 50:50 ratio at the end of the day. THis is an ergodic system.
 
@@ -43,7 +45,7 @@ The Monte Carlo Simulation on the right tracks the results of 1000 simulations o
 
 ## The Fallacy of "Things Getting Better Over Time"
 
-A concept that can be seen from this is that the chance of a happy outcome becomes worse as time goes on. This contradicts the popular belief that coexisting with a pandemic gets better over time. However, this is to be expected when gambling. The only way to "win" at gambling is to get lucky quickly and then never gamble again. A previous manager of mine had a friend who won $40,000 at a casino. He asked the friend if he's finally positive, to which the friend said, "almost."
+A key takeaway is that the likelihood of a positive outcome diminishes over time. This contradicts the popular belief that coexisting with a pandemic gets better over time. However, this is to be expected when gambling. The only way to "win" at gambling is to get lucky quickly and then never gamble again. A previous manager of mine had a friend who won $40,000 at a casino. He asked the friend if he's finally positive, to which the friend said, "almost."
 
 ## The Solution is to Stop Gambling
 
