@@ -12,13 +12,11 @@
 
 <g class="axis y">
 	{#if label}
-		<text
-			class="label"
-			style="transform: translate(-60px, {height / 2}px) rotate(-90deg)"
-			text-anchor="middle"
-		>
-			{label}
-		</text>
+		<g style="transform: translate(-60px, {height / 2}px) rotate(-90deg)">
+			<text class="label" text-anchor="middle">
+				{label}
+			</text>
+		</g>
 	{/if}
 	{#each yTicks as tick, index (tick)}
 		<g
