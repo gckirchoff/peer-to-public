@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "default-background-6.jpg"
 date: 'Wed Oct 23 2024 17:04:49 GMT-0400 (Eastern Daylight Time)'
 published: false
-updated: 'Thu Oct 24 2024 10:37:09 GMT-0400 (Eastern Daylight Time)'
+updated: 'Tue Oct 29 2024 18:56:26 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -23,7 +23,7 @@ To grasp the implications of ergodic risk in the context of pandemics, it's esse
 
 ### Ergodic Systems
 
-In an ergodic system, given enough time, everyone's average outcome will match the group's average outcome. In other words, long-term averages converve and stabilize over time.
+In an ergodic system, given enough time, everyone's average outcome will match the group's average outcome. In other words, long-term averages converge and stabilize over time.
 
 Imagine we have thousands of people flipping a coin a thousand times each. You may find that your first four coins land heads up - not the 50:50 ratio we'd expect - but if you stay in the game and keep flipping that coin 1,000 times, you and everyone else will experience a 50:50 ratio at the end of the day. THis is an ergodic system.
 
@@ -39,7 +39,7 @@ The irreversible long-term health consequences of COVID-19 - including symptomat
 
 Consider the following chart. The numbers are agnostic so you can interpret them how you wish. Imagine that stable attenuation is the small chance of winning big at the casino and walking out the door, money in-hand. Collapse is, of course, financial ruin; it can be interpreted as Long Covid disrupting society through labor shortages. Grey and black swan events - such as serotype formation and highly virulent strains - exist on the table due to the increasingly rapidly evolving strains our unmitigated spread is allowing for, so the simulation can be taken literally as well.
 
-The Monte Carlo Simulation on the right tracks the results of 1000 simulations of society co-existing with a pandemic disease. Society will experience non-stop waves of the disease. Most waves will be standard baseline mortality waves, but there is a chance that any given wave can be temporarily highly deadly or become permanently attenuated, resulting in an immediate, happy ending to the simulation. There are two ways that the game can end: we just need to get lucky once and experience a stable attenuation, or the deadly waves chip away at society until we reach the collapse threshold. The chance of stable attenuation and high mortality per wave can be chosen from the heat map on the left. The values of the heat map represent the overall chance of attenuation occuring before collapse.
+The Monte Carlo Simulation on the right tracks the results of 1000 simulations of society co-existing with a pandemic disease. Society will experience non-stop waves of the disease. Most waves will be standard baseline mortality waves, but there is a chance that any given wave can be temporarily highly deadly or become permanently attenuated, resulting in an immediate, happy ending to the simulation. There are two ways that the game can end: we just need to get lucky once and experience a stable attenuation, or the deadly waves chip away at society until we reach the collapse threshold. The chance of stable attenuation and high mortality per wave can be chosen from the heat map on the left. The values of the heat map represent the overall chance of attenuation occurring before collapse.
 
 <CrisisPredictions />
 
@@ -49,14 +49,14 @@ A key takeaway is that the likelihood of a positive outcome diminishes over time
 
 ## The Solution is to Stop Gambling
 
-What we shouldn't do is to advise people to assess their risk factors and how much money they have to decide whether or not they should gamble until they get a terminal outcome. The game is rigged, so no matter how much money and good health you have, you are still vulnerable to bankrupcy and long-term consequences from COVID-19 at the end of the day - it may just take you a little longer to get there. This is why the CDC [says](https://archive.cdc.gov/www_cdc_gov/coronavirus/2019-ncov/your-health/understanding-risk_1709314735.html) that "understanding your risk [of contracting COVID-19] helps you make decisions" without opening themselves up to the liability of suggesting that ever taking the gamble of getting COVID-19 is a *good* decision.
+What we shouldn't do is to advise people to assess their risk factors and how much money they have to decide whether or not they should gamble until they get a terminal outcome. The game is rigged, so no matter how much money and good health you have, you are still vulnerable to bankruptcy and long-term consequences from COVID-19 at the end of the day - it may just take you a little longer to get there. This is why the CDC [says](https://archive.cdc.gov/www_cdc_gov/coronavirus/2019-ncov/your-health/understanding-risk_1709314735.html) that "understanding your risk [of contracting COVID-19] helps you make decisions" without opening themselves up to the liability of suggesting that ever taking the gamble of getting COVID-19 is a *good* decision.
 
-The solution is to leave. Walk out the door. Stop gambling. Even if you think to yourself that you've already lost money and that people have already died, and you want to keep gambling to break even and "move past the pandemic", you have to realize that casinos and red queens' races with viruses are rigged against us. It's not too late to wallk out the door and control this virus.
+The solution is to leave. Walk out the door. Stop gambling. Even if you think to yourself that you've already lost money and that people have already died, and you want to keep gambling to break even and "move past the pandemic", you have to realize that casinos and red queens' races with viruses are rigged against us. It's not too late to walk out the door and control this virus.
 
 Gambling is ill-advised when it comes to both casinos and pandemics.
 
 ## Methodology
 
-Heatmap data generation is done by calculating the probability of attenuation occuring before population collase based on several epidemiological and demographic parameters. The expected mortality is calculated as *fractionInfectedPerWave X [(1 - pExaggeratedMortality) X baselineMortality + pExaggeratedMortality X exaggeratedMortality]*. Calculating *log(populationLossCollapseThreshold)/log(1 - mortalityExpected)* results in an estimate of the total waves until collapse. The probability of attenuation occuring before collapse is *1 - (1 - pStableAttenuation)^totalWavesUntilCollapse*.
+Heatmap data generation is done by calculating the probability of attenuation occuring before population collaspe based on several epidemiological and demographic parameters. The expected mortality is calculated as *fractionInfectedPerWave X [(1 - pExaggeratedMortality) X baselineMortality + pExaggeratedMortality X exaggeratedMortality]*. Calculating *log(populationLossCollapseThreshold)/log(1 - mortalityExpected)* results in an estimate of the total waves until collapse. The probability of attenuation occuring before collapse is *1 - (1 - pStableAttenuation)^totalWavesUntilCollapse*.
 
-The Monte Carlo simulation tracks the amount of times that stable attenuation and collapse occurs across 1000 separate runs. For each simulation, the population is initializaed to 100%. The simulation progresses wave by wave in which each wave either reduces the population by a small or larger amount, or the virus attenuates and the sim is broken out of. If attenuation does not occur in time, the population experiences collapse.
+The Monte Carlo simulation tracks the amount of times that stable attenuation and collapse occurs across 1000 separate runs. For each simulation, the population is initialized to 100%. The simulation progresses wave by wave in which each wave either reduces the population by a small or larger amount, or the virus attenuates and the sim is broken out of. If attenuation does not occur in time, the population experiences collapse.
