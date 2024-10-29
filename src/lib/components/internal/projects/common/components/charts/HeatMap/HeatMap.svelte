@@ -9,6 +9,7 @@
 	import ColorLegend from './ColorLegend/ColorLegend.svelte';
 	import {
 		defaultMargin,
+		defaultValueFormatter,
 		squareHoverScale,
 		squarePadding,
 		type HeatmapData,
@@ -26,6 +27,7 @@
 		colorScheme = interpolateMagma,
 		selectedIndex = $bindable(),
 		valueDomain,
+		valueFormatter = defaultValueFormatter,
 	}: Props = $props();
 
 	let width = $state(0);
@@ -41,7 +43,8 @@
 		yLabel: yAccessor(data),
 		xPosition: (xScale(xAccessor(data)) ?? 0) + xScale.bandwidth() + usedMargin.left,
 		yPosition: (yScale(yAccessor(data)) ?? 0) + yScale.bandwidth() * 0.5 + usedMargin.top,
-		value: Math.round(data.value * 100) / 100,
+		value: data.value,
+		formattedValue: valueFormatter(data.value),
 	});
 
 	let tooltipData: TooltipData | null = $state(null);

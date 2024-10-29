@@ -74,13 +74,15 @@ export const generateOverallData = ({
 			heatmapData.push({
 				x: `${roundTo(pStableAttenuation * 100, 2)}%`,
 				y: `${roundTo(pExaggeratedMortality * 100, 2)}%`,
-				value: Math.round(overallProbOfAttenuatingBeforeCollapse * 100),
+				value: overallProbOfAttenuatingBeforeCollapse * 100,
 			});
 		});
 	});
 
 	return heatmapData;
 };
+
+export const valueFormatter = (value: number) => `${roundTo(value, 1)}%`;
 
 interface SimulatePopulationDynamicsProps {
 	numSimulations?: number;
