@@ -8,7 +8,7 @@ export const siteConfig: SiteConfig = {
 	description: 'Simple, visual explanations about SARS-CoV-2',
 	url: 'https://www.peertopublic.com',
 	link: 'https://github.com/gckirchoff/peer-to-public',
-	author: 'Peer to Public',
+	author: 'Gregory Kirchoff',
 	pages: {
 		landing: {
 			miniAboutMe: {
@@ -24,13 +24,9 @@ export const siteConfig: SiteConfig = {
 		about: {
 			img: 'me.svg',
 			content: [
-				`Peer to Public is the result of the collaborative efforts of scientists and data visualization developers.`,
-				`The purpose of this site is to make difficult-to-understand yet important issues feel intuitive
-				through the use of engaging, interactive articles.`,
-				`Our primary goal is to educate the public and government about the importance of stopping SARS-CoV-2 infections.`,
-				`SARS-CoV-2 is not the common cold and never will be. It is a SARS coronavirus. The implications of this
-				are major and require prevention measures to be taken.`,
-				`To reach out for further information or collaboration, please use the contact form to get in touch.`,
+				`Peer to Public is a collaborative platform uniting scientists and data visualization experts to make complex, crucial topics accessible to everyone. Through interactive, data-driven articles, we aim to illuminate important issues that impact public health and well-being, especially surrounding SARS-CoV-2 and Long Covid.`,
+				`Our mission is clear: to educate both the public and policymakers on the critical need to curb SARS-CoV-2 infections. This virus is not a common cold but a SARS coronavirus, with implications that demand ongoing preventative measures.`,
+				`If you're interested in learning more or exploring collaborative opportunities, please reach out via the contact form.`,
 			],
 		},
 		contact: {
