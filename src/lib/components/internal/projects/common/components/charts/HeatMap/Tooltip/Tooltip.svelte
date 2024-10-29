@@ -17,7 +17,7 @@
 	</div>
 	<div>
 		<span>
-			<b>value</b>: {tooltipData.value}
+			<b>value</b>: {tooltipData.formattedValue}
 		</span>
 	</div>
 </div>
