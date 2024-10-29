@@ -33,12 +33,11 @@
 			</text>
 		</g>
 	{/each}
-	<text
-		style="transform: translate(-60px, {yScale.range()[0] * 0.5}px) rotate(-90deg);"
-		text-anchor="middle"
-	>
-		{label}
-	</text>
+	<g style="transform: translate(-60px, {yScale.range()[0] * 0.5}px) rotate(-90deg);">
+		<text text-anchor="middle">
+			{label}
+		</text>
+	</g>
 </g>
 
 <style lang="scss">
