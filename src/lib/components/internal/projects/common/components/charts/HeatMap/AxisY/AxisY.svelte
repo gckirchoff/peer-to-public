@@ -15,13 +15,11 @@
 		{yLabel}
 	</text>
 {/each}
-<text
-	class="axis-label"
-	style="transform: translate(-60px, {yScale.range()[0] * 0.5}px) rotate(-90deg);"
-	text-anchor="middle"
->
-	{label}
-</text>
+<g style="transform: translate(-60px, {yScale.range()[0] * 0.5}px) rotate(-90deg);">
+	<text class="axis-label" text-anchor="middle">
+		{label}
+	</text>
+</g>
 
 <style lang="scss">
 	text {
