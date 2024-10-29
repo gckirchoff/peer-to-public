@@ -7,6 +7,7 @@
 		getParamsFromSelectedData,
 		simulatePopulationDynamics,
 		UseAdvancedConfigurables,
+		valueFormatter,
 	} from './logic.svelte';
 
 	const advancedConfigurables = new UseAdvancedConfigurables();
@@ -58,6 +59,7 @@
 				yLabel="Chance of Exaggerated Mortality/Wave"
 				bind:selectedIndex={selectedHeatmapIndex}
 				valueDomain={[0, 100]}
+				{valueFormatter}
 			/>
 		</div>
 		<div class="chart-container monte-carlo-sim">

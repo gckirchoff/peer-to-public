@@ -17,7 +17,10 @@ export interface Props {
 	colorScheme?: typeof interpolateInferno;
 	selectedIndex?: number | null;
 	valueDomain?: [number, number];
+	valueFormatter?: (value: number) => string;
 }
+
+export const defaultValueFormatter = (value: number) => `${value}`;
 
 export interface TooltipData {
 	id: string;
@@ -26,6 +29,7 @@ export interface TooltipData {
 	xPosition: number;
 	yPosition: number;
 	value: number;
+	formattedValue: string;
 }
 
 export const squarePadding = 0.075;
