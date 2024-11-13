@@ -15,44 +15,47 @@
 
 	let birthRate = 2.212;
 	let deathRate = 0.727272727;
-	let longCovidDeathRate = 1;
+	let longCovidDeathRate = $state(1);
 
-	let infectionRate = 1.3;
-	let longCovidRate = 0.1;
+	let infectionRate = $state(1.3);
+	let longCovidRate = $state(0.1);
 
-	let view: 'percent' | 'population' = 'population';
+	let view = $state<'percent' | 'population'>('percent');
 
-	let width = 400;
+	let width = $state(400);
 	let height = 400;
 
-	$: innerChartWidth = width - margin.left - margin.right;
-	$: innerChartHeight = height - margin.top - margin.bottom;
+	let innerChartWidth = $derived(width - margin.left - margin.right);
+	let innerChartHeight = $derived(height - margin.top - margin.bottom);
 
 	const xAccessor = (d: PopulationByYear) => d.year;
 	const yAccessorTotalPopulation = (d: PopulationByYear) => d.populationStatus.totalPopulation;
-	$: yAccessorDisabledPopulation = ({
-		populationStatus: { disabledPopulation, totalPopulation },
-	}: PopulationByYear) =>
-		view === 'population' ? disabledPopulation : disabledPopulation / totalPopulation;
+	let yAccessorDisabledPopulation = $derived(
+		({ populationStatus: { disabledPopulation, totalPopulation } }: PopulationByYear) =>
+			view === 'population' ? disabledPopulation : disabledPopulation / totalPopulation,
+	);
 
-	$: yAxisFormatter = (num: number): string =>
-		view === 'population' ? format('.2s')(num).replace('G', 'B') : `${num * 100}%`;
+	let yAxisFormatter = $derived((num: number): string =>
+		view === 'population' ? format('.2s')(num).replace('G', 'B') : `${num * 100}%`,
+	);
 
-	$: populationOverTime = forecastPopulationWithDisabilityOverTime({
-		birthRate,
-		deathRate,
-		disabledDeathRate: deathRate * longCovidDeathRate,
-		initialPopulation,
-		initialDisabledPopulation: initialLongCovidPopulation,
-		averageNumOfInfectionsPerPersonPerYear: infectionRate,
-		chanceOfDisabilityPerInfection: longCovidRate,
-		years,
-	});
+	let populationOverTime = $derived(
+		forecastPopulationWithDisabilityOverTime({
+			birthRate,
+			deathRate,
+			disabledDeathRate: deathRate * longCovidDeathRate,
+			initialPopulation,
+			initialDisabledPopulation: initialLongCovidPopulation,
+			averageNumOfInfectionsPerPersonPerYear: infectionRate,
+			chanceOfDisabilityPerInfection: longCovidRate,
+			years,
+		}),
+	);
 
-	$: xScale = scaleLinear().domain([0, years]).range([0, innerChartWidth]);
+	let xScale = $derived(scaleLinear().domain([0, years]).range([0, innerChartWidth]));
 
-	$: yDomain = view === 'population' ? [0, 360e6] : [0, 1];
-	$: yScale = scaleLinear().domain(yDomain).range([innerChartHeight, 0]);
+	let yDomain = $derived(view === 'population' ? [0, 360e6] : [0, 1]);
+	let yScale = $derived(scaleLinear().domain(yDomain).range([innerChartHeight, 0]));
 </script>
 
 <div class="inputs-container">
@@ -70,13 +73,13 @@
 	</label>
 	<label class="range-input">
 		<Body2>
-			{longCovidDeathRate}X Long Covid Death Rate:
+			{longCovidDeathRate} LC Mortality Hazard Ratio:
 		</Body2>
-		<input bind:value={longCovidDeathRate} type="range" min={1} max={50} step={0.1} />
+		<input bind:value={longCovidDeathRate} type="range" min={1} max={10} step={0.1} />
 	</label>
 	<select bind:value={view}>
-		<option value="population">Population</option>
-		<option value="percent">Percent</option>
+		<option value="percent">Percent view</option>
+		<option value="population">Population view</option>
 	</select>
 </div>
 <div class="chart-container" bind:clientWidth={width} role="application">

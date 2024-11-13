@@ -1,35 +1,53 @@
 <script lang="ts">
+	import { run, createBubbler } from 'svelte/legacy';
+
+	const bubble = createBubbler();
 	import * as d3 from 'd3';
 
 	type T = $$Generic;
 
-	export let type: 'line' | 'area' = 'line';
-	export let data: T[] = [];
-	export let xAccessorScaled: (d: T) => number;
-	export let yAccessorScaled: (d: T) => number;
-	export let y0AccessorScaled: number | ((d: T) => number) = 0;
-	export let interpolation = d3.curveMonotoneX;
-	export let style = '';
-
-	$: lineGenerator = d3[type]<T>().x(xAccessorScaled).y(yAccessorScaled).curve(interpolation);
-
-	$: {
-		if (type == 'area') {
-			lineGenerator.y0(y0AccessorScaled).y1(yAccessorScaled);
-		}
+	interface Props {
+		type?: 'line' | 'area';
+		data?: T[];
+		xAccessorScaled: (d: T) => number;
+		yAccessorScaled: (d: T) => number;
+		y0AccessorScaled?: number | ((d: T) => number);
+		interpolation?: any;
+		style?: string;
 	}
 
-	$: line = lineGenerator(data);
+	let {
+		type = 'line',
+		data = [],
+		xAccessorScaled,
+		yAccessorScaled,
+		y0AccessorScaled = 0,
+		interpolation = d3.curveMonotoneX,
+		style = '',
+	}: Props = $props();
+
+	let lineGenerator = $derived.by(() =>
+		type === 'line'
+			? d3.line<T>().x(xAccessorScaled).y(yAccessorScaled).curve(interpolation)
+			: d3
+					.area<T>()
+					.x(xAccessorScaled)
+					.y0(y0AccessorScaled as (d: T) => number)
+					.y1(yAccessorScaled)
+					.curve(interpolation),
+	);
+
+	let line = $derived(lineGenerator(data));
 </script>
 
 <path
 	class={`Line Line--type-${type}`}
 	d={line}
 	{style}
-	on:mouseover
-	on:mouseleave
-	on:focus
-	on:blur
+	onmouseover={bubble('mouseover')}
+	onmouseleave={bubble('mouseleave')}
+	onfocus={bubble('focus')}
+	onblur={bubble('blur')}
 	role="figure"
 	aria-roledescription="area"
 />

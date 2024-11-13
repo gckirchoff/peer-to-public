@@ -1,12 +1,12 @@
 ---
-title: "The Curve That Wasn't and May Be"
+title: "From Flattening the Curve to Endemic Long Covid"
 description: "The curve of new infections never flattened while the curve of Long Covid cases continues to climb"
 categories: [ "covid-19" ]
 authors: [ "Gregory Kirchoff" ]
 coverImage: "default-background-7.jpg"
-date: 'Sun Oct 20 2024 13:22:53 GMT-0400 (Eastern Daylight Time)'
+date: 'Sat Oct 19 2024 17:15:32 GMT-0400 (Eastern Daylight Time)'
 published: true
-
+updated: 'Wed Nov 13 2024 17:39:51 GMT-0500 (Eastern Standard Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
