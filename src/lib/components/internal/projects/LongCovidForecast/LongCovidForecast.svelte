@@ -73,13 +73,13 @@
 	</label>
 	<label class="range-input">
 		<Body2>
-			{longCovidDeathRate}X Long Covid Death Rate:
+			{longCovidDeathRate} LC Mortality Hazard Ratio:
 		</Body2>
-		<input bind:value={longCovidDeathRate} type="range" min={1} max={50} step={0.1} />
+		<input bind:value={longCovidDeathRate} type="range" min={1} max={10} step={0.1} />
 	</label>
 	<select bind:value={view}>
-		<option value="population">Population</option>
-		<option value="percent">Percent</option>
+		<option value="percent">Percent view</option>
+		<option value="population">Population view</option>
 	</select>
 </div>
 <div class="chart-container" bind:clientWidth={width} role="application">
