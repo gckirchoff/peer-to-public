@@ -40,11 +40,11 @@
 </main>
 
 <style lang="scss">
-	@import '/src/styles/mixins.scss';
+	@use '/src/styles/mixins.scss';
 
 	main {
-		@include base-layout;
 		row-gap: var(--spacing-16);
+		@include mixins.base-layout;
 
 		.profile {
 			flex: 1 0 30rem;
