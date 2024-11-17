@@ -1,20 +1,15 @@
-@use 'sass:color';
-@use 'sass:map';
-@function lightenColor($baseColor, $intensity) {
-	$r: color.channel($baseColor, 'red', $space: rgb) +
-		(255 - color.channel($baseColor, 'red', $space: rgb)) * $intensity;
-	$g: color.channel($baseColor, 'green', $space: rgb) +
-		(255 - color.channel($baseColor, 'green', $space: rgb)) * $intensity;
-	$b: color.channel($baseColor, 'blue', $space: rgb) +
-		(255 - color.channel($baseColor, 'blue', $space: rgb)) * $intensity;
+@function lighten($baseColor, $intensity) {
+	$r: red($baseColor) + (255 - red($baseColor)) * $intensity;
+	$g: green($baseColor) + (255 - green($baseColor)) * $intensity;
+	$b: blue($baseColor) + (255 - blue($baseColor)) * $intensity;
 
 	@return rgb($r, $g, $b);
 }
 
-@function darkenColor($baseColor, $intensity) {
-	$r: color.channel($baseColor, 'red', $space: rgb) * $intensity;
-	$g: color.channel($baseColor, 'green', $space: rgb) * $intensity;
-	$b: color.channel($baseColor, 'blue', $space: rgb) * $intensity;
+@function darken($baseColor, $intensity) {
+	$r: red($baseColor) * $intensity;
+	$g: green($baseColor) * $intensity;
+	$b: blue($baseColor) * $intensity;
 
 	@return rgb($r, $g, $b);
 }
@@ -33,12 +28,12 @@
 		1000: 0.36,
 	);
 
-	$intensity: map.get($intensities, $shade);
+	$intensity: map-get($intensities, $shade);
 
 	@if ($shade < 500) {
-		@return lightenColor($hex, $intensity);
+		@return lighten($hex, $intensity);
 	}
-	@return darkenColor($hex, $intensity);
+	@return darken($hex, $intensity);
 }
 
 @mixin color-palette($name, $color, $invert: false) {
