@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { postsPerPage } from '$lib/config';
-	import H3 from '../typography/H3.svelte';
+	import H6 from '../typography/H6.svelte';
 
 	export let currentPage: number;
 	export let totalPosts: number;
@@ -14,7 +14,7 @@
 {#key currentPage}
 	{#if pagesAvailable > 1}
 		<nav aria-label="Pagination navigation">
-			<H3>Go to page:</H3>
+			<H6>Go to page:</H6>
 			<ul>
 				{#each Array.from({ length: pagesAvailable }, (_, i) => i + 1) as page}
 					<li>
@@ -29,12 +29,20 @@
 {/key}
 
 <style lang="scss">
+	nav {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		margin-top: var(--spacing-8);
+		margin-bottom: var(--spacing-8);
+	}
 	ul {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: start;
 		gap: var(--spacing-8);
 		list-style: none;
+		margin-top: var(--spacing-4);
 	}
 
 	a {
@@ -43,15 +51,20 @@
 		align-items: center;
 		width: var(--font-16);
 		font-weight: bold;
-		transition: background 0.1s;
+		transition: all 0.5s;
+		padding: var(--spacing-4) var(--spacing-8);
+		color: var(--clr-text-on-surface-500);
+		border: 2px solid transparent;
+		border-radius: var(--rounded-4);
 
 		&:hover {
-			background: var(--clr-secondary-500);
+			border-color: var(--clr-primary-500);
 		}
 
 		&[aria-current='true'] {
-			background: var(--clr-tertiary-500);
-			color: var(--clr-txt);
+			border-color: var(--clr-primary-500);
+			background: var(--clr-primary-500);
+			color: var(--clr-text-on-primary);
 		}
 	}
 </style>
