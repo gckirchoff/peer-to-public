@@ -1,5 +1,5 @@
 ---
-title: "Gambling with Covid"
+title: "Gambling with a Pandemic"
 description: "Why gambling with a pandemic is a losing bet"
 categories: [ "covid-19" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
