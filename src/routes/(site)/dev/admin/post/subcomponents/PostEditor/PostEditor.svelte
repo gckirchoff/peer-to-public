@@ -77,7 +77,7 @@
 		localStorageTimer = setTimeout(() => {
 			window.localStorage.setItem(postContentLocalStorage, mdValue);
 			savedToLocalStorageText = 'Changes Saved';
-		}, 2000);
+		}, 3000);
 	};
 
 	const handleSubmit = async (event: MouseEvent) => {
@@ -171,7 +171,7 @@
 		<input type="file" bind:files={newImage} />
 	</label>
 	<input type="text" bind:value={formTitle} placeholder="Title" />
-	<textarea bind:value={formDescription} placeholder="Description" />
+	<textarea bind:value={formDescription} placeholder="Description"></textarea>
 	<div>
 		<MultiSelect id="categories" bind:value={formCategories}>
 			{#each allCategories as category}
