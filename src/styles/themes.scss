@@ -1,4 +1,4 @@
-@import './color-palette.scss';
+@use 'color-palette.scss';
 
 html[color-theme='dark'] {
 	/* Palette ---------------------------------- */
@@ -10,13 +10,13 @@ html[color-theme='dark'] {
 	$clr-error: #d41976;
 	$clr-surface: #363636;
 
-	@include color-palette(primary, $clr-primary, true);
-	@include color-palette(secondary, $clr-secondary, true);
-	@include color-palette(tertiary, $clr-tertiary, true);
-	@include color-palette(success, $clr-success, true);
-	@include color-palette(warning, $clr-warning, true);
-	@include color-palette(error, $clr-error, true);
-	@include color-palette(surface, $clr-surface, true);
+	@include color-palette.color-palette(primary, $clr-primary, true);
+	@include color-palette.color-palette(secondary, $clr-secondary, true);
+	@include color-palette.color-palette(tertiary, $clr-tertiary, true);
+	@include color-palette.color-palette(success, $clr-success, true);
+	@include color-palette.color-palette(warning, $clr-warning, true);
+	@include color-palette.color-palette(error, $clr-error, true);
+	@include color-palette.color-palette(surface, $clr-surface, true);
 
 	--clr-txt: hsl(0 0% 98%);
 	--clr-txt-neg: hsl(220 10% 10%);
@@ -62,13 +62,13 @@ html[color-theme='light'] {
 	$clr-error: #d41976;
 	$clr-surface: rgb(73 90 143);
 
-	@include color-palette(primary, $clr-primary);
-	@include color-palette(secondary, $clr-secondary);
-	@include color-palette(tertiary, $clr-tertiary);
-	@include color-palette(success, $clr-success);
-	@include color-palette(warning, $clr-warning);
-	@include color-palette(error, $clr-error);
-	@include color-palette(surface, $clr-surface);
+	@include color-palette.color-palette(primary, $clr-primary);
+	@include color-palette.color-palette(secondary, $clr-secondary);
+	@include color-palette.color-palette(tertiary, $clr-tertiary);
+	@include color-palette.color-palette(success, $clr-success);
+	@include color-palette.color-palette(warning, $clr-warning);
+	@include color-palette.color-palette(error, $clr-error);
+	@include color-palette.color-palette(surface, $clr-surface);
 
 	--clr-txt: hsl(220 10% 10%);
 	--clr-txt-neg: hsl(0 0% 98%);
