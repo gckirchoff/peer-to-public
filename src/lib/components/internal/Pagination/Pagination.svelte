@@ -30,32 +30,27 @@
 
 <style lang="scss">
 	nav {
+		margin-top: var(--spacing-16);
 		display: flex;
 		align-items: center;
 		flex-direction: column;
-		margin-top: var(--spacing-8);
-		margin-bottom: var(--spacing-8);
+		gap: var(--spacing-16);
 	}
 	ul {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: start;
 		gap: var(--spacing-8);
 		list-style: none;
-		margin-top: var(--spacing-4);
 	}
 
 	a {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: var(--font-16);
-		font-weight: bold;
-		transition: all 0.5s;
-		padding: var(--spacing-4) var(--spacing-8);
-		color: var(--clr-text-on-surface-500);
-		border: 2px solid transparent;
-		border-radius: var(--rounded-4);
+		width: var(--font-16);  
+        font-weight: bold;  
+        transition: all 0.5s;  
+        padding: var(--spacing-4) var(--spacing-8);  
+        color: var(--clr-text-on-surface-500);  
+        border: 2px solid transparent;  
+        border-radius: var(--rounded-4);  
 
 		&:hover {
 			border-color: var(--clr-primary-500);
