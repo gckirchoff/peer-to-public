@@ -44,13 +44,13 @@
 	}
 
 	a {
-		width: var(--font-16);  
-        font-weight: bold;  
-        transition: all 0.5s;  
-        padding: var(--spacing-4) var(--spacing-8);  
-        color: var(--clr-text-on-surface-500);  
-        border: 2px solid transparent;  
-        border-radius: var(--rounded-4);  
+		width: var(--font-16);
+		font-weight: bold;
+		transition: all 0.5s;
+		padding: var(--spacing-4) var(--spacing-8);
+		color: var(--clr-text-on-surface-500);
+		border: 2px solid transparent;
+		border-radius: var(--rounded-4);
 
 		&:hover {
 			border-color: var(--clr-primary-500);
