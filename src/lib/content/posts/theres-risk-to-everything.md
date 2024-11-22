@@ -5,7 +5,7 @@ categories: [ "covid-19" ]
 authors: [ "Peer to Public", "Arijit Chakravarty" ]
 coverImage: "coin-stack-ibrahim-rifath-unsplash.jpg"
 date: 'Wed Oct 23 2024 17:01:23 GMT-0400 (Eastern Daylight Time)'
-published: false
+published: true
 updated: 'Wed Oct 23 2024 17:01:43 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
