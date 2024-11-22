@@ -9,10 +9,10 @@
 	@return rgb($r, $g, $b);
 }
 
-@function darken($baseColor, $intensity) {
-	$r: red($baseColor) * $intensity;
-	$g: green($baseColor) * $intensity;
-	$b: blue($baseColor) * $intensity;
+@function darkenColor($baseColor, $intensity) {
+	$r: color.channel($baseColor, 'red', $space: rgb) * $intensity;
+	$g: color.channel($baseColor, 'green', $space: rgb) * $intensity;
+	$b: color.channel($baseColor, 'blue', $space: rgb) * $intensity;
 
 	@return rgb($r, $g, $b);
 }
