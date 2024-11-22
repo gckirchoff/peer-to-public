@@ -9,7 +9,7 @@
 		<ul>
 			{#each navItems as { route, title } (route)}
 				<NavItem href={route}>
-					<div class="nav-item">{title}</div>
+					{title}
 				</NavItem>
 			{/each}
 			<NavItem href="/rss.xml">RSS</NavItem>
