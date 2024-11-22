@@ -152,6 +152,14 @@
 	height: 90vh;
 }
 
+// Remove width and height from embedded iframe
+.prose > iframe[title='YouTube video player'] {
+	width: min(80%, 70rem);
+	height: auto;
+	aspect-ratio: 16 / 9;
+	justify-self: center;
+}
+
 .prose {
 	align-self: stretch;
 	display: grid;
