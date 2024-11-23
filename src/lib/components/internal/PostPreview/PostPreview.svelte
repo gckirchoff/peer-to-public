@@ -12,16 +12,22 @@
 
 <li>
 	<article>
-		<a href="/posts/{post.slug}" class="card">
-			<div class="image-container">
-				<img src="/images/postImages/{post.slug}/{post.coverImage}" alt={post.title} />
-			</div>
+		<div class="card">
+			<a href="/posts/{post.slug}">
+				<div class="image-container">
+					<img src="/images/postImages/{post.slug}/{post.coverImage}" alt={post.title} />
+				</div>
+			</a>
 			<div class="info">
-				<H4>
-					{post.title}
-				</H4>
-				<SubTitle2>{simpleDate(new Date(post.date))}</SubTitle2>
-				<Body1>{post.description}</Body1>
+				<a href="/posts/{post.slug}">
+					<div class="post-headings">
+						<H4>
+							{post.title}
+						</H4>
+						<SubTitle2>{simpleDate(new Date(post.date))}</SubTitle2>
+						<Body1>{post.description}</Body1>
+					</div>
+				</a>
 				<CategoryTagsList>
 					{#each post.categories as category}
 						<CategoryTag {category} />
@@ -37,7 +43,7 @@
 					</Body1>
 				</div>
 			{/if}
-		</a>
+		</div>
 	</article>
 </li>
 
@@ -71,6 +77,12 @@
 				display: flex;
 				flex-direction: column;
 				gap: var(--spacing-8);
+			}
+
+			.post-headings {
+				display: flex;
+				flex-direction: column;
+				gap: var(--spacing-4);
 			}
 
 			.published-state {
