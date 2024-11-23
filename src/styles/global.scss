@@ -9,6 +9,7 @@
 	--font-dyslexic-mono: 'OpenDyslexic Mono', monospace;
 
 	--font-10: 1.0rem;
+	--font-12: 1.2rem;
 	--font-14: 1.4rem;
 	--font-16: 1.6rem;
 	--font-18: 1.8rem;
@@ -74,12 +75,12 @@ html {
 
 	@include mixins.respond('tab-land') {
 		// width < 1200?
-		font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
+		font-size: 60%; //1 rem = 9px, 9/16 = 50%
 	}
 
 	@include mixins.respond('tab-port') {
 		// width < 900?
-		font-size: 50%; //1 rem = 8px, 8/16 = 50%
+		font-size: 60%; //1 rem = 8px, 8/16 = 50%
 	}
 
 	@include mixins.respond('big-desktop') {

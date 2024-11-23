@@ -12,7 +12,7 @@
 	a {
 		color: var(--clr-text-on-primary);
 		background-color: var(--clr-primary-500);
-		font-size: var(--font-10);
+		font-size: var(--font-12);
 		font-weight: var(--font-weight-regular);
 		text-transform: uppercase;
 		
