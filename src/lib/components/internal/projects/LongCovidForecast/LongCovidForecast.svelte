@@ -2,6 +2,7 @@
 	import { scaleLinear, scaleTime, extent, max, format } from 'd3';
 
 	import { Body2 } from '../../typography';
+	import Tooltip from '../../Tooltip/Tooltip.svelte';
 	import AxisX from '../common/components/charts/common/AxisX/AxisX.svelte';
 	import AxisY from '../common/components/charts/common/AxisY/AxisY.svelte';
 	import Line from '../common/components/Line/Line.svelte';
@@ -61,7 +62,7 @@
 <div class="inputs-container">
 	<label class="range-input">
 		<Body2>
-			{infectionRate} Covid infection rate:
+			{infectionRate} Covid infection rate: <Tooltip>Howdy</Tooltip>
 		</Body2>
 		<input bind:value={infectionRate} type="range" min={0} max={2} step={0.1} />
 	</label>
