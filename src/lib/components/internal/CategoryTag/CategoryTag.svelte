@@ -17,7 +17,7 @@
 		text-transform: uppercase;
 		
 
-		padding: var(--spacing-4) var(--spacing-6);
+		padding: var(--spacing-4) var(--spacing-8);
 		border-radius: var(--rounded-4);
 		transition: all 0.1s ease-in;
 
