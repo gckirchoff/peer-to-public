@@ -8,7 +8,6 @@
 	--font-dyslexic: 'OpenDyslexic', sans-serif;
 	--font-dyslexic-mono: 'OpenDyslexic Mono', monospace;
 
-	--font-10: 1.0rem;
 	--font-12: 1.2rem;
 	--font-14: 1.4rem;
 	--font-16: 1.6rem;
@@ -28,7 +27,6 @@
 	/* Spacing */
 	--spacing-2: 0.2rem;
 	--spacing-4: 0.4rem;
-	--spacing-6: 0.6rem;
 	--spacing-8: 0.8rem;
 	--spacing-16: 1.6rem;
 	--spacing-24: 2.4rem;
@@ -69,22 +67,26 @@
 }
 
 html {
-	font-size: 62.5%;
+	font-size: 62.5%; //1rem = 10px; 62.5% * 16px = 10px; 10/16 =
 	scroll-padding-top: var(--spacing-32);
 	scrollbar-color: var(--clr-scrollbar-thumb) transparent;
 
 	@include mixins.respond('tab-land') {
-		// width < 1200?
-		font-size: 60%; //1 rem = 9px, 9/16 = 50%
+		// width < 1200
+		font-size: 62.5%; //1rem = 10px;
 	}
 
 	@include mixins.respond('tab-port') {
-		// width < 900?
-		font-size: 60%; //1 rem = 8px, 8/16 = 50%
+		// width < 900
+		font-size: 56.25%; //1rem = 9px; 9/16
+	}
+	@include mixins.respond('mobile') {
+		// width < 600
+		font-size: 62.5%; //1rem = 10px;
 	}
 
 	@include mixins.respond('big-desktop') {
-		font-size: 75%; //1rem = 12, 12/16
+		font-size: 75%; //1rem = 12px, 12/16
 	}
 }
 
