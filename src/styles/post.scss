@@ -104,14 +104,14 @@
 .prose > table {
 	border-collapse: collapse;
 	margin-bottom: var(--spacing-32);
-	font-size: 1.8rem;
+	font-size: var(--font-16);
 	font-weight: var(--font-weight-regular);
-	line-height: 2.6rem;
+	line-height: var(--spacing-24);
 
 	th,
 	td {
 		padding: var(--spacing-8) var(--spacing-16);
-		border: 1px solid var(--clr-surface-400);
+		border: 1px solid var(--clr-surface-600);
 	}
 
 	/* Table Header Styles */
