@@ -38,6 +38,7 @@ export interface ForecastPopulationWithDisabilityArgs {
 	birthRate: number;
 	deathRate: number;
 	disabledDeathRate: number;
+	recoveryRate: number;
 	initialPopulation: number;
 	initialDisabledPopulation: number;
 	averageNumOfInfectionsPerPersonPerYear: number;

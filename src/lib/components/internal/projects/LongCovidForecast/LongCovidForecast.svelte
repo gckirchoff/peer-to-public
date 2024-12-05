@@ -16,6 +16,8 @@
 
 	let birthRate = 2.212;
 	let deathRate = 0.727272727;
+	let recoveryRate = $state(5);
+
 	let longCovidDeathRate = $state(1);
 
 	let infectionRate = $state(1.3);
@@ -44,6 +46,7 @@
 		forecastPopulationWithDisabilityOverTime({
 			birthRate,
 			deathRate,
+			recoveryRate,
 			disabledDeathRate: deathRate * longCovidDeathRate,
 			initialPopulation,
 			initialDisabledPopulation: initialLongCovidPopulation,
@@ -60,17 +63,27 @@
 </script>
 
 <div class="inputs-container">
+	<select bind:value={view}>
+		<option value="percent">Percent view</option>
+		<option value="population">Population view</option>
+	</select>
 	<label class="range-input">
 		<Body2>
-			{infectionRate} Covid infection rate: <Tooltip>Howdy</Tooltip>
+			{infectionRate} Infections/year: <Tooltip>Howdy</Tooltip>
 		</Body2>
 		<input bind:value={infectionRate} type="range" min={0} max={2} step={0.1} />
 	</label>
 	<label class="range-input">
 		<Body2>
-			{Math.round(longCovidRate * 100)}% Long Covid Rate:
+			{Math.round(longCovidRate * 100)}% LC Rate:
 		</Body2>
 		<input bind:value={longCovidRate} type="range" min={0} max={1} step={0.01} />
+	</label>
+	<label class="range-input">
+		<Body2>
+			{recoveryRate}% LC Recovery Rate:
+		</Body2>
+		<input bind:value={recoveryRate} type="range" min={0} max={50} step={0.1} />
 	</label>
 	<label class="range-input">
 		<Body2>
@@ -78,10 +91,6 @@
 		</Body2>
 		<input bind:value={longCovidDeathRate} type="range" min={1} max={10} step={0.1} />
 	</label>
-	<select bind:value={view}>
-		<option value="percent">Percent view</option>
-		<option value="population">Population view</option>
-	</select>
 </div>
 <div class="chart-container" bind:clientWidth={width} role="application">
 	<svg {width} {height}>
@@ -146,6 +155,12 @@
 
 		@include mixins.respond('mobile') {
 			margin-bottom: 0;
+		}
+
+		select {
+			justify-self: center;
+			width: 70%;
+			grid-column: -2;
 		}
 
 		.range-input {

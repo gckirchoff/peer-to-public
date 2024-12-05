@@ -125,6 +125,7 @@ export function forecastPopulationWithDisabilityV2({
 	birthRate,
 	deathRate,
 	disabledDeathRate,
+	recoveryRate,
 	initialPopulation,
 	initialDisabledPopulation,
 	averageNumOfInfectionsPerPersonPerYear,
@@ -137,6 +138,7 @@ export function forecastPopulationWithDisabilityV2({
 	const annualBirthRate = birthRate / 100;
 	const annualDeathRate = deathRate / 100;
 	const annualDisabledDeathRate = disabledDeathRate / 100;
+	const annualRecoveryRate = recoveryRate / 100;
 
 	const proportionsInfectedThroughYear = breakdownNumber(averageNumOfInfectionsPerPersonPerYear);
 
@@ -159,6 +161,11 @@ export function forecastPopulationWithDisabilityV2({
 			disabledPopulation += newDisabilities;
 		});
 
+		// Recoveries
+		const recoveries = disabledPopulation * annualRecoveryRate;
+		disabledPopulation = Math.max(disabledPopulation - recoveries, 0);
+		nonDisabledPopulation += recoveries;
+
 		// const chanceOfDisabilityPerPerson =
 		// 	averageNumOfInfectionsPerPersonPerYear > 1
 		// 		? 1 - Math.pow(1 - chanceOfDisabilityPerInfection, averageNumOfInfectionsPerPersonPerYear)
@@ -176,6 +183,7 @@ export function forecastPopulationWithDisabilityV2({
 export const forecastPopulationWithDisabilityOverTime = ({
 	birthRate,
 	deathRate,
+	recoveryRate,
 	disabledDeathRate,
 	initialPopulation,
 	initialDisabledPopulation,
@@ -188,6 +196,7 @@ export const forecastPopulationWithDisabilityOverTime = ({
 		const populationStatus = forecastPopulationWithDisabilityV2({
 			birthRate,
 			deathRate,
+			recoveryRate,
 			disabledDeathRate,
 			initialPopulation,
 			initialDisabledPopulation,
