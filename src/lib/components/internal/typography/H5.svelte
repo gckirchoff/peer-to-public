@@ -6,7 +6,7 @@
 
 <style lang="scss">
 	h5 {
-		font-size: var(--font-24);
+		font-size: var(--font-20);
 		font-weight: var(--font-weight-regular);
 		line-height: 1.334;
 		font-family: var(--font-base);

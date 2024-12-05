@@ -1,12 +1,10 @@
 @use 'sass:color';
 @use 'sass:map';
+
 @function lightenColor($baseColor, $intensity) {
-	$r: color.channel($baseColor, 'red', $space: rgb) +
-		(255 - color.channel($baseColor, 'red', $space: rgb)) * $intensity;
-	$g: color.channel($baseColor, 'green', $space: rgb) +
-		(255 - color.channel($baseColor, 'green', $space: rgb)) * $intensity;
-	$b: color.channel($baseColor, 'blue', $space: rgb) +
-		(255 - color.channel($baseColor, 'blue', $space: rgb)) * $intensity;
+	$r: color.channel($baseColor, 'red', $space: rgb) + (255 - color.channel($baseColor, 'red', $space: rgb)) * $intensity;
+	$g: color.channel($baseColor, 'green', $space: rgb) + (255 - color.channel($baseColor, 'green', $space: rgb)) * $intensity;
+	$b: color.channel($baseColor, 'blue', $space: rgb) + (255 - color.channel($baseColor, 'blue', $space: rgb)) * $intensity;
 
 	@return rgb($r, $g, $b);
 }
@@ -33,12 +31,13 @@
 		1000: 0.36,
 	);
 
-	$intensity: map.get($intensities, $shade);
+$intensity: map.get($intensities, $shade);
 
-	@if ($shade < 500) {
-		@return lightenColor($hex, $intensity);
-	}
-	@return darkenColor($hex, $intensity);
+@if ($shade < 500) {
+	@return lightenColor($hex, $intensity);
+}
+
+@return darkenColor($hex, $intensity);
 }
 
 @mixin color-palette($name, $color, $invert: false) {
@@ -54,7 +53,9 @@
 		--clr-#{$name}-800: #{shade($color, 200)};
 		--clr-#{$name}-900: #{shade($color, 100)};
 		--clr-#{$name}-1000: #{shade($color, 50)};
-	} @else {
+	}
+
+	@else {
 		--clr-#{$name}-50: #{shade($color, 50)};
 		--clr-#{$name}-100: #{shade($color, 100)};
 		--clr-#{$name}-200: #{shade($color, 200)};

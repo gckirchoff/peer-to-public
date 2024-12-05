@@ -19,7 +19,7 @@
 		<ul>
 			{#each navItems as { route, title } (route)}
 				<NavItem href={route}>
-					<div class="nav-item">{title}</div>
+					<span class="nav-item">{title}</span>
 				</NavItem>
 			{/each}
 			<LightModeToggle />

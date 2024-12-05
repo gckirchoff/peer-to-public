@@ -29,7 +29,7 @@
 		border: none;
 		box-shadow: none;
 		overflow: hidden;
-		width: 3rem;
+		width: 2.5rem;
 		color: var(--clr-text-on-surface-500);
 	}
 	button > * {

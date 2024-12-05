@@ -6,7 +6,7 @@
 
 <style lang="scss">
 	h2 {
-		font-size: var(--font-60);
+		font-size: var(--font-48);
 		font-weight: var(--font-weight-regular);
 		line-height: 1.2;
 		font-family: var(--font-accent);
