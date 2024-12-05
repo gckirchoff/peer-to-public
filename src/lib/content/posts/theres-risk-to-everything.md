@@ -2,7 +2,7 @@
 title: "There's Risk to Everything"
 description: "This post challenges the idea that individuals can fully understand and manage their own risk without proper information, highlighting the dangers of incomplete knowledge in pandemic decision-making."
 categories: [ "covid-19" ]
-authors: [ "Peer to Public", "Arijit Chakravarty" ]
+authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "coin-stack-ibrahim-rifath-unsplash.jpg"
 date: 'Wed Oct 23 2024 17:01:23 GMT-0400 (Eastern Daylight Time)'
 published: true
@@ -35,13 +35,21 @@ People can only make decisions based on what they know, and that knowledge is of
 
 Getting symptomatic Long Covid has often been described as a "roll of the dice" - a game of chance. While this phrase might elicit nods of agreement, it becomes more complex the deeper you think about it. Are these dice rolls independent of each other? Does the chance of Long Covid increase with each subsequent infection? How many times are we expecting to roll these dice? How many times can we anticipate being infected?
 
-One way to conceptualize risk is through the analogy of flipping coins. The chance of a single coin landing heads-up is 50%. The probability of flipping two coins and getting heads on both is 25%. To put this in perspective, imagine being in Pamplona waiting for the rocket to go off signaling that the bulls are being released, aware of the many who get injured during the event. Now, take five coins and toss them into the air. If they all land heads-up, you get injured during the race - around a 3% chance. Say you're lucky this time - the coins don't all land heads-up, and you finish the run safely. This doesn't guarantee that your next attempt will be as fortunate. You can throw those five coins again at your next event and not be so lucky.
+We can conceptualize risk through the above analogy of flipping coins. The chance of a single coin landing heads-up is 50%. The probability of flipping two coins and getting heads on both is 25%. To put this in perspective, imagine being in Pamplona waiting for the rocket to go off signaling that the bulls are being released, aware of the many who get injured during the event. Now, take five coins and toss them into the air. If they all land heads-up, you get injured during the race - around a 3% chance. Say you're lucky this time - the coins don't all land heads-up, and you finish the run safely. This doesn't guarantee that your next attempt will be as fortunate. You can throw those five coins again at your next event and not be so lucky.
 
 Statistically, you can expect to run with the bulls 18 times before your cumulative risk of injury exceeds 50%. Beyond that point, the odds begin to stack against you. It takes 77 excursions before you can be 95% confident that you will get injured.
 
 For such a seemingly dangerous sport, those numbers aren't that bad. The per-infection chance of developing symptomatic Long Covid is 14.6% according to [Statistics Canada](https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00015-eng.htm). With these numbers, you can get infected with SARS-Cov-2 4 times before your risk of Long Covid approaches a 50/50 chance. After 19 infections, your cumulative risk approaches near certainty at 95%.
 
 I would rather run with the bulls.
+
+## You Are Running With the Bulls
+
+You may assume that because you avoid high-risk activities like bull running, skydiving, or motorcycle riding, you can comfortably manage the risks of COVID-19. You might feel that your generally cautious lifestyle has increased your tolerance for risk, or perhaps you simply believe that the likelihood of contracting COVID-19 has significantly decreased. However, it's important to recognize that COVID-19 is still a recurring threat. Even with annual [vaccinations](https://pubmed.ncbi.nlm.nih.gov/34270597/), you are likely to face COVID-19 [each year](https://fortune.com/2022/05/25/how-often-can-you-get-covid-yearly-modeling-shows/). The effect of a yearly vaccination effectively displaces an infection event you would have gotten, but its effectiveness is largely dependent on how well your immunity aligns with the circulating variants, which is apt to change.
+
+Consequently, your life now carries more risk than it did before the pandemic. Without taking necessary precautions, even the relatively safe life of an office worker has become riskier, potentially surpassing the personal injury risks associated with traditionally dangerous jobs such as logging and steelworking.
+
+<CovidCoins mode="outlook" />
 
 ## Methodology
 

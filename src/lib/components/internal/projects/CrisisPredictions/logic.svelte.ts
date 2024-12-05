@@ -14,6 +14,7 @@ const calcProbOfAttenuationBeforeCollapse = ({
 	fractionInfected,
 	baselineMortality,
 	wavesPerYear,
+	populationGrowthRate,
 }: {
 	pExaggeratedMortality: number;
 	exaggeratedMortality: number;
@@ -22,21 +23,31 @@ const calcProbOfAttenuationBeforeCollapse = ({
 	fractionInfected: number;
 	baselineMortality: number;
 	wavesPerYear: number;
+	populationGrowthRate: number;
 }) => {
 	const mortalityExpected =
 		fractionInfected *
 		((1 - pExaggeratedMortality) * baselineMortality +
 			pExaggeratedMortality * exaggeratedMortality);
 
+	const populationChangeFromDiseasePerWave = mortalityExpected * -1;
+	const populationChangeFromGrowthPerWave = populationGrowthRate / wavesPerYear;
+	const effectivePopulationChangePerWave =
+		populationChangeFromDiseasePerWave + populationChangeFromGrowthPerWave;
+
+	if (effectivePopulationChangePerWave >= 0) {
+		return { overallProbOfAttenuatingBeforeCollapse: 1, yearsUntilCollapse: Infinity };
+	}
+
 	const populationToLoseToReachCollapse = 1 - collapseThreshold;
 
 	const totalWavesUntilCollapse =
 		fractionInfected === 0
 			? Infinity
-			: Math.log(populationToLoseToReachCollapse) / Math.log(1 - mortalityExpected);
+			: Math.log(populationToLoseToReachCollapse) / Math.log(1 + effectivePopulationChangePerWave);
 
 	const overallProbOfAttenuatingBeforeCollapse =
-		1 - Math.pow(1 - pStableAttenuation, totalWavesUntilCollapse);
+		wavesPerYear === 0 ? 1 : 1 - Math.pow(1 - pStableAttenuation, totalWavesUntilCollapse);
 
 	const yearsUntilCollapse = wavesPerYear === 0 ? Infinity : totalWavesUntilCollapse / wavesPerYear;
 
@@ -49,6 +60,7 @@ interface GenerateOverallDataProps {
 	exaggeratedMortality: number;
 	fractionInfected: number;
 	wavesPerYear: number;
+	populationGrowthRate: number;
 }
 
 export const generateOverallData = ({
@@ -57,6 +69,7 @@ export const generateOverallData = ({
 	exaggeratedMortality,
 	fractionInfected,
 	wavesPerYear,
+	populationGrowthRate,
 }: GenerateOverallDataProps) => {
 	const heatmapData: HeatmapData[] = [];
 	probabilitiesOfExaggeratedMortality.forEach((pExaggeratedMortality) => {
@@ -69,6 +82,7 @@ export const generateOverallData = ({
 				fractionInfected,
 				pStableAttenuation,
 				wavesPerYear,
+				populationGrowthRate,
 			});
 
 			heatmapData.push({
@@ -94,6 +108,7 @@ interface SimulatePopulationDynamicsProps {
 	populationDeclinePerHighWave: number;
 	percentLossOfPopulationCrisisThreshold: number;
 	fractionInfected: number;
+	populationGrowthRate: number;
 }
 
 export const simulatePopulationDynamics = ({
@@ -106,6 +121,7 @@ export const simulatePopulationDynamics = ({
 	populationDeclinePerHighWave,
 	percentLossOfPopulationCrisisThreshold,
 	fractionInfected,
+	populationGrowthRate,
 }: SimulatePopulationDynamicsProps): {
 	crisisTimes: number[];
 	attenuationTimes: number[];
@@ -114,6 +130,7 @@ export const simulatePopulationDynamics = ({
 	const attenuationTimes: number[] = [];
 
 	const populationThatTriggersCrisis = 1 - percentLossOfPopulationCrisisThreshold;
+	const populationChangeFromGrowthPerWave = populationGrowthRate / wavesPerYear;
 
 	for (let sim = 0; sim < numSimulations; sim++) {
 		let population = 1.0;
@@ -121,6 +138,8 @@ export const simulatePopulationDynamics = ({
 
 		for (let year = 0; year < years; year++) {
 			for (let wave = 0; wave < wavesPerYear; wave++) {
+				population *= 1 + populationChangeFromGrowthPerWave;
+
 				const has_attenuated = Math.random() < probOfAttenuation;
 				if (has_attenuated) {
 					stable_attenuation = true;
@@ -209,6 +228,7 @@ export class UseAdvancedConfigurables {
 	exaggeratedMortality = $state(0.1);
 	fractionInfected = $state(0.7);
 	collapseThreshold = $state(0.4);
+	populationGrowthRate = $state(0.0);
 
 	constructor() {}
 }

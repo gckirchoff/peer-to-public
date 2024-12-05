@@ -37,15 +37,23 @@ The irreversible long-term health consequences of COVID-19 - including symptomat
 
 ## Outcomes
 
-Consider the following chart. The numbers are agnostic so you can interpret them how you wish. Imagine that stable attenuation is the small chance of winning big at the casino and walking out the door, money in-hand. Collapse is, of course, financial ruin; it can be interpreted as Long Covid disrupting society through labor shortages. Grey and black swan events - such as serotype formation and highly virulent strains - exist on the table due to the increasingly rapidly evolving strains our unmitigated spread is allowing for, so the simulation can be taken literally as well.
+These concepts are somewhat abstract, so let's try to visualize them. We'll use an epidemic and its associated fatality for demonstration purposes, but the concept is agnostic so you can interpret this as Long COVID with disability causing labor shortages in specific sectors, gambling with going bankrupt/winning big, etc.
 
-The Monte Carlo Simulation on the right tracks the results of 1000 simulations of society co-existing with a pandemic disease. Society will experience non-stop waves of the disease. Most waves will be standard baseline mortality waves, but there is a chance that any given wave can be temporarily highly deadly or become permanently attenuated, resulting in an immediate, happy ending to the simulation. There are two ways that the game can end: we just need to get lucky once and experience a stable attenuation, or the deadly waves chip away at society until we reach the collapse threshold. The chance of stable attenuation and high mortality per wave can be chosen from the heat map on the left. The values of the heat map represent the overall chance of attenuation occurring before collapse.
+Let's imagine that we have a population that goes through successive waves of a disease. Most waves will result in minimal mortality. However, each wave has a chance to instead be one of two special variants: it could be a highly deadly wave with an exaggerated mortality or it could go extinct/attenuate stably. The deadly waves can be interpreted as being driven by temporary, more lethal variants. Stable attenuation can be interpreted as extinction or stably/permanently evolving into an extremely mild strain that poses practically no harm.
+
+The heat map allows you to click on squares with different combinations of these chances along with what the overall chance is that the system in question will reach a stable, happy place instead of systemic collapse. Notice how the chances of exaggerated mortality are often higher. The [reasoning](https://www.biorxiv.org/content/10.1101/2023.01.16.523994v1) for this assumption will be discussed elsewhere, but the result of this is that each type of special wave has a unique edge - exaggerated mortality waves are more likely, but you only need one attenuation wave to permanently "win" the simulation.
+
+The second chart is a [Monte Carlo Simulation](https://en.wikipedia.org/wiki/Monte_Carlo_method) that tracks the results of 1,000 societies being put through successive waves of infections with your selected parameters. The results - whether they experience attenuation or collapse - are tracked by when they occur.
 
 <CrisisPredictions />
 
 ## The Fallacy of "Things Getting Better Over Time"
 
-A key takeaway is that the likelihood of a positive outcome diminishes over time. This contradicts the popular belief that coexisting with a pandemic gets better over time. However, this is to be expected when gambling. The only way to "win" at gambling is to get lucky quickly and then never gamble again. A previous manager of mine had a friend who won $40,000 at a casino. He asked the friend if he's finally positive, to which the friend said, "almost."
+A key takeaway is that the likelihood of a positive outcome diminishes over time. This contradicts the popular belief that coexisting with a pandemic gets better over time. This is because the population of  "productive" invididuals keeps getting chipped away at until it reaches a critical point or a miracle happens. However, this is to be expected when gambling. The only way to "win" at gambling is to get lucky quickly and then never gamble again. A previous manager of mine had a friend who won $40,000 at a casino. He asked the friend if he's finally positive, to which the friend said, "almost."
+
+## Interpretations
+
+There are "advanced tools" you can use to see how population growth could ammeliorate these issues at a population level. However, our population/society is composed of many subsystems like economies and corporations. A corporation for example may have negligible onboarding growth and a high sensitivity to collapse if a small number of key individuals, such as those in dev-ops at a software company, are affected by symptomatic Long COVID. Play around with the advanced tools and keep in mind what they could represent as you do.
 
 ## The Solution is to Stop Gambling
 

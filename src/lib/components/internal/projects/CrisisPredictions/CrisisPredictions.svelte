@@ -20,6 +20,7 @@
 			exaggeratedMortality: advancedConfigurables.exaggeratedMortality,
 			fractionInfected: advancedConfigurables.fractionInfected,
 			wavesPerYear: advancedConfigurables.wavesPerYear,
+			populationGrowthRate: advancedConfigurables.populationGrowthRate,
 		}),
 	);
 
@@ -33,6 +34,7 @@
 			probOfHighMortalityWave: selectedParams.pExaggeratedMortality,
 			wavesPerYear: advancedConfigurables.wavesPerYear,
 			fractionInfected: advancedConfigurables.fractionInfected,
+			populationGrowthRate: advancedConfigurables.populationGrowthRate,
 			years: 100,
 		}),
 	);
@@ -54,7 +56,7 @@
 		<div class="chart-container overall-probabilities">
 			<HeatMap
 				data={overallData}
-				title="Overall Chance of Attenuation Before Collapse"
+				title="Chance of Attenuation Before Collapse"
 				xLabel="Chance of Stable Attenuation/Wave"
 				yLabel="Chance of Exaggerated Mortality/Wave"
 				bind:selectedIndex={selectedHeatmapIndex}

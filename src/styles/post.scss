@@ -4,32 +4,31 @@
 }
 
 .prose > h1 {
-	color: var(--clr-primary-800);
-	font-size: var(--font-48);
+	font-size: var(--font-32);
 	font-family: var(--font-accent);
 	line-height: 1.167;
 }
 
 .prose > h2 {
-	color: var(--clr-primary-700);
-	font-weight: var(--font-weight-light);
-	font-size: var(--font-48);
+	font-weight: var(--font-weight-regular);
+	font-size: var(--font-32);
+	// color: var(--clr-primary-700);
 }
 
 .prose > h3 {
-	font-size: var(--font-32);
+	font-size: var(--font-24);
 }
 
 .prose > h4 {
-	font-size: var(--font-32);
+	font-size: var(--font-24);
 	font-weight: var(--font-weight-regular);
 }
 .prose > h5 {
-	font-size: var(--font-24);
+	font-size: var(--font-20);
 	font-weight: var(--font-weight-medium);
 }
 .prose > h6 {
-	font-size: var(--font-24);
+	font-size: var(--font-20);
 	font-weight: var(--font-weight-regular);
 }
 
@@ -46,8 +45,8 @@
 
 .prose > p,
 .prose > ul li {
-	font-size: 2.2rem;
-	line-height: 3.2rem;
+	font-size: 1.8rem;
+	line-height: 1.6;
 	font-weight: 500;
 }
 
@@ -62,7 +61,7 @@
 .prose > h3,
 .prose > ul,
 .prose > p {
-	margin-bottom: var(--spacing-24);
+	margin-bottom: var(--spacing-16);
 }
 
 .prose > h1,
@@ -105,16 +104,15 @@
 
 .prose > table {
 	border-collapse: collapse;
-	margin-bottom: var(--spacing-24);
-	font-size: 2rem;
+	margin-bottom: var(--spacing-32);
+	font-size: var(--font-16);
 	font-weight: var(--font-weight-regular);
-	line-height: 2.8rem;
-	margin-bottom: var(--spacing-64);
+	line-height: var(--spacing-24);
 
 	th,
 	td {
-		padding: var(--spacing-16);
-		border: 1px solid var(--clr-surface-400);
+		padding: var(--spacing-8) var(--spacing-16);
+		border: 1px solid var(--clr-surface-600);
 	}
 
 	/* Table Header Styles */
@@ -151,6 +149,14 @@
 
 .prose > iframe:not([height]) {
 	height: 90vh;
+}
+
+// Remove width and height from embedded iframe
+.prose > iframe[title='YouTube video player'] {
+	width: min(80%, 70rem);
+	height: auto;
+	aspect-ratio: 16 / 9;
+	justify-self: center;
 }
 
 .prose {
