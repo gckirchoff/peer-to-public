@@ -28,8 +28,8 @@
 	let simResults = $derived(
 		simulatePopulationDynamics({
 			percentLossOfPopulationCrisisThreshold: advancedConfigurables.collapseThreshold,
-			populationDeclinePerHighWave: advancedConfigurables.exaggeratedMortality,
-			populationDeclinePerNormalWave: advancedConfigurables.baselineMortality,
+			highWaveIfr: advancedConfigurables.exaggeratedMortality,
+			normalWaveIfr: advancedConfigurables.baselineMortality,
 			probOfAttenuation: selectedParams.pStableAttenuation,
 			probOfHighMortalityWave: selectedParams.pExaggeratedMortality,
 			wavesPerYear: advancedConfigurables.wavesPerYear,
