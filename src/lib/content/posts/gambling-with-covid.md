@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "default-background-6.jpg"
 date: 'Wed Oct 23 2024 17:04:49 GMT-0400 (Eastern Daylight Time)'
 published: false
-updated: 'Thu Dec 05 2024 14:20:43 GMT-0500 (Eastern Standard Time)'
+updated: 'Thu Dec 05 2024 15:44:49 GMT-0500 (Eastern Standard Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -39,11 +39,11 @@ The irreversible long-term health consequences of COVID-19 - including symptomat
 
 These concepts are somewhat abstract, so let's try to visualize them. We'll use an epidemic and its associated fatality for demonstration purposes, but the concept is agnostic so you can interpret this as Long COVID with disability causing labor shortages in specific sectors, gambling with going bankrupt/winning big, etc.
 
-Let's imagine that we have a population to goes through successive waves of a disease. Most waves will result in minimal mortality. However, each wave has a chance to instead be one of two special variants: it could be a highly deadly wave with an exageratted mortality or it could go extinct/attenuate stably. The deadly waves can be interpreted as being driven by temporary, more lethal variants. Stable attenuation can be interpreted as extinction or stably/permanently evolving into an extremely mild strain that poses practically no harm.
+Let's imagine that we have a population that goes through successive waves of a disease. Most waves will result in minimal mortality. However, each wave has a chance to instead be one of two special variants: it could be a highly deadly wave with an exaggerated mortality or it could go extinct/attenuate stably. The deadly waves can be interpreted as being driven by temporary, more lethal variants. Stable attenuation can be interpreted as extinction or stably/permanently evolving into an extremely mild strain that poses practically no harm.
 
-The heat map allows you to click on squares with different combinations of these changes along with what the overall chance is that the system in question will reach a stable, happy place instead of systemic collapse. Notice how the chances of exaggerated mortality are often higher. The reasoning for this assumption will be discussed elsewhere, but the result of this is that each type of special wave has a "power" - exagerrated mortality waves are more likely, but you only need one attenuation wave to permanently "win" the simulation.
+The heat map allows you to click on squares with different combinations of these chances along with what the overall chance is that the system in question will reach a stable, happy place instead of systemic collapse. Notice how the chances of exaggerated mortality are often higher. The [reasoning](https://www.biorxiv.org/content/10.1101/2023.01.16.523994v1) for this assumption will be discussed elsewhere, but the result of this is that each type of special wave has a unique edge - exaggerated mortality waves are more likely, but you only need one attenuation wave to permanently "win" the simulation.
 
-The chart on the right is a Monte Carlo Simulation that tracks the results of 1,000 societies being put through successive waves of infections with your selected parameters. The results - whether they experience attenuation or collapse - are tracked by when they occur.
+The second chart is a [Monte Carlo Simulation](https://en.wikipedia.org/wiki/Monte_Carlo_method) that tracks the results of 1,000 societies being put through successive waves of infections with your selected parameters. The results - whether they experience attenuation or collapse - are tracked by when they occur.
 
 <CrisisPredictions />
 
