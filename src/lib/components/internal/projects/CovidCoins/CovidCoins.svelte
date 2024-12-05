@@ -140,8 +140,13 @@
 </script>
 
 <div class="inputs-container">
-	<h3>What is the chance I get</h3>
-	<select bind:value={outcome}>
+	<h3>What is the chance I get injured/Long COVID</h3>
+
+	<!-- Find injury stats for riding on motorcycle (like micromorts) -->
+
+	<!-- life exectancy, baselin mortality -->
+
+	<!-- <select bind:value={outcome}>
 		<option value="mortality">killed</option>
 		<option value="disability">injured/Long Covid</option>
 	</select>
@@ -154,7 +159,7 @@
 		<h3>from my next infection</h3>
 	{:else}
 		<h3>in the next</h3>
-	{/if}
+	{/if} -->
 	{#if view === 'outlook'}
 		<input
 			on:input={handleOutlookWindowChange}
@@ -178,7 +183,7 @@
 	{/if}
 	{#if outcome === 'disability'}
 		<h3>assuming a long covid rate of</h3>
-		<input bind:value={longCovidRate} type="range" min="0.01" max="0.25" step="0.01" />
+		<input bind:value={longCovidRate} type="range" min="0.01" max="0.5" step="0.01" />
 		<h3>{(longCovidRate * 100).toFixed(1)}% per infection</h3>
 	{/if}
 </div>

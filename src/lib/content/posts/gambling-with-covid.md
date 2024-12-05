@@ -1,12 +1,12 @@
 ---
-title: "Gambling with Covid"
+title: "Gambling with a Pandemic"
 description: "Why gambling with a pandemic is a losing bet"
 categories: [ "covid-19" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "default-background-6.jpg"
 date: 'Wed Oct 23 2024 17:04:49 GMT-0400 (Eastern Daylight Time)'
 published: false
-updated: 'Tue Oct 29 2024 18:56:26 GMT-0400 (Eastern Daylight Time)'
+updated: 'Mon Nov 18 2024 14:37:33 GMT-0500 (Eastern Standard Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';

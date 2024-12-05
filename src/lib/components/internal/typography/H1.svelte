@@ -6,7 +6,7 @@
 
 <style lang="scss">
 	h1 {
-		font-size: var(--font-60);
+		font-size: var(--font-48);
 		line-height: 1.167;
 		font-family: var(--font-accent);
 		color: var(--clr-txt-500);

@@ -2,7 +2,7 @@
 	import { postsPerPage, siteConfig } from '$lib/config.js';
 	import Pagination from '$lib/components/internal/Pagination/Pagination.svelte';
 	import PostsList from '$lib/components/internal/PostsList/PostsList.svelte';
-	import H3 from '$lib/components/internal/typography/H3.svelte';
+	import H6 from '$lib/components/internal/typography/H6.svelte';
 
 	export let data;
 
@@ -20,12 +20,21 @@
 </svelte:head>
 
 <main tabindex="-1">
-	{#if lowerBound === totalPosts}
-		<H3>Post {totalPosts} of {totalPosts}</H3>
-	{:else}
-		<H3>Posts {lowerBound}–{upperBound} of {totalPosts}</H3>
-	{/if}
-	<Pagination currentPage={page} {totalPosts} />
+	<div class="posts-counter">
+		{#if lowerBound === totalPosts}
+			<H6>Post {totalPosts} of {totalPosts}</H6>
+		{:else}
+			<H6>Posts {lowerBound}–{upperBound} of {totalPosts}</H6>
+		{/if}
+	</div>
 	<PostsList {posts} />
 	<Pagination currentPage={page} {totalPosts} />
 </main>
+
+<style lang="scss">
+	.posts-counter {
+		display: flex;
+		justify-content: center;
+		margin-bottom: var(--spacing-16);
+	}
+</style>
