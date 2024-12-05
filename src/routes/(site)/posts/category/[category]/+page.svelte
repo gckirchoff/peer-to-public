@@ -1,6 +1,6 @@
 <script lang="ts">
 	import PostsList from '$lib/components/internal/PostsList/PostsList.svelte';
-	import H2 from '$lib/components/internal/typography/H2.svelte';
+	import H3 from '$lib/components/internal/typography/H3.svelte';
 	import { capitalize } from '$lib/utils/logic';
 
 	export let data;
@@ -10,9 +10,9 @@
 </script>
 
 <main>
-	<H2 style="margin-bottom: var(--spacing-32);">
+	<H3 style="margin-bottom: var(--spacing-32);">
 		Category: <b>{capitalize(category)}</b>
-	</H2>
+	</H3>
 
 	<PostsList {posts} />
 </main>

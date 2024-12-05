@@ -18,7 +18,7 @@
 				{#each featuredPosts as post}
 					<li>
 						<a href="/posts/{post.slug}">
-							<Body1 style="font-family: var(--font-base); font-size: var(--font-16);">
+							<Body1 style="font-family: var(--font-base); font-size: var(--font-14);">
 								{post.title}
 							</Body1>
 						</a>
@@ -61,7 +61,7 @@
 		display: inline-block;
 		margin-bottom: var(--spacing-8);
 		font-family: var(--font-base);
-		font-size: var(--font-16);
+		font-size: var(--font-14);
 		text-transform: uppercase;
 		color: var(--clr-primary-600);
 	}
