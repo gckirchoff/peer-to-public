@@ -64,7 +64,7 @@
 			position: relative;
 
 			.image-container {
-				height: 28rem;
+				height: 22rem;
 			}
 
 			img {
