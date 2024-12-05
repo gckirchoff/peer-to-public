@@ -59,7 +59,7 @@
 
 				.logo {
 					:global(svg) {
-						height: 8rem;
+						height: 6rem;
 						width: auto;
 					}
 				}
