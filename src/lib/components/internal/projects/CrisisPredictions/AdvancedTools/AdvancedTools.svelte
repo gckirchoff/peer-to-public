@@ -58,6 +58,16 @@
 				step="0.01"
 			/>
 		</label>
+		<label>
+			{roundTo(advancedConfigurables.populationGrowthRate * 100, 2)}% population growth rate
+			<input
+				bind:value={advancedConfigurables.populationGrowthRate}
+				type="range"
+				min="-0.03"
+				max="0.03"
+				step="0.001"
+			/>
+		</label>
 	</div>
 </Accordion>
 
