@@ -10,6 +10,7 @@
 	import { roundTo } from '../logic';
 
 	export let longCovidChance: number;
+	export let riskGrowthFactor: number;
 
 	const xAccessor = (d: InfectionCumulativeRisk) => d.infectionCount;
 	const yAccessor = (d: InfectionCumulativeRisk) => d.risk * 100;
@@ -18,8 +19,8 @@
 	let width = 400;
 	let height = 400;
 
-	const statsCanadaPredictedRisk = 0.14;
-	const statsCanadaData = getCumulativeRisks(statsCanadaPredictedRisk);
+	// const statsCanadaPredictedRisk = 0.14;
+	// const statsCanadaData = getCumulativeRisks(statsCanadaPredictedRisk, 1);
 
 	$: isSmallScreen = windowWidth < smallScreen;
 
@@ -36,7 +37,7 @@
 	$: xScale = scaleLinear().domain([0, maxInfectionCount]).range([0, innerChartWidth]);
 	$: yScale = scaleLinear().domain([0, 100]).range([innerChartHeight, 0]);
 
-	$: cumulativeRisks = getCumulativeRisks(longCovidChance);
+	$: cumulativeRisks = getCumulativeRisks(longCovidChance, riskGrowthFactor);
 
 	$: xAccessorScaled = (d: InfectionCumulativeRisk) => xScale(xAccessor(d));
 	$: yAccessorScaled = (d: InfectionCumulativeRisk) => yScale(yAccessor(d));

@@ -4,22 +4,26 @@
 	import type { InfectionCumulativeRisk } from '../constants';
 	import { roundTo } from '../../logic';
 
-	export let data: InfectionCumulativeRisk;
-	export let xAccessorScaled: (d: InfectionCumulativeRisk) => number;
-	export let yAccessorScaled: (d: InfectionCumulativeRisk) => number;
-	export let width: number;
+	interface Props {
+		data: InfectionCumulativeRisk;
+		xAccessorScaled: (d: InfectionCumulativeRisk) => number;
+		yAccessorScaled: (d: InfectionCumulativeRisk) => number;
+		width: number;
+	}
+
+	let { data, xAccessorScaled, yAccessorScaled, width }: Props = $props();
 
 	const xNudge = 15;
 	const yNudge = 15;
 
-	let tooltipWidth = 0;
+	let tooltipWidth = $state(0);
 
-	$: x = xAccessorScaled(data);
-	$: y = yAccessorScaled(data);
+	let x = $derived(xAccessorScaled(data));
+	let y = $derived(yAccessorScaled(data));
 
-	$: isOverflowingRight = x + tooltipWidth + xNudge > width;
-	$: xPosition = isOverflowingRight ? x - tooltipWidth / 2 - xNudge : x + xNudge;
-	$: yPosition = y + yNudge;
+	let isOverflowingRight = $derived(x + tooltipWidth + xNudge > width);
+	let xPosition = $derived(isOverflowingRight ? x - tooltipWidth / 2 - xNudge : x + xNudge);
+	let yPosition = $derived(y + yNudge);
 </script>
 
 <div

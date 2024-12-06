@@ -1,19 +1,21 @@
 <script lang="ts">
 	import Body2 from '../../typography/Body2.svelte';
+	import AdvancedTools from './AdvancedTools/AdvancedTools.svelte';
 	import Chart from './Chart/Chart.svelte';
 	import Highlight from './Highlight/Highlight.svelte';
 	import { roundTo } from './logic';
 
-	let inputLongCovidPercent = 15;
-	let infectionCount = 3;
+	let inputLongCovidPercent = $state(15);
+	let infectionCount = $state(3);
+	let riskGrowthFactor = $state(1);
 
-	$: longCovidChance = inputLongCovidPercent / 100;
-	$: chanceOfNotGettingLongCovid = 1 - longCovidChance;
-	$: chanceOfNotGettingLongCovidAfterNInfections = Math.pow(
-		chanceOfNotGettingLongCovid,
-		infectionCount,
+	let longCovidChance = $derived(inputLongCovidPercent / 100);
+
+	let chanceOfNotGettingLongCovid = $derived(1 - longCovidChance);
+	let chanceOfNotGettingLongCovidAfterNInfections = $derived(
+		Math.pow(chanceOfNotGettingLongCovid, infectionCount),
 	);
-	$: cumulativeRiskOfLongCovid = 1 - chanceOfNotGettingLongCovidAfterNInfections;
+	let cumulativeRiskOfLongCovid = $derived(1 - chanceOfNotGettingLongCovidAfterNInfections);
 </script>
 
 <p>
@@ -198,7 +200,8 @@
 	<input bind:value={inputLongCovidPercent} type="range" min={0} max={100} step={0.1} />
 </label>
 
-<Chart {longCovidChance} />
+<Chart {longCovidChance} {riskGrowthFactor} />
+<AdvancedTools bind:riskGrowthFactor />
 
 <style lang="scss">
 	img {
