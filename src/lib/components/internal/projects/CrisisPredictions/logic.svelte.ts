@@ -104,8 +104,8 @@ interface SimulatePopulationDynamicsProps {
 	wavesPerYear: number;
 	probOfHighMortalityWave: number;
 	probOfAttenuation: number;
-	populationDeclinePerNormalWave: number;
-	populationDeclinePerHighWave: number;
+	normalWaveIfr: number;
+	highWaveIfr: number;
 	percentLossOfPopulationCrisisThreshold: number;
 	fractionInfected: number;
 	populationGrowthRate: number;
@@ -117,8 +117,8 @@ export const simulatePopulationDynamics = ({
 	wavesPerYear,
 	probOfHighMortalityWave,
 	probOfAttenuation,
-	populationDeclinePerNormalWave,
-	populationDeclinePerHighWave,
+	normalWaveIfr,
+	highWaveIfr,
 	percentLossOfPopulationCrisisThreshold,
 	fractionInfected,
 	populationGrowthRate,
@@ -130,39 +130,34 @@ export const simulatePopulationDynamics = ({
 	const attenuationTimes: number[] = [];
 
 	const populationThatTriggersCrisis = 1 - percentLossOfPopulationCrisisThreshold;
-	const populationChangeFromGrowthPerWave = populationGrowthRate / wavesPerYear;
+	const populationChangeFromGrowthPerWave = 1 + populationGrowthRate / wavesPerYear;
 
 	for (let sim = 0; sim < numSimulations; sim++) {
 		let population = 1.0;
-		let stable_attenuation = false;
+		let time = 0;
 
-		for (let year = 0; year < years; year++) {
-			for (let wave = 0; wave < wavesPerYear; wave++) {
-				population *= 1 + populationChangeFromGrowthPerWave;
+		while (time < years) {
+			// if no waves ever happen, then we assume it has attenuated immediately
+			if (wavesPerYear === 0) {
+				attenuationTimes.push(time);
+				break;
+			}
+			time += 1 / wavesPerYear;
+			population *= populationChangeFromGrowthPerWave;
 
-				const has_attenuated = Math.random() < probOfAttenuation;
-				if (has_attenuated) {
-					stable_attenuation = true;
-					attenuationTimes.push(year);
-					break;
-				}
-
-				const is_high_mortality_wave =
-					Math.random() < probOfHighMortalityWave && !stable_attenuation;
-				if (is_high_mortality_wave) {
-					population *= 1 - populationDeclinePerHighWave * fractionInfected;
-				} else {
-					population *= 1 - populationDeclinePerNormalWave * fractionInfected;
-				}
-
-				const crisis_occurred = population <= populationThatTriggersCrisis;
-				if (crisis_occurred) {
-					crisisTimes.push(year + wave / wavesPerYear);
-					break;
-				}
+			const hasAttenuated = Math.random() < probOfAttenuation;
+			if (hasAttenuated) {
+				attenuationTimes.push(time);
+				break;
 			}
 
-			if (population <= populationThatTriggersCrisis || stable_attenuation) {
+			const isHighMortalityWave = Math.random() < probOfHighMortalityWave;
+			const ifr = isHighMortalityWave ? highWaveIfr : normalWaveIfr;
+			population *= 1 - fractionInfected * ifr;
+
+			const crisisOccured = population <= populationThatTriggersCrisis;
+			if (crisisOccured) {
+				crisisTimes.push(time);
 				break;
 			}
 		}

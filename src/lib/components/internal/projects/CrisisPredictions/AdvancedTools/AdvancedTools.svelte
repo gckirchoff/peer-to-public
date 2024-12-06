@@ -59,7 +59,7 @@
 			/>
 		</label>
 		<label>
-			{roundTo(advancedConfigurables.populationGrowthRate * 100, 2)}% population growth rate
+			{roundTo(advancedConfigurables.populationGrowthRate * 100, 2)}% pop. growth rate
 			<input
 				bind:value={advancedConfigurables.populationGrowthRate}
 				type="range"

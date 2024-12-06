@@ -69,25 +69,29 @@
 	</select>
 	<label class="range-input">
 		<Body2>
-			{infectionRate} Infections/year: <Tooltip>Howdy</Tooltip>
+			{infectionRate} Infections/year:
+			<Tooltip>Average amount of infections per year in population</Tooltip>
 		</Body2>
 		<input bind:value={infectionRate} type="range" min={0} max={2} step={0.1} />
 	</label>
 	<label class="range-input">
 		<Body2>
 			{Math.round(longCovidRate * 100)}% LC Rate:
+			<Tooltip>Chance of Long COVID per infection</Tooltip>
 		</Body2>
 		<input bind:value={longCovidRate} type="range" min={0} max={1} step={0.01} />
 	</label>
 	<label class="range-input">
 		<Body2>
 			{recoveryRate}% LC Recovery Rate:
+			<Tooltip>Chance of recovery from Long COVID per year</Tooltip>
 		</Body2>
 		<input bind:value={recoveryRate} type="range" min={0} max={50} step={0.1} />
 	</label>
 	<label class="range-input">
 		<Body2>
 			{longCovidDeathRate} LC Mortality Hazard Ratio:
+			<Tooltip>How likely those with Long COVID are to die compared to average</Tooltip>
 		</Body2>
 		<input bind:value={longCovidDeathRate} type="range" min={1} max={10} step={0.1} />
 	</label>
