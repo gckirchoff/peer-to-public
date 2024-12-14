@@ -4,7 +4,7 @@ description: "This post challenges the idea that individuals can fully understan
 categories: [ "covid-19" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "coin-stack-ibrahim-rifath-unsplash.jpg"
-date: 'Sat Dec 14 2024 13:59:05 GMT-0500 (Eastern Standard Time)'
+date: 'Sat Dec 14 2024 14:02:15 GMT-0500 (Eastern Standard Time)'
 published: true
 
 ---
@@ -59,4 +59,4 @@ The initial symptomatic Long COVID rate was derived from [this study](https://ww
 
 For the purpose of visual at-a-glance interpretability, probabilities are represented as the chance of getting all heads for N number of coins flipped. The equation for deriving this is Log10(p)/Log10(0.5).
 
-The chance of injury per year of being an office worker pre-pandemic is estimated by averaging the rate of injury sufficient to cause days away from work, job restriction, or transfer for educational services, finance, insurance, and real estate, and other information services from the [U.S. Bureau of Labor Statistics 2019 report](https://www.bls.gov/iif/nonfatal-injuries-and-illnesses-tables/soii-summary-historical/summary-table-1-2019-national.htm) table of incidence rates of nonfatal occupational injuries and illnesses by industry and case type.
+The chance of injury per year of being an office worker pre-pandemic is estimated by averaging the rate of injury sufficient to cause days away from work, job restriction, or transfer for professional, scientific, and technical services, finance, insurance, and real estate, and other information services from the [U.S. Bureau of Labor Statistics 2019 report](https://www.bls.gov/iif/nonfatal-injuries-and-illnesses-tables/soii-summary-historical/summary-table-1-2019-national.htm) table of incidence rates of nonfatal occupational injuries and illnesses by industry and case type.
