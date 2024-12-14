@@ -4,9 +4,9 @@ description: "This post challenges the idea that individuals can fully understan
 categories: [ "covid-19" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "coin-stack-ibrahim-rifath-unsplash.jpg"
-date: 'Wed Oct 23 2024 17:01:23 GMT-0400 (Eastern Daylight Time)'
-published: false
-updated: 'Sat Dec 14 2024 13:58:09 GMT-0500 (Eastern Standard Time)'
+date: 'Sat Dec 14 2024 13:59:05 GMT-0500 (Eastern Standard Time)'
+published: true
+
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';

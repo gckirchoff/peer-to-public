@@ -182,7 +182,7 @@
 		<Switch bind:value={vaccinated} label="" />
 	{/if}
 	{#if outcome === 'disability'}
-		<h3>assuming a long covid rate of</h3>
+		<h3>assuming a Long COVID rate of</h3>
 		<input bind:value={longCovidRate} type="range" min="0.01" max="0.5" step="0.01" />
 		<h3>{(longCovidRate * 100).toFixed(1)}% per infection</h3>
 	{/if}
