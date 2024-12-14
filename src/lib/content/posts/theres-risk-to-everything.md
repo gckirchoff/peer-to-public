@@ -15,7 +15,11 @@ updated: 'Wed Oct 23 2024 17:01:43 GMT-0400 (Eastern Daylight Time)'
   
 </script>
 
-The chart below visualizes risk by illustrating the probability of consecutive coin tosses landing heads up. Each individual coin toss has a 50% chance of landing heads, but with each additional consecutive heads, the probability decreases sharply. For example, the probability of getting heads twice in a row is 25%, while three consecutive heads drops to just 12.5%. The more consecutive heads you're aiming for, the lower the likelihood.
+
+
+We often hear the risk of death or disability associated with Covid described as being "low" or "high" – confusingly, different people can respond to the same number with very different qualifiers. Just how risky is Covid, compared to other risks in our lives? We dig into that in this article.
+
+To make it easieer to relate to intuitively, we've set up the chart below to visualize risk by displaying it as the probability of consecutive coin tosses all landing heads up. Each individual coin toss has a 50% chance of landing heads, but with each additional consecutive heads, the probability decreases sharply. For example, the probability of getting heads twice in a row is 25%, while three consecutive heads drops to just 12.5%. The more consecutive heads you're aiming for, the lower the likelihood.
 
 Take skydiving as an example: there's a 0.023% chance of injury. Translating this into coin tosses, it's like flipping 12 coins and having all of them land heads up—making skydiving the least risky activity in the chart. As activities become riskier, the equivalent number of consecutive heads decreases.
 
@@ -25,11 +29,11 @@ To make the concept more tangible, try it yourself: simulate the risk of an acti
 
 ## The Illusion of "Pros and Cons"
 
-"You need to weigh the pros and cons," "everything has risk associated with it," and  "you can't live your life in fear." These phrases represent common perceptions of risk, and and they reflect the CDC's officially endorsed methods for pandemic management. The CDC has stated that "understanding your risk [of contracting COVID-19] helps you make decisions." [Source](https://archive.cdc.gov/www_cdc_gov/coronavirus/2019-ncov/your-health/understanding-risk_1709314735.html).  You'll notice that they don't specify that you'll make "good decisions." There are significant, glaring flaws with this individualistic, citizen-driven approach that explain why they don't expose themselves to that liability.
+"You need to weigh the pros and cons," "everything has risk associated with it," and  "you can't live your life in fear." These phrases represent common perceptions of risk, and and they reflect the CDC's officially endorsed methods for pandemic management. The CDC has stated that "understanding your risk [of contracting COVID-19] helps you make decisions." [Source](https://archive.cdc.gov/www_cdc_gov/coronavirus/2019-ncov/your-health/understanding-risk_1709314735.html).  You'll notice that they don't specify that you'll make "good decisions." There are significant, glaring flaws with this individualistic, citizen-driven approach that explain why they don't make that promise.
 
-The average citizen is neither a medical professional nor a statistician. Physicians, who are most commonly responsible for our health, undergo extensive higher education and training for good reason. Their expertise is grounded in well-established practices, many of which have been developed over decades. Expecting untrained individuals to fully understand the risks associated with a novel pathogen - especially one with long-term effects that are not yet fully researched - and to make associated "good decisions" is unrealistic.
+The average citizen is neither a medical professional nor a statistician. Statisticians [often](https://scientistseessquirrel.wordpress.com/2015/10/06/why-do-we-make-statistics-so-hard-for-our-students/) [complain](https://iase-web.org/documents/papers/isi52/rams0070.pdf) that their students struggle with mastering probabilistic concepts intuitively. Expecting the public at large to fully grasp the risks associated with a novel pathogen - especially one with long-term effects that are not yet fully researched - and to make associated "good decisions" is unrealistic.
 
-People can only make decisions based on what they know, and that knowledge is often incomplete. The problem is compounded when crucial information is not adequately communicated to the public. For example, president Joe Biden [has not](https://www.youtube.com/watch?v=RZUBLTph5uw&t=490s) openly discussed "Long Covid" to the public since taking office despite the fact that [4 million](https://www.brookings.edu/articles/new-data-shows-long-covid-is-keeping-as-many-as-4-million-people-out-of-work/) American workers are out of work due to Long Covid. The CDC reports that approximately [1 in 5](https://www.cdc.gov/mmwr/volumes/71/wr/mm7121e1.htm) adults over 18 have a health condition possibly linked to a previous covid infection, which aligns with research showing that COVID-19 can affect nearly [every organ-system](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9839201/). If the current administration truly wanted us to make informed decisions, this information would be common knowledge.
+The problem is compounded when crucial information is not adequately communicated to the public. For example, president Joe Biden, during his four years in office, [never once](https://www.youtube.com/watch?v=RZUBLTph5uw&t=490s) discussed "Long Covid" with the public despite the fact that [4 million](https://www.brookings.edu/articles/new-data-shows-long-covid-is-keeping-as-many-as-4-million-people-out-of-work/) American workers are out of work due to Long Covid. The CDC reports that approximately [1 in 5](https://www.cdc.gov/mmwr/volumes/71/wr/mm7121e1.htm) adults over 18 have a health condition possibly linked to a previous Covid infection, which aligns with research showing that the SARS-CoV-2 virus can affect nearly [every organ-system](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9839201/). If the current administration truly wanted us to make informed decisions, this information would be common knowledge.
 
 ## The Game of Chance: Understanding COVID-19 Risks
 
@@ -41,7 +45,7 @@ Statistically, you can expect to run with the bulls 18 times before your cumulat
 
 For such a seemingly dangerous sport, those numbers aren't that bad. The per-infection chance of developing symptomatic Long Covid is 14.6% according to [Statistics Canada](https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00015-eng.htm). With these numbers, you can get infected with SARS-Cov-2 4 times before your risk of Long Covid approaches a 50/50 chance. After 19 infections, your cumulative risk approaches near certainty at 95%.
 
-I would rather run with the bulls.
+We would rather run with the bulls.
 
 ## You Are Running With the Bulls
 
