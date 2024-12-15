@@ -160,6 +160,9 @@
 	{:else}
 		<h3>in the next</h3>
 	{/if} -->
+	{#if mode === 'outlook'}
+		<h3>in</h3>
+	{/if}
 	{#if view === 'outlook'}
 		<input
 			on:input={handleOutlookWindowChange}

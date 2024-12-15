@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "coin-stack-ibrahim-rifath-unsplash.jpg"
 date: 'Sat Dec 14 2024 14:02:15 GMT-0500 (Eastern Standard Time)'
 published: true
-
+updated: 'Sun Dec 15 2024 12:49:08 GMT-0500 (Eastern Standard Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -41,7 +41,7 @@ We can conceptualize risk through the above analogy of flipping coins. The chanc
 
 Statistically, you can expect to run with the bulls 18 times before your cumulative risk of injury exceeds 50%. Beyond that point, the odds begin to stack against you. It takes 77 excursions before you can be 95% confident that you will get injured.
 
-For such a seemingly dangerous sport, those numbers aren't that bad. The per-infection chance of developing symptomatic Long COVID is 14.6% according to [Statistics Canada](https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00015-eng.htm). With these numbers, you can get infected with SARS-Cov-2 4 times before your risk of Long COVID approaches a 50/50 chance. After 19 infections, your cumulative risk approaches near certainty at 95%.
+For such a seemingly dangerous sport, those numbers aren't that bad. The per-infection chance of developing symptomatic Long COVID is 14.6% according to [Statistics Canada](https://www150.statcan.gc.ca/n1/pub/75-006-x/2023001/article/00015-eng.htm). With these numbers, you can get infected with SARS-Cov-2 four times before your risk of Long COVID approaches a 50/50 chance. After 19 infections, your cumulative risk approaches near certainty at 95%.
 
 We would rather run with the bulls.
 

@@ -42,7 +42,7 @@
 >
 	<h1 class="item">{tooltipTitle}</h1>
 	{#if view === 'instance'}
-		<p class="frequency">{data.frequency} - {tooltipProbability}%</p>
+		<p class="frequency">{data.frequency}: {tooltipProbability}%</p>
 		<a class="source" href={data.source} target="_blank">Source</a>
 		<h3 class="tries-title">Can attempt:</h3>
 		<h4>
