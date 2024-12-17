@@ -42,15 +42,15 @@
 >
 	<h1 class="item">{tooltipTitle}</h1>
 	{#if view === 'instance'}
-		<p class="frequency">{data.frequency} - {tooltipProbability}%</p>
+		<p class="frequency">{data.frequency}: {tooltipProbability}%</p>
 		<a class="source" href={data.source} target="_blank">Source</a>
 		<h3 class="tries-title">Can attempt:</h3>
 		<h4>
-			<span class="highlight">{Math.round(data.triesUntil50)}</span> times until a
+			<span class="highlight">{Math.ceil(data.triesUntil50)}</span> times until a
 			<span class="highlight">50%</span> chance of {outcomeText}
 		</h4>
 		<h4>
-			<span class="highlight">{Math.round(data.triesUntil95)}</span> times until a
+			<span class="highlight">{Math.ceil(data.triesUntil95)}</span> times until a
 			<span class="highlight">95%</span> chance of {outcomeText}
 		</h4>
 	{:else}

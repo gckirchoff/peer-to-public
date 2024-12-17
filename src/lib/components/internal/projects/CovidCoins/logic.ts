@@ -24,6 +24,11 @@ export const processAgeItem = (row: UnprocessedAgeMortality): AgeMortality => ({
 export const representProbabilityAsCoins = (p: number): number =>
 	Math.round(Math.log10(p) / Math.log10(0.5));
 
+export const trialsToReachProbability = (
+	eventProbability: number,
+	desiredProbability: number,
+): number => Math.ceil(Math.log10(1 - desiredProbability) / Math.log10(1 - eventProbability));
+
 export const baselineOverTime = (
 	baselineMortality: RiskItem[],
 	outlookWindow: number,

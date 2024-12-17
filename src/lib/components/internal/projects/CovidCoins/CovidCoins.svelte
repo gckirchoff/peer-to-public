@@ -11,6 +11,7 @@
 		processAgeItem,
 		processMortalityItem,
 		representProbabilityAsCoins,
+		trialsToReachProbability,
 	} from './logic';
 	import Switch from '../../Switch.svelte';
 
@@ -99,9 +100,14 @@
 					data = [...baselineMortality, mortalityByAge[input], mortalityByAgeCovid[input]];
 				} else if (outcome === 'disability') {
 					const coins = representProbabilityAsCoins(longCovidRate);
+					const triesUntil50 = trialsToReachProbability(longCovidRate, 0.5);
+					const triesUntil95 = trialsToReachProbability(longCovidRate, 0.95);
+
 					const covidRow: RiskItem = {
 						...disabilityByReinfectionCovid[0],
 						probability: longCovidRate,
+						triesUntil50,
+						triesUntil95,
 						coins,
 					};
 					data = [...baselineDisability, covidRow];
@@ -160,6 +166,9 @@
 	{:else}
 		<h3>in the next</h3>
 	{/if} -->
+	{#if mode === 'outlook'}
+		<h3>in</h3>
+	{/if}
 	{#if view === 'outlook'}
 		<input
 			on:input={handleOutlookWindowChange}
