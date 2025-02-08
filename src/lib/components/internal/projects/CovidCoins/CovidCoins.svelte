@@ -11,6 +11,7 @@
 		processAgeItem,
 		processMortalityItem,
 		representProbabilityAsCoins,
+		trialsToReachProbability,
 	} from './logic';
 	import Switch from '../../Switch.svelte';
 
@@ -99,9 +100,14 @@
 					data = [...baselineMortality, mortalityByAge[input], mortalityByAgeCovid[input]];
 				} else if (outcome === 'disability') {
 					const coins = representProbabilityAsCoins(longCovidRate);
+					const triesUntil50 = trialsToReachProbability(longCovidRate, 0.5);
+					const triesUntil95 = trialsToReachProbability(longCovidRate, 0.95);
+
 					const covidRow: RiskItem = {
 						...disabilityByReinfectionCovid[0],
 						probability: longCovidRate,
+						triesUntil50,
+						triesUntil95,
 						coins,
 					};
 					data = [...baselineDisability, covidRow];
@@ -160,6 +166,9 @@
 	{:else}
 		<h3>in the next</h3>
 	{/if} -->
+	{#if mode === 'outlook'}
+		<h3>in</h3>
+	{/if}
 	{#if view === 'outlook'}
 		<input
 			on:input={handleOutlookWindowChange}
@@ -182,7 +191,7 @@
 		<Switch bind:value={vaccinated} label="" />
 	{/if}
 	{#if outcome === 'disability'}
-		<h3>assuming a long covid rate of</h3>
+		<h3>assuming a Long COVID rate of</h3>
 		<input bind:value={longCovidRate} type="range" min="0.01" max="0.5" step="0.01" />
 		<h3>{(longCovidRate * 100).toFixed(1)}% per infection</h3>
 	{/if}
