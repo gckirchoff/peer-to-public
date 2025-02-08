@@ -5,6 +5,10 @@ interface Link {
 
 export const links: Link[] = [
 	{
+		title: 'Noisy Baseline',
+		href: 'signal-vs-noise',
+	},
+	{
 		title: 'Long Covid Forecaster',
 		href: 'long-covid-forecast',
 	},
@@ -13,17 +17,17 @@ export const links: Link[] = [
 		href: 'delayed-onset',
 	},
 	{
-		title: 'Crisis Predictions',
-		href: 'crisis-predictions',
+		title: 'Successive Waves',
+		href: 'successive-waves',
 	},
-	// {
-	// 	title: 'Short-Term Risk Visualizer',
-	// 	href: 'gambling-with-covid',
-	// },
-	// {
-	// 	title: 'Top Cause of Death Comparison',
-	// 	href: 'mortality-comparison',
-	// },
+	{
+		title: 'Short-Term Risk Visualizer',
+		href: 'gambling-with-covid',
+	},
+	{
+		title: 'Top Cause of Death Comparison',
+		href: 'mortality-comparison',
+	},
 	// {
 	// 	title: 'Long-Term Risk Visualizer',
 	// 	href: 'the-curve-that-wasnt',
