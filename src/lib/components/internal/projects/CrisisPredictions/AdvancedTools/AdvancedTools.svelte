@@ -49,7 +49,7 @@
 			/>
 		</label>
 		<label>
-			Collapse after {roundTo(advancedConfigurables.collapseThreshold * 100, 2)}% pop. loss
+			System Failure after {roundTo(advancedConfigurables.collapseThreshold * 100, 2)}% pop. loss
 			<input
 				bind:value={advancedConfigurables.collapseThreshold}
 				type="range"
