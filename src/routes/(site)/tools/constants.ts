@@ -28,6 +28,10 @@ export const links: Link[] = [
 		title: 'Top Cause of Death Comparison',
 		href: 'mortality-comparison',
 	},
+	{
+		title: 'MAPS',
+		href: 'maps',
+	},
 	// {
 	// 	title: 'Long-Term Risk Visualizer',
 	// 	href: 'the-curve-that-wasnt',
