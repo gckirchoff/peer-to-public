@@ -2,12 +2,16 @@
 	import { flip } from 'svelte/animate';
 	import type { ScaleLinear, ScaleTime } from 'd3';
 
-	export let xScale: ScaleLinear<number, number, never> | ScaleTime<number, number, never>;
-	export let label: string;
-	export let innerChartWidth: number;
-	export let innerChartHeight: number;
+	type Props = {
+		xScale: ScaleLinear<number, number, never> | ScaleTime<number, number, never>;
+		label: string;
+		innerChartWidth: number;
+		innerChartHeight: number;
+	};
 
-	$: ticks = xScale.ticks().filter((tick) => Number.isInteger(tick));
+	let { xScale, label, innerChartWidth, innerChartHeight }: Props = $props();
+
+	let ticks = $derived(xScale.ticks());
 </script>
 
 <g class="axis x" transform="translate(0, {innerChartHeight})">
