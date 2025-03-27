@@ -44,11 +44,13 @@ export interface ForecastPopulationWithDisabilityArgs {
 	averageNumOfInfectionsPerPersonPerYear: number;
 	chanceOfDisabilityPerInfection: number;
 	year: number;
+	riskGrowthFactor: number;
 }
 
 export interface ForecastPopulationWithDisabilityOverTimeArgs
-	extends Omit<ForecastPopulationWithDisabilityArgs, 'year'> {
+	extends Omit<ForecastPopulationWithDisabilityArgs, 'year' | 'riskGrowthFactor'> {
 	years: number;
+	riskGrowthFactor?: number;
 }
 
 export interface PopulationStatus {

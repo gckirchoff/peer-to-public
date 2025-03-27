@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { scaleLinear, scaleTime, extent, max, format } from 'd3';
+	import { scaleLinear, scaleTime, extent, max, format, curveNatural } from 'd3';
 
 	import { Body2 } from '../../typography';
 	import Tooltip from '../../Tooltip/Tooltip.svelte';
@@ -16,12 +16,12 @@
 
 	let birthRate = 2.212;
 	let deathRate = 0.727272727;
-	let recoveryRate = $state(5);
-
-	let longCovidDeathRate = $state(1);
 
 	let infectionRate = $state(1.3);
 	let longCovidRate = $state(0.1);
+	let recoveryRate = $state(5);
+	let riskGrowthFactor = $state(1);
+	let longCovidDeathRate = $state(1);
 
 	let view = $state<'percent' | 'population'>('percent');
 
@@ -53,6 +53,7 @@
 			averageNumOfInfectionsPerPersonPerYear: infectionRate,
 			chanceOfDisabilityPerInfection: longCovidRate,
 			years,
+			riskGrowthFactor,
 		}),
 	);
 
@@ -90,6 +91,13 @@
 	</label>
 	<label class="range-input">
 		<Body2>
+			{riskGrowthFactor} risk growth/decay
+			<Tooltip>Chance of recovery from Long COVID per year</Tooltip>
+		</Body2>
+		<input bind:value={riskGrowthFactor} type="range" min="0" max="2" step="0.1" />
+	</label>
+	<label class="range-input">
+		<Body2>
 			{longCovidDeathRate} LC Mortality Hazard Ratio:
 			<Tooltip>How likely those with Long COVID are to die compared to average</Tooltip>
 		</Body2>
@@ -113,11 +121,13 @@
 					xAccessorScaled={(d) => xScale(xAccessor(d))}
 					yAccessorScaled={(d) => yScale(yAccessorTotalPopulation(d))}
 					y0AccessorScaled={innerChartHeight}
+					interpolation={curveNatural}
 				/>
 				<Line
 					data={populationOverTime}
 					xAccessorScaled={(d) => xScale(xAccessor(d))}
 					yAccessorScaled={(d) => yScale(yAccessorTotalPopulation(d))}
+					interpolation={curveNatural}
 				/>
 			{/if}
 			<Line

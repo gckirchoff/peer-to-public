@@ -131,6 +131,7 @@ export function forecastPopulationWithDisabilityV2({
 	averageNumOfInfectionsPerPersonPerYear,
 	chanceOfDisabilityPerInfection,
 	year,
+	riskGrowthFactor,
 }: ForecastPopulationWithDisabilityArgs): PopulationStatus {
 	let nonDisabledPopulation = initialPopulation - initialDisabledPopulation;
 	let disabledPopulation = initialDisabledPopulation;
@@ -141,6 +142,7 @@ export function forecastPopulationWithDisabilityV2({
 	const annualRecoveryRate = recoveryRate / 100;
 
 	const proportionsInfectedThroughYear = breakdownNumber(averageNumOfInfectionsPerPersonPerYear);
+	let currentChanceOfDisability = chanceOfDisabilityPerInfection;
 
 	for (let i = 0; i < year; i++) {
 		// Births
@@ -155,10 +157,14 @@ export function forecastPopulationWithDisabilityV2({
 
 		// Disabilities
 		proportionsInfectedThroughYear.forEach((proportionInfected) => {
-			const newDisabilities =
-				nonDisabledPopulation * proportionInfected * chanceOfDisabilityPerInfection;
+			const newDisabilities = Math.min(
+				nonDisabledPopulation * proportionInfected * currentChanceOfDisability,
+				nonDisabledPopulation,
+			);
 			nonDisabledPopulation -= newDisabilities;
 			disabledPopulation += newDisabilities;
+
+			currentChanceOfDisability *= riskGrowthFactor;
 		});
 
 		// Recoveries
@@ -190,6 +196,7 @@ export const forecastPopulationWithDisabilityOverTime = ({
 	averageNumOfInfectionsPerPersonPerYear,
 	chanceOfDisabilityPerInfection,
 	years,
+	riskGrowthFactor = 1,
 }: ForecastPopulationWithDisabilityOverTimeArgs): PopulationByYear[] => {
 	const data: PopulationByYear[] = [];
 	for (let i = 0; i < years + 1; i++) {
@@ -203,6 +210,7 @@ export const forecastPopulationWithDisabilityOverTime = ({
 			averageNumOfInfectionsPerPersonPerYear,
 			chanceOfDisabilityPerInfection,
 			year: i,
+			riskGrowthFactor,
 		});
 		data.push({
 			year: i,
