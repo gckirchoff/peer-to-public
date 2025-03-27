@@ -12,6 +12,9 @@
 </div>
 
 <style lang="scss">
+	:global(body) {
+		background-color: unset;
+	}
 	.container {
 		padding: var(--spacing-24);
 	}
