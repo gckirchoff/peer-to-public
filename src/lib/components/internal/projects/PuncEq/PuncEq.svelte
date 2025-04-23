@@ -218,15 +218,13 @@
 						/>
 					{/each}
 					{#if showSystemFailures}
-						{#each allSystemFailures as systemFailureYear}
-							<line
-								x1={simXScale(systemFailureYear)}
-								x2={simXScale(systemFailureYear)}
-								y1={0}
-								y2={innerChartHeight}
-								stroke-width={1}
-								stroke="red"
-								style="opacity: 0.3"
+						{#each allSystemFailures as systemFailurePoint}
+							<circle
+								cx={simXScale(systemFailurePoint.year)}
+								cy={simYScale(systemFailurePoint.population)}
+								r={2}
+								fill="red"
+								style="opacity: 0.8;"
 							/>
 						{/each}
 					{/if}

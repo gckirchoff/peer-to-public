@@ -123,14 +123,19 @@ interface AssessSystemFailuresProps {
 	collapseThreshold?: number; // as fraction, e.g. 0.2 = 20% drop
 }
 
+interface SystemFailurePoint {
+	year: number;
+	population: number;
+}
+
 export const assessSystemFailures = ({
 	populationSims,
 	windowSize = 1,
 	collapseThreshold = 0.2,
-}: AssessSystemFailuresProps): number[][] => {
+}: AssessSystemFailuresProps): SystemFailurePoint[][] => {
 	return populationSims.map((populationSim) => {
 		const data = populationSim.data;
-		const systemFailureYears: number[] = [];
+		const systemFailureYears: SystemFailurePoint[] = [];
 
 		for (let i = 0; i < data.length; i++) {
 			const currentYear = data[i].year;
@@ -143,7 +148,7 @@ export const assessSystemFailures = ({
 				const drop = (startPop - currentPop) / startPop;
 
 				if (drop >= collapseThreshold) {
-					systemFailureYears.push(currentYear);
+					systemFailureYears.push({ year: currentYear, population: currentPop });
 				}
 			}
 		}
