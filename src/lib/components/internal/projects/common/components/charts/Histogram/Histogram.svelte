@@ -67,7 +67,7 @@
 <div class="chart-container histogram" bind:clientWidth={width} bind:clientHeight={height}>
 	<svg {width} {height}>
 		<g style="transform: translate({usedMargin.left}px, {usedMargin.top}px);">
-			<text x={chartWidth * 0.5} text-anchor="middle" dominant-baseline="middle">{title}</text>
+			<text x={chartWidth * 0.5} y={-25} text-anchor="middle" dominant-baseline="middle">{title}</text>
 			<AxisX {xScale} innerChartWidth={chartWidth} innerChartHeight={chartHeight} label={xLabel} />
 			<AxisY {yScale} innerChartWidth={chartWidth} label={yLabel} />
 			{#each groupBuckets as group}

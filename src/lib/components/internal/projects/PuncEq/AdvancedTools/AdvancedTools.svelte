@@ -45,7 +45,7 @@
 				type="range"
 				min="-0.03"
 				max="0.03"
-				step="0.001"
+				step="0.0005"
 			/>
 		</label>
 	</div>

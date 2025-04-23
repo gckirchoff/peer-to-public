@@ -1,20 +1,25 @@
 <script lang="ts">
-	import { scaleLinear, scaleLog, range, max, extent } from 'd3';
+	import { scaleLinear, scaleLog, range, max, extent, pointer, leastIndex, bisector } from 'd3';
 
 	import { Body2 } from '../../typography';
 	import Tooltip from '../../Tooltip/Tooltip.svelte';
+	import Histogram from '../common/components/charts/Histogram/Histogram.svelte';
 	import AxisX from '../common/components/charts/common/AxisX/AxisX.svelte';
 	import AxisY from '../common/components/charts/common/AxisY/AxisY.svelte';
 	import Line from '../common/components/Line/Line.svelte';
 	import AdvancedTools from './AdvancedTools/AdvancedTools.svelte';
-	import { margin } from './constants';
+	import { margin, type Vector } from './constants';
 	import {
 		logNormalPDF,
 		UseAdvancedConfigurables,
 		simulatePopulationDynamics,
+		getXDataIndex,
+		getCursorPositionInfo,
+		assessSystemFailures,
 	} from './logic.svelte';
 	import LogNormalDistribution from './LogNormalDistribution/LogNormalDistribution.svelte';
 	import type { Margin } from '../common/components/charts/constants';
+	import { roundTo } from '../util/math';
 
 	const minimumMedianIfr = 0.001;
 
@@ -26,7 +31,7 @@
 	let mu = $derived(Math.log(medianIfr));
 
 	let width = $state(400);
-	let height = 400;
+	let height = $state(400);
 
 	let innerChartWidth = $derived(width - margin.left - margin.right);
 	let innerChartHeight = $derived(height - margin.top - margin.bottom);
@@ -39,7 +44,7 @@
 
 	let xScale = $derived(
 		scaleLinear()
-			.domain([minimumMedianIfr, 0.1] as [number, number])
+			.domain([minimumMedianIfr, 0.05] as [number, number])
 			.range([0, innerChartWidth]),
 	);
 
@@ -66,26 +71,83 @@
 			percentLossOfPopulationCrisisThreshold: advancedConfigurables.collapseThreshold,
 			populationGrowthRate: advancedConfigurables.populationGrowthRate,
 			wavesPerYear: advancedConfigurables.wavesPerYear,
-			numSimulations: 100,
+			numSimulations: 10,
 			years: 100,
 		}),
 	);
+
+	let collapseThreshold = $state(0.2);
+	let windowSize = $state(5);
+	let showSystemFailures = $state(true);
+	let systemFailures = $derived(
+		assessSystemFailures({
+			populationSims: populations,
+			collapseThreshold,
+			windowSize,
+		}),
+	);
+
+	let allSystemFailures = $derived(systemFailures.flat());
 
 	const allData = $derived(populations.flatMap((sim) => sim.data));
 
 	const xExtent = $derived(extent(allData, (d) => d.year) as [number, number]);
 	const yMax = $derived(max(allData, (d) => d.population) as number);
+	const populationsYExtent = $derived([0, yMax] as [number, number]);
 
-	const simXScale = $derived(scaleLinear().domain(xExtent).range([0, width])); // replace width with your actual SVG width
-	const simYScale = $derived(scaleLinear().domain([0, yMax]).range([height, 0])); // invert for SVG
+	const simXScale = $derived(scaleLinear().domain(xExtent).range([0, simInnerChartWidth]));
+	const simYScale = $derived(
+		scaleLinear().domain(populationsYExtent).range([simInnerChartHeight, 0]),
+	);
 
-	// Raw accessors
 	const simXAccessor = (d: { year: number; population: number }) => d.year;
 	const simYAccessor = (d: { year: number; population: number }) => d.population;
 
-	// Scaled accessors
 	const simScaledX = (d: { year: number; population: number }) => simXScale(simXAccessor(d));
 	const simScaledY = (d: { year: number; population: number }) => simYScale(simYAccessor(d));
+
+	let hoverSimCursorPosition = $state<Vector | null>(null);
+	let selectedSimCursorPosition = $state<Vector | null>(null);
+
+	const onSimPointerMove = (
+		event: PointerEvent & {
+			currentTarget: EventTarget & SVGRectElement;
+		},
+	) => {
+		const mousePosition = pointer(event);
+		hoverSimCursorPosition = {
+			x: mousePosition[0],
+			y: mousePosition[1],
+		};
+	};
+
+	const onPointerLeave = () => {
+		hoverSimCursorPosition = null;
+	};
+
+	const setSelectedXValue = () => {
+		selectedSimCursorPosition = hoverSimCursorPosition;
+	};
+
+	let timeStep = 1 / advancedConfigurables.wavesPerYear;
+
+	let hoverPositionInfo = $derived(
+		getCursorPositionInfo({ timeStep, cursorPosition: hoverSimCursorPosition, simXScale }),
+	);
+
+	let selectedPositionInfo = $derived(
+		getCursorPositionInfo({
+			timeStep,
+			cursorPosition: selectedSimCursorPosition,
+			simXScale,
+			populations,
+		}),
+	);
+
+	let populationAtSelectedTime = $derived(selectedPositionInfo?.populationsAtSelectedTime ?? null);
+	let selectedYear = $derived(
+		selectedPositionInfo?.xValue ? roundTo(selectedPositionInfo.xValue, 2) : null,
+	);
 </script>
 
 <AdvancedTools {advancedConfigurables} />
@@ -95,7 +157,7 @@
 			{medianIfr} median IFR:
 			<Tooltip>Average amount of infections per year in population</Tooltip>
 		</Body2>
-		<input bind:value={medianIfr} type="range" min={minimumMedianIfr} max={0.5} step={0.001} />
+		<input bind:value={medianIfr} type="range" min={minimumMedianIfr} max={0.05} step={0.001} />
 	</label>
 	<label class="range-input">
 		<Body2>
@@ -107,10 +169,37 @@
 </div>
 <div class="punc-eq-container">
 	<div class="dashboard">
-		<div class="chart-container">
+		<!-- <div class="chart-container">
 			<LogNormalDistribution {mu} {sigma} xDomainMin={0.001} xDomainMax={0.1} />
+		</div> -->
+		<div
+			class="chart-container"
+			bind:clientWidth={width}
+			bind:clientHeight={height}
+			role="application"
+		>
+			<svg {width} {height}>
+				<g style="transform: translate({margin.left}px, {margin.top}px)">
+					<AxisX label="IFR" {innerChartWidth} {innerChartHeight} {xScale} />
+					<AxisY label="density" {innerChartWidth} {yScale} />
+					<Line {data} {xAccessorScaled} {yAccessorScaled} />
+				</g>
+			</svg>
 		</div>
-		<div class="chart-container" bind:clientWidth={simWidth}>
+		<div class="inputs-container">
+			<label class="range-input">
+				<Body2>failure at: {Math.round(collapseThreshold * 100)}% pop. loss</Body2>
+				<input type="range" bind:value={collapseThreshold} min="0.01" max="0.5" step="0.01" />
+			</label>
+			<label class="range-input">
+				<Body2>within {windowSize} years</Body2>
+				<input type="range" bind:value={windowSize} min="1" max="20" step="1" />
+			</label>
+			<label>
+				<input type="checkbox" bind:checked={showSystemFailures} /> Show system failures
+			</label>
+		</div>
+		<div class="chart-container" bind:clientWidth={simWidth} bind:clientHeight={simHeight}>
 			<svg width={simWidth} height={simHeight}>
 				<g style="transform: translate({simMargin.left}px, {simMargin.top}px)">
 					<AxisX
@@ -125,21 +214,67 @@
 							data={population.data}
 							xAccessorScaled={simScaledX}
 							yAccessorScaled={simScaledY}
-							style="opacity: 0.3"
+							style="opacity: 0.6"
 						/>
 					{/each}
+					{#if showSystemFailures}
+						{#each allSystemFailures as systemFailureYear}
+							<line
+								x1={simXScale(systemFailureYear)}
+								x2={simXScale(systemFailureYear)}
+								y1={0}
+								y2={innerChartHeight}
+								stroke-width={1}
+								stroke="red"
+								style="opacity: 0.3"
+							/>
+						{/each}
+					{/if}
+					{#if hoverPositionInfo}
+						<line
+							x1={hoverPositionInfo.xPosition}
+							x2={hoverPositionInfo.xPosition}
+							y1={0}
+							y2={innerChartHeight}
+							stroke-width={1}
+							stroke="grey"
+						/>
+					{/if}
+					{#if selectedPositionInfo}
+						<line
+							x1={selectedPositionInfo.xPosition}
+							x2={selectedPositionInfo.xPosition}
+							y1={0}
+							y2={innerChartHeight}
+							stroke-width={1}
+							stroke="black"
+						/>
+					{/if}
+					<rect
+						width={simInnerChartWidth}
+						height={simInnerChartHeight}
+						onpointermove={onSimPointerMove}
+						onpointerleave={onPointerLeave}
+						onclick={setSelectedXValue}
+						onkeydown={() => undefined}
+						role="presentation"
+						fill="transparent"
+					/>
 				</g>
 			</svg>
 		</div>
-		<div class="chart-container" bind:clientWidth={width} role="application">
-			<svg {width} {height}>
-				<g style="transform: translate({margin.left}px, {margin.top}px)">
-					<AxisX label="IFR" {innerChartWidth} {innerChartHeight} {xScale} />
-					<AxisY label="density" {innerChartWidth} {yScale} />
-					<Line {data} {xAccessorScaled} {yAccessorScaled} />
-				</g>
-			</svg>
-		</div>
+		{#if populationAtSelectedTime && selectedYear !== null}
+			<div class="chart-container" bind:clientWidth={width} role="application">
+				<Histogram
+					title="Population Distribution at Year {selectedYear}"
+					xLabel="Population Size"
+					yLabel="Frequency"
+					series={[{ group: `Year ${selectedYear}`, values: populationAtSelectedTime }]}
+					margin={{ top: 80 }}
+					xDomain={populationsYExtent}
+				/>
+			</div>
+		{/if}
 	</div>
 </div>
 
@@ -152,5 +287,10 @@
 				height: 40rem;
 			}
 		}
+	}
+
+	.inputs-container {
+		display: flex;
+		gap: var(--spacing-16);
 	}
 </style>

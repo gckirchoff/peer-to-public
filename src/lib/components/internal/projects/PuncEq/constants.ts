@@ -6,3 +6,5 @@ export const margin: Margin = {
 	bottom: 45,
 	right: 15,
 };
+
+export type Vector = { x: number; y: number };
