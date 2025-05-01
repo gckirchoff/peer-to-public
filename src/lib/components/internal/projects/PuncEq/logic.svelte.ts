@@ -135,25 +135,31 @@ export const assessSystemFailures = ({
 }: AssessSystemFailuresProps): SystemFailurePoint[][] => {
 	return populationSims.map((populationSim) => {
 		const data = populationSim.data;
-		const systemFailureYears: SystemFailurePoint[] = [];
+		const systemFailurePoints: SystemFailurePoint[] = [];
 
 		for (let i = 0; i < data.length; i++) {
 			const currentYear = data[i].year;
 			const currentPop = data[i].population;
 
-			// Find earliest year in window
-			const startIdx = data.findIndex((d) => d.year >= currentYear - windowSize);
-			if (startIdx >= 0 && startIdx < i) {
-				const startPop = data[startIdx].population;
-				const drop = (startPop - currentPop) / startPop;
+			for (let j = i - 1; j >= 0; j--) {
+				const previousYear = data[j].year;
+				const previousPop = data[j].population;
+
+				const hasGonePastWindow = previousYear < currentYear - windowSize;
+				if (hasGonePastWindow) {
+					break;
+				}
+
+				const drop = (previousPop - currentPop) / previousPop;
 
 				if (drop >= collapseThreshold) {
-					systemFailureYears.push({ year: currentYear, population: currentPop });
+					systemFailurePoints.push({ year: currentYear, population: currentPop });
+					break;
 				}
 			}
 		}
 
-		return systemFailureYears;
+		return systemFailurePoints;
 	});
 };
 
