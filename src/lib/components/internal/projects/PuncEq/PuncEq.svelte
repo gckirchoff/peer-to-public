@@ -31,6 +31,8 @@
 		getCursorPositionInfo,
 		assessSystemFailures,
 		sampleLogNormalIfr,
+		welchTTest,
+		leveneTest,
 	} from './logic.svelte';
 	import LogNormalDistribution from './LogNormalDistribution/LogNormalDistribution.svelte';
 
@@ -38,10 +40,13 @@
 
 	let medianIfr = $state(0.002);
 	let sigma = $state(0.5);
+	let testSigma = $state(0.5);
 	let xDomainMax = $state(0.2);
 	const advancedConfigurables = new UseAdvancedConfigurables();
 
 	let mu = $derived(Math.log(medianIfr));
+
+	let showAltSigmaForecast = $state(false);
 
 	let ifrDistributionWidth = $state(400);
 	let ifrDistributionHeight = $state(400);
@@ -54,6 +59,7 @@
 
 	const xValues = range(minimumMedianIfr, 1, 0.001);
 	let data = $derived(xValues.map((x) => ({ x, y: logNormalPDF(x, mu, sigma) })));
+	let altSigmaData = $derived(xValues.map((x) => ({ x, y: logNormalPDF(x, mu, testSigma) })));
 
 	let xScale = $derived(
 		scaleLinear()
@@ -61,11 +67,12 @@
 			.range([0, ifrDistributionInnerChartWidth]),
 	);
 
-	let yScale = $derived(
-		scaleLinear()
-			.domain([0, max(data, yAccessor)] as [number, number])
-			.range([innerChartHeight, 0]),
-	);
+	let yDomain = $derived([
+		0,
+		max(showAltSigmaForecast ? data.concat(altSigmaData) : data, yAccessor),
+	] as [number, number]);
+
+	let yScale = $derived(scaleLinear().domain(yDomain).range([innerChartHeight, 0]));
 
 	const xAccessorScaled = $derived((d: { x: number; y: number }) => xScale(xAccessor(d)));
 	const yAccessorScaled = $derived((d: { x: number; y: number }) => yScale(yAccessor(d)));
@@ -89,6 +96,21 @@
 		}),
 	);
 
+	let altPopulations = $derived(
+		showAltSigmaForecast
+			? simulatePopulationDynamics({
+					ifrMu: mu,
+					ifrSigma: testSigma,
+					fractionInfected: advancedConfigurables.wavesPerYear,
+					percentLossOfPopulationCrisisThreshold: advancedConfigurables.collapseThreshold,
+					populationGrowthRate: advancedConfigurables.populationGrowthRate,
+					wavesPerYear: advancedConfigurables.wavesPerYear,
+					numSimulations: 100,
+					years: 100,
+				})
+			: [],
+	);
+
 	let collapseThreshold = $state(0.2);
 	let windowSize = $state(5);
 	let showSystemFailures = $state(true);
@@ -99,6 +121,14 @@
 			windowSize,
 		}),
 	);
+	let altSystemFailures = $derived(
+		assessSystemFailures({
+			populationSims: altPopulations,
+			collapseThreshold,
+			windowSize,
+		}),
+	);
+
 	let shouldDelayTransitions = $state(true);
 	const handleRangeInputMouseDown = () => {
 		shouldDelayTransitions = false;
@@ -109,7 +139,7 @@
 
 	let allSystemFailures = $derived(systemFailures.slice(0, 10).flat());
 
-	const allData = $derived(populations.flatMap((sim) => sim.data));
+	const allData = $derived(populations.concat(altPopulations).flatMap((sim) => sim.data));
 
 	const xExtent = $derived(extent(allData, (d) => d.year) as [number, number]);
 	const yMax = $derived(max(allData, (d) => d.population) as number);
@@ -175,7 +205,6 @@
 	);
 
 	let sampleSize = $state(10);
-	let testSigma = $state(0.5);
 	let { mainIfrSamples, testIfrSamples } = $derived.by(() => {
 		let randomIfr = sampleLogNormalIfr(mu, sigma);
 		let testRandomIfr = sampleLogNormalIfr(mu, testSigma);
@@ -183,6 +212,9 @@
 		let testIfrSamples = new Array(sampleSize).fill(0).map(testRandomIfr);
 		return { mainIfrSamples, testIfrSamples };
 	});
+
+	let { t } = $derived(welchTTest(mainIfrSamples, testIfrSamples));
+	let pValue = $derived(leveneTest([mainIfrSamples, testIfrSamples]));
 
 	let histogramWidth = $state(400);
 	let populationAtSelectedTime = $derived(selectedPositionInfo?.populationsAtSelectedTime ?? null);
@@ -234,8 +266,16 @@
 							{innerChartHeight}
 							{xScale}
 						/>
-						<!-- <AxisY label="density" innerChartWidth={ifrDistributionInnerChartWidth} {yScale} /> -->
+						<AxisY label="density" innerChartWidth={ifrDistributionInnerChartWidth} {yScale} />
 						<Line {data} {xAccessorScaled} {yAccessorScaled} />
+						{#if showAltSigmaForecast}
+							<Line
+								data={altSigmaData}
+								{xAccessorScaled}
+								{yAccessorScaled}
+								style="stroke: var(--clr-secondary-800);"
+							/>
+						{/if}
 					</g>
 				</svg>
 			</div>
@@ -288,6 +328,16 @@
 								style="opacity: 0.6"
 							/>
 						{/each}
+						{#if showAltSigmaForecast}
+							{#each altPopulations.slice(0, 10) as population}
+								<Line
+									data={population.data}
+									xAccessorScaled={simScaledX}
+									yAccessorScaled={simScaledY}
+									style="opacity: 0.6; stroke: var(--clr-secondary-800);"
+								/>
+							{/each}
+						{/if}
 						{#if showSystemFailures}
 							{#each systemFailures.slice(0, 10) as systemFailureSet}
 								{#each systemFailureSet as systemFailurePoint (`${systemFailurePoint.year}-${systemFailurePoint.population}`)}
@@ -296,6 +346,20 @@
 										cy={simYScale(systemFailurePoint.population)}
 										r={2}
 										fill="red"
+										style="opacity: 0.8;"
+										in:fade={{ delay: shouldDelayTransitions ? 200 : 0, duration: 125 }}
+									/>
+								{/each}
+							{/each}
+						{/if}
+						{#if showSystemFailures && showAltSigmaForecast}
+							{#each altSystemFailures.slice(0, 10) as systemFailureSet}
+								{#each systemFailureSet as systemFailurePoint (`${systemFailurePoint.year}-${systemFailurePoint.population}`)}
+									<circle
+										cx={simXScale(systemFailurePoint.year)}
+										cy={simYScale(systemFailurePoint.population)}
+										r={2}
+										fill="DarkOrange"
 										style="opacity: 0.8;"
 										in:fade={{ delay: shouldDelayTransitions ? 200 : 0, duration: 125 }}
 									/>
@@ -336,21 +400,53 @@
 				</svg>
 			</div>
 		</div>
-		<div
-			class="chart-container"
-			bind:clientWidth={sampleTestChartWidth}
-			bind:clientHeight={sampleTestChartHeight}
-			role="application"
-		>
-			<BoxPlot
-				title="Sample test"
-				xLabel="Stuff heregyGq"
-				yLabel="Stuff there"
-				series={[
-					{ group: '1', values: mainIfrSamples },
-					{ group: '2', values: testIfrSamples },
-				]}
-			/>
+		<div class="box-plot-container">
+			<div class="inputs-container">
+				<label class="range-input">
+					<Body2>
+						{sampleSize} samples:
+						<Tooltip>
+							Take a sample of points using this sigma and the selected {medianIfr} medianIfr
+						</Tooltip>
+					</Body2>
+					<input bind:value={sampleSize} type="range" min={5} max={100} step={5} />
+				</label>
+				<label class="range-input">
+					<Body2>
+						{testSigma} alt sigma:
+						<Tooltip>
+							Take a sample of points using this sigma and the selected {medianIfr} medianIfr
+						</Tooltip>
+					</Body2>
+					<input bind:value={testSigma} type="range" min={0.001} max={5} step={0.001} />
+				</label>
+				<label>
+					<input type="checkbox" bind:checked={showAltSigmaForecast} /> Show alt sigma forecast
+				</label>
+			</div>
+			<Body2>t = {roundTo(t ?? 0, 4)}</Body2>
+			<Body2>
+				levene test p =
+				<span style="color: {pValue < 0.05 ? 'green' : 'red'};">
+					{roundTo(pValue, 3)}
+				</span>
+			</Body2>
+			<div
+				class="chart-container"
+				bind:clientWidth={sampleTestChartWidth}
+				bind:clientHeight={sampleTestChartHeight}
+				role="application"
+			>
+				<BoxPlot
+					title="Sample test"
+					xLabel="Group"
+					yLabel="IFR"
+					series={[
+						{ group: 'Main population', values: mainIfrSamples },
+						{ group: 'Alt population', values: testIfrSamples },
+					]}
+				/>
+			</div>
 		</div>
 		{#if populationAtSelectedTime && selectedYear !== null}
 			<div class="chart-container" bind:clientWidth={histogramWidth} role="application">
@@ -385,7 +481,7 @@
 			}
 		}
 		.chart-container {
-			height: 40vh;
+			height: 36vh;
 		}
 	}
 
