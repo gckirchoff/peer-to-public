@@ -11,9 +11,9 @@ export const logNormalPDF = (x: number, mu: number, sigma: number) => {
 	);
 };
 
-const sampleLogNormalIfr = (mu: number, sigma: number): number => {
-	const thing = randomLogNormal(mu, sigma)();
-	return Math.exp(thing);
+export const sampleLogNormalIfr = (mu: number, sigma: number): (() => number) => {
+	const randLogNormal = randomLogNormal(mu, sigma);
+	return () => Math.min(randLogNormal(), 1);
 };
 
 interface SimulatePopulationDynamicsProps {
@@ -50,7 +50,7 @@ export const simulatePopulationDynamics = ({
 	fractionInfected,
 	populationGrowthRate,
 }: SimulatePopulationDynamicsProps): PopulationSim[] => {
-	const randomIfr = randomLogNormal(ifrMu, ifrSigma);
+	const randomIfr = sampleLogNormalIfr(ifrMu, ifrSigma);
 	const simulations: PopulationSim[] = [];
 
 	const populationChangeFromGrowthPerWave = 1 + populationGrowthRate / wavesPerYear;

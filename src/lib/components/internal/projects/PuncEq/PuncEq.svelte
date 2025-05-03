@@ -1,8 +1,22 @@
 <script lang="ts">
-	import { scaleLinear, scaleLog, range, max, extent, pointer, leastIndex, bisector } from 'd3';
+	import { fade } from 'svelte/transition';
+	import {
+		scaleLinear,
+		scaleLog,
+		range,
+		max,
+		extent,
+		pointer,
+		leastIndex,
+		bisector,
+		randomLogNormal,
+	} from 'd3';
 
 	import { Body2 } from '../../typography';
 	import Tooltip from '../../Tooltip/Tooltip.svelte';
+	import type { Margin } from '../common/components/charts/constants';
+	import { roundTo } from '../util/math';
+	import BoxPlot from '../common/components/charts/BoxPlot/BoxPlot.svelte';
 	import Histogram from '../common/components/charts/Histogram/Histogram.svelte';
 	import AxisX from '../common/components/charts/common/AxisX/AxisX.svelte';
 	import AxisY from '../common/components/charts/common/AxisY/AxisY.svelte';
@@ -16,11 +30,9 @@
 		getXDataIndex,
 		getCursorPositionInfo,
 		assessSystemFailures,
+		sampleLogNormalIfr,
 	} from './logic.svelte';
 	import LogNormalDistribution from './LogNormalDistribution/LogNormalDistribution.svelte';
-	import type { Margin } from '../common/components/charts/constants';
-	import { roundTo } from '../util/math';
-	import { fade } from 'svelte/transition';
 
 	const minimumMedianIfr = 0.001;
 
@@ -152,6 +164,26 @@
 		}),
 	);
 
+	let sampleTestChartWidth = $state(400);
+	let sampleTestChartHeight = $state(400);
+	const sampleTestChartMargin: Margin = { top: 25, right: 25, bottom: 25, left: 75 };
+	let sampleTestInnerChartWidth = $derived(
+		sampleTestChartWidth - sampleTestChartMargin.left - sampleTestChartMargin.right,
+	);
+	let sampleTestInnerChartHeight = $derived(
+		sampleTestChartHeight - sampleTestChartMargin.top - sampleTestChartMargin.bottom,
+	);
+
+	let sampleSize = $state(10);
+	let testSigma = $state(0.5);
+	let { mainIfrSamples, testIfrSamples } = $derived.by(() => {
+		let randomIfr = sampleLogNormalIfr(mu, sigma);
+		let testRandomIfr = sampleLogNormalIfr(mu, testSigma);
+		let mainIfrSamples = new Array(sampleSize).fill(0).map(randomIfr);
+		let testIfrSamples = new Array(sampleSize).fill(0).map(testRandomIfr);
+		return { mainIfrSamples, testIfrSamples };
+	});
+
 	let histogramWidth = $state(400);
 	let populationAtSelectedTime = $derived(selectedPositionInfo?.populationsAtSelectedTime ?? null);
 	let selectedYear = $derived(
@@ -202,7 +234,7 @@
 							{innerChartHeight}
 							{xScale}
 						/>
-						<AxisY label="density" innerChartWidth={ifrDistributionInnerChartWidth} {yScale} />
+						<!-- <AxisY label="density" innerChartWidth={ifrDistributionInnerChartWidth} {yScale} /> -->
 						<Line {data} {xAccessorScaled} {yAccessorScaled} />
 					</g>
 				</svg>
@@ -304,19 +336,35 @@
 				</svg>
 			</div>
 		</div>
-	</div>
-	{#if populationAtSelectedTime && selectedYear !== null}
-		<div class="chart-container" bind:clientWidth={histogramWidth} role="application">
-			<Histogram
-				title="Population Distribution at Year {selectedYear}"
-				xLabel="Population Size"
-				yLabel="Frequency"
-				series={[{ group: `Year ${selectedYear}`, values: populationAtSelectedTime }]}
-				margin={{ top: 80 }}
-				xDomain={populationsYExtent}
+		<div
+			class="chart-container"
+			bind:clientWidth={sampleTestChartWidth}
+			bind:clientHeight={sampleTestChartHeight}
+			role="application"
+		>
+			<BoxPlot
+				title="Sample test"
+				xLabel="Stuff heregyGq"
+				yLabel="Stuff there"
+				series={[
+					{ group: '1', values: mainIfrSamples },
+					{ group: '2', values: testIfrSamples },
+				]}
 			/>
 		</div>
-	{/if}
+		{#if populationAtSelectedTime && selectedYear !== null}
+			<div class="chart-container" bind:clientWidth={histogramWidth} role="application">
+				<Histogram
+					title="Population Distribution at Year {selectedYear}"
+					xLabel="Population Size"
+					yLabel="Frequency"
+					series={[{ group: `Year ${selectedYear}`, values: populationAtSelectedTime }]}
+					margin={{ top: 80 }}
+					xDomain={populationsYExtent}
+				/>
+			</div>
+		{/if}
+	</div>
 </div>
 
 <style lang="scss">
@@ -324,22 +372,20 @@
 		margin: var(--spacing-24) 0;
 
 		.dashboard {
-			--gap: 1%;
-			display: flex;
-			flex-wrap: wrap;
-			gap: var(--gap);
+			display: grid;
+			grid-template-columns: repeat(2, minmax(20rem, 1fr));
 
 			.ifr-distribution {
-				flex: 1 1 calc(40% - var(--gap) * 0.5);
-				min-width: 350px;
+				// flex: 1 1 calc(40% - var(--gap) * 0.5);
+				// min-width: 350px;
 			}
 
 			.population-sims {
-				flex: 1 1 calc(60% - var(--gap) * 0.5);
+				// flex: 1 1 calc(60% - var(--gap) * 0.5);
 			}
 		}
 		.chart-container {
-			height: 37rem;
+			height: 40vh;
 		}
 	}
 
