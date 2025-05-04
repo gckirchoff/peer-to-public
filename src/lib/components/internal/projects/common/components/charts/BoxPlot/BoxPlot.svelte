@@ -58,7 +58,7 @@
 				label={xLabel}
 			/>
 			<AxisY {yScale} innerChartWidth={chartWidth} label={yLabel} />
-			{#each series as { group, values }}
+			{#each series as { group, values, color }}
 				{@const stats = computeBoxStats(values)}
 				{#if show}
 					<g style="transform: translate({xScale(group)}px,0px)">
@@ -69,7 +69,7 @@
 							x2={xScale.bandwidth() * 0.5}
 							y1={yScale(stats.min)}
 							y2={yScale(stats.max)}
-							stroke={colorScale(group)}
+							stroke={color ?? colorScale(group)}
 							transition:draw
 						/>
 						<line
@@ -77,7 +77,7 @@
 							x2={xScale.bandwidth() * 0.5 + 10}
 							y1={yScale(stats.min)}
 							y2={yScale(stats.min)}
-							stroke={colorScale(group)}
+							stroke={color ?? colorScale(group)}
 							stroke-width={2}
 							transition:fade={{ delay: 450 }}
 						/>
@@ -86,7 +86,7 @@
 							x2={xScale.bandwidth() * 0.5 + 10}
 							y1={yScale(stats.max)}
 							y2={yScale(stats.max)}
-							stroke={colorScale(group)}
+							stroke={color ?? colorScale(group)}
 							stroke-width={2}
 							transition:fade={{ delay: 450 }}
 						/>
@@ -97,8 +97,8 @@
 							y={yScale(stats.q3)}
 							width={Math.max(xScale.bandwidth(), 0)}
 							height={Math.max(yScale(stats.q1) - yScale(stats.q3), 0)}
-							fill="{colorScale(group)}AA"
-							stroke={colorScale(group)}
+							fill={color ?? `${colorScale(group)}AA`}
+							stroke={color ?? colorScale(group)}
 							transition:fade
 						/>
 

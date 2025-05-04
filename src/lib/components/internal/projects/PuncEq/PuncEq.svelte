@@ -472,8 +472,12 @@
 										xLabel="Group"
 										yLabel="IFR"
 										series={[
-											{ group: 'Main population', values: mainIfrSample },
-											{ group: 'Alt population', values: sample },
+											{ group: 'Main population', values: mainIfrSample, color: '#9980fa' },
+											{
+												group: 'Alt population',
+												values: sample,
+												color: 'var(--clr-secondary-800)',
+											},
 										]}
 									/>
 								</td>
@@ -505,9 +509,15 @@
 					xLabel="Population Size"
 					yLabel="Frequency"
 					series={[
-						{ group: `Year ${selectedYear}`, values: populationAtSelectedTime },
+						{ group: `Year ${selectedYear}`, values: populationAtSelectedTime, color: '#9980fa' },
 						...(showAltSigmaForecast && altPopulationAtSelectedTime
-							? [{ group: 'Alt population', values: altPopulationAtSelectedTime }]
+							? [
+									{
+										group: 'Alt population',
+										values: altPopulationAtSelectedTime,
+										color: 'var(--clr-secondary-800)',
+									},
+								]
 							: []),
 					]}
 					margin={{ top: 80 }}
