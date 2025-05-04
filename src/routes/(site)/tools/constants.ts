@@ -21,6 +21,10 @@ export const links: Link[] = [
 		href: 'successive-waves',
 	},
 	{
+		title: 'Punctuated Equilibrium',
+		href: 'punc-eq',
+	},
+	{
 		title: 'Short-Term Risk Visualizer',
 		href: 'gambling-with-covid',
 	},

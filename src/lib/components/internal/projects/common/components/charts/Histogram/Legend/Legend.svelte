@@ -7,15 +7,17 @@
 
 	let textNodes: SVGTextElement[] = $state([]);
 
-	let maxTextLength = $derived(
-		textNodes.length ? Math.max(...textNodes.map((node) => node.getBoundingClientRect().width)) : 0,
-	);
+	let maxTextLength = $state(0);
+	let maxTextHeight = $state(0);
 
-	let maxTextHeight = $derived(
-		textNodes.length
-			? Math.max(...textNodes.map((node) => node.getBoundingClientRect().height))
-			: 0,
-	);
+	$effect(() => {
+		if (textNodes.length && textNodes.every(Boolean)) {
+			maxTextLength = Math.max(...textNodes.map((node) => node.getBoundingClientRect().width));
+			maxTextHeight = Math.max(...textNodes.map((node) => node.getBoundingClientRect().height));
+		}
+		// dependecies
+		groups;
+	});
 </script>
 
 <g style="transform: translate({chartWidth - maxTextLength - 20}px, {chartHeight * 0.1}px);">

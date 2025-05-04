@@ -45,7 +45,7 @@
 			values: simResults.attenuationTimes,
 		},
 		{
-			group: 'Collapses',
+			group: 'System Failures',
 			values: simResults.crisisTimes,
 		},
 	]);
@@ -56,7 +56,7 @@
 		<div class="chart-container overall-probabilities">
 			<HeatMap
 				data={overallData}
-				title="Chance of Attenuation Before Collapse"
+				title="Chance of Attenuation Before System Failure"
 				xLabel="Chance of Stable Attenuation/Wave"
 				yLabel="Chance of Exaggerated Mortality/Wave"
 				bind:selectedIndex={selectedHeatmapIndex}
@@ -67,7 +67,7 @@
 		<div class="chart-container monte-carlo-sim">
 			<Histogram
 				series={simData}
-				title="Attenuation vs Collapse Times"
+				title="Attenuation vs System Failure Times"
 				xLabel="Years"
 				yLabel="Frequency"
 				xDomain={[0, 100]}

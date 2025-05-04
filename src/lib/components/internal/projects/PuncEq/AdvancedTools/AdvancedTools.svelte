@@ -29,26 +29,6 @@
 			/>
 		</label>
 		<label>
-			{roundTo(advancedConfigurables.baselineMortality * 100, 2)}% baseline IFR
-			<input
-				bind:value={advancedConfigurables.baselineMortality}
-				type="range"
-				min="0"
-				max="0.005"
-				step="0.0001"
-			/>
-		</label>
-		<label>
-			{roundTo(advancedConfigurables.exaggeratedMortality * 100, 2)}% exaggerated IFR
-			<input
-				bind:value={advancedConfigurables.exaggeratedMortality}
-				type="range"
-				min="0"
-				max="0.5"
-				step="0.01"
-			/>
-		</label>
-		<label>
 			System Failure after {roundTo(advancedConfigurables.collapseThreshold * 100, 2)}% pop. loss
 			<input
 				bind:value={advancedConfigurables.collapseThreshold}
@@ -65,7 +45,7 @@
 				type="range"
 				min="-0.03"
 				max="0.03"
-				step="0.001"
+				step="0.0005"
 			/>
 		</label>
 	</div>
