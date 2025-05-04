@@ -205,16 +205,19 @@
 	);
 
 	let sampleSize = $state(10);
-	let { mainIfrSamples, testIfrSamples } = $derived.by(() => {
+	let { mainIfrSample, testIfrSamples } = $derived.by(() => {
 		let randomIfr = sampleLogNormalIfr(mu, sigma);
 		let testRandomIfr = sampleLogNormalIfr(mu, testSigma);
-		let mainIfrSamples = new Array(sampleSize).fill(0).map(randomIfr);
-		let testIfrSamples = new Array(sampleSize).fill(0).map(testRandomIfr);
-		return { mainIfrSamples, testIfrSamples };
+		let mainIfrSample = new Array(sampleSize).fill(0).map(randomIfr);
+
+		let testIfrSamples = new Array(5)
+			.fill([])
+			.map(() => new Array(sampleSize).fill(0).map(testRandomIfr));
+		return { mainIfrSample, testIfrSamples };
 	});
 
-	let { t } = $derived(welchTTest(mainIfrSamples, testIfrSamples));
-	let pValue = $derived(leveneTest([mainIfrSamples, testIfrSamples]));
+	// let { t } = $derived(welchTTest(mainIfrSample, testIfrSamples));
+	// let pValue = $derived(leveneTest([mainIfrSample, testIfrSamples]));
 
 	let histogramWidth = $state(400);
 	let populationAtSelectedTime = $derived(selectedPositionInfo?.populationsAtSelectedTime ?? null);
@@ -424,28 +427,61 @@
 					<input type="checkbox" bind:checked={showAltSigmaForecast} /> Show alt sigma forecast
 				</label>
 			</div>
-			<Body2>t = {roundTo(t ?? 0, 4)}</Body2>
+			<!-- <Body2>t = {roundTo(t ?? 0, 4)}</Body2>
 			<Body2>
 				levene test p =
 				<span style="color: {pValue < 0.05 ? 'green' : 'red'};">
 					{roundTo(pValue, 3)}
 				</span>
-			</Body2>
+			</Body2> -->
 			<div
 				class="chart-container"
 				bind:clientWidth={sampleTestChartWidth}
 				bind:clientHeight={sampleTestChartHeight}
 				role="application"
 			>
-				<BoxPlot
+				<table border="1" cellpadding="8" cellspacing="0" style="width: 100%;">
+					<thead>
+						<tr>
+							<th>Chart</th>
+							<th>T Value</th>
+							<th>P Value</th>
+						</tr>
+					</thead>
+					<tbody>
+						{#each testIfrSamples as sample}
+							{@const pValue = leveneTest([mainIfrSample, sample])}
+							<tr>
+								<td style="height: 22rem;">
+									<BoxPlot
+										title="Sample test"
+										xLabel="Group"
+										yLabel="IFR"
+										series={[
+											{ group: 'Main population', values: mainIfrSample },
+											{ group: 'Alt population', values: sample },
+										]}
+									/>
+								</td>
+								<td>{roundTo(welchTTest(mainIfrSample, sample).t, 4)}</td>
+								<td>
+									<span style="color: {pValue < 0.05 ? 'green' : 'red'};">
+										{roundTo(pValue, 3)}
+									</span>
+								</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+				<!-- <BoxPlot
 					title="Sample test"
 					xLabel="Group"
 					yLabel="IFR"
 					series={[
-						{ group: 'Main population', values: mainIfrSamples },
+						{ group: 'Main population', values: mainIfrSample },
 						{ group: 'Alt population', values: testIfrSamples },
 					]}
-				/>
+				/> -->
 			</div>
 		</div>
 		{#if populationAtSelectedTime && selectedYear !== null}
@@ -488,5 +524,10 @@
 	.inputs-container {
 		display: flex;
 		gap: var(--spacing-16);
+	}
+
+	td {
+		text-align: center;
+		padding: var(--spacing-4);
 	}
 </style>
