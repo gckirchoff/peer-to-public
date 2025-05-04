@@ -194,6 +194,17 @@
 		}),
 	);
 
+	let altSelectedPositionInfo = $derived(
+		showAltSigmaForecast
+			? getCursorPositionInfo({
+					timeStep,
+					cursorPosition: selectedSimCursorPosition,
+					simXScale,
+					populations: altPopulations,
+				})
+			: null,
+	);
+
 	let sampleTestChartWidth = $state(400);
 	let sampleTestChartHeight = $state(400);
 	const sampleTestChartMargin: Margin = { top: 25, right: 25, bottom: 25, left: 75 };
@@ -221,6 +232,9 @@
 
 	let histogramWidth = $state(400);
 	let populationAtSelectedTime = $derived(selectedPositionInfo?.populationsAtSelectedTime ?? null);
+	let altPopulationAtSelectedTime = $derived(
+		altSelectedPositionInfo?.populationsAtSelectedTime ?? null,
+	);
 	let selectedYear = $derived(
 		selectedPositionInfo?.xValue ? roundTo(selectedPositionInfo.xValue, 2) : null,
 	);
@@ -490,7 +504,12 @@
 					title="Population Distribution at Year {selectedYear}"
 					xLabel="Population Size"
 					yLabel="Frequency"
-					series={[{ group: `Year ${selectedYear}`, values: populationAtSelectedTime }]}
+					series={[
+						{ group: `Year ${selectedYear}`, values: populationAtSelectedTime },
+						...(showAltSigmaForecast && altPopulationAtSelectedTime
+							? [{ group: 'Alt population', values: altPopulationAtSelectedTime }]
+							: []),
+					]}
 					margin={{ top: 80 }}
 					xDomain={populationsYExtent}
 				/>
