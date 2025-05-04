@@ -58,8 +58,18 @@
 
 	let groupBuckets = $derived(
 		series.map((group) => ({
-			group,
+			group: {
+				...group,
+				color: group.color ?? colorScale(group.group),
+			},
 			buckets: bucketGenerator(group.values),
+		})),
+	);
+
+	let legendGroups = $derived(
+		groupBuckets.map((group) => ({
+			label: group.group.group,
+			color: group.group.color ?? colorScale(group.group.group),
 		})),
 	);
 </script>
@@ -67,7 +77,9 @@
 <div class="chart-container histogram" bind:clientWidth={width} bind:clientHeight={height}>
 	<svg {width} {height}>
 		<g style="transform: translate({usedMargin.left}px, {usedMargin.top}px);">
-			<text x={chartWidth * 0.5} y={-25} text-anchor="middle" dominant-baseline="middle">{title}</text>
+			<text x={chartWidth * 0.5} y={-25} text-anchor="middle" dominant-baseline="middle"
+				>{title}</text
+			>
 			<AxisX {xScale} innerChartWidth={chartWidth} innerChartHeight={chartHeight} label={xLabel} />
 			<AxisY {yScale} innerChartWidth={chartWidth} label={yLabel} />
 			{#each groupBuckets as group}
@@ -77,15 +89,15 @@
 						y={yScale(bucket.length)}
 						width={xScale(bucket.x1 as number) - xScale(bucket.x0 as number) - bucketPadding}
 						height={chartHeight - yScale(bucket.length)}
-						fill="{colorScale(group.group.group)}E8"
-						stroke={colorScale(group.group.group)}
+						fill={group.group.color}
+						stroke={group.group.color}
 						stroke-width={2}
-						opacity={0.7}
+						opacity={0.8}
 						animationOptions={{ delay: i * 10 }}
 					/>
 				{/each}
 			{/each}
-			<Legend {colorScale} {chartWidth} {chartHeight} />
+			<Legend groups={legendGroups} {chartWidth} {chartHeight} />
 		</g>
 	</svg>
 </div>

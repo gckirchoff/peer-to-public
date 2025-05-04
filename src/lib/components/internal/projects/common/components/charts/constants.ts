@@ -8,4 +8,5 @@ export interface Margin {
 export interface Series {
 	group: string;
 	values: number[];
+	color?: string;
 }

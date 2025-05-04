@@ -1,9 +1,7 @@
 <script lang="ts">
 	import type { LegendProps } from './constants';
 
-	let { colorScale, chartWidth, chartHeight }: LegendProps = $props();
-
-	let groups = $derived(colorScale.domain());
+	let { groups, chartWidth, chartHeight }: LegendProps = $props();
 
 	let textNodes: SVGTextElement[] = $state([]);
 
@@ -32,8 +30,8 @@
 	/>
 	{#each groups as group, i}
 		<g style="transform: translate(0px, {maxTextHeight * 1.05 * i}px);">
-			<circle r={5} fill={colorScale(group)} />
-			<text dx={10} bind:this={textNodes[i]} dominant-baseline="middle">{group}</text>
+			<circle r={5} fill={group.color} />
+			<text dx={10} bind:this={textNodes[i]} dominant-baseline="middle">{group.label}</text>
 		</g>
 	{/each}
 </g>
