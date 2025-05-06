@@ -87,7 +87,7 @@
 		simulatePopulationDynamics({
 			ifrMu: mu,
 			ifrSigma: sigma,
-			fractionInfected: advancedConfigurables.wavesPerYear,
+			fractionInfected: advancedConfigurables.fractionInfected,
 			percentLossOfPopulationCrisisThreshold: advancedConfigurables.collapseThreshold,
 			populationGrowthRate: advancedConfigurables.populationGrowthRate,
 			wavesPerYear: advancedConfigurables.wavesPerYear,
