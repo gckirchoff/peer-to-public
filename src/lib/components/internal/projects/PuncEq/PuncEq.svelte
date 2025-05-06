@@ -100,7 +100,7 @@
 			? simulatePopulationDynamics({
 					ifrMu: mu,
 					ifrSigma: testSigma,
-					fractionInfected: advancedConfigurables.wavesPerYear,
+					fractionInfected: advancedConfigurables.fractionInfected,
 					populationGrowthRate: advancedConfigurables.populationGrowthRate,
 					wavesPerYear: advancedConfigurables.wavesPerYear,
 					numSimulations: 100,
