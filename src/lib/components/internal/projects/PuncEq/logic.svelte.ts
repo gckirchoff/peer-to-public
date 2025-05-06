@@ -24,7 +24,6 @@ interface SimulatePopulationDynamicsProps {
 	numSimulations?: number;
 	years?: number;
 	wavesPerYear: number;
-	percentLossOfPopulationCrisisThreshold: number;
 	fractionInfected: number;
 	populationGrowthRate: number;
 }
@@ -215,7 +214,6 @@ export class UseAdvancedConfigurables {
 	baselineMortality = $state(0.002);
 	exaggeratedMortality = $state(0.1);
 	fractionInfected = $state(0.7);
-	collapseThreshold = $state(0.4);
 	populationGrowthRate = $state(0.0085);
 
 	constructor() {}

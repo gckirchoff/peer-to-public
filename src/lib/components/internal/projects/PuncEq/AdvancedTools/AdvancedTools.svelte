@@ -13,7 +13,7 @@
 			<input
 				bind:value={advancedConfigurables.wavesPerYear}
 				type="range"
-				min="0"
+				min="0.25"
 				max="3"
 				step="0.25"
 			/>
@@ -22,16 +22,6 @@
 			{roundTo(advancedConfigurables.fractionInfected * 100, 2)}% Infected/wave
 			<input
 				bind:value={advancedConfigurables.fractionInfected}
-				type="range"
-				min="0"
-				max="1"
-				step="0.01"
-			/>
-		</label>
-		<label>
-			System Failure after {roundTo(advancedConfigurables.collapseThreshold * 100, 2)}% pop. loss
-			<input
-				bind:value={advancedConfigurables.collapseThreshold}
 				type="range"
 				min="0"
 				max="1"
