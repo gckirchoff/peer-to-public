@@ -8,3 +8,5 @@ export const margin: Margin = {
 };
 
 export type Vector = { x: number; y: number };
+
+export const statisticalSignificanceThreshold = 0.01;
