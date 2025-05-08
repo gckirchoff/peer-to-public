@@ -10,9 +10,11 @@
 		leastIndex,
 		bisector,
 		randomLogNormal,
+		median,
+		deviation,
 	} from 'd3';
 
-	import { Body2 } from '../../typography';
+	import { Body1, Body2 } from '../../typography';
 	import Tooltip from '../../Tooltip/Tooltip.svelte';
 	import type { Margin } from '../common/components/charts/constants';
 	import { roundTo } from '../util/math';
@@ -22,7 +24,7 @@
 	import AxisY from '../common/components/charts/common/AxisY/AxisY.svelte';
 	import Line from '../common/components/Line/Line.svelte';
 	import AdvancedTools from './AdvancedTools/AdvancedTools.svelte';
-	import { margin, type Vector } from './constants';
+	import { margin, statisticalSignificanceThreshold, type Vector } from './constants';
 	import {
 		logNormalPDF,
 		UseAdvancedConfigurables,
@@ -33,6 +35,8 @@
 		sampleLogNormalIfr,
 		welchTTest,
 		leveneTest,
+		getMainAndTestSamples,
+		percentOfStatisticallySignificantTests,
 	} from './logic.svelte';
 	import LogNormalDistribution from './LogNormalDistribution/LogNormalDistribution.svelte';
 
@@ -224,6 +228,8 @@
 			.map(() => new Array(sampleSize).fill(0).map(testRandomIfr));
 		return { mainIfrSample, testIfrSamples };
 	});
+
+	let sampleTests = $derived(getMainAndTestSamples({ mu, sigma, testSigma, sampleSize }));
 
 	// let { t } = $derived(welchTTest(mainIfrSample, testIfrSamples));
 	// let pValue = $derived(leveneTest([mainIfrSample, testIfrSamples]));
@@ -439,6 +445,13 @@
 					<input type="checkbox" bind:checked={showAltSigmaForecast} /> Show alt sigma forecast
 				</label>
 			</div>
+			<div class="sample-tests-summary">
+				<Body1
+					>{roundTo(percentOfStatisticallySignificantTests(sampleTests) * 100, 2)}% of tests had p {'<'}
+					{statisticalSignificanceThreshold}</Body1
+				>
+				<Body1>Showing 5 out of 100 tests</Body1>
+			</div>
 			<!-- <Body2>t = {roundTo(t ?? 0, 4)}</Body2>
 			<Body2>
 				levene test p =
@@ -456,12 +469,48 @@
 					<thead>
 						<tr>
 							<th>Chart</th>
+							<th>Main median</th>
+							<th>Main SD</th>
+							<th>Alt median</th>
+							<th>Alt SD</th>
 							<th>T Value</th>
 							<th>P Value</th>
 						</tr>
 					</thead>
 					<tbody>
-						{#each testIfrSamples as sample}
+						{#each sampleTests.slice(0, 5) as { mainIfrSample, testIfrSample }}
+							{@const pValue = leveneTest([mainIfrSample, testIfrSample])}
+							<tr>
+								<td style="height: 22rem;">
+									<BoxPlot
+										title="Sample test"
+										xLabel="Group"
+										yLabel="IFR"
+										series={[
+											{ group: 'Main population', values: mainIfrSample, color: '#9980fa' },
+											{
+												group: 'Alt population',
+												values: testIfrSample,
+												color: 'var(--clr-secondary-800)',
+											},
+										]}
+									/>
+								</td>
+								<td>{roundTo(median(mainIfrSample) ?? 0, 4)}</td>
+								<td>{roundTo(deviation(mainIfrSample) ?? 0, 4)}</td>
+								<td>{roundTo(median(testIfrSample) ?? 0, 4)}</td>
+								<td>{roundTo(deviation(testIfrSample) ?? 0, 4)}</td>
+								<td>{roundTo(welchTTest(mainIfrSample, testIfrSample).t, 4)}</td>
+								<td>
+									<span
+										style="color: {pValue < statisticalSignificanceThreshold ? 'green' : 'red'};"
+									>
+										{roundTo(pValue, 3)}
+									</span>
+								</td>
+							</tr>
+						{/each}
+						<!-- {#each testIfrSamples as sample}
 							{@const pValue = leveneTest([mainIfrSample, sample])}
 							<tr>
 								<td style="height: 22rem;">
@@ -486,7 +535,7 @@
 									</span>
 								</td>
 							</tr>
-						{/each}
+						{/each} -->
 					</tbody>
 				</table>
 				<!-- <BoxPlot

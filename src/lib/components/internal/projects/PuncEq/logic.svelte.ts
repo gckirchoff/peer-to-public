@@ -1,7 +1,7 @@
 import { randomLogNormal, type ScaleLinear } from 'd3';
 import jStat from 'jstat';
 
-import type { Vector } from './constants';
+import { statisticalSignificanceThreshold, type Vector } from './constants';
 
 export const logNormalPDF = (x: number, mu: number, sigma: number) => {
 	if (x <= 0) {
@@ -207,6 +207,55 @@ export const getCursorPositionInfo = ({
 	const populationsAtSelectedTime =
 		populations?.map((population) => population.data[dataXIndex]?.population ?? 0) ?? null;
 	return { xPosition, xValue, populationsAtSelectedTime };
+};
+
+interface SampleTest {
+	mainIfrSample: number[];
+	testIfrSample: number[];
+}
+
+interface GetMainAndTestSampleArgs {
+	mu: number;
+	sigma: number;
+	testSigma: number;
+	sampleSize: number;
+}
+
+const getMainAndTestSample = ({
+	mu,
+	sigma,
+	testSigma,
+	sampleSize,
+}: GetMainAndTestSampleArgs): SampleTest => {
+	let randomIfr = sampleLogNormalIfr(mu, sigma);
+	let testRandomIfr = sampleLogNormalIfr(mu, testSigma);
+
+	let mainIfrSample = new Array(sampleSize).fill(0).map(randomIfr);
+	let testIfrSample = new Array(sampleSize).fill(0).map(testRandomIfr);
+
+	return { mainIfrSample, testIfrSample };
+};
+
+export const getMainAndTestSamples = (
+	args: GetMainAndTestSampleArgs,
+	iterations = 100,
+): SampleTest[] => {
+	const results = [];
+	for (let i = 0; i < iterations; i++) {
+		results.push(getMainAndTestSample(args));
+	}
+	return results;
+};
+
+export const percentOfStatisticallySignificantTests = (tests: SampleTest[]) => {
+	let significantTests = 0;
+	tests.forEach(({ mainIfrSample, testIfrSample }) => {
+		const pValue = leveneTest([mainIfrSample, testIfrSample]);
+		if (pValue < statisticalSignificanceThreshold) {
+			significantTests++;
+		}
+	});
+	return significantTests / tests.length;
 };
 
 export class UseAdvancedConfigurables {
