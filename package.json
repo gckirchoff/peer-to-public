@@ -39,8 +39,9 @@
 	"type": "module",
 	"dependencies": {
 		"@vercel/analytics": "^1.4.0",
-		"nanoid": "^5.0.8",
 		"d3": "^7.9.0",
+		"jstat": "^1.9.6",
+		"nanoid": "^5.0.8",
 		"vditor": "^3.10.7"
 	}
 }

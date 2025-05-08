@@ -4,3 +4,9 @@ export interface Margin {
 	right: number;
 	bottom: number;
 }
+
+export interface Series {
+	group: string;
+	values: number[];
+	color?: string;
+}

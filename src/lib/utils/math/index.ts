@@ -1,1 +1,1 @@
-export { randNumBetween } from './math';
+export { randNumBetween, randomLogNormal } from './math';
