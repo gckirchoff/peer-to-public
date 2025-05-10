@@ -36,7 +36,9 @@
 		welchTTest,
 		leveneTest,
 		getMainAndTestSamples,
-		percentOfStatisticallySignificantTests,
+		percentOfStatisticallySignificantLeveneTests,
+		percentOfStatisticallySignificantLogTransformedWelchTTest,
+		logTransformedWelchTTest,
 	} from './logic.svelte';
 	import LogNormalDistribution from './LogNormalDistribution/LogNormalDistribution.svelte';
 
@@ -446,10 +448,25 @@
 				</label>
 			</div>
 			<div class="sample-tests-summary">
-				<Body1
-					>{roundTo(percentOfStatisticallySignificantTests(sampleTests) * 100, 2)}% of tests had p {'<'}
-					{statisticalSignificanceThreshold}</Body1
-				>
+				<!-- <Body1
+					>{roundTo(percentOfStatisticallySignificantLeveneTests(sampleTests) * 100, 2)}% of tests
+					had p {'<'}
+					{statisticalSignificanceThreshold}
+				</Body1> -->
+				<Body1>
+					Levene's test of equality of variances: {roundTo(
+						percentOfStatisticallySignificantLeveneTests(sampleTests) * 100,
+						2,
+					)}% p {'<'}
+					{statisticalSignificanceThreshold}
+				</Body1>
+				<Body1>
+					Welch 2 tailed t test on log transformed data: {roundTo(
+						percentOfStatisticallySignificantLogTransformedWelchTTest(sampleTests),
+						2,
+					)}% p {'<'}
+					{statisticalSignificanceThreshold}
+				</Body1>
 				<Body1>Showing 5 out of 100 tests</Body1>
 			</div>
 			<!-- <Body2>t = {roundTo(t ?? 0, 4)}</Body2>
@@ -473,13 +490,14 @@
 							<th>Main SD</th>
 							<th>Alt median</th>
 							<th>Alt SD</th>
-							<th>T Value</th>
-							<th>P Value</th>
+							<th>Log Transformed<br />Welch T Test <br /> P Value</th>
+							<th>Levene Test<br /> P Value</th>
 						</tr>
 					</thead>
 					<tbody>
 						{#each sampleTests.slice(0, 5) as { mainIfrSample, testIfrSample }}
-							{@const pValue = leveneTest([mainIfrSample, testIfrSample])}
+							{@const levenePValue = leveneTest([mainIfrSample, testIfrSample])}
+							{@const tTestPValue = logTransformedWelchTTest(mainIfrSample, testIfrSample).p}
 							<tr>
 								<td style="height: 22rem;">
 									<BoxPlot
@@ -500,12 +518,22 @@
 								<td>{roundTo(deviation(mainIfrSample) ?? 0, 4)}</td>
 								<td>{roundTo(median(testIfrSample) ?? 0, 4)}</td>
 								<td>{roundTo(deviation(testIfrSample) ?? 0, 4)}</td>
-								<td>{roundTo(welchTTest(mainIfrSample, testIfrSample).t, 4)}</td>
 								<td>
 									<span
-										style="color: {pValue < statisticalSignificanceThreshold ? 'green' : 'red'};"
+										style="color: {tTestPValue < statisticalSignificanceThreshold
+											? 'green'
+											: 'red'};"
 									>
-										{roundTo(pValue, 3)}
+										{roundTo(tTestPValue, 3)}
+									</span>
+								</td>
+								<td>
+									<span
+										style="color: {levenePValue < statisticalSignificanceThreshold
+											? 'green'
+											: 'red'};"
+									>
+										{roundTo(levenePValue, 3)}
 									</span>
 								</td>
 							</tr>
@@ -569,6 +597,7 @@
 					]}
 					margin={{ top: 80 }}
 					xDomain={populationsYExtent}
+					showPercentage
 				/>
 			</div>
 		{/if}

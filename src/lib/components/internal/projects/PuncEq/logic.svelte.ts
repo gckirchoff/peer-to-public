@@ -247,7 +247,7 @@ export const getMainAndTestSamples = (
 	return results;
 };
 
-export const percentOfStatisticallySignificantTests = (tests: SampleTest[]) => {
+export const percentOfStatisticallySignificantLeveneTests = (tests: SampleTest[]) => {
 	let significantTests = 0;
 	tests.forEach(({ mainIfrSample, testIfrSample }) => {
 		const pValue = leveneTest([mainIfrSample, testIfrSample]);
@@ -367,3 +367,20 @@ export function leveneTest(groups: number[][]): number {
 
 	return pValue;
 }
+
+export const logTransformedWelchTTest = (group1: number[], group2: number[]) => {
+	const logGroup1 = group1.map((x) => Math.log(x));
+	const logGroup2 = group2.map((x) => Math.log(x));
+	return welchTTest(logGroup1, logGroup2);
+};
+
+export const percentOfStatisticallySignificantLogTransformedWelchTTest = (tests: SampleTest[]) => {
+	let significantTests = 0;
+	tests.forEach(({ mainIfrSample, testIfrSample }) => {
+		const pValue = logTransformedWelchTTest(mainIfrSample, testIfrSample).p;
+		if (pValue < statisticalSignificanceThreshold) {
+			significantTests++;
+		}
+	});
+	return significantTests / tests.length;
+};
