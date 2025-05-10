@@ -597,6 +597,7 @@
 					]}
 					margin={{ top: 80 }}
 					xDomain={populationsYExtent}
+					showPercentage
 				/>
 			</div>
 		{/if}

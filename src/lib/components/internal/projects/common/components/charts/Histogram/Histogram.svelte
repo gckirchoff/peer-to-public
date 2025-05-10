@@ -16,6 +16,7 @@
 		xDomain,
 		yDomain,
 		margin,
+		showPercentage = false,
 	}: HistogramProps = $props();
 
 	let width = $state(0);
@@ -50,11 +51,23 @@
 			}),
 	);
 
-	let yScale = $derived(
-		scaleLinear()
-			.domain(yDomain ?? [0, Math.max(...bucketGenerator(allData).map((bucket) => bucket?.length))])
-			.range([chartHeight, 0]),
-	);
+	// let yScale1 = $derived(
+	// 	scaleLinear()
+	// 		.domain(yDomain ?? [0, Math.max(...bucketGenerator(allData).map((bucket) => bucket?.length))])
+	// 		.range([chartHeight, 0]),
+	// );
+
+	let totalCount = $derived(allData.length);
+
+	let yScale = $derived.by(() => {
+		const allBuckets = bucketGenerator(allData);
+		const maxBucketValue = Math.max(...allBuckets.map((bucket) => bucket.length));
+		const maxPercent = maxBucketValue / totalCount;
+
+		const domain = yDomain ? yDomain : showPercentage ? [0, maxPercent] : [0, maxBucketValue];
+
+		return scaleLinear().domain(domain).range([chartHeight, 0]);
+	});
 
 	let groupBuckets = $derived(
 		series.map((group) => ({
@@ -81,14 +94,20 @@
 				>{title}</text
 			>
 			<AxisX {xScale} innerChartWidth={chartWidth} innerChartHeight={chartHeight} label={xLabel} />
-			<AxisY {yScale} innerChartWidth={chartWidth} label={yLabel} />
+			<AxisY
+				{yScale}
+				innerChartWidth={chartWidth}
+				label={yLabel}
+				formatter={showPercentage ? (d) => `${(d * 100).toFixed(0)}%` : undefined}
+			/>
 			{#each groupBuckets as group}
 				{#each group.buckets as bucket, i}
 					<AnimatedRectangle
 						x={xScale(bucket.x0 as number) + bucketPadding * 0.5}
-						y={yScale(bucket.length)}
+						y={yScale(showPercentage ? bucket.length / totalCount : bucket.length)}
 						width={xScale(bucket.x1 as number) - xScale(bucket.x0 as number) - bucketPadding}
-						height={chartHeight - yScale(bucket.length)}
+						height={chartHeight -
+							yScale(showPercentage ? bucket.length / totalCount : bucket.length)}
 						fill={group.group.color}
 						stroke={group.group.color}
 						stroke-width={2}
