@@ -14,7 +14,7 @@
 		deviation,
 	} from 'd3';
 
-	import { Body1, Body2 } from '../../typography';
+	import { Body1, Body2, H4, H5, H6 } from '../../typography';
 	import Tooltip from '../../Tooltip/Tooltip.svelte';
 	import type { Margin } from '../common/components/charts/constants';
 	import { roundTo } from '../util/math';
@@ -246,227 +246,264 @@
 	);
 </script>
 
-<AdvancedTools {advancedConfigurables} />
 <div class="punc-eq-container">
-	<div class="dashboard">
-		<div class="ifr-distribution">
-			<!-- <div class="chart-container">
+	<div class="ifr-distribution">
+		<!-- <div class="chart-container">
 			<LogNormalDistribution {mu} {sigma} xDomainMin={0.001} xDomainMax={0.1} />
 			</div> -->
-			<div class="inputs-container">
-				<label class="range-input">
-					<Body2>
-						{medianIfr} median IFR:
-						<Tooltip>Average amount of infections per year in population</Tooltip>
-					</Body2>
-					<input
-						bind:value={medianIfr}
-						type="range"
-						min={minimumMedianIfr}
-						max={0.05}
-						step={0.001}
-					/>
-				</label>
-				<label class="range-input">
-					<Body2>
-						{sigma} sigma:
-						<Tooltip>Chance of Long COVID per infection</Tooltip>
-					</Body2>
-					<input bind:value={sigma} type="range" min={0.001} max={5} step={0.001} />
-				</label>
-			</div>
-			<div
-				class="chart-container"
-				bind:clientWidth={ifrDistributionWidth}
-				bind:clientHeight={ifrDistributionHeight}
-				role="application"
-			>
-				<svg width={ifrDistributionWidth} height={ifrDistributionHeight}>
-					<g style="transform: translate({margin.left}px, {margin.top}px)">
-						<AxisX
-							label="IFR"
-							innerChartWidth={ifrDistributionInnerChartWidth}
-							{innerChartHeight}
-							{xScale}
-						/>
-						<AxisY label="density" innerChartWidth={ifrDistributionInnerChartWidth} {yScale} />
-						<Line {data} {xAccessorScaled} {yAccessorScaled} />
-						{#if showAltSigmaForecast}
-							<Line
-								data={altSigmaData}
-								{xAccessorScaled}
-								{yAccessorScaled}
-								style="stroke: var(--clr-secondary-800);"
-							/>
-						{/if}
-					</g>
-				</svg>
-			</div>
-		</div>
-		<div class="population-sims">
-			<div class="inputs-container">
-				<label class="range-input">
-					<Body2>failure at: {Math.round(collapseThreshold * 100)}% pop. loss</Body2>
-					<input
-						type="range"
-						bind:value={collapseThreshold}
-						min="0.01"
-						max="0.5"
-						step="0.01"
-						onmousedown={handleRangeInputMouseDown}
-						onmouseup={handleRangeInputMouseUp}
-					/>
-				</label>
-				<label class="range-input">
-					<Body2>within {windowSize} years</Body2>
-					<input
-						type="range"
-						bind:value={windowSize}
-						min="1"
-						max="20"
-						step="1"
-						onmousedown={handleRangeInputMouseDown}
-						onmouseup={handleRangeInputMouseUp}
-					/>
-				</label>
-				<label>
-					<input type="checkbox" bind:checked={showSystemFailures} /> Show system failures
-				</label>
-			</div>
-			<div class="chart-container" bind:clientWidth={simWidth} bind:clientHeight={simHeight}>
-				<svg width={simWidth} height={simHeight}>
-					<g style="transform: translate({simMargin.left}px, {simMargin.top}px)">
-						<AxisX
-							label="Time (years)"
-							innerChartWidth={simInnerChartWidth}
-							innerChartHeight={simInnerChartHeight}
-							xScale={simXScale}
-						/>
-						<AxisY label="Population" innerChartWidth={simInnerChartWidth} yScale={simYScale} />
-						{#each populations.slice(0, 10) as population}
-							<Line
-								data={population.data}
-								xAccessorScaled={simScaledX}
-								yAccessorScaled={simScaledY}
-								style="opacity: 0.6"
-							/>
-						{/each}
-						{#if showAltSigmaForecast}
-							{#each altPopulations.slice(0, 10) as population}
-								<Line
-									data={population.data}
-									xAccessorScaled={simScaledX}
-									yAccessorScaled={simScaledY}
-									style="opacity: 0.6; stroke: var(--clr-secondary-800);"
-								/>
-							{/each}
-						{/if}
-						{#if showSystemFailures}
-							{#each systemFailures.slice(0, 10) as systemFailureSet}
-								{#each systemFailureSet as systemFailurePoint (`${systemFailurePoint.year}-${systemFailurePoint.population}`)}
-									<circle
-										cx={simXScale(systemFailurePoint.year)}
-										cy={simYScale(systemFailurePoint.population)}
-										r={2}
-										fill="red"
-										style="opacity: 0.8;"
-										in:fade={{ delay: shouldDelayTransitions ? 200 : 0, duration: 125 }}
-									/>
-								{/each}
-							{/each}
-						{/if}
-						{#if showSystemFailures && showAltSigmaForecast}
-							{#each altSystemFailures.slice(0, 10) as systemFailureSet}
-								{#each systemFailureSet as systemFailurePoint (`${systemFailurePoint.year}-${systemFailurePoint.population}`)}
-									<circle
-										cx={simXScale(systemFailurePoint.year)}
-										cy={simYScale(systemFailurePoint.population)}
-										r={2}
-										fill="DarkOrange"
-										style="opacity: 0.8;"
-										in:fade={{ delay: shouldDelayTransitions ? 200 : 0, duration: 125 }}
-									/>
-								{/each}
-							{/each}
-						{/if}
-						{#if hoverPositionInfo}
-							<line
-								x1={hoverPositionInfo.xPosition}
-								x2={hoverPositionInfo.xPosition}
-								y1={0}
-								y2={innerChartHeight}
-								stroke-width={1}
-								stroke="grey"
-							/>
-						{/if}
-						{#if selectedPositionInfo}
-							<line
-								x1={selectedPositionInfo.xPosition}
-								x2={selectedPositionInfo.xPosition}
-								y1={0}
-								y2={innerChartHeight}
-								stroke-width={1}
-								stroke="black"
-							/>
-						{/if}
-						<rect
-							width={simInnerChartWidth}
-							height={simInnerChartHeight}
-							onpointermove={onSimPointerMove}
-							onpointerleave={onPointerLeave}
-							onclick={setSelectedXValue}
-							onkeydown={() => undefined}
-							role="presentation"
-							fill="transparent"
-						/>
-					</g>
-				</svg>
-			</div>
-		</div>
-		<div class="box-plot-container">
-			<div class="inputs-container">
-				<label class="range-input">
-					<Body2>
-						{sampleSize} samples:
-						<Tooltip>
-							Take a sample of points using this sigma and the selected {medianIfr} medianIfr
-						</Tooltip>
-					</Body2>
-					<input bind:value={sampleSize} type="range" min={5} max={100} step={5} />
-				</label>
+		<div class="inputs-container">
+			<label class="range-input">
+				<Body2>
+					{medianIfr} median IFR:
+					<Tooltip>Average amount of infections per year in population</Tooltip>
+				</Body2>
+				<input bind:value={medianIfr} type="range" min={minimumMedianIfr} max={0.05} step={0.001} />
+			</label>
+			<label class="range-input">
+				<Body2>
+					{sigma} sigma:
+					<Tooltip>Chance of Long COVID per infection</Tooltip>
+				</Body2>
+				<input bind:value={sigma} type="range" min={0.001} max={5} step={0.001} />
+			</label>
+			{#if showAltSigmaForecast}
 				<label class="range-input">
 					<Body2>
 						{testSigma} alt sigma:
 						<Tooltip>
-							Take a sample of points using this sigma and the selected {medianIfr} medianIfr
+							Take a sample of points using this sigma and the selected {medianIfr} median IFR
 						</Tooltip>
 					</Body2>
 					<input bind:value={testSigma} type="range" min={0.001} max={5} step={0.001} />
 				</label>
-				<label>
-					<input type="checkbox" bind:checked={showAltSigmaForecast} /> Show alt sigma forecast
-				</label>
+			{/if}
+			<label>
+				<input type="checkbox" bind:checked={showAltSigmaForecast} /> Show alt sigma forecast
+			</label>
+		</div>
+		<div
+			class="chart-container"
+			bind:clientWidth={ifrDistributionWidth}
+			bind:clientHeight={ifrDistributionHeight}
+			role="application"
+		>
+			<svg width={ifrDistributionWidth} height={ifrDistributionHeight}>
+				<g style="transform: translate({margin.left}px, {margin.top}px)">
+					<AxisX
+						label="IFR"
+						innerChartWidth={ifrDistributionInnerChartWidth}
+						{innerChartHeight}
+						{xScale}
+					/>
+					<AxisY label="density" innerChartWidth={ifrDistributionInnerChartWidth} {yScale} />
+					<Line {data} {xAccessorScaled} {yAccessorScaled} />
+					{#if showAltSigmaForecast}
+						<Line
+							data={altSigmaData}
+							{xAccessorScaled}
+							{yAccessorScaled}
+							style="stroke: var(--clr-secondary-800);"
+						/>
+					{/if}
+				</g>
+			</svg>
+		</div>
+	</div>
+	<div>
+		<div class="inputs-container system-failure-inputs">
+			<label class="range-input">
+				<Body2>failure at: {Math.round(collapseThreshold * 100)}% pop. loss</Body2>
+				<input
+					type="range"
+					bind:value={collapseThreshold}
+					min="0.01"
+					max="0.5"
+					step="0.01"
+					onmousedown={handleRangeInputMouseDown}
+					onmouseup={handleRangeInputMouseUp}
+				/>
+			</label>
+			<label class="range-input">
+				<Body2>within {windowSize} years</Body2>
+				<input
+					type="range"
+					bind:value={windowSize}
+					min="1"
+					max="20"
+					step="1"
+					onmousedown={handleRangeInputMouseDown}
+					onmouseup={handleRangeInputMouseUp}
+				/>
+			</label>
+			<label>
+				<input type="checkbox" bind:checked={showSystemFailures} /> Show system failures
+			</label>
+		</div>
+
+		<div class="population-forecast-dashboard">
+			<div class="population-sims">
+				<div class="chart-container" bind:clientWidth={simWidth} bind:clientHeight={simHeight}>
+					<svg width={simWidth} height={simHeight}>
+						<g style="transform: translate({simMargin.left}px, {simMargin.top}px)">
+							<AxisX
+								label="Time (years)"
+								innerChartWidth={simInnerChartWidth}
+								innerChartHeight={simInnerChartHeight}
+								xScale={simXScale}
+							/>
+							<AxisY label="Population" innerChartWidth={simInnerChartWidth} yScale={simYScale} />
+							{#each populations.slice(0, 10) as population}
+								<Line
+									data={population.data}
+									xAccessorScaled={simScaledX}
+									yAccessorScaled={simScaledY}
+									style="opacity: 0.6"
+								/>
+							{/each}
+							{#if showAltSigmaForecast}
+								{#each altPopulations.slice(0, 10) as population}
+									<Line
+										data={population.data}
+										xAccessorScaled={simScaledX}
+										yAccessorScaled={simScaledY}
+										style="opacity: 0.6; stroke: var(--clr-secondary-800);"
+									/>
+								{/each}
+							{/if}
+							{#if showSystemFailures}
+								{#each systemFailures.slice(0, 10) as systemFailureSet}
+									{#each systemFailureSet as systemFailurePoint (`${systemFailurePoint.year}-${systemFailurePoint.population}`)}
+										<circle
+											cx={simXScale(systemFailurePoint.year)}
+											cy={simYScale(systemFailurePoint.population)}
+											r={2}
+											fill="red"
+											style="opacity: 0.8;"
+											in:fade={{ delay: shouldDelayTransitions ? 200 : 0, duration: 125 }}
+										/>
+									{/each}
+								{/each}
+							{/if}
+							{#if showSystemFailures && showAltSigmaForecast}
+								{#each altSystemFailures.slice(0, 10) as systemFailureSet}
+									{#each systemFailureSet as systemFailurePoint (`${systemFailurePoint.year}-${systemFailurePoint.population}`)}
+										<circle
+											cx={simXScale(systemFailurePoint.year)}
+											cy={simYScale(systemFailurePoint.population)}
+											r={2}
+											fill="DarkOrange"
+											style="opacity: 0.8;"
+											in:fade={{ delay: shouldDelayTransitions ? 200 : 0, duration: 125 }}
+										/>
+									{/each}
+								{/each}
+							{/if}
+							{#if hoverPositionInfo}
+								<line
+									x1={hoverPositionInfo.xPosition}
+									x2={hoverPositionInfo.xPosition}
+									y1={0}
+									y2={innerChartHeight}
+									stroke-width={1}
+									stroke="grey"
+								/>
+							{/if}
+							{#if selectedPositionInfo}
+								<line
+									x1={selectedPositionInfo.xPosition}
+									x2={selectedPositionInfo.xPosition}
+									y1={0}
+									y2={innerChartHeight}
+									stroke-width={1}
+									stroke="black"
+								/>
+							{/if}
+							<rect
+								width={simInnerChartWidth}
+								height={simInnerChartHeight}
+								onpointermove={onSimPointerMove}
+								onpointerleave={onPointerLeave}
+								onclick={setSelectedXValue}
+								onkeydown={() => undefined}
+								role="presentation"
+								fill="transparent"
+							/>
+						</g>
+					</svg>
+				</div>
 			</div>
-			<div class="sample-tests-summary">
+			<!-- {#if populationAtSelectedTime && selectedYear !== null} -->
+			<div class="chart-container" bind:clientWidth={histogramWidth} role="application">
+				<Histogram
+					title="Population Distribution at Year {selectedYear}"
+					xLabel="Population Size"
+					yLabel="Frequency"
+					series={[
+						{
+							group: selectedYear ? `Year ${selectedYear}` : 'Select year',
+							values: populationAtSelectedTime ?? [],
+							color: '#9980fa',
+						},
+						...(showAltSigmaForecast && altPopulationAtSelectedTime
+							? [
+									{
+										group: 'Alt population',
+										values: altPopulationAtSelectedTime,
+										color: 'var(--clr-secondary-800)',
+									},
+								]
+							: []),
+					]}
+					xDomain={populationsYExtent}
+					yDomain={[0, 1]}
+					showPercentage
+				/>
+			</div>
+			<!-- {/if} -->
+		</div>
+		<AdvancedTools {advancedConfigurables} />
+	</div>
+	{#if showAltSigmaForecast}
+		<div class="box-plot-container">
+			<div class="sample-tests-summaries">
 				<!-- <Body1
 					>{roundTo(percentOfStatisticallySignificantLeveneTests(sampleTests) * 100, 2)}% of tests
 					had p {'<'}
 					{statisticalSignificanceThreshold}
 				</Body1> -->
-				<Body1>
-					Levene's test of equality of variances: {roundTo(
-						percentOfStatisticallySignificantLeveneTests(sampleTests) * 100,
-						2,
-					)}% p {'<'}
-					{statisticalSignificanceThreshold}
-				</Body1>
-				<Body1>
-					Welch 2 tailed t test on log transformed data: {roundTo(
-						percentOfStatisticallySignificantLogTransformedWelchTTest(sampleTests),
-						2,
-					)}% p {'<'}
-					{statisticalSignificanceThreshold}
-				</Body1>
+				<div class="summary">
+					<H5>Levene's test of equality of variances:</H5>
+					<H6>
+						<span style="text-decoration: underline;">
+							{roundTo(percentOfStatisticallySignificantLeveneTests(sampleTests) * 100, 2)}%
+						</span>
+						p {'<'}
+						{statisticalSignificanceThreshold}
+					</H6>
+				</div>
+				<div class="summary">
+					<H5>Welch 2 tailed t test on log transformed data:</H5>
+					<H6>
+						<span style="text-decoration: underline;">
+							{roundTo(percentOfStatisticallySignificantLogTransformedWelchTTest(sampleTests), 2)}%
+						</span>
+						p {'<'}
+						{statisticalSignificanceThreshold}
+					</H6>
+				</div>
+			</div>
+			<div class="above-boxplots-decorators">
+				<div class="inputs-container">
+					<label class="range-input">
+						<Body2>
+							{sampleSize} samples:
+							<Tooltip>
+								Take a sample of points using this sigma and the selected {medianIfr} median IFR
+							</Tooltip>
+						</Body2>
+						<input bind:value={sampleSize} type="range" min={5} max={100} step={5} />
+					</label>
+				</div>
 				<Body1>Showing 5 out of 100 tests</Body1>
 			</div>
 			<!-- <Body2>t = {roundTo(t ?? 0, 4)}</Body2>
@@ -476,6 +513,7 @@
 					{roundTo(pValue, 3)}
 				</span>
 			</Body2> -->
+
 			<div
 				class="chart-container"
 				bind:clientWidth={sampleTestChartWidth}
@@ -577,40 +615,19 @@
 				/> -->
 			</div>
 		</div>
-		{#if populationAtSelectedTime && selectedYear !== null}
-			<div class="chart-container" bind:clientWidth={histogramWidth} role="application">
-				<Histogram
-					title="Population Distribution at Year {selectedYear}"
-					xLabel="Population Size"
-					yLabel="Frequency"
-					series={[
-						{ group: `Year ${selectedYear}`, values: populationAtSelectedTime, color: '#9980fa' },
-						...(showAltSigmaForecast && altPopulationAtSelectedTime
-							? [
-									{
-										group: 'Alt population',
-										values: altPopulationAtSelectedTime,
-										color: 'var(--clr-secondary-800)',
-									},
-								]
-							: []),
-					]}
-					margin={{ top: 80 }}
-					xDomain={populationsYExtent}
-					showPercentage
-				/>
-			</div>
-		{/if}
-	</div>
+	{/if}
 </div>
 
 <style lang="scss">
 	.punc-eq-container {
 		margin: var(--spacing-24) 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-32);
 
-		.dashboard {
+		.population-forecast-dashboard {
 			display: grid;
-			grid-template-columns: repeat(2, minmax(20rem, 1fr));
+			grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 
 			.ifr-distribution {
 				// flex: 1 1 calc(40% - var(--gap) * 0.5);
@@ -628,7 +645,29 @@
 
 	.inputs-container {
 		display: flex;
+		flex-wrap: wrap;
 		gap: var(--spacing-16);
+	}
+
+	.sample-tests-summaries {
+		padding: var(--spacing-4) var(--spacing-16);
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: var(--spacing-16);
+		margin-bottom: var(--spacing-16);
+
+		.summary {
+			flex: 1 1 auto;
+			text-align: center;
+		}
+	}
+
+	.above-boxplots-decorators {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
 	}
 
 	td {
