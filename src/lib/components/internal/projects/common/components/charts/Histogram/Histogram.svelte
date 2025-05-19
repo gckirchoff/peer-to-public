@@ -17,7 +17,6 @@
 		yDomain,
 		margin,
 		showPercentage = false,
-		scalePercentYDomain = false,
 	}: HistogramProps = $props();
 
 	let width = $state(0);
@@ -64,9 +63,8 @@
 		const allBuckets = bucketGenerator(allData);
 		const maxBucketValue = Math.max(...allBuckets.map((bucket) => bucket.length));
 		const maxPercent = maxBucketValue / totalCount;
-		const yDomainMax = scalePercentYDomain ? maxPercent : 1;
 
-		const domain = yDomain ? yDomain : showPercentage ? [0, yDomainMax] : [0, maxBucketValue];
+		const domain = yDomain ? yDomain : showPercentage ? [0, maxPercent] : [0, maxBucketValue];
 
 		return scaleLinear().domain(domain).range([chartHeight, 0]);
 	});

@@ -456,6 +456,7 @@
 							: []),
 					]}
 					xDomain={populationsYExtent}
+					yDomain={[0, 1]}
 					showPercentage
 				/>
 			</div>

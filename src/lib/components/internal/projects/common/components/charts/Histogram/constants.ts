@@ -10,7 +10,6 @@ export interface HistogramProps {
 	yDomain?: [number, number];
 	margin?: Partial<Margin>;
 	showPercentage?: boolean;
-	scalePercentYDomain?: boolean;
 }
 
 export const defaultMargin: Margin = {
