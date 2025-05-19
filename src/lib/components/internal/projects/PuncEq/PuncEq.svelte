@@ -52,7 +52,7 @@
 
 	let mu = $derived(Math.log(medianIfr));
 
-	let showAltSigmaForecast = $state(true);
+	let showAltSigmaForecast = $state(false);
 
 	let ifrDistributionWidth = $state(400);
 	let ifrDistributionHeight = $state(400);
@@ -246,7 +246,6 @@
 	);
 </script>
 
-<AdvancedTools {advancedConfigurables} />
 <div class="punc-eq-container">
 	<div class="ifr-distribution">
 		<!-- <div class="chart-container">
@@ -462,6 +461,7 @@
 			</div>
 			<!-- {/if} -->
 		</div>
+		<AdvancedTools {advancedConfigurables} />
 	</div>
 	{#if showAltSigmaForecast}
 		<div class="box-plot-container">
@@ -474,14 +474,20 @@
 				<div class="summary">
 					<H5>Levene's test of equality of variances:</H5>
 					<H6>
-						{roundTo(percentOfStatisticallySignificantLeveneTests(sampleTests) * 100, 2)}% p {'<'}
+						<span style="text-decoration: underline;">
+							{roundTo(percentOfStatisticallySignificantLeveneTests(sampleTests) * 100, 2)}%
+						</span>
+						p {'<'}
 						{statisticalSignificanceThreshold}
 					</H6>
 				</div>
 				<div class="summary">
 					<H5>Welch 2 tailed t test on log transformed data:</H5>
 					<H6>
-						{roundTo(percentOfStatisticallySignificantLogTransformedWelchTTest(sampleTests), 2)}% p {'<'}
+						<span style="text-decoration: underline;">
+							{roundTo(percentOfStatisticallySignificantLogTransformedWelchTTest(sampleTests), 2)}%
+						</span>
+						p {'<'}
 						{statisticalSignificanceThreshold}
 					</H6>
 				</div>
@@ -652,7 +658,7 @@
 		margin-bottom: var(--spacing-16);
 
 		.summary {
-			flex: 1 0 auto;
+			flex: 1 1 auto;
 			text-align: center;
 		}
 	}
