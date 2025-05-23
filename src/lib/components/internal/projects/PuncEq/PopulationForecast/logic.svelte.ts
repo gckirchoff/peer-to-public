@@ -1,6 +1,6 @@
 import type { ScaleLinear } from 'd3';
-import type { Vector } from '../constants';
 import { sampleLogNormalIfr } from '../logic.svelte';
+import type { Vector } from './constants';
 
 class PopulationSim {
 	currentPopulation = 1;

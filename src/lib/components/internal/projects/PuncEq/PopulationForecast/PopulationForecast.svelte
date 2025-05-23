@@ -7,16 +7,16 @@
 	import AxisX from '../../common/components/charts/common/AxisX/AxisX.svelte';
 	import AxisY from '../../common/components/charts/common/AxisY/AxisY.svelte';
 	import Line from '../../common/components/Line/Line.svelte';
+	import Histogram from '../../common/components/charts/Histogram/Histogram.svelte';
+	import { roundTo } from '../../util/math';
+	import AdvancedTools from '../AdvancedTools/AdvancedTools.svelte';
 	import { medianToMu, UseAdvancedConfigurables } from '../logic.svelte';
+	import type { Vector } from './constants';
 	import {
 		assessSystemFailures,
 		getCursorPositionInfo,
 		simulatePopulationDynamics,
 	} from './logic.svelte';
-	import type { Vector } from '../constants';
-	import Histogram from '../../common/components/charts/Histogram/Histogram.svelte';
-	import { roundTo } from '../../util/math';
-	import AdvancedTools from '../AdvancedTools/AdvancedTools.svelte';
 
 	interface PopulationForecastProps {
 		medianIfr: number;
