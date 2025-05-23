@@ -130,5 +130,6 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: var(--spacing-16);
+        align-items: center;
 	}
 </style>
