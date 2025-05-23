@@ -7,7 +7,7 @@
 	import AxisX from '../../common/components/charts/common/AxisX/AxisX.svelte';
 	import AxisY from '../../common/components/charts/common/AxisY/AxisY.svelte';
 	import Line from '../../common/components/Line/Line.svelte';
-	import { medianToMu, type UseAdvancedConfigurables } from '../logic.svelte';
+	import { medianToMu, UseAdvancedConfigurables } from '../logic.svelte';
 	import {
 		assessSystemFailures,
 		getCursorPositionInfo,
@@ -23,17 +23,11 @@
 		sigma: number;
 		testSigma: number;
 		showAltSigmaForecast: boolean;
-		advancedConfigurables: UseAdvancedConfigurables;
 	}
 
-	let {
-		medianIfr,
-		sigma,
-		testSigma,
-		showAltSigmaForecast,
-		advancedConfigurables,
-	}: PopulationForecastProps = $props();
+	let { medianIfr, sigma, testSigma, showAltSigmaForecast }: PopulationForecastProps = $props();
 
+	const advancedConfigurables = new UseAdvancedConfigurables();
 	let simWidth = $state(400);
 	let simHeight = $state(400);
 	const simMargin: Margin = { top: 25, right: 25, bottom: 25, left: 75 };
