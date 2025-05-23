@@ -47,7 +47,6 @@
 	let medianIfr = $state(0.002);
 	let sigma = $state(0.5);
 	let testSigma = $state(0.5);
-	let xDomainMax = $state(0.2);
 	const advancedConfigurables = new UseAdvancedConfigurables();
 
 	let mu = $derived(Math.log(medianIfr));
@@ -209,32 +208,9 @@
 			: null,
 	);
 
-	let sampleTestChartWidth = $state(400);
-	let sampleTestChartHeight = $state(400);
-	const sampleTestChartMargin: Margin = { top: 25, right: 25, bottom: 25, left: 75 };
-	let sampleTestInnerChartWidth = $derived(
-		sampleTestChartWidth - sampleTestChartMargin.left - sampleTestChartMargin.right,
-	);
-	let sampleTestInnerChartHeight = $derived(
-		sampleTestChartHeight - sampleTestChartMargin.top - sampleTestChartMargin.bottom,
-	);
-
 	let sampleSize = $state(10);
-	let { mainIfrSample, testIfrSamples } = $derived.by(() => {
-		let randomIfr = sampleLogNormalIfr(mu, sigma);
-		let testRandomIfr = sampleLogNormalIfr(mu, testSigma);
-		let mainIfrSample = new Array(sampleSize).fill(0).map(randomIfr);
-
-		let testIfrSamples = new Array(5)
-			.fill([])
-			.map(() => new Array(sampleSize).fill(0).map(testRandomIfr));
-		return { mainIfrSample, testIfrSamples };
-	});
 
 	let sampleTests = $derived(getMainAndTestSamples({ mu, sigma, testSigma, sampleSize }));
-
-	// let { t } = $derived(welchTTest(mainIfrSample, testIfrSamples));
-	// let pValue = $derived(leveneTest([mainIfrSample, testIfrSamples]));
 
 	let histogramWidth = $state(400);
 	let populationAtSelectedTime = $derived(selectedPositionInfo?.populationsAtSelectedTime ?? null);
@@ -432,7 +408,6 @@
 					</svg>
 				</div>
 			</div>
-			<!-- {#if populationAtSelectedTime && selectedYear !== null} -->
 			<div class="chart-container" bind:clientWidth={histogramWidth} role="application">
 				<Histogram
 					title="Population Distribution at Year {selectedYear}"
@@ -459,18 +434,12 @@
 					showPercentage
 				/>
 			</div>
-			<!-- {/if} -->
 		</div>
 		<AdvancedTools {advancedConfigurables} />
 	</div>
 	{#if showAltSigmaForecast}
 		<div class="box-plot-container">
 			<div class="sample-tests-summaries">
-				<!-- <Body1
-					>{roundTo(percentOfStatisticallySignificantLeveneTests(sampleTests) * 100, 2)}% of tests
-					had p {'<'}
-					{statisticalSignificanceThreshold}
-				</Body1> -->
 				<div class="summary">
 					<H5>Levene's test of equality of variances:</H5>
 					<H6>
@@ -506,114 +475,62 @@
 				</div>
 				<Body1>Showing 5 out of 100 tests</Body1>
 			</div>
-			<!-- <Body2>t = {roundTo(t ?? 0, 4)}</Body2>
-			<Body2>
-				levene test p =
-				<span style="color: {pValue < 0.05 ? 'green' : 'red'};">
-					{roundTo(pValue, 3)}
-				</span>
-			</Body2> -->
-
-			<div
-				class="chart-container"
-				bind:clientWidth={sampleTestChartWidth}
-				bind:clientHeight={sampleTestChartHeight}
-				role="application"
-			>
-				<table border="1" cellpadding="8" cellspacing="0" style="width: 100%;">
-					<thead>
+			<table border="1" cellpadding="8" cellspacing="0" style="width: 100%;">
+				<thead>
+					<tr>
+						<th>Chart</th>
+						<th>Main median</th>
+						<th>Main SD</th>
+						<th>Alt median</th>
+						<th>Alt SD</th>
+						<th>Log Transformed<br />Welch T Test <br /> P Value</th>
+						<th>Levene Test<br /> P Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					{#each sampleTests.slice(0, 5) as { mainIfrSample, testIfrSample }}
+						{@const levenePValue = leveneTest([mainIfrSample, testIfrSample])}
+						{@const tTestPValue = logTransformedWelchTTest(mainIfrSample, testIfrSample).p}
 						<tr>
-							<th>Chart</th>
-							<th>Main median</th>
-							<th>Main SD</th>
-							<th>Alt median</th>
-							<th>Alt SD</th>
-							<th>Log Transformed<br />Welch T Test <br /> P Value</th>
-							<th>Levene Test<br /> P Value</th>
+							<td style="height: 22rem;">
+								<BoxPlot
+									title="Sample test"
+									xLabel="Group"
+									yLabel="IFR"
+									series={[
+										{ group: 'Main population', values: mainIfrSample, color: '#9980fa' },
+										{
+											group: 'Alt population',
+											values: testIfrSample,
+											color: 'var(--clr-secondary-800)',
+										},
+									]}
+								/>
+							</td>
+							<td>{roundTo(median(mainIfrSample) ?? 0, 4)}</td>
+							<td>{roundTo(deviation(mainIfrSample) ?? 0, 4)}</td>
+							<td>{roundTo(median(testIfrSample) ?? 0, 4)}</td>
+							<td>{roundTo(deviation(testIfrSample) ?? 0, 4)}</td>
+							<td>
+								<span
+									style="color: {tTestPValue < statisticalSignificanceThreshold ? 'green' : 'red'};"
+								>
+									{roundTo(tTestPValue, 3)}
+								</span>
+							</td>
+							<td>
+								<span
+									style="color: {levenePValue < statisticalSignificanceThreshold
+										? 'green'
+										: 'red'};"
+								>
+									{roundTo(levenePValue, 3)}
+								</span>
+							</td>
 						</tr>
-					</thead>
-					<tbody>
-						{#each sampleTests.slice(0, 5) as { mainIfrSample, testIfrSample }}
-							{@const levenePValue = leveneTest([mainIfrSample, testIfrSample])}
-							{@const tTestPValue = logTransformedWelchTTest(mainIfrSample, testIfrSample).p}
-							<tr>
-								<td style="height: 22rem;">
-									<BoxPlot
-										title="Sample test"
-										xLabel="Group"
-										yLabel="IFR"
-										series={[
-											{ group: 'Main population', values: mainIfrSample, color: '#9980fa' },
-											{
-												group: 'Alt population',
-												values: testIfrSample,
-												color: 'var(--clr-secondary-800)',
-											},
-										]}
-									/>
-								</td>
-								<td>{roundTo(median(mainIfrSample) ?? 0, 4)}</td>
-								<td>{roundTo(deviation(mainIfrSample) ?? 0, 4)}</td>
-								<td>{roundTo(median(testIfrSample) ?? 0, 4)}</td>
-								<td>{roundTo(deviation(testIfrSample) ?? 0, 4)}</td>
-								<td>
-									<span
-										style="color: {tTestPValue < statisticalSignificanceThreshold
-											? 'green'
-											: 'red'};"
-									>
-										{roundTo(tTestPValue, 3)}
-									</span>
-								</td>
-								<td>
-									<span
-										style="color: {levenePValue < statisticalSignificanceThreshold
-											? 'green'
-											: 'red'};"
-									>
-										{roundTo(levenePValue, 3)}
-									</span>
-								</td>
-							</tr>
-						{/each}
-						<!-- {#each testIfrSamples as sample}
-							{@const pValue = leveneTest([mainIfrSample, sample])}
-							<tr>
-								<td style="height: 22rem;">
-									<BoxPlot
-										title="Sample test"
-										xLabel="Group"
-										yLabel="IFR"
-										series={[
-											{ group: 'Main population', values: mainIfrSample, color: '#9980fa' },
-											{
-												group: 'Alt population',
-												values: sample,
-												color: 'var(--clr-secondary-800)',
-											},
-										]}
-									/>
-								</td>
-								<td>{roundTo(welchTTest(mainIfrSample, sample).t, 4)}</td>
-								<td>
-									<span style="color: {pValue < 0.05 ? 'green' : 'red'};">
-										{roundTo(pValue, 3)}
-									</span>
-								</td>
-							</tr>
-						{/each} -->
-					</tbody>
-				</table>
-				<!-- <BoxPlot
-					title="Sample test"
-					xLabel="Group"
-					yLabel="IFR"
-					series={[
-						{ group: 'Main population', values: mainIfrSample },
-						{ group: 'Alt population', values: testIfrSamples },
-					]}
-				/> -->
-			</div>
+					{/each}
+				</tbody>
+			</table>
 		</div>
 	{/if}
 </div>
