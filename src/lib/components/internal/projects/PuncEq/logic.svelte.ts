@@ -384,3 +384,5 @@ export const percentOfStatisticallySignificantLogTransformedWelchTTest = (tests:
 	});
 	return significantTests / tests.length;
 };
+
+export const medianToMu = (median: number): number => Math.log(median);

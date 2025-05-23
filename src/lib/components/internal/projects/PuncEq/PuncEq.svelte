@@ -1,20 +1,8 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import {
-		scaleLinear,
-		scaleLog,
-		range,
-		max,
-		extent,
-		pointer,
-		leastIndex,
-		bisector,
-		randomLogNormal,
-		median,
-		deviation,
-	} from 'd3';
+	import { scaleLinear, max, extent, pointer, median, deviation } from 'd3';
 
-	import { Body1, Body2, H4, H5, H6 } from '../../typography';
+	import { Body1, Body2, H5, H6 } from '../../typography';
 	import Tooltip from '../../Tooltip/Tooltip.svelte';
 	import type { Margin } from '../common/components/charts/constants';
 	import { roundTo } from '../util/math';
@@ -26,23 +14,17 @@
 	import AdvancedTools from './AdvancedTools/AdvancedTools.svelte';
 	import { margin, statisticalSignificanceThreshold, type Vector } from './constants';
 	import {
-		logNormalPDF,
 		UseAdvancedConfigurables,
 		simulatePopulationDynamics,
-		getXDataIndex,
 		getCursorPositionInfo,
 		assessSystemFailures,
-		sampleLogNormalIfr,
-		welchTTest,
 		leveneTest,
 		getMainAndTestSamples,
 		percentOfStatisticallySignificantLeveneTests,
 		percentOfStatisticallySignificantLogTransformedWelchTTest,
 		logTransformedWelchTTest,
 	} from './logic.svelte';
-	import LogNormalDistribution from './LogNormalDistribution/LogNormalDistribution.svelte';
-
-	const minimumMedianIfr = 0.001;
+	import IfrDistributions from './IfrDistributions/IfrDistributions.svelte';
 
 	let medianIfr = $state(0.002);
 	let sigma = $state(0.5);
@@ -53,34 +35,7 @@
 
 	let showAltSigmaForecast = $state(false);
 
-	let ifrDistributionWidth = $state(400);
 	let ifrDistributionHeight = $state(400);
-
-	let ifrDistributionInnerChartWidth = $derived(ifrDistributionWidth - margin.left - margin.right);
-	let innerChartHeight = $derived(ifrDistributionHeight - margin.top - margin.bottom);
-
-	const xAccessor = (d: { x: number; y: number }) => d.x;
-	const yAccessor = (d: { x: number; y: number }) => d.y;
-
-	const xValues = range(minimumMedianIfr, 1, 0.001);
-	let data = $derived(xValues.map((x) => ({ x, y: logNormalPDF(x, mu, sigma) })));
-	let altSigmaData = $derived(xValues.map((x) => ({ x, y: logNormalPDF(x, mu, testSigma) })));
-
-	let xScale = $derived(
-		scaleLinear()
-			.domain([minimumMedianIfr, 0.02] as [number, number])
-			.range([0, ifrDistributionInnerChartWidth]),
-	);
-
-	let yDomain = $derived([
-		0,
-		max(showAltSigmaForecast ? data.concat(altSigmaData) : data, yAccessor),
-	] as [number, number]);
-
-	let yScale = $derived(scaleLinear().domain(yDomain).range([innerChartHeight, 0]));
-
-	const xAccessorScaled = $derived((d: { x: number; y: number }) => xScale(xAccessor(d)));
-	const yAccessorScaled = $derived((d: { x: number; y: number }) => yScale(yAccessor(d)));
 
 	let simWidth = $state(400);
 	let simHeight = $state(400);
@@ -139,8 +94,6 @@
 	const handleRangeInputMouseUp = () => {
 		shouldDelayTransitions = true;
 	};
-
-	let allSystemFailures = $derived(systemFailures.slice(0, 10).flat());
 
 	const allData = $derived(populations.concat(altPopulations).flatMap((sim) => sim.data));
 
@@ -223,68 +176,7 @@
 </script>
 
 <div class="punc-eq-container">
-	<div class="ifr-distribution">
-		<!-- <div class="chart-container">
-			<LogNormalDistribution {mu} {sigma} xDomainMin={0.001} xDomainMax={0.1} />
-			</div> -->
-		<div class="inputs-container">
-			<label class="range-input">
-				<Body2>
-					{medianIfr} median IFR:
-					<Tooltip>Average amount of infections per year in population</Tooltip>
-				</Body2>
-				<input bind:value={medianIfr} type="range" min={minimumMedianIfr} max={0.05} step={0.001} />
-			</label>
-			<label class="range-input">
-				<Body2>
-					{sigma} sigma:
-					<Tooltip>Chance of Long COVID per infection</Tooltip>
-				</Body2>
-				<input bind:value={sigma} type="range" min={0.001} max={5} step={0.001} />
-			</label>
-			{#if showAltSigmaForecast}
-				<label class="range-input">
-					<Body2>
-						{testSigma} alt sigma:
-						<Tooltip>
-							Take a sample of points using this sigma and the selected {medianIfr} median IFR
-						</Tooltip>
-					</Body2>
-					<input bind:value={testSigma} type="range" min={0.001} max={5} step={0.001} />
-				</label>
-			{/if}
-			<label>
-				<input type="checkbox" bind:checked={showAltSigmaForecast} /> Show alt sigma forecast
-			</label>
-		</div>
-		<div
-			class="chart-container"
-			bind:clientWidth={ifrDistributionWidth}
-			bind:clientHeight={ifrDistributionHeight}
-			role="application"
-		>
-			<svg width={ifrDistributionWidth} height={ifrDistributionHeight}>
-				<g style="transform: translate({margin.left}px, {margin.top}px)">
-					<AxisX
-						label="IFR"
-						innerChartWidth={ifrDistributionInnerChartWidth}
-						{innerChartHeight}
-						{xScale}
-					/>
-					<AxisY label="density" innerChartWidth={ifrDistributionInnerChartWidth} {yScale} />
-					<Line {data} {xAccessorScaled} {yAccessorScaled} />
-					{#if showAltSigmaForecast}
-						<Line
-							data={altSigmaData}
-							{xAccessorScaled}
-							{yAccessorScaled}
-							style="stroke: var(--clr-secondary-800);"
-						/>
-					{/if}
-				</g>
-			</svg>
-		</div>
-	</div>
+	<IfrDistributions bind:medianIfr bind:sigma bind:testSigma bind:showAltSigmaForecast />
 	<div>
 		<div class="inputs-container system-failure-inputs">
 			<label class="range-input">
@@ -379,7 +271,7 @@
 									x1={hoverPositionInfo.xPosition}
 									x2={hoverPositionInfo.xPosition}
 									y1={0}
-									y2={innerChartHeight}
+									y2={simInnerChartHeight}
 									stroke-width={1}
 									stroke="grey"
 								/>
@@ -389,7 +281,7 @@
 									x1={selectedPositionInfo.xPosition}
 									x2={selectedPositionInfo.xPosition}
 									y1={0}
-									y2={innerChartHeight}
+									y2={simInnerChartHeight}
 									stroke-width={1}
 									stroke="black"
 								/>
@@ -545,15 +437,6 @@
 		.population-forecast-dashboard {
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-
-			.ifr-distribution {
-				// flex: 1 1 calc(40% - var(--gap) * 0.5);
-				// min-width: 350px;
-			}
-
-			.population-sims {
-				// flex: 1 1 calc(60% - var(--gap) * 0.5);
-			}
 		}
 		.chart-container {
 			height: 36vh;
