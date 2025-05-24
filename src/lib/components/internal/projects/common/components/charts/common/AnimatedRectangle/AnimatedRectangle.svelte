@@ -12,8 +12,8 @@
 		{
 			x,
 			y,
-			width,
-			height,
+			width: floorNum(width),
+			height: floorNum(height),
 		},
 		{
 			easing: easeCubicInOut,
