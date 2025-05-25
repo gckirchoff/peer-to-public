@@ -68,12 +68,6 @@ export const simulatePopulationDynamics = ({
 			populationSim.currentPopulation *= Math.max(1 - fractionInfected * ifr, 0);
 
 			populationSim.logPopulation(time);
-
-			const systemFailureOccured = false;
-			if (systemFailureOccured) {
-				populationSim.result = 'system failure';
-				// break;
-			}
 		}
 	}
 
