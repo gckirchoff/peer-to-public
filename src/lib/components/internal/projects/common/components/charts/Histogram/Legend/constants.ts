@@ -1,7 +1,10 @@
-import type { ScaleOrdinal } from 'd3';
+interface Group {
+	label: string;
+	color: string;
+}
 
 export interface LegendProps {
-	colorScale: ScaleOrdinal<string, string, never>;
+	groups: Group[];
 	chartWidth: number;
 	chartHeight: number;
 }

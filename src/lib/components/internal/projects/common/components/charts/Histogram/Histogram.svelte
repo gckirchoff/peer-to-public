@@ -16,6 +16,7 @@
 		xDomain,
 		yDomain,
 		margin,
+		showPercentage = false,
 	}: HistogramProps = $props();
 
 	let width = $state(0);
@@ -50,16 +51,38 @@
 			}),
 	);
 
-	let yScale = $derived(
-		scaleLinear()
-			.domain(yDomain ?? [0, Math.max(...bucketGenerator(allData).map((bucket) => bucket?.length))])
-			.range([chartHeight, 0]),
-	);
+	// let yScale1 = $derived(
+	// 	scaleLinear()
+	// 		.domain(yDomain ?? [0, Math.max(...bucketGenerator(allData).map((bucket) => bucket?.length))])
+	// 		.range([chartHeight, 0]),
+	// );
+
+	let totalCount = $derived(allData.length);
+
+	let yScale = $derived.by(() => {
+		const allBuckets = bucketGenerator(allData);
+		const maxBucketValue = Math.max(...allBuckets.map((bucket) => bucket.length));
+		const maxPercent = maxBucketValue / totalCount;
+
+		const domain = yDomain ? yDomain : showPercentage ? [0, maxPercent] : [0, maxBucketValue];
+
+		return scaleLinear().domain(domain).range([chartHeight, 0]);
+	});
 
 	let groupBuckets = $derived(
 		series.map((group) => ({
-			group,
+			group: {
+				...group,
+				color: group.color ?? colorScale(group.group),
+			},
 			buckets: bucketGenerator(group.values),
+		})),
+	);
+
+	let legendGroups = $derived(
+		groupBuckets.map((group) => ({
+			label: group.group.group,
+			color: group.group.color ?? colorScale(group.group.group),
 		})),
 	);
 </script>
@@ -67,25 +90,33 @@
 <div class="chart-container histogram" bind:clientWidth={width} bind:clientHeight={height}>
 	<svg {width} {height}>
 		<g style="transform: translate({usedMargin.left}px, {usedMargin.top}px);">
-			<text x={chartWidth * 0.5} text-anchor="middle" dominant-baseline="middle">{title}</text>
+			<text x={chartWidth * 0.5} y={-25} text-anchor="middle" dominant-baseline="middle"
+				>{title}</text
+			>
 			<AxisX {xScale} innerChartWidth={chartWidth} innerChartHeight={chartHeight} label={xLabel} />
-			<AxisY {yScale} innerChartWidth={chartWidth} label={yLabel} />
+			<AxisY
+				{yScale}
+				innerChartWidth={chartWidth}
+				label={yLabel}
+				formatter={showPercentage ? (d) => `${(d * 100).toFixed(0)}%` : undefined}
+			/>
 			{#each groupBuckets as group}
 				{#each group.buckets as bucket, i}
 					<AnimatedRectangle
 						x={xScale(bucket.x0 as number) + bucketPadding * 0.5}
-						y={yScale(bucket.length)}
+						y={yScale(showPercentage ? bucket.length / totalCount : bucket.length)}
 						width={xScale(bucket.x1 as number) - xScale(bucket.x0 as number) - bucketPadding}
-						height={chartHeight - yScale(bucket.length)}
-						fill="{colorScale(group.group.group)}E8"
-						stroke={colorScale(group.group.group)}
+						height={chartHeight -
+							yScale(showPercentage ? bucket.length / totalCount : bucket.length)}
+						fill={group.group.color}
+						stroke={group.group.color}
 						stroke-width={2}
-						opacity={0.7}
+						opacity={0.8}
 						animationOptions={{ delay: i * 10 }}
 					/>
 				{/each}
 			{/each}
-			<Legend {colorScale} {chartWidth} {chartHeight} />
+			<Legend groups={legendGroups} {chartWidth} {chartHeight} />
 		</g>
 	</svg>
 </div>

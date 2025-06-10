@@ -21,6 +21,10 @@ export const links: Link[] = [
 		href: 'successive-waves',
 	},
 	{
+		title: 'Punctuated Equilibrium',
+		href: 'punc-eq',
+	},
+	{
 		title: 'Short-Term Risk Visualizer',
 		href: 'gambling-with-covid',
 	},
@@ -28,6 +32,10 @@ export const links: Link[] = [
 		title: 'Top Cause of Death Comparison',
 		href: 'mortality-comparison',
 	},
+	{
+		title: 'Cumulative Risk',
+		href: 'cumulative-risk'
+	}
 	// {
 	// 	title: 'Long-Term Risk Visualizer',
 	// 	href: 'the-curve-that-wasnt',

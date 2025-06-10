@@ -1,9 +1,4 @@
-import type { Margin } from '../constants';
-
-export interface Series {
-	group: string;
-	values: number[];
-}
+import type { Margin, Series } from '../constants';
 
 export interface HistogramProps {
 	series: Series[];
@@ -14,6 +9,7 @@ export interface HistogramProps {
 	xDomain?: [number, number];
 	yDomain?: [number, number];
 	margin?: Partial<Margin>;
+	showPercentage?: boolean;
 }
 
 export const defaultMargin: Margin = {
