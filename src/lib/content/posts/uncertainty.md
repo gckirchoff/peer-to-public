@@ -2,11 +2,11 @@
 title: "Uncertainty"
 description: "Gregory Kirchoff"
 categories: [ "covid-19" ]
-authors: [ "Gregory Kirchoff" ]
+authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "default-background-7.jpg"
 date: 'Sat Jun 14 2025 12:56:31 GMT-0400 (Eastern Daylight Time)'
 published: false
-updated: 'Sat Jun 14 2025 14:19:50 GMT-0400 (Eastern Daylight Time)'
+updated: 'Sat Jun 14 2025 14:26:54 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
