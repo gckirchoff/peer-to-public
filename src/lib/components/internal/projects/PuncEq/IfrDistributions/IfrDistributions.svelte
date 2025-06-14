@@ -15,6 +15,7 @@
 		sigma: number;
 		testSigma: number;
 		showAltSigmaForecast: boolean;
+		showShowAltSigmaForecastCheckbox?: boolean;
 	}
 
 	let {
@@ -22,6 +23,7 @@
 		sigma = $bindable(),
 		testSigma = $bindable(),
 		showAltSigmaForecast = $bindable(),
+		showShowAltSigmaForecastCheckbox = true,
 	}: IfrDistributionProps = $props();
 
 	const minimumMedianIfr = 0.001;
@@ -88,9 +90,11 @@
 				<input bind:value={testSigma} type="range" min={0.001} max={5} step={0.001} />
 			</label>
 		{/if}
-		<label>
-			<input type="checkbox" bind:checked={showAltSigmaForecast} /> Show alt sigma forecast
-		</label>
+		{#if showShowAltSigmaForecastCheckbox}
+			<label>
+				<input type="checkbox" bind:checked={showAltSigmaForecast} /> Show alt sigma forecast
+			</label>
+		{/if}
 	</div>
 	<div
 		class="chart-container"
@@ -130,6 +134,6 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: var(--spacing-16);
-        align-items: center;
+		align-items: center;
 	}
 </style>
