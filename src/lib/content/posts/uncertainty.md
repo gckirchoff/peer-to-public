@@ -25,7 +25,7 @@ published: true
   }
 </script>
 
-Uncertainty is not a desired state or result, whether it be within oursevles, in our view of politicians, or in the publication of research. Studies that have statistically insignificant results often [don't get published](https://pmc.ncbi.nlm.nih.gov/articles/PMC6573059/), politicians who say "I don't know" don't get voted for, and uncertainty within our own lives is often addressed with various psychological defense mechansims meant to make the world around us feel simpler and safer.
+Uncertainty is not a desired state or result, whether it be within ourselves, in our view of politicians, or in the publication of research. Studies that have statistically insignificant results often [don't get published](https://pmc.ncbi.nlm.nih.gov/articles/PMC6573059/), politicians who say "I don't know" don't get voted for, and uncertainty within our own lives is often addressed with various psychological defense mechanisms meant to make the world around us feel simpler and safer.
 
 Uncertainty is not necessarily a failure to understand something, but can be a genuine finding that leads to concrete plans. When we drive, we don't know whether or not we'll crash, so we plan for that uncertainty by wearing a seatbelt.
 
