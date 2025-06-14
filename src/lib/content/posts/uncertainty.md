@@ -2,7 +2,7 @@
 title: "Uncertainty"
 description: "Gregory Kirchoff"
 categories: [ "covid-19" ]
-authors: [ "Gregory Kirchoff" ]
+authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "default-background-7.jpg"
 date: 'Sat Jun 14 2025 13:58:40 GMT-0400 (Eastern Daylight Time)'
 published: true
