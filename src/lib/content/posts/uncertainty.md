@@ -43,19 +43,21 @@ Regardless, a disease that pulls from this IFR/disability distribution can be ex
 
 <PopulationForecast {medianIfr} {showAltSigmaForecast} {sigma} {testSigma} />
 
-The problem we currently face is, how do we know what this distribution looks like? How well can we use statistics, the closest thing we have to a crystal ball, to assesss and plan for what coexisting with this pathogen could look like? Try adjusting the skew of the second distribution to have a higher mu/skew. Notice how the medians of the two distributions are the same, but the outlooks are completely different. These are the consequences of fat-tailed risks. When you come back down here, we will investigate how well we can differentiate between your two distributions from seeing a few variants early in the disease's emergence.
+The problem we currently face is, how do we know what this distribution looks like? How well can we use statistics, the closest thing we have to a crystal ball, to assess and plan for what coexisting with this pathogen could look like? Try adjusting the skew of the second distribution to have a higher mu/skew. Notice how the medians of the two distributions are the same, but the outlooks are completely different. These are the consequences of fat-tailed risks. Also notice that increasing sigma decreases the quantity of variants you see around the median, which is balanced out by having more to the left and some far out to the right of the median. When you come back down here, we will investigate how well we can differentiate between your two distributions from seeing a few variants early in the disease's emergence.
 
-<label>
-<input type="checkbox" bind:checked={showAltSigmaForecast} on:change={handleCheckboxChange} /> Show alterntive distribution
-</label>
+<div style="grid-column: content-start; margin-bottom: var(--spacing-16);">
+  <label>
+    <input type="checkbox" bind:checked={showAltSigmaForecast} on:change={handleCheckboxChange} /> Show alterntive distribution
+  </label>
+</div>
 
-Based on the amount of variants we've gotten so far, our image
+Based on the amount of variants we've gotten so far, our picture of the future may not be clear.
 
 {#if showAltSigmaForecast}
 <IfrComparisons {medianIfr} {sigma} {testSigma} />
 {/if}
 
-The Levene's test shows how confidently we can say that the variances of your two distributions are different. The Welch 2 tailed t test shows how confidently we can say that the medians of your two distributions are different. As you can see, no matter what we will never be confident that the medians are different because they aren't.
+Levene's test shows how confidently we can say that the variances of your two distributions are different. The Welch 2 tailed t test shows how confidently we can say that the medians of your two distributions are different. As you can see, no matter what we will never be confident that the medians are different because they aren't.
 
 ## How to Plan for the Unknown
 
@@ -65,8 +67,8 @@ As mentioned before with seatbelts, these types of uncertainties are common and 
 
 ### Risk Mitigation
 
-Risk mitigation, or prevention, is the primary method for addressing these situations. Aircraft design standards dictate the need for multiple redundant systems to prevent crashes even if one system fails, with all of this backed by rigorous quality assurance. Rules of the road are to be well understood and respected to prevent crashes whether in a car or on a bike. When it comes to a disease, mitigation and prevention are done through various structural or behavioral implementations such as rigurous water treatment protocols, HVAC installations in shared spaces such as classrooms, offices, and medical centers, and wearing masks to prevent airborne transmission.
+Risk mitigation, or prevention, is the primary method for addressing these situations. Aircraft design standards dictate the need for multiple redundant systems to prevent crashes even if one system fails, with all of this backed by rigorous quality assurance. Rules of the road are to be well understood and respected to prevent crashes whether in a car or on a bike. When it comes to a disease, mitigation and prevention are done through various structural or behavioral implementations such as rigorous water treatment protocols, HVAC installations in shared spaces such as classrooms, offices, and medical centers, and wearing masks to prevent airborne transmission.
 
 ### Risk Response
 
-Risk response, or contingency planning, is about preparing for what to do if the negative event does occur. This is where helmets, safety rafts, seatbelts, Paxlovid, and COVID vaccines come in. These interventions do not prevent the events from happening, but are important to mitigate whatever the outcome may be. This category of risk management alone is highly undesireable. It does not become okay to start crashing planes and cars or contracting novel pathogens just because we have outcome severity mitigators. Another point to note about this category is that although risk response is reactive, it is pre-planned. You don't put on a bike helmet as you're flying through the air. You act like negative outcomes are very real and possible and put on your helmet before you start moving. If there is an actively evolving pandemic disease, we should act as if the associated risks exist while they remain possible.
+Risk response, or contingency planning, is about preparing for what to do if the negative event does occur. This is where helmets, safety rafts, seatbelts, Paxlovid, and COVID vaccines come in. These interventions do not prevent the events from happening, but are important to mitigate whatever the outcome may be. This category of risk management alone is highly undesirable. It does not become okay to start crashing planes and cars or contracting novel pathogens just because we have outcome severity mitigators. Another point to note about this category is that although risk response is reactive, it is pre-planned. You don't put on a bike helmet as you're flying through the air. You act like negative outcomes are very real and possible and put on your helmet before you start moving. If there is an actively evolving pandemic disease, we should act as if the associated risks exist while they remain possible.
