@@ -31,7 +31,7 @@ Uncertainty is not necessarily a failure to understand something, but can be a g
 
 ## Pathological Uncertainty
 
-Let's consider the emergence of a novel disease. As the disease evolves, new variants emerge that have different IFRs (infection fatality rates - but for this hypothetical situation, IFR can be seen as disabilitity chance such as paralytic polio, Chronic Lyme Disease, or Long COVID). Let's say the IFR of any new variant that comes out is pulled from the following distribution:
+Let's consider the emergence of a novel disease. As the disease evolves, new variants emerge that have different IFRs (infection fatality rates - but for this hypothetical situation, IFR can be seen as disability chance such as paralytic polio, Chronic Lyme Disease, or Long COVID). Let's say the IFR of any new variant that comes out is pulled from the following distribution:
 
 <span id="hidden-scroll-to-target" style="visibility: hidden;"></span>
 
