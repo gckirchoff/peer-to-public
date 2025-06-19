@@ -6,6 +6,7 @@
 	import AnimatedRectangle from '../common/AnimatedRectangle/AnimatedRectangle.svelte';
 	import { defaultMargin, type HistogramProps, bucketPadding } from './constants';
 	import Legend from './Legend/Legend.svelte';
+	import { getYDomain } from './logic';
 
 	let {
 		series,
@@ -60,11 +61,18 @@
 	let totalCount = $derived(allData.length);
 
 	let yScale = $derived.by(() => {
-		const allBuckets = bucketGenerator(allData);
-		const maxBucketValue = Math.max(...allBuckets.map((bucket) => bucket.length));
+		const allBuckets = series.map((group) => bucketGenerator(group.values));
+		const maxBucketValue = Math.max(
+			...allBuckets.flatMap((buckets) => buckets.map((bucket) => bucket?.length ?? 0)),
+		);
 		const maxPercent = maxBucketValue / totalCount;
 
-		const domain = yDomain ? yDomain : showPercentage ? [0, maxPercent] : [0, maxBucketValue];
+		const domain = getYDomain({
+			yDomain,
+			showPercentage,
+			maxBucketValue,
+			maxPercent,
+		});
 
 		return scaleLinear().domain(domain).range([chartHeight, 0]);
 	});
@@ -102,12 +110,15 @@
 			/>
 			{#each groupBuckets as group}
 				{#each group.buckets as bucket, i}
+					{@const rawValue = showPercentage ? bucket.length / totalCount : bucket.length}
+					{@const value = Math.max(0, rawValue)}
+					{@const y = yScale(value)}
+					{@const height = Math.max(0, chartHeight - y)}
 					<AnimatedRectangle
 						x={xScale(bucket.x0 as number) + bucketPadding * 0.5}
-						y={yScale(showPercentage ? bucket.length / totalCount : bucket.length)}
+						{y}
 						width={xScale(bucket.x1 as number) - xScale(bucket.x0 as number) - bucketPadding}
-						height={chartHeight -
-							yScale(showPercentage ? bucket.length / totalCount : bucket.length)}
+						{height}
 						fill={group.group.color}
 						stroke={group.group.color}
 						stroke-width={2}

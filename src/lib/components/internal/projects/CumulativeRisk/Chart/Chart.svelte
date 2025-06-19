@@ -92,7 +92,7 @@
 				<text class="legend-header">Stats Canada Data</text>
 				<g style="transform: translate(0, 20px);">
 					<circle cx={-1} fill="#7a40f7" r={4} />
-					<text dx={7} dominant-baseline="middle" class="legend-text"> Observed Risk </text>
+					<text dx={7} dominant-baseline="middle" class="legend-text"> Observed Risk</text>
 				</g>
 				<g style="transform: translate(0, 40px)">
 					<line x1={-6} x2={4} stroke="#ED1C24" stroke-width="2" />
