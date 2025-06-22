@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "default-background-7.jpg"
 date: 'Sat Jun 14 2025 12:56:31 GMT-0400 (Eastern Daylight Time)'
 published: false
-updated: 'Sat Jun 21 2025 23:13:28 GMT-0400 (Eastern Daylight Time)'
+updated: 'Sat Jun 21 2025 23:14:14 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -80,7 +80,7 @@ A final note to summarize the situation we face:
 
 > The general (non-naive) precautionary principle [3] delineates conditions where actions must be taken to reduce risk of ruin, and traditional cost-benefit analyses must not be used. These are ruin problems where, over time, exposure to tail events leads to a certain eventual extinction. While there is a very high probability for humanity surviving a single such event, over time, there is eventually zero probability of surviving repeated exposures to such events. While repeated risks can be taken by individuals with a limited life expectancy, ruin exposures must never be taken at the systemic and collective level. In technical terms, the precautionary principle applies when traditional statistical averages are invalid because risks are not ergodic.
 >
-> - Joseph Norman, Yaneer Bar-Yam, and Nassim Nicholas Taleb, Systemic risk of pandemic via novel pathogens – Coronavirus: A note, *New England Complex Systems Institute* (January 26, 2020).
+> -Joseph Norman, Yaneer Bar-Yam, and Nassim Nicholas Taleb, Systemic risk of pandemic via novel pathogens – Coronavirus: A note, *New England Complex Systems Institute* (January 26, 2020).
 
 ## How to Plan for the Unknown
 
