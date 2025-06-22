@@ -52,7 +52,7 @@ The problem we currently face is, how do we know what this distribution looks li
   </label>
 </div>
 
-Levene's test shows how confidently we can say that the variances of your two distributions are different. The Welch 2 tailed t test shows how confidently we can say that the medians of your two distributions are different. As you can see, no matter what we will never be confident that the medians are different because they aren't. The important takeaway from this is that you can create two distributions that result in markedly different population outcomes, as can be seen above, but you can't tell the difference based on limited observed data, as can be seen below.
+Levene's test shows how confidently we can say that the variances of your two distributions are different. The Welch 2 tailed t test shows how confidently we can say that the medians of your two distributions are different. As you can see, no matter what we will never be confident that the medians are different because they aren't. The key takeaway is that two underlying distributions can produce dramatically different population outcomes, as illustrated above, yet appear indistinguishable when viewed through limited observed data, as shown below.
 
 {#if showAltSigmaForecast}
 <IfrComparisons {medianIfr} {sigma} {testSigma} />
