@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "default-background-7.jpg"
 date: 'Sat Jun 14 2025 12:56:31 GMT-0400 (Eastern Daylight Time)'
 published: false
-updated: 'Sat Jun 21 2025 23:34:45 GMT-0400 (Eastern Daylight Time)'
+updated: 'Sat Jun 21 2025 23:38:11 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -70,7 +70,7 @@ Based on the number of SARS-CoV-2 variants we've seen so far, our ability to pre
 >
 > -Nicholas Nassim Taleb
 
-Just as the turkey cannot predict Thanksgiving by extrapolating from its daily experiences, we cannot safely assume the pandemic's trajectory by averaging what we've seen so far. In fait-tailed domains like pandemics, it's not the typical events but the rare, extreme ones, such as the emergence of a highly transmissible, immune-evasive, or more lethal variant, that shape the overall risk and long-term impact. Ignoring these risks because they are rare is precisely what makes them so dangerous.
+Just as the turkey cannot predict Thanksgiving by extrapolating from its daily experiences, we cannot safely assume the pandemic's trajectory by averaging what we've seen so far. In fat-tailed domains like pandemics, it's not the typical events but the rare, extreme ones, such as the emergence of a highly transmissible, immune-evasive, or more lethal variant, that shape the overall risk and long-term impact. Ignoring these risks because they are rare is precisely what makes them so dangerous.
 
 ![image](/images/postImages/uncertainty/image.png)
 
