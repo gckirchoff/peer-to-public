@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "default-background-7.jpg"
 date: 'Sat Jun 14 2025 12:56:31 GMT-0400 (Eastern Daylight Time)'
 published: false
-updated: 'Sat Jun 21 2025 23:15:23 GMT-0400 (Eastern Daylight Time)'
+updated: 'Sat Jun 21 2025 23:19:18 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -90,7 +90,7 @@ As mentioned before with seatbelts, these types of uncertainties are common and 
 
 ### Risk Mitigation
 
-Risk mitigation, or prevention, is the primary method for addressing these situations. Aircraft design standards dictate the need for multiple redundant systems to prevent crashes even if one system fails, with all of this backed by rigorous quality assurance. Rules of the road are to be well understood and respected to prevent crashes whether in a car or on a bike. When it comes to a disease, mitigation and prevention are done through various structural or behavioral implementations such as rigorous water treatment protocols, HVAC installations in shared spaces such as classrooms, offices, and medical centers, and wearing masks to prevent airborne transmission. SARS-CoV-2 will not be the last pandemic-level threat we face. Permanent architectural and behavioral changes can stop present day and future exposure to these fat tail, extinction-level risks.
+Risk mitigation, or prevention, is the primary method for addressing these situations. Aircraft design standards dictate the need for multiple redundant systems to prevent crashes even if one system fails, with all of this backed by rigorous quality assurance. Rules of the road are to be well understood and respected to prevent crashes whether in a car or on a bike. When it comes to a disease, mitigation and prevention are done through various structural or behavioral implementations such as rigorous water treatment protocols, HVAC installations in shared spaces such as classrooms, offices, and medical centers, and wearing masks to prevent airborne transmission. SARS-CoV-2 remains an active, evolving threat - and it won't be the last. To reduce our exposure to these fat tail, extinction-level risks, both now and in the future, we need permanent structural and behavioral changes.
 
 ### Risk Response
 
