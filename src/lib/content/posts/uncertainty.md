@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "default-background-7.jpg"
 date: 'Sat Jun 14 2025 12:56:31 GMT-0400 (Eastern Daylight Time)'
 published: false
-updated: 'Sat Jun 21 2025 23:38:11 GMT-0400 (Eastern Daylight Time)'
+updated: 'Sat Jun 21 2025 23:48:58 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -17,7 +17,7 @@ updated: 'Sat Jun 21 2025 23:38:11 GMT-0400 (Eastern Daylight Time)'
 
   let medianIfr = $state(0.002);
   let sigma = $state(0.5);
-   let testSigma = $state(0.5);
+   let testSigma = $state(1.5);
    let showAltSigmaForecast = $state(false);
 
   const handleCheckboxChange = () => {
@@ -52,7 +52,7 @@ The problem we currently face is, how do we know what this distribution looks li
   </label>
 </div>
 
-Levene's test shows how confidently we can say that the variances of your two distributions are different. The Welch 2 tailed t test shows how confidently we can say that the medians of your two distributions are different. As you can see, no matter what we will never be confident that the medians are different because they aren't.
+Levene's test shows how confidently we can say that the variances of your two distributions are different. The Welch 2 tailed t test shows how confidently we can say that the medians of your two distributions are different. As you can see, no matter what we will never be confident that the medians are different because they aren't. The important takeaway from this is that you can create two distributions that result in markedly different population outcomes, as can be seen above, but you can't tell the difference based on limited observed data, as can be seen below.
 
 {#if showAltSigmaForecast}
 <IfrComparisons {medianIfr} {sigma} {testSigma} />
