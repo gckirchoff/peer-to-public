@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "default-background-7.jpg"
 date: 'Sat Jun 14 2025 12:56:31 GMT-0400 (Eastern Daylight Time)'
 published: false
-updated: 'Sat Jun 21 2025 23:19:18 GMT-0400 (Eastern Daylight Time)'
+updated: 'Sat Jun 21 2025 23:34:45 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -60,7 +60,7 @@ Levene's test shows how confidently we can say that the variances of your two di
 
 ## Fat Tail Risk
 
-In risk analysis, a "fat tail" refers to a statistical distribution where reare, extreme events are significantly more likely than we might expect under a normal (bell curve) distribution. These tail events, though highly infrequent, carry outsized consequences. In domains like pandemics and climate systems, focusing only on the average or the most likely outcomes can leave us dangerously unprepared for the worst-case scenarios.
+In risk analysis, a "fat tail" refers to a statistical distribution where rare, extreme events are significantly more likely than we might expect under a normal (bell curve) distribution. These tail events, though highly infrequent, carry outsized consequences. In domains like pandemics and climate systems, focusing only on the average or the most likely outcomes can leave us dangerously unprepared for the worst-case scenarios.
 
 Pandemics are classic examples of fat tail risks. Unlike many natural or engineered systems that behave in predictable, linear ways, infectious disease outbreaks involve highly nonlinear dynamics: exponential growth, mutation, and complex interactions with global human behavior. A single, unlikely mutation or a brief lapse in containment can trigger cascading consequences that dwarf anything observed previously.
 
@@ -70,11 +70,11 @@ Based on the number of SARS-CoV-2 variants we've seen so far, our ability to pre
 >
 > -Nicholas Nassim Taleb
 
-Just as the turkey cannot predict Thanksgiving by extrapolating from its daily experiences, we cannot safely assume the pandemic's trajectory by averaging what we've seen so far. In fait-tailed domains like pandemics, it's not the typical events but the rare, extreme ones, such as the emergence of a highly transmissable, immune-evasive, or more lethal variant, that shape the overall risk and long-term impact. Ignoring these risks because they are rare is preceisely what makes them so dangerous.
+Just as the turkey cannot predict Thanksgiving by extrapolating from its daily experiences, we cannot safely assume the pandemic's trajectory by averaging what we've seen so far. In fait-tailed domains like pandemics, it's not the typical events but the rare, extreme ones, such as the emergence of a highly transmissible, immune-evasive, or more lethal variant, that shape the overall risk and long-term impact. Ignoring these risks because they are rare is precisely what makes them so dangerous.
 
 ![image](/images/postImages/uncertainty/image.png)
 
-Discussing unprecendented, catostrophic levels of risk can sometimes feel melodramatic, but it's not. The *Homeland Security Affairs* journal, published by the Naval Postgraduate School's Center for Homeand Defense and Security, rightly classifies global pandemic as *extinction-level events*. They argue that such threats must be treated with the seriousness they deserve, not later, but now.
+Discussing unprecedented, catastrophic levels of risk can sometimes feel melodramatic, but it's not. The *Homeland Security Affairs* journal, published by the Naval Postgraduate School's Center for Homeland Defense and Security, rightly classifies global pandemic as *extinction-level events*. They argue that such threats must be treated with the seriousness they deserve, not later, but now.
 
 A final note to summarize the reality we face:
 
