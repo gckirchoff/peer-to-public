@@ -159,11 +159,13 @@
 	$: innerChartHeight = height - margin.top - margin.bottom;
 
 	$: xDomainEnd =
+		(dateOfPrevention, // I don't know why but these updates need to be listened for here
+		hazardRatio, // in order to make the y scale work with these
 		audience === 'general' || preventionDeterminant === 'date'
 			? endOfChart
 			: panicPredictionPoint
 				? addYearsToDate(panicPredictionPoint.date, delay + standardDeviation * 3.5)
-				: endOfChart;
+				: endOfChart);
 
 	$: xScale = scaleTime()
 		.domain([beginningOfPandemic, xDomainEnd])
@@ -387,12 +389,14 @@
 							on:mouseleave={() => (hoveredExtraCasesSoFar = false)}
 						/>
 					{/if}
-					<Line
-						data={plottedExtraCases}
-						{xAccessorScaled}
-						{yAccessorScaled}
-						style="stroke: #67a4e0; transition: none;"
-					/>
+					{#if !realLifeMode}
+						<Line
+							data={plottedExtraCases}
+							{xAccessorScaled}
+							{yAccessorScaled}
+							style="stroke: #67a4e0; transition: none;"
+						/>
+					{/if}
 				{/if}
 				{#if internalMode === 'separate' || internalMode === 'both'}
 					{#each distributions as distribution}
@@ -440,8 +444,9 @@
 					/>
 					<text
 						x={innerChartWidth - 10}
-						y={yScale(baselineCancer) + 20}
+						y={yScale(baselineCancer)}
 						text-anchor="end"
+						dominant-baseline="middle"
 						class="baseline-text yellow"
 					>
 						Baseline Incidence
