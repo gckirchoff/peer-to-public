@@ -389,12 +389,14 @@
 							on:mouseleave={() => (hoveredExtraCasesSoFar = false)}
 						/>
 					{/if}
-					<Line
-						data={plottedExtraCases}
-						{xAccessorScaled}
-						{yAccessorScaled}
-						style="stroke: #67a4e0; transition: none;"
-					/>
+					{#if !realLifeMode}
+						<Line
+							data={plottedExtraCases}
+							{xAccessorScaled}
+							{yAccessorScaled}
+							style="stroke: #67a4e0; transition: none;"
+						/>
+					{/if}
 				{/if}
 				{#if internalMode === 'separate' || internalMode === 'both'}
 					{#each distributions as distribution}
