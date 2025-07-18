@@ -14,7 +14,7 @@ export const siteConfig: SiteConfig = {
 			miniAboutMe: {
 				img: 'me.svg',
 				quickDescription:
-					'Explore key insights into the ongoing SARS-CoV-2 pandemic through interactive, visual articles. We are scientists and data visualization experts with an aim to inform both the public and government officials by contributing to a deeper understanding of the current health landscape.',
+					"Interactive, visual articles. We are scientists and data visualization experts dedicated to informing the public and guiding policymakers by deepening understanding of today's health and science landscape.",
 			},
 			welcome: {
 				header: 'Peer to Public',
@@ -24,9 +24,9 @@ export const siteConfig: SiteConfig = {
 		about: {
 			img: 'me.svg',
 			content: [
-				`Peer to Public is a collaborative platform uniting scientists and data visualization experts to make complex, crucial topics accessible to everyone. Through interactive, data-driven articles, we aim to illuminate important issues that impact public health and well-being, especially surrounding SARS-CoV-2 and Long Covid.`,
-				`Our mission is clear: to educate both the public and policymakers on the critical need to curb SARS-CoV-2 infections. This virus is not a common cold but a SARS coronavirus, with implications that demand ongoing preventative measures.`,
-				`If you're interested in learning more or exploring collaborative opportunities, please reach out via the contact form.`,
+				`Peer to Public is a collaborative platform founded by Gregory Kirchoff to help make complex, critical topics understandable for everyone. I partner with scientists to transform essential research into interactive, data-driven articles that illuminate issues affecting public health and well-being, with a particular focus on SARS-CoV-2 and Long Covid.`,
+				`For many challenges, such as climate change and the long-term effects of Covid, the science is clear, but it is often complex and poorly communicated to the public. Peer to Public exists to bridge that gap, ensuring that scientific insights can inform and drive change in communities and governments.`,
+				`If you would like to learn more or explore a collaboration, please reach out through the contact form.`,
 			],
 		},
 		contact: {
