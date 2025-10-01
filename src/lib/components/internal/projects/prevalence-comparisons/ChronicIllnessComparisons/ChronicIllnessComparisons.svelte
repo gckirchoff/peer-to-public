@@ -1,8 +1,9 @@
 <script lang="ts">
 	/**
 	 * CREDITS:
-	 *
-	 * Gregory Kirchoff
+	 * 
+	 * Gregory Kirchoff	
+	 * Matthew Martin
 	 */
 	import { onMount } from 'svelte';
 	import DataChart from './DataChart/DataChart.svelte';
