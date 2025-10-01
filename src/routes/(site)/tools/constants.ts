@@ -34,8 +34,16 @@ export const links: Link[] = [
 	},
 	{
 		title: 'Cumulative Risk',
-		href: 'cumulative-risk'
-	}
+		href: 'cumulative-risk',
+	},
+	{
+		title: 'Chronic Illness Prevalence To Baseline',
+		href: 'chronic-illness-prevalence-to-baseline',
+	},
+	{
+		title: 'Chronic Illness Prevalence To Each Other',
+		href: 'chronic-illness-prevalence-to-each-other',
+	},
 	// {
 	// 	title: 'Long-Term Risk Visualizer',
 	// 	href: 'the-curve-that-wasnt',
