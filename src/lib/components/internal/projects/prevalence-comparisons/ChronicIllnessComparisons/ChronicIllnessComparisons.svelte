@@ -1,4 +1,9 @@
 <script lang="ts">
+	/**
+	 * CREDITS:
+	 *
+	 * Gregory Kirchoff
+	 */
 	import { onMount } from 'svelte';
 	import DataChart from './DataChart/DataChart.svelte';
 
@@ -8,7 +13,7 @@
 		options,
 		type ChronicIlnessComparisonsProps,
 		type CsvPrevalenceData,
-		type PrevalenceData
+		type PrevalenceData,
 	} from './constants';
 	import { isRare } from './logic';
 
@@ -35,7 +40,7 @@
 				funding: Number(typedRow.funding) / 1000000,
 				isRareInAdults: typedRow.isRareInAdults === 'TRUE',
 				isPreventable: typedRow.isPreventable === 'TRUE',
-				ratioValue: null
+				ratioValue: null,
 			};
 		});
 		data = csvData;
@@ -45,7 +50,7 @@
 	const handleYPropertyChange = (
 		event: Event & {
 			currentTarget: EventTarget & HTMLSelectElement;
-		}
+		},
 	) => {
 		const selectedValue = event.currentTarget.value as keyof PrevalenceData;
 		const shouldFlipValues = selectedValue === ratioYProperty;
@@ -58,7 +63,7 @@
 	const handleRatioYPropertyChange = (
 		event: Event & {
 			currentTarget: EventTarget & HTMLSelectElement;
-		}
+		},
 	) => {
 		const selectedValue = event.currentTarget.value as keyof PrevalenceData;
 		const shouldFlipValues = selectedValue === yProperty;
@@ -71,13 +76,13 @@
 	let longCovidPrevalenceSource = $state(1);
 
 	let selectedLcOption = $derived(
-		adultLcPrevalenceSourceOptions.find(({ value }) => longCovidPrevalenceSource === value)!
+		adultLcPrevalenceSourceOptions.find(({ value }) => longCovidPrevalenceSource === value)!,
 	);
 
 	let processedData = $derived.by(() => {
 		const adjustedData = data
 			.filter(({ adultPrevalence, illness }) =>
-				showRare ? true : !isRare(adultPrevalence) && illness !== 'Color Blindness'
+				showRare ? true : !isRare(adultPrevalence) && illness !== 'Color Blindness',
 			)
 			.map((row) => {
 				const isLongCovidRow = row.illness === 'Long COVID';
@@ -95,7 +100,7 @@
 
 		return adjustedData.map((row) => ({
 			...row,
-			ratioValue: Number(row[yProperty]) / Number(row[ratioYProperty])
+			ratioValue: Number(row[yProperty]) / Number(row[ratioYProperty]),
 		}));
 	});
 </script>
