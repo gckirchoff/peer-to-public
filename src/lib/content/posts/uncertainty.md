@@ -4,9 +4,9 @@ description: "Gregory Kirchoff"
 categories: [ "covid-19" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "default-background-7.jpg"
-date: 'Sat Jun 14 2025 12:56:31 GMT-0400 (Eastern Daylight Time)'
-published: false
-updated: 'Sat Jun 21 2025 23:48:58 GMT-0400 (Eastern Daylight Time)'
+date: 'Sat Jun 14 2025 13:58:40 GMT-0400 (Eastern Daylight Time)'
+published: true
+updated: 'Sat Jun 21 2025 23:53:04 GMT-0400 (Eastern Daylight Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
