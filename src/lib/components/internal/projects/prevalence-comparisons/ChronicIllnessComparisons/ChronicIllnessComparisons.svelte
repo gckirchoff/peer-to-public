@@ -5,9 +5,11 @@
 	 * Gregory Kirchoff
 	 */
 	import { onMount } from 'svelte';
+	import { csv } from 'd3-fetch';
+
+	import { H6 } from '$lib/components/internal/typography';
 	import DataChart from './DataChart/DataChart.svelte';
 
-	import { csv } from 'd3-fetch';
 	import {
 		adultLcPrevalenceSourceOptions,
 		options,
@@ -107,7 +109,7 @@
 
 <div class="menu">
 	<div class="control-section">
-		<h3>Long COVID Prevalence (<a href={selectedLcOption.href} target="_blank">src</a>)</h3>
+		<H6>Long COVID Prevalence (<a href={selectedLcOption.href} target="_blank">src</a>)</H6>
 		<select bind:value={longCovidPrevalenceSource}>
 			{#each adultLcPrevalenceSourceOptions as { value, label }}
 				<option {value}>{label}</option>
@@ -117,7 +119,7 @@
 
 	{#if compareMode === 'to each other'}
 		<div class="control-section">
-			<h3>Metric</h3>
+			<H6>Metric</H6>
 			<select value={yProperty} onchange={handleYPropertyChange}>
 				{#each options as option}
 					<option value={option.value}>{option.label}</option>
@@ -126,7 +128,7 @@
 		</div>
 
 		<div class="control-section">
-			<h3>Display</h3>
+			<H6>Display</H6>
 			<div class="ratio-wrapper">
 				<label class="toggle">
 					<input type="checkbox" bind:checked={ratioed} />
@@ -201,12 +203,6 @@
 		margin-bottom: 1rem;
 	}
 
-	.control-section h3 {
-		font-size: 0.9rem;
-		font-weight: 600;
-		margin-bottom: 0.5rem;
-	}
-
 	.control-section > select {
 		width: 100%;
 		min-width: 120px;
@@ -217,7 +213,7 @@
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
-		gap: 0.4rem;
+		gap: 0.5rem;
 		min-height: 2rem;
 	}
 
@@ -228,6 +224,8 @@
 	}
 
 	.toggle-button {
+		position: relative;
+		left: 0.3rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -269,10 +267,8 @@
 	}
 
 	select {
-		padding: 0.4rem 0.6rem;
 		border-radius: 6px;
 		border: 1px solid #ccc;
-		font-size: 0.9rem;
 		min-width: 0;
 	}
 
