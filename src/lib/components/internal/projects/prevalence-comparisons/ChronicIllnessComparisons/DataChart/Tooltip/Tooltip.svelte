@@ -72,7 +72,6 @@
 		position: absolute;
 		background: white;
 		border: 1px solid rgb(227, 227, 227);
-		color: var(--clr-text-on-surface-500);
 		max-width: min(50%, var(--max-width));
 		padding: 8px 6px;
 		display: flex;
