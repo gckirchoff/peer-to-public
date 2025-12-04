@@ -16,12 +16,12 @@
 	});
 </script>
 
-<div class="container">
+<div class:container-in-ptp={!inIframe}>
 	{@render children()}
 </div>
 
 <style lang="scss">
-	.container {
+	.container-in-ptp {
 		padding: var(--spacing-24);
 	}
 </style>
