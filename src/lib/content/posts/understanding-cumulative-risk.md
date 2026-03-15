@@ -6,7 +6,7 @@ authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "dice-edge2edge-media-uKlneQRwaxY-unsplash.jpg"
 date: 'Tue May 28 2024 16:05:15 GMT-0400 (Eastern Daylight Time)'
 published: true
-
+updated: 'Sun Mar 15 2026 21:38:10 GMT+0900 (Japan Standard Time)'
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
@@ -14,6 +14,5 @@ published: true
   import CumulativeRisk from '$lib/components/internal/projects/CumulativeRisk/CumulativeRisk.svelte';
 
 </script>
-
 
 <CumulativeRisk  />

@@ -171,14 +171,14 @@
 
 <p>
 	This interactive chart below makes an important practical point: should the data found by
-	Statistics Canada be indicative of a cumulative risk pattern, getting Long Covid becomes an
-	inevitability.
+	Statistics Canada be indicative of a stable cumulative risk trend, as <a
+		href="https://academic.oup.com/cid/article/80/6/1247/8002322?login=false"
+		target="_blank">recent data</a
+	> supports, getting Long Covid becomes an inevitability.
 </p>
 
 <p>
-	Getting Covid repeatedly is not a game we can win in the long-term. Like playing roulette, we can
-	win a game, maybe even a few, but given enough chances, the house always wins. The good news is
-	that you <a
+	Getting Covid repeatedly is not a game we can win in the long-term. The good news is that you <a
 		href="https://typingmonkeys.substack.com/p/you-dont-need-to-catch-that-wave"
 		target="_blank">don't</a
 	>
