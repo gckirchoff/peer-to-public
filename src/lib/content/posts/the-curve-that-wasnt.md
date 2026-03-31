@@ -4,9 +4,9 @@ description: "\"It's tough to make predictions, especially about the future\" - 
 categories: [ "covid-19", "statistics" ]
 authors: [ "Gregory Kirchoff", "Arijit Chakravarty" ]
 coverImage: "flatten-the-curve.png"
-date: '2023-12-30'
-published: false
-updated: 'Tue May 28 2024 16:03:49 GMT-0400 (Eastern Daylight Time)'
+date: 'Wed Aug 14 2024 19:57:02 GMT-0400 (Eastern Daylight Time)'
+published: true
+
 ---
 <script> // usables
 	import RecipeCard from '$lib/components/usables/RecipeCard/RecipeCard.svelte';
